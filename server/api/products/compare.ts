@@ -18,8 +18,8 @@ export default defineEventHandler(async (event) => {
       },
     },
   };
-  sql = `select p.productID, p.name, p.Price_Bn, p.is_auction, p.is_new
-from site_products p where p.productID in (${id})`;
+  sql = `select (select concat('https://win7.by/data/big/', thumbnail) from iven_product_pictures where photoID=site_products.default_picture) as img, productID, uri, name, Price_Bn, is_auction, is_new
+from site_products where productID in (${id})`;
   const [products] = await db.execute(sql);
 
   data.products = products;

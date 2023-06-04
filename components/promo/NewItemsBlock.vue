@@ -19,7 +19,7 @@ const { data } = await useFetch('/api/products', {
     take: 4,
     sortby: 'popular',
     sortdir: 'desc',
-    filters: { is_new: 1 },
+    where: { is_new: 1 },
   },
 });
 </script>

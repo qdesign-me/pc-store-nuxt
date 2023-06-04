@@ -1,14 +1,16 @@
 <template>
-  <a class="card border !pb-[115px] text-black">
+  <div class="card border !pb-[115px] text-black">
     <div class="flex justify-between mb-8 -mt-2 text-lightgray">
       <Add2Favorites :productID="props.product.productID" />
       <Add2Compare :productID="props.product.productID" />
     </div>
 
     <div>
-      <ImageCarousel />
+      <NuxtLink :to="uri">
+        <ImageCarousel :data="props.product" />
+      </NuxtLink>
     </div>
-    <div class="text-sm font-light leading-4 mt-4">{{ props.product.name }}</div>
+    <NuxtLink :to="uri" class="text-sm font-light leading-4 mt-4">{{ props.product.name }}</NuxtLink>
 
     <div class="price-info">
       <div>
@@ -38,9 +40,10 @@
       <div v-if="props.product.Price_bn > 500" class="bg-[#F54D4D]">В рассрочку</div>
       <div v-if="props.product.PriceSale_bn > 0" class="bg-[#FFAC2F]">На акции</div>
     </div>
-  </a>
+  </div>
 </template>
 
 <script setup>
 const props = defineProps(['product']);
+const uri = '/p/' + props.product?.uri?.replace('.html', '');
 </script>

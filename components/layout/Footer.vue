@@ -57,7 +57,7 @@
           <div class="col-span-2">
             <button class="btn">
               <CalcIcon />
-              >Калькулятор рассрочки
+              Калькулятор рассрочки
             </button>
           </div>
         </div>
@@ -100,7 +100,6 @@
 </template>
 
 <script setup>
-console.log('app footer setup');
 import { useAppStore } from '~/stores/app';
 const { $state } = useAppStore();
 </script>

@@ -26,10 +26,10 @@
                 <template v-if="key === 'Стоимость при оплате единым платежом'"><ValetIcon width="27" height="26" /></template>
                 {{ key }}
               </div>
-              <SimpleTooltip v-if="props.data.features[key].tooltip">
+              <Tooltip v-if="props.data.features[key].tooltip">
                 <div class="help-trigger"></div>
                 <template #text>{{ props.data.features[key].tooltip }}</template>
-              </SimpleTooltip>
+              </Tooltip>
             </div>
           </td>
 
