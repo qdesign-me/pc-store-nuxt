@@ -4,7 +4,7 @@
 
 <script setup>
 const route = useRoute();
-const hostname = process.env?.BASE_URL;
+const hostname = process?.env?.NUXT_PUBLIC_HOSTNAME;
 
 const path = route.path;
 
