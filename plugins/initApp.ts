@@ -10,9 +10,10 @@ export default defineNuxtPlugin({
       const store = useAppStore(nuxtApp.$pinia);
       if (process) {
         const hostname = process?.env?.NUXT_PUBLIC_HOSTNAME;
-
-        const initData = await fetch(`${hostname}/api/config`).then((res) => res.json());
-        store.config = initData.config;
+        if (hostname?.length) {
+          const initData = await fetch(`${hostname}/api/config`).then((res) => res.json());
+          store.config = initData.config;
+        }
       }
     },
   },
