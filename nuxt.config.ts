@@ -31,9 +31,4 @@ export default defineNuxtConfig({
   pinia: {
     autoImports: ['defineStore', 'acceptHMRUpdate'],
   },
-  runtimeConfig: {
-    public: {
-      hostname: '',
-    },
-  },
 });
