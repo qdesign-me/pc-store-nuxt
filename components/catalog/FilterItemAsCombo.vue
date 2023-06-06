@@ -14,7 +14,7 @@ const filters = inject('filters');
 if (!filters[alias]) filters[alias] = '';
 if (!filters[`${alias}[from]`]) filters[`${alias}[from]`] = '';
 if (!filters[`${alias}[to]`]) filters[`${alias}[to]`] = '';
-const model = ref(filters[alias].split(','));
+const model = ref(filters[alias].split(',').filter((item) => item.length));
 
 const checkboxes = props.block.preffered_values
   ? props.block.preffered_values
@@ -30,14 +30,14 @@ const handleCheckbox = (value) => {
   const from = current[0];
   const to = current[current.length - 1];
   filters[`${alias}[from]`] = from;
-  filters[`${alias}[to]`] = to;
+  if (to !== from) filters[`${alias}[to]`] = to;
 
   checkboxes.forEach((item) => {
-    if (+item < +to && +item > +from) {
+    if (+item < +to && +item > +from && !model.value.includes(item)) {
       model.value.push(item);
     }
   });
-  filters[alias] = model.value.join(',');
+  filters[alias] = model.value.sort((a, b) => a - b).join(',');
 };
 
 const handleSelect = (value) => {

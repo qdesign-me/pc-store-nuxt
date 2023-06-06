@@ -11,11 +11,12 @@
       <div class="col-span-4">
         <template v-if="products.total === 0"> Результатов не найдено </template>
         <template v-else>
+          <div class="text-[#E5A35B] mb-4">Всего {{ pluralize(products.total, ['товар', 'товара', 'товаров']) }}</div>
           <SortingLinks :uri="uri" />
           <div class="grid grid-cols-4 gap-x-2.5 gap-y-8">
             <ProductCard v-for="product in products.data" :key="product.productID" :product="product" />
           </div>
-          <Pagination v-if="products.total > 12" :total="products.total" :uri="uri" />
+          <Pagination :total="products.total" v-if="products.total > 12" />
         </template>
       </div>
     </div>
@@ -37,6 +38,7 @@ const { data: products } = await useFetch('/api/categories/products', {
   method: 'POST',
   body: {
     uri,
+    filters,
   },
 });
 

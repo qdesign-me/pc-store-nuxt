@@ -2,7 +2,7 @@ export function buildQuery(params: Record<string, string | number | undefined | 
   if (!params) return '';
   if (params?.page === 1) params.page = undefined;
   const ret = Object.keys(params)
-    .filter((key) => ('' + params[key]).length > 0)
+    .filter((key) => params[key] !== undefined && params[key] !== null && ('' + params[key]).length > 0)
     .map((key) => key + '=' + params[key])
 
     .join('&');

@@ -19,11 +19,8 @@ const getCategory = async (uri: string) => {
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
-
   const data = await getCategory(body.uri);
-  console.log({ body, data });
   const blocks = await getFilters(data);
-
   return {
     blocks,
     data,

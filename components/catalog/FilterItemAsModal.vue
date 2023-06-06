@@ -1,5 +1,5 @@
 <template>
-  <FilterItemAsCheckboxes :block="props.block" :values="checkboxes" v-model="model" @update:modelValue="handleCheckbox" />
+  <FilterItemAsCheckboxes :block="props.block" :values="all" v-model="model" @update:modelValue="handleCheckbox" />
 
   <div class="relative">
     <button class="btn is-small w-full relative is-plain" @click="modal = true">
@@ -26,7 +26,7 @@ const modal = ref(false);
 const target = ref(null);
 const filters = inject('filters');
 if (!filters[alias]) filters[alias] = '';
-const model = ref(filters[alias].split(','));
+const model = ref(filters[alias].split(',').filter((item) => item.length));
 
 const checkboxes = props.block.preffered_values
   ? props.block.preffered_values
@@ -36,15 +36,20 @@ const checkboxes = props.block.preffered_values
   : props.values.slice(0, 3);
 
 const handleCheckbox = (value) => (filters[alias] = value.join(','));
+
 const handleInput = (event) => {
   const checked = event.target.checked;
   const value = event.target.value;
-
-  const newValues = checked ? [...model.value, value] : model.value.filter((item) => item !== value);
+  const newValues = checked ? [...model.value, value] : model.value;
   model.value = newValues;
   filters[alias] = newValues.join(',');
 };
+
 const totalInfo = pluralize(props.values.length, ['вариант', 'варианта', 'вариантов']);
 
 onClickOutside(target, () => (modal.value = false));
+
+const all = computed(() => {
+  return [...checkboxes, ...model.value.filter((item) => !checkboxes.includes(item))];
+});
 </script>

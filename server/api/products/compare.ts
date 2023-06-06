@@ -60,8 +60,6 @@ from site_products where productID in (${id})`;
       data.features[key].items.forEach((item, index) => {
         if (item === sorted[0]) data.features[key].bg[index] = 'bg-lightred/20';
       });
-
-      //console.log({ sorted });
     }
   });
 

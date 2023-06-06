@@ -41,7 +41,7 @@
           </div>
         </div>
         <div class="text-sm flex flex-col gap-4 flex-1">
-          <div class="text-xs">Артикул: {{ props.data.model }}</div>
+          <div class="text-base font-semibld mb-4">Код товара: {{ props.data.model }}</div>
           <template v-if="0">
             <div>
               <strong> Модификация:</strong>
@@ -51,18 +51,13 @@
               <div>Материнская плата MSI H510M-A PRO, LGA 1200, Intel H510, mATX, Ret</div>
               <ChevronDownIcon width="40" height="26" />
             </div>
-            <ul class="flex flex-col gap-3">
-              <li>Форм-фактор: mATX</li>
-              <li>Сокет: LGA 1200</li>
-              <li>Чипсет: Intel H510</li>
-              <li>Память: DDR4 - 2слота, частотой до 3200 МГц</li>
-              <li>Слоты: PCI-E 4.0 x16 х 1, PCI-E x1 х 1</li>
-              <li>Разъемы: M.2 х 1, SATA3 х 4, HDMI х 1, VGA (D-Sub) х 1</li>
-              <li>Сеть: Gigabit Ethernet</li>
-            </ul>
           </template>
 
-          <div class="mt-10 text-lightblue cursor-pointer text-base flex gap-10 items-center" v-if="props.data.features.length > 0">
+          <ul class="flex flex-col gap-3" v-if="props.data.features.length">
+            <li v-for="feature in props.data.features" :key="feature.label">{{ feature.label }}: {{ feature.value }}</li>
+          </ul>
+
+          <div class="mt-10 text-lightblue cursor-pointer text-base flex gap-10 items-center" v-if="props.data.description.length > 0">
             <div class="underline underline-offset-4" @click="showFeatures">Все характеристики товара</div>
             <ArrowRightIcon />
           </div>
@@ -71,35 +66,10 @@
 
       <div class="tabs" ref="target">
         <div class="tabs-header">
-          <div :class="{ active: tab === 0 }" @click="tab = 0">О товаре</div>
-          <div :class="{ active: tab === 1 }" @click="tab = 1" v-if="props.data.features.length > 0">Характеристики</div>
+          <div v-for="(tab, index) in tabs" :class="{ active: index === activeTab }" @click="activeTab = index" :key="tab.title">{{ tab.title }}</div>
         </div>
-        <div class="tabs-content content" v-if="tab === 0">
-          <div v-html="props.data.description"></div>
-        </div>
-        <div class="tabs-content content" v-if="tab === 1">
-          <div>
-            <table class="compare-table w-full">
-              <tbody>
-                <tr v-for="feature in props.data.features" :key="feature.label">
-                  <td width="300">
-                    <div class="label-wrap">
-                      <div class="label flex items-center gap-2">
-                        {{ feature.label }}
-                      </div>
-                      <Tooltip v-if="feature.tooltip">
-                        <div class="help-trigger"></div>
-                        <template #text>{{ feature.tooltip }}</template>
-                      </Tooltip>
-                    </div>
-                  </td>
-                  <td width="*">
-                    {{ feature.value }}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+        <div class="tabs-content content" v-for="(tab, index) in tabs" :key="tab.title" :class="{ hidden: index !== activeTab }">
+          <div v-html="tab.content"></div>
         </div>
       </div>
 
@@ -172,12 +142,20 @@
 
 <script setup>
 const target = ref(null);
-const tab = ref(0);
+
+const tabs = computed(() => {
+  const tabs = [];
+  if (props.data.about) tabs.push({ title: 'О товаре', content: props.data.about });
+  if (props.data.description) tabs.push({ title: 'Характеристики', content: props.data.description });
+  return tabs;
+});
+const activeTab = ref(0);
 const modalVisible = ref(false);
 const props = defineProps(['data']);
 
 const showFeatures = () => {
-  tab.value = 1;
+  activeTab.value = tabs.value.findIndex((item) => item.title === 'Характеристики');
+
   target.value.scrollIntoView({ behavior: 'smooth', block: 'start' });
 };
 </script>

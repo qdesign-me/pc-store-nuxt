@@ -1,5 +1,4 @@
 <template>
-  {{ filters[alias] }}
   <FilterItemAsCheckboxes :block="props.block" :values="checkboxes" v-model="model" @update:modelValue="handleCheckbox" />
   <div class="input-group">
     <input placeholder="от" type="number" v-model="filters[`${alias}[from]`]" :min="min" :max="max" :step="1" @input="handleInput" />
@@ -15,7 +14,7 @@ const alias = props.block.alias;
 if (!filters[alias]) filters[alias] = '';
 if (!filters[`${alias}[from]`]) filters[`${alias}[from]`] = '';
 if (!filters[`${alias}[to]`]) filters[`${alias}[to]`] = '';
-const model = ref(filters[alias].split(','));
+const model = ref(filters[alias].split(',').filter((item) => item.length));
 const max = props.values[0];
 const min = props.values[props.values[props.values.length - 1]];
 const checkboxes = props.values;
@@ -27,7 +26,7 @@ const handleCheckbox = (value) => {
   filters[`${alias}[to]`] = to;
   filters[`${alias}[from]`] = from;
   checkboxes.forEach((item) => {
-    if (+item < +to && +item > +from) {
+    if (+item < +to && +item > +from && !model.value.includes(item)) {
       model.value.push(item);
     }
   });

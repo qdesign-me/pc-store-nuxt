@@ -3,7 +3,7 @@ import db from '../../../db/db';
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   const { take = 100, sortby = 'popular', sortdir = 'desc', where = {} } = body;
-  const select = `(select concat('https://win7.by/data/big/', thumbnail) from iven_product_pictures where photoID=site_products.default_picture) as img, productID, name, Price_bn, PriceSale_bn, uri, is_auction, is_new`;
+  const select = `(select group_concat(ip.filename) from site_pictures ip where ip.productID=site_products.productID group by ip.productID) as img, productID, name, Price_bn, PriceSale_bn, uri, is_auction, is_new`;
   const sorttypes: Record<string, string> = {
     name: 'name',
     popular: 'viewed_times',
@@ -27,7 +27,7 @@ export default defineEventHandler(async (event) => {
         .join(' and ')
     : 1;
   const sql = `select ${select} from site_products   where enabled=1 and ${whereCond} order by ${sorttypes[sortby]} ${sortdir} limit ${take}`;
-  console.log(sql);
+
   const [data] = await db.execute(sql);
 
   return {

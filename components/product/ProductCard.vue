@@ -6,9 +6,7 @@
     </div>
 
     <div>
-      <NuxtLink :to="uri">
-        <ImageCarousel :data="props.product" />
-      </NuxtLink>
+      <ImageCarousel :data="props.product" :to="uri" />
     </div>
     <NuxtLink :to="uri" class="text-sm font-light leading-4 mt-4">{{ props.product.name }}</NuxtLink>
 
