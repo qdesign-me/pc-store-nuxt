@@ -1,3 +1,4 @@
+//@ts-nocheck
 import db from '../../../db/db';
 
 export default defineEventHandler(async (event) => {
@@ -12,39 +13,45 @@ export default defineEventHandler(async (event) => {
     products: [],
     features: {
       'Стоимость при оплате единым платежом': {
+        label: 'Стоимость при оплате единым платежом',
         items: [],
         bg: [],
         suffix: ' Br',
+        feature_type: 'price',
       },
     },
   };
-  sql = `select (select concat('https://win7.by/data/big/', thumbnail) from iven_product_pictures where photoID=site_products.default_picture) as img, productID, uri, name, Price_Bn, is_auction, is_new
+  sql = `select (select group_concat(ip.filename) from site_pictures ip where ip.productID=site_products.productID group by ip.productID) as img, productID, uri, name, Price_Bn, is_auction, is_new
 from site_products where productID in (${id})`;
   const [products] = await db.execute(sql);
-
   data.products = products;
 
-  sql = `select sfop.productID, sfop.value, spf.label, spf.tooltip, spf.suffix, spf.filter_type from  site_features_on_products sfop
-  join  site_products_features spf on spf.featureID=sfop.featureID where productID in (${id}) `;
+  sql = `select  p.productID, sfop.value, spf.label, spf.tooltip, spf.suffix, spf.filter_type, spf.feature_type from site_products p 
+  left join site_features_on_products sfop on p.productID=sfop.productID 
+  left join site_products_features spf on spf.featureID=sfop.featureID where p.productID in (${id}) order by spf.sort_order`;
+  console.log(sql);
   const [features] = await db.execute(sql);
-
   data.products.forEach((item, index) => {
     data.features['Стоимость при оплате единым платежом'].items[index] = Math.round(item.Price_Bn);
   });
+
   features.forEach((item) => {
-    if (!data.features[item.label]) {
-      data.features[item.label] = {
-        tooltip: item.tooltip,
-        items: [],
-        equal: false,
-        bg: [],
-        suffix: item.suffix,
-      };
+    if (item.label) {
+      if (!data.features[item.label]) {
+        data.features[item.label] = {
+          label: item.label,
+          tooltip: item.tooltip,
+          items: [],
+          equal: false,
+          bg: [],
+          suffix: item.suffix,
+          feature_type: item.feature_type,
+        };
+      }
+      const value = item.filter_type === 'boolean' ? (item.value === '1' ? 'Да' : 'Нет') : item.value;
+      const idx = data.products.findIndex((it) => it.productID == item.productID);
+      data.features[item.label]['items'][idx] = value;
     }
-    const value = item.filter_type === 'boolean' ? (item.value === '1' ? 'Да' : 'Нет') : item.value;
-    //if (item.suffix && value?.length) value = `${value}${item.suffix}`;
-    const idx = data.products.findIndex((it) => it.productID === item.productID);
-    data.features[item.label]['items'][idx] = value;
   });
 
   Object.keys(data.features).forEach((key) => {
@@ -62,6 +69,16 @@ from site_products where productID in (${id})`;
       });
     }
   });
+
+  data.features = Object.keys(data.features).reduce((acc, key) => {
+    const current = data.features[key];
+    console.log('FT', current.feature_type, current);
+
+    return {
+      ...acc,
+      [current.feature_type]: [...(acc[current.feature_type] ?? []), current],
+    };
+  }, {});
 
   return { data };
 });

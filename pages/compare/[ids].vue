@@ -5,6 +5,7 @@
       <span>Корзина</span>
     </div>
     <h1>Сравнение товаров</h1>
+
     <CompareTable :data="data.data" />
   </main>
 </template>

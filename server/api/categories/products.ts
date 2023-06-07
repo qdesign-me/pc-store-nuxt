@@ -21,7 +21,7 @@ export default defineEventHandler(async (event) => {
 
   console.log({ rest });
 
-  const select = `(select concat('https://win7.by/data/big/', thumbnail) from iven_product_pictures where photoID=p.default_picture) as img, 
+  const select = `(select group_concat(ip.filename) from site_pictures ip where ip.productID=p.productID group by ip.productID) as img, 
   c.uri, p.productID, p.name, p.Price_bn, p.PriceSale_bn, p.uri, p.is_auction, p.is_new `;
   const sorttypes: Record<string, string> = {
     name: 'p.name',

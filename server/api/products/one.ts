@@ -27,7 +27,7 @@ export default defineEventHandler(async (event) => {
   );
 
   data['features'] = await getFeatures(
-    `select sfop.value,  sf.label, sf.tooltip, sf.suffix from site_features_on_products sfop join site_products_features sf on sf.featureID = sfop.featureID where sfop.productID=${data.productID}`
+    `select sfop.value,  sf.label, sf.tooltip, sf.suffix from site_features_on_products sfop join site_products_features sf on sf.featureID = sfop.featureID where sfop.productID=${data.productID} order by sf.sort_order`
   );
   const similar = {
     link: data.uri,

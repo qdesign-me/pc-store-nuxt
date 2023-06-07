@@ -26,5 +26,10 @@ module.exports = {
       },
     },
   },
+  purge: {
+    options: {
+      safelist: ['swiper-pagination'],
+    },
+  },
   plugins: [],
 };

@@ -19,24 +19,28 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="key in Object.keys(props.data.features)" :key="key" :class="{ hidden: hideEqual && props.data.features[key].equal }">
-          <td>
-            <div class="label-wrap">
-              <div class="label flex items-center gap-2">
-                <template v-if="key === 'Стоимость при оплате единым платежом'"><ValetIcon width="27" height="26" /></template>
-                {{ key }}
+        <template v-for="key in Object.keys(props.data.features)" :key="key">
+          <tr v-if="key !== 'price'" class="bg-lightbeige/10" :class="{ hidden: hideEqual && props.data.features[key].every((item) => item.equal) }">
+            <td :colspan="props.data.products.length + 1">{{ groups[key] }}</td>
+          </tr>
+          <tr v-for="row in props.data.features[key]" :key="row" :class="{ hidden: hideEqual && row.equal }">
+            <td>
+              <div class="label-wrap">
+                <div class="label flex items-center gap-2">
+                  <template v-if="row.label === 'Стоимость при оплате единым платежом'"><ValetIcon width="27" height="26" /></template>
+                  {{ row.label }}
+                </div>
+                <Tooltip v-if="row.tooltip">
+                  <div class="help-trigger"></div>
+                  <template #text>{{ row.tooltip }}</template>
+                </Tooltip>
               </div>
-              <Tooltip v-if="props.data.features[key].tooltip">
-                <div class="help-trigger"></div>
-                <template #text>{{ props.data.features[key].tooltip }}</template>
-              </Tooltip>
-            </div>
-          </td>
-
-          <td v-for="(item, index) in props.data.features[key].items" :class="props.data.features[key].bg[index]">
-            {{ item }}<template v-if="item">{{ props.data.features[key].suffix }}</template>
-          </td>
-        </tr>
+            </td>
+            <td v-for="(item, index) in props.data.products" :class="row.bg[index]">
+              {{ row.items[index] }}<template v-if="row.items[index]">{{ row.suffix }}</template>
+            </td>
+          </tr>
+        </template>
       </tbody>
     </table>
   </div>
@@ -58,5 +62,11 @@ const handleRemove = (productID) => {
   const link = ids.length === 0 ? '/' : `/compare/${ids.join('+')}`;
   store.removeCompare(productID);
   router.push(link);
+};
+
+const groups = {
+  general: 'Основные характеристики',
+  package: 'Комплектация',
+  tech: 'Технические характеристики',
 };
 </script>
