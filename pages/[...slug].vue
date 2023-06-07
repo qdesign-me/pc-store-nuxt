@@ -23,10 +23,13 @@
   </main>
 </template>
 <script async setup>
-const router = useRouter();
-const filters = reactive(router.currentRoute.value.query);
+const route = useRoute();
+const filters = reactive(route.query);
+
 provide('filters', filters);
-const uri = router.currentRoute.value.path;
+const searchQuery = computed(() => buildQuery(filters));
+const uri = route.path;
+
 const { data: category } = await useFetch('/api/categories/one', {
   method: 'POST',
   body: {
@@ -42,10 +45,8 @@ const { data: products } = await useFetch('/api/categories/products', {
   },
 });
 
-const searchQuery = computed(() => buildQuery(filters));
-
 watch(searchQuery, () => {
-  router.push(`${uri}${searchQuery.value}`);
+  navigateTo(`${uri}${searchQuery.value}`);
 });
 
 definePageMeta({

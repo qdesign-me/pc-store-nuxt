@@ -21,6 +21,7 @@ export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   const data = await getCategory(body.uri);
   const blocks = await getFilters(data);
+  console.log('API CATEGORIES HIT');
   return {
     blocks,
     data,

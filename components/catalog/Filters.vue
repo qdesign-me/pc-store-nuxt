@@ -1,5 +1,6 @@
 <template>
   <div class="pr-10 flex flex-col gap-4">
+    <FilterItemAsPrice />
     <div v-for="block in props.blocks" :key="block.label">
       <div class="label-wrap">
         <div class="label">{{ block.label }}</div>

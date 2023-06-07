@@ -2,7 +2,6 @@
   <div class="pagination">
     <button v-for="link in links" :key="link.page" :class="{ active: current === link.page }" @click="filters.page = link.page" :title="link.page">{{ link.label }}</button>
   </div>
-  {{ props.total }}
 </template>
 
 <script setup>
