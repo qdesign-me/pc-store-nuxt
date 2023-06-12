@@ -1,31 +1,39 @@
 <template>
-  <button class="btn menu-button" :class="{ opened: showMenu }" @mouseover="showMenu = true"><CatalogIcon /> Каталог товров</button>
-  <div class="menu" @mouseleave="showMenu = false" ref="target">
-    <div class="container">
-      <div class="breadcrumbs"><span class="a">Главная</span><span>Каталог товаров</span></div>
-      <div class="grid grid-cols-5 gap-2.5">
-        <div>
-          <div class="title"><NuxtLink to="/kompyutery">Компьютеры</NuxtLink></div>
-          <div class="items">
-            <PcTypesBlock />
+  <div ref="target">
+    <button class="btn menu-button" :class="{ opened: showMenu }" @click.stop.prevent="showMenu = !showMenu">
+      <div class="w-6 flex items-center justify-center">
+        <CatalogIcon v-if="!showMenu" />
+        <div v-else class="text-2xl">&times;</div>
+      </div>
+      Каталог товров
+    </button>
+    <div class="menu">
+      <div class="container">
+        <div class="breadcrumbs"><span class="a">Главная</span><span>Каталог товаров</span></div>
+        <div class="grid grid-cols-5 gap-2.5">
+          <div>
+            <div class="title"><NuxtLink to="/kompyutery">Компьютеры</NuxtLink></div>
+            <div class="items">
+              <PcTypesBlock />
+            </div>
           </div>
-        </div>
-        <div>
-          <div class="title"><NuxtLink to="/ehlektronika/noutbuki">Ноутбуки</NuxtLink></div>
-        </div>
-        <div v-for="item in data" :key="item.categotyID">
-          <div class="title">
-            <NuxtLink :to="item.uri">
-              {{ item.name }}
-            </NuxtLink>
+          <div>
+            <div class="title"><NuxtLink to="/ehlektronika/noutbuki">Ноутбуки</NuxtLink></div>
           </div>
-          <ul v-if="item.nodes">
-            <li v-for="node in item.nodes" :key="node.name">
-              <NuxtLink :to="node.uri">
-                {{ node.name }}
+          <div v-for="item in data" :key="item.categotyID">
+            <div class="title">
+              <NuxtLink :to="item.uri">
+                {{ item.name }}
               </NuxtLink>
-            </li>
-          </ul>
+            </div>
+            <ul v-if="item.nodes">
+              <li v-for="node in item.nodes" :key="node.name">
+                <NuxtLink :to="node.uri">
+                  {{ node.name }}
+                </NuxtLink>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -36,10 +44,16 @@
 const route = useRoute();
 import { onClickOutside } from '@vueuse/core';
 const target = ref(null);
-onClickOutside(target, () => (showMenu.value = false));
+onClickOutside(target, (e) => {
+  showMenu.value = false;
+});
 const { data } = await useFetch('/api/categories/menu');
 const showMenu = ref(false);
 watch(route, () => {
   showMenu.value = false;
+});
+
+watch(showMenu, () => {
+  showMenu.value ? document.querySelector('body').classList.add('with-open-menu') : document.querySelector('body').classList.remove('with-open-menu');
 });
 </script>

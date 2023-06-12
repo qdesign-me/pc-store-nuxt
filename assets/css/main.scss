@@ -7,6 +7,12 @@
 @layer base {
   body {
     font-family: 'Inter', sans-serif;
+    &.with-open-menu {
+      @apply overflow-hidden;
+      .menu {
+        @apply block;
+      }
+    }
   }
   a {
     @apply transition;
@@ -360,9 +366,6 @@
   }
   .menu-button {
     @apply cursor-pointer;
-    &.opened + .menu {
-      @apply block;
-    }
   }
   .review-item {
     @apply flex;

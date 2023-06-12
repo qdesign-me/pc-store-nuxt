@@ -1,19 +1,6 @@
 <template>
   <main class="container flex flex-col space-y-10">
-    <div class="grid grid-cols-5 gap-2.5">
-      <NuxtLink class="col-span-4 card bg-blue py-0 height-sm justify-center" to="/">
-        <img src="/img/promo/slide1.png" alt="" loading="lazy" width="450" height="350" class="slider-bg" />
-        <div class="title-lg text-white mb-0 relative">
-          ФАНТАСТИЧЕСКИЙ<br />
-          КОРПУС JONSBO D30<br />
-          УЖЕ В ПРОДАЖЕ
-        </div>
-      </NuxtLink>
-      <NuxtLink class="card bg-blue pb-0 height-sm" to="/akcii"
-        ><img src="/img/promo/sale.png" alt="" loading="lazy" width="295" height="350" class="promo-bg" />
-        <div class="title-lg text-white relative">Все <br />акции</div></NuxtLink
-      >
-    </div>
+    <SliderBlock />
     <PromoBlock />
     <TopSalesBlock />
     <PopularCatsBlock />

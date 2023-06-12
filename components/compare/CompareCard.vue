@@ -2,7 +2,7 @@
   <div class="flex flex-col gap-2 items-center relative px-14 pt-2 pb-10">
     <button @click="emit('remove', props.product.productID)">удалить</button>
     <NuxtLink :to="uri">
-      <ImageCarousel :data="props.product" class="mx-auto my-2" />
+      <ProductThumbs :data="props.product" class="mx-auto my-2" />
     </NuxtLink>
 
     <NuxtLink :to="uri" class="max-w-[240px] mx-auto line-clamp-2">{{ props.product.name }}</NuxtLink>
