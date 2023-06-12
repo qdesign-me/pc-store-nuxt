@@ -196,7 +196,7 @@
     max-width: 1540px !important;
   }
   .card {
-    @apply flex flex-col rounded relative py-6 px-6 transition hover:shadow;
+    @apply flex flex-col rounded relative py-6 px-6 transition hover:shadow h-[400px];
     .note {
       @apply flex items-center gap-10;
     }

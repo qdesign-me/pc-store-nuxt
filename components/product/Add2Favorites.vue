@@ -8,9 +8,9 @@
     <FavoritesIcon />
     Сохранить
   </button>
-  <div v-else :class="{ 'text-blue': store.$state.favorites.includes(props.productID) }">
-    <FavoritesIcon class="cursor-pointer" @click="store.toggleFavorites(props.productID)" />
-  </div>
+  <button v-else class="is-transparent p-2 cursor-pointer" :class="{ 'text-blue': store.$state.favorites.includes(props.productID) }">
+    <FavoritesIcon @click="store.toggleFavorites(props.productID)" />
+  </button>
 </template>
 
 <script setup>

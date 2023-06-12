@@ -8,13 +8,13 @@
     <CompareIcon />
     Сравнить
   </button>
-  <div
+  <button
     v-else
-    class="ml-auto"
+    class="ml-auto is-transparent p-2 cursor-pointer"
     :class="{ 'text-blue': store.$state.compare.includes(props.productID), disabled: store.$state.compare.length > 4 && !store.$state.compare.includes(props.productID) }"
   >
-    <CompareIcon class="cursor-pointer" @click="store.toggleCompare(props.productID)" />
-  </div>
+    <CompareIcon @click="store.toggleCompare(props.productID)" />
+  </button>
 </template>
 
 <script setup>
