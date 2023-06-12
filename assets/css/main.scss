@@ -32,6 +32,12 @@
   .box-promo a {
     @apply transition hover:text-blue;
   }
+  .promo-bg {
+    @apply -inset-0 absolute w-full h-full;
+  }
+  .slider-bg {
+    @apply -inset-0 absolute w-full h-full object-cover object-right;
+  }
   svg.active {
     @apply text-lightblue;
   }
@@ -70,7 +76,7 @@
       &:before {
         content: '';
         transform: translate(-50%, -50%);
-        @apply w-3 h-3 rounded-full bg-lightblue absolute top-1/2 left-1/2;
+        @apply w-2 h-2 rounded-full bg-lightblue absolute top-1/2 left-1/2;
       }
     }
   }
@@ -102,7 +108,7 @@
     @apply text-xl font-semibold;
   }
   .title-lg {
-    @apply text-5xl leading-[56px] uppercase font-extrabold mb-4;
+    @apply text-4xl leading-[48px] uppercase font-extrabold mb-4;
   }
   .pagination {
     @apply flex flex-wrap gap-2 text-xs mt-6;
@@ -293,8 +299,12 @@
     a {
       @apply block;
     }
-    a[href^='mailto:'] {
-      @apply mt-6;
+
+    .with-icon {
+      @apply relative pl-10 mb-6;
+      svg {
+        @apply absolute top-1 left-0;
+      }
     }
   }
   .temp {
@@ -335,6 +345,7 @@
     a {
       @apply underline underline-offset-4 block;
     }
+
     .main-links {
       @apply grid grid-cols-3 gap-8 ml-12;
       a {

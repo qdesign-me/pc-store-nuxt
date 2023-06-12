@@ -16,7 +16,7 @@
           <div class="grid grid-cols-4 gap-x-2.5 gap-y-8">
             <ProductCard v-for="product in products.data" :key="product.productID" :product="product" />
           </div>
-          <Pagination :total="products.total" v-if="products.total > 12" />
+          <PaginationBox :total="products.total" v-if="products.total > 12" />
         </template>
       </div>
     </div>

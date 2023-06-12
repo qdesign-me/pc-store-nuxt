@@ -4,40 +4,54 @@
       <div class="grid grid-cols-5 gap-2.5">
         <div class="grid grid-cols-4 gap-14 col-span-4">
           <div>
-            <div class="title">Наш адрес:</div>
-            <a href="#" class="underline underline-offset-4">{{ $state.config.address }}</a>
+            <div class="title">Наши контакты:</div>
+            <div class="with-icon">
+              <MapPinIcon />
+              <a href="#" class="underline underline-offset-4"> {{ $state.config.address }}</a>
+            </div>
+
+            <div class="with-icon">
+              <PhoneIcon />
+              <a v-for="phone in $state.config.phones?.split(' ')" :key="phone" :href="`tel:${phone}`">
+                {{ formatPhoneNumber(phone) }}
+              </a>
+            </div>
+            <div class="with-icon">
+              <MessageIcon />
+              <a :href="`mailto:${$state.config.email}`" class="underline underline-offset-4">{{ $state.config.email }}</a>
+            </div>
+
+            <div class="title mt-10">Режим работы:</div>
+            <div v-html="$state.config.timetable" class="-mr-8"></div>
           </div>
           <div>
             <div class="title">Гарантийное обслуживание:</div>
-            <a href="#" class="underline underline-offset-4">{{ $state.config.address }}</a>
+            <div class="with-icon">
+              <MapPinIcon />
+              <a href="#" class="underline underline-offset-4">{{ $state.config.address }}</a>
+            </div>
+            <div class="with-icon min-h-[65px]">
+              <PhoneIcon />
+              <a v-for="phone in $state.config['service.phone']?.split(' ')" :key="phone" :href="`tel:${phone}`" class="translate-y-1">
+                {{ formatPhoneNumber(phone) }}
+              </a>
+            </div>
+            <div class="with-icon">
+              <MessageIcon />
+              <a :href="`mailto:${$state.config.email}`" class="underline underline-offset-4">{{ $state.config.email }}</a>
+            </div>
+            <div class="flex gap-6 mt-10"><SocialLinks :social="$state.config.social" /></div>
           </div>
-          <div class="col-span-2">
-            <div class="title">Режим работы:</div>
-            <div v-html="$state.config.timetable"></div>
-          </div>
-          <div>
-            <div class="title">Наши контакты:</div>
 
-            <a v-for="phone in $state.config.phones?.split(' ')" :key="phone" :href="`tel:${phone}`">
-              {{ formatPhoneNumber(phone) }}
-            </a>
-          </div>
-          <div>
-            <div class="title">Контакты:</div>
-            <a v-for="phone in $state.config['service.phone']?.split(' ')" :key="phone" :href="`tel:${phone}`">
-              {{ formatPhoneNumber(phone) }}
-            </a>
-            <a :href="`mailto:${$state.config.email}`" class="underline underline-offset-4">{{ $state.config.email }}</a>
-          </div>
           <div class="col-span-2">
-            <div class="title">Платежные системы</div>
+            <div class="title">Платежные системы:</div>
             <div class="flex flex-col gap-6 items-start">
               <div class="flex gap-2">
                 <img src="/img/info/vtb.png" loading="lazy" width="64" height="40" alt="" />
                 <img src="/img/info/halva.png" loading="lazy" width="64" height="40" alt="" />
                 <img src="/img/info/magnit.png" loading="lazy" width="64" height="40" alt="" /><img src="/img/info/erip.png" loading="lazy" width="125" height="40" alt="" />
               </div>
-              <div>Наличный расчет и расчет банковской картой при получении. Возможно оформление кредита в банках-партнёрах:</div>
+              <div class="my-6">Наличный расчет и расчет банковской картой при получении. Возможно оформление кредита в банках-партнёрах:</div>
               <div class="flex flex-wrap gap-2 gap-x-0">
                 <img src="/img/info/belapb-logo.png" loading="lazy" width="175" height="25" alt="" /><img
                   src="/img/info/belarusb-logo.png"
@@ -46,19 +60,13 @@
                   height="25"
                   alt=""
                 />
+
+                <button class="btn mt-8">
+                  <CalcIcon />
+                  Калькулятор рассрочки
+                </button>
               </div>
             </div>
-          </div>
-          <div class="col-span-2">
-            <div class="flex gap-6">
-              <SocialLinks :social="$state.config.social" />
-            </div>
-          </div>
-          <div class="col-span-2">
-            <button class="btn">
-              <CalcIcon />
-              Калькулятор рассрочки
-            </button>
           </div>
         </div>
         <div class="bg-[#cee7ec] p-6 rounded -mt-6">

@@ -11,6 +11,15 @@ const getFilters = async (category: { categoryID: number; uri: string }) => {
   return data;
 };
 
+const getMinMax = async (uri: string) => {
+  const sql = `select min(Price_bn) as priceMin, max(Price_bn) from site_products p join site_categories c on c.categoryID = p.categoryID  where c.uri='${uri}'`;
+  const [data] = await db.execute(sql);
+  return {
+    min: data[0]['priceMin'],
+    max: data[0]['priceMax'],
+  };
+};
+
 const getCategory = async (uri: string) => {
   const sql = `select categoryID, name, uri, meta_description, breadcrumbs from site_categories where uri='${uri}'`;
   const [data] = await db.execute(sql);
@@ -21,9 +30,11 @@ export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   const data = await getCategory(body.uri);
   const blocks = await getFilters(data);
+  const minmax = await getMinMax(body.uri);
   console.log('API CATEGORIES HIT');
   return {
     blocks,
     data,
+    minmax,
   };
 });

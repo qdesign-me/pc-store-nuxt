@@ -1,18 +1,17 @@
 <template>
   <main class="container flex flex-col space-y-10">
     <div class="grid grid-cols-5 gap-2.5">
-      <NuxtLink class="col-span-4 card bg-orange py-0" to=""
-        ><div class="flex items-center justify-end">
-          <div class="title-lg text-center">
-            Актуальный аукцион<br />
-            или<br />
-            новинка
-          </div>
-          <img src="/img/promo/asus-laptop.png" alt="" loading="lazy" width="450" height="350" class="-ml-6" /></div
-      ></NuxtLink>
-      <NuxtLink class="card bg-coral pb-0" to="/akcii"
-        ><img src="/img/promo/asus-laptop.png" alt="" loading="lazy" width="200" height="155" class="self-end mb-2" />
-        <div class="title-lg">Все акции</div></NuxtLink
+      <NuxtLink class="col-span-4 card bg-lightblue py-0 min-h-[350px] justify-center" to="/">
+        <img src="/img/promo/slide1.png" alt="" loading="lazy" width="450" height="350" class="slider-bg" />
+        <div class="title-lg text-white mb-0 relative">
+          ФАНТАСТИЧЕСКИЙ<br />
+          КОРПУС JONSBO D30<br />
+          УЖЕ В ПРОДАЖЕ
+        </div>
+      </NuxtLink>
+      <NuxtLink class="card bg-lightblue pb-0" to="/akcii"
+        ><img src="/img/promo/sale.png" alt="" loading="lazy" width="295" height="350" class="promo-bg" />
+        <div class="title-lg text-white relative">Все акции</div></NuxtLink
       >
     </div>
     <PromoBlock />

@@ -27,8 +27,11 @@ export default defineNuxtConfig({
     },
   },
   css: ['~/assets/css/main.scss'],
-  modules: ['@pinia/nuxt'],
+  modules: ['@pinia/nuxt', 'nuxt-swiper'],
   pinia: {
     autoImports: ['defineStore', 'acceptHMRUpdate'],
+  },
+  swiper: {
+    modules: ['navigation', 'pagination'],
   },
 });
