@@ -197,6 +197,12 @@
   }
   .card {
     @apply flex flex-col rounded relative py-6 px-6 transition hover:shadow h-[400px];
+    &.height-sm {
+      height: 250px;
+    }
+    &.height-xs {
+      height: 200px;
+    }
     .note {
       @apply flex items-center gap-10;
     }

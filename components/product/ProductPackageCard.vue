@@ -1,5 +1,5 @@
 <template>
-  <div class="card col-span-2 border shadow h-[400px]">
+  <div class="card col-span-2 border shadow">
     <div class="flex justify-between mb-0 -mt-2 text-lightgray">
       <FavoritesIcon class="hoverable cursor-pointer" />
     </div>
