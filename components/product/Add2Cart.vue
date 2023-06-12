@@ -7,7 +7,7 @@
   >
     <CartIcon /> В корзину
   </button>
-  <div v-else class="ml-auto" :class="{ 'text-lightblue': store.$state.cart.includes(props.productID) }">
+  <div v-else class="ml-auto" :class="{ 'text-blue': store.$state.cart.includes(props.productID) }">
     <CartIcon class="cursor-pointer" @click="store.toggleCart(props.productID)" />
   </div>
 </template>

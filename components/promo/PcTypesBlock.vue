@@ -34,7 +34,7 @@ const links = [
     uri: '/elektronika/Gotovie-komputeri/igrovye',
   },
   {
-    name: 'Серверы и рабочие станции',
+    name: 'Серверы и станции',
     icon: ServerIcon,
     uri: '/elektronika/Gotovie-komputeri/servery-irabochie-stancii',
   },

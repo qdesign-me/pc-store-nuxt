@@ -39,10 +39,10 @@
     @apply -inset-0 absolute w-full h-full object-cover object-right;
   }
   svg.active {
-    @apply text-lightblue;
+    @apply text-blue;
   }
   .input {
-    @apply border border-lightblue rounded leading-10 py-0 px-4 w-full outline-none text-sm font-medium;
+    @apply border border-blue rounded leading-10 py-0 px-4 w-full outline-none text-sm font-medium;
   }
   .checkbox-wrap {
     @apply relative cursor-pointer;
@@ -76,20 +76,20 @@
       &:before {
         content: '';
         transform: translate(-50%, -50%);
-        @apply w-2 h-2 rounded-full bg-lightblue absolute top-1/2 left-1/2;
+        @apply w-2 h-2 rounded-full bg-blue absolute top-1/2 left-1/2;
       }
     }
   }
   .btn {
-    @apply leading-10 px-6 py-0 bg-lightblue text-white text-sm font-medium rounded inline-flex gap-4 items-center justify-center cursor-pointer whitespace-nowrap hover:text-white;
+    @apply leading-10 px-6 py-0 bg-blue text-white text-sm font-medium rounded inline-flex gap-4 items-center justify-center cursor-pointer whitespace-nowrap hover:text-white;
     &.is-plain {
-      @apply text-lightblue bg-white border border-lightblue;
+      @apply text-blue bg-white border border-blue;
     }
     &.is-transparent {
       @apply text-[#7C7C7C] bg-transparent border-transparent;
     }
     &.is-underlined {
-      @apply underline underline-offset-4 bg-white text-lightblue hover:text-lightblue hover:no-underline px-0;
+      @apply underline underline-offset-4 bg-white text-blue hover:text-blue hover:no-underline px-0;
     }
     &.is-small {
       @apply leading-8;
@@ -128,7 +128,7 @@
       div {
         @apply font-semibold text-lightgray py-3 text-xl cursor-pointer;
         &.active {
-          @apply text-lightblue text-3xl;
+          @apply text-blue text-3xl;
         }
       }
     }
@@ -162,7 +162,7 @@
       @apply transition;
     }
     &:hover svg {
-      @apply text-lightblue;
+      @apply text-blue;
     }
   }
   .input-group {
@@ -322,22 +322,21 @@
   }
   header {
     @apply mb-10;
-    .input,
     .btn {
       @apply leading-[50px];
     }
+
     .input {
-      @apply pr-20;
-      border: 2px solid #a1a1a1;
+      @apply pr-20  leading-[47px] border-2 border-[#A1A1A1];
     }
     .nav-links {
       @apply flex gap-6 text-sm;
       .a {
-        @apply flex flex-col items-center justify-between gap-2 relative cursor-pointer hover:text-lightblue transition;
+        @apply flex flex-col items-center justify-between gap-2 relative cursor-pointer hover:text-blue transition;
       }
     }
     a[href^='tel:'] {
-      @apply text-lightblue text-3xl font-bold flex gap-4;
+      @apply text-blue text-3xl font-bold flex gap-4;
     }
   }
   footer {
@@ -385,7 +384,7 @@
         @apply flex-1 relative h-2 rounded;
         background: rgba(0, 179, 215, 0.2);
         div {
-          @apply absolute bg-lightblue rounded h-2 left-0;
+          @apply absolute bg-blue rounded h-2 left-0;
         }
       }
     }

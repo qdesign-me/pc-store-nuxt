@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-lightblue/10 rounded p-3 flex-1">
+  <div class="bg-blue/10 rounded p-3 flex-1">
     <div class="flex justify-between mb-4">
       <div class="text-xl font-semibold">Рейтинг товара</div>
       <div class="flex gap-4 items-center">
@@ -52,7 +52,7 @@
         <img src="/img/reviews/1.jpg" alt="" loading="lazy" width="400" height="253" class="w-full" />
         <VideoIcon class="absolute shadow rounded-full left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
       </div>
-      <div class="bg-lightblue text-white font-semibold text-lg p-2">Как выбрать материнскую плату</div>
+      <div class="bg-blue text-white font-semibold text-lg p-2">Как выбрать материнскую плату</div>
     </div>
 
     <div class="flex flex-col gap-6 text-sm my-10">
@@ -75,6 +75,6 @@
       за публикацию <br />
       обзоров и статей!
     </div>
-    <button class="text-lightblue flex items-center gap-6 underline underline-offset-4">Опубликовать обзор <ArrowRightIcon /></button>
+    <button class="text-blue flex items-center gap-6 underline underline-offset-4">Опубликовать обзор <ArrowRightIcon /></button>
   </div>
 </template>

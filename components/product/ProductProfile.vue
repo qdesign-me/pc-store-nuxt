@@ -57,7 +57,7 @@
             <li v-for="feature in props.data.features" :key="feature.label">{{ feature.label }}: {{ feature.value }}</li>
           </ul>
 
-          <div class="mt-10 text-lightblue cursor-pointer text-base flex gap-10 items-center" v-if="props.data.description.length > 0">
+          <div class="mt-10 text-blue cursor-pointer text-base flex gap-10 items-center" v-if="props.data.description.length > 0">
             <div class="underline underline-offset-4" @click="showFeatures">Все характеристики товара</div>
             <ArrowRightIcon />
           </div>
@@ -73,7 +73,7 @@
         </div>
       </div>
 
-      <div class="text-lightblue cursor-pointer underline underline-offset-4 mt-6" @click="modalVisible = true">Сообщить об ошибке в описании</div>
+      <div class="text-blue cursor-pointer underline underline-offset-4 mt-6" @click="modalVisible = true">Сообщить об ошибке в описании</div>
 
       <Modal :visible="modalVisible" @close="modalVisible = false" title="Сообщить об ошибке">
         <form @submit="modalVisible = false">
@@ -91,7 +91,7 @@
           <StarIcon />
           4.5
         </div>
-        <div class="ml-auto flex gap-8 text-lightblue">
+        <div class="ml-auto flex gap-8 text-blue">
           <div class="underline underline-offset-4 cursor-pointer">1 Обзор</div>
           <div class="underline underline-offset-4 cursor-pointer">13 Отзывов</div>
         </div>

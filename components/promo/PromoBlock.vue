@@ -1,6 +1,6 @@
 <template>
   <div class="grid grid-cols-5 gap-2.5">
-    <NuxtLink to="/zakazat-sborku" class="card bg-lightblue group">
+    <NuxtLink to="/zakazat-sborku" class="card bg-blue group">
       <div class="title text-white">
         Заказать
         <br />
@@ -14,7 +14,7 @@
         <PcTypesBlock />
       </div>
     </div>
-    <div class="card col-span-2 bg-lightblue/10">
+    <div class="card col-span-2 bg-blue/10">
       <div class="title">Хочу быть в курсе акций и новинок!</div>
 
       <SubscribeBlock />

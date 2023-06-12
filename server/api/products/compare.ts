@@ -59,7 +59,7 @@ from site_products where productID in (${id})`;
     if (highlightUp.includes(key)) {
       const sorted = data.features[key].items.sort((a, b) => Number(b) - Number(a));
       data.features[key].items.forEach((item, index) => {
-        if (item === sorted[0]) data.features[key].bg[index] = 'bg-lightblue/10';
+        if (item === sorted[0]) data.features[key].bg[index] = 'bg-blue/10';
       });
     }
     if (highlightDown.includes(key)) {
