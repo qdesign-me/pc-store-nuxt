@@ -7,6 +7,13 @@
 @layer base {
   body {
     font-family: 'Inter', sans-serif;
+    &.with-open-mmenu {
+      @apply overflow-hidden;
+      nav {
+        position: fixed;
+        top: 60px;
+      }
+    }
     &.with-open-menu {
       @apply overflow-hidden;
       .menu {
@@ -39,7 +46,7 @@
   }
   .carousel {
     img {
-      @apply w-52 h-52 object-contain;
+      @apply w-52 h-52 object-contain mx-auto;
     }
   }
   .hoverable,
@@ -108,7 +115,7 @@
     }
   }
   .btn {
-    @apply leading-10 px-6 py-0 bg-blue text-white text-sm font-medium rounded inline-flex gap-4 items-center justify-center cursor-pointer whitespace-nowrap hover:text-white;
+    @apply leading-10 px-6 py-0 bg-blue text-white text-sm font-medium rounded inline-flex gap-4 items-center justify-center cursor-pointer whitespace-nowrap hover:text-white transition;
     &.is-plain {
       @apply text-blue bg-white border border-blue;
     }
@@ -205,7 +212,7 @@
     }
   }
   .breadcrumbs {
-    @apply text-xs text-gray-400 font-medium mb-8 flex  items-center;
+    @apply text-xs text-gray-400 font-medium mt-4 mb-8 flex  items-center;
     a,
     .a {
       @apply text-inherit inline-block;
@@ -216,7 +223,14 @@
     }
   }
   .count {
-    @apply absolute -top-3 right-3 bg-orange w-4 h-4 flex items-center justify-center text-[10px] text-white rounded-full;
+    @apply absolute -top-3 left-1/2 translate-x-1 bg-orange w-4 h-4 flex items-center justify-center text-[10px] text-white rounded-full;
+  }
+  .mobi-call {
+    @apply fixed right-4 top-[68px] z-[300] w-12 h-12 rounded-full bg-blue cursor-pointer  items-center justify-center hidden;
+    color: white !important;
+    animation: shake 2s infinite alternate;
+    transform: translate3d(0, 0, 0);
+    transform-origin: 50% 50%;
   }
   .container {
     @apply mx-auto px-5;
@@ -393,7 +407,7 @@
     .nav-links {
       @apply flex gap-6 text-sm;
       .a {
-        @apply flex flex-col items-center justify-end gap-1 relative cursor-pointer hover:text-blue transition;
+        @apply flex flex-col items-center justify-center gap-1 relative cursor-pointer hover:text-blue transition h-[50px];
       }
     }
     a[href^='tel:'] {
@@ -407,7 +421,7 @@
     }
 
     .main-links {
-      @apply flex flex-wrap gap-8 ml-12;
+      @apply flex flex-wrap gap-8 ml-12 max-w-[370px];
       a {
         @apply text-[16px] font-normal py-2 w-[95px];
       }
@@ -590,12 +604,14 @@
 }
 
 @media screen and (max-width: 1024px) {
+  .mobi-call {
+    @apply flex;
+  }
   header {
     position: sticky;
     top: 0;
     z-index: 20;
     background: white;
-
     height: 60px;
     border-bottom: 1px solid #d9d9d9;
     .logo {
@@ -605,10 +621,30 @@
       transform: translate(-50%, -50%);
     }
     nav {
-      display: none;
-      + div {
-        display: none !important;
+      position: absolute;
+      top: -999px;
+      left: 0;
+      bottom: 60px;
+      z-index: 200;
+      background: #fff;
+      right: 0;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+      ul {
+        display: flex;
+        flex-direction: column;
+        background: #fff;
+        a {
+          @apply leading-[60px]  block;
+          padding: 0 !important;
+        }
+        li + li {
+          @apply border-t;
+        }
       }
+    }
+    nav + div {
+      display: none !important;
     }
   }
   .sticky-line {
@@ -621,10 +657,13 @@
       right: 0;
       left: 0;
       border-top: 1px solid #d9d9d9;
-      padding: 10px 2rem;
+      padding: 0 2rem;
       justify-content: space-between;
       font-size: 12px;
       gap: 0;
+      height: 60px;
+      display: flex;
+      align-items: center;
       a {
         gap: 0 !important;
         justify-content: center;
@@ -751,6 +790,12 @@
   }
 
   .card {
+    .note {
+      gap: 0;
+      justify-content: space-between;
+      left: 0.75rem;
+      right: 0.75rem;
+    }
     .can-span {
       right: 1rem;
       left: 1rem;
@@ -768,7 +813,23 @@
       }
     }
   }
-  .sticky-line .nav-links {
-    padding: 10px 1rem;
+}
+@keyframes shake {
+  5%,
+  40% {
+    transform: translate3d(-1px, 0, 0) scale(1.05);
+  }
+  10%,
+  40% {
+    transform: translate3d(2px, 0, 0) scale(0.95);
+  }
+  10%,
+  20%,
+  30% {
+    transform: translate3d(-4px, 0, 0) scale(1.1);
+  }
+  15%,
+  25% {
+    transform: translate3d(4px, 0, 0) scale(1);
   }
 }

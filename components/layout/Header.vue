@@ -5,6 +5,12 @@
         <div class="logo">
           <NuxtLink to="/"><img src="/img/logo.svg" alt="Viven" /></NuxtLink>
         </div>
+
+        <MobiMenu />
+        <MobiSearch />
+        <MobiCall>
+          <a :href="`tel:${config.mainphone}`" class="mobi-call"><PhoneIcon /></a>
+        </MobiCall>
         <nav class="col-span-3">
           <ul class="flex justify-between text-sm">
             <li><NuxtLink class="py-2 px-4" to="/o-kompanii">О компании</NuxtLink></li>
@@ -15,6 +21,7 @@
             <li><NuxtLink class="py-2 px-4" to="/garantiya">Гарантия</NuxtLink></li>
           </ul>
         </nav>
+
         <div class="flex">
           <NuxtLink class="btn ml-auto" to="/"> <ConfiguratorIcon /> Конфигуратор ПК</NuxtLink>
         </div>

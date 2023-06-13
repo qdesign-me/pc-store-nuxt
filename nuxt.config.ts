@@ -11,6 +11,7 @@ export default defineNuxtConfig({
     },
   },
   components: [
+    '~/components/mobi',
     '~/components/layout',
     '~/components/general',
     '~/components/icons',
