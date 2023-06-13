@@ -1,6 +1,6 @@
 <template>
-  <div class="mt-6 flex flex-wrap gap-6">
-    <div class="flex justify-around w-10 flex-1">
+  <div class="mt-4 lg:mt-6 flex flex-wrap gap-6">
+    <div class="flex justify-around w-10 flex-1 links">
       <a href="#" target="_blank">
         <div class="icon icon-viber"></div>
       </a>
@@ -14,7 +14,7 @@
     <div class="w-10 flex-1">
       <form action="#" class="flex flex-col gap-2 items-start">
         <input type="text" class="input" placeholder="Укажите ваш контакт" />
-        <button class="btn" type="submit">Подписаться на акции</button>
+        <button class="btn w-full" type="submit">Подписаться на акции</button>
       </form>
     </div>
   </div>

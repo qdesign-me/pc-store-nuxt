@@ -20,7 +20,7 @@
           <BankIcon />
         </div>
         <div class="text-2xl">1 600 Br</div>
-        <div class="ml-auto flex gap-2.5">
+        <div class="ml-auto flex gap-2.5 flex-wrap">
           <button class="btn leading-[50px] is-plain"><ConfiguratorIcon /> В конфигуратор</button>
           <button class="btn leading-[50px]"><CartIcon />В корзину</button>
         </div>

@@ -1,7 +1,7 @@
 <template>
   <NuxtLink v-for="link in links" :to="link.uri" :key="link.uri">
     <component :is="link.icon" />
-    {{ link.name }}
+    <span v-html="link.title"></span>
   </NuxtLink>
 </template>
 
@@ -14,27 +14,27 @@ const ServerIcon = resolveComponent('ServerIcon');
 
 const links = [
   {
-    name: 'Для офиса',
+    title: 'Для офиса',
     icon: OfficeIcon,
     uri: '/elektronika/Gotovie-komputeri/dlya-ofisa',
   },
   {
-    name: 'Для дома',
+    title: 'Для дома',
     icon: HomeIcon,
     uri: '/elektronika/Gotovie-komputeri/dlya-doma',
   },
   {
-    name: 'Для графики',
+    title: 'Для графики',
     icon: GraphicsIcon,
     uri: '/elektronika/Gotovie-komputeri/dlya-grafiki',
   },
   {
-    name: 'Игровые',
+    title: 'Игровые',
     icon: PlayIcon,
     uri: '/elektronika/Gotovie-komputeri/igrovye',
   },
   {
-    name: 'Серверы и станции',
+    title: 'Серверы <span>и станции</span>',
     icon: ServerIcon,
     uri: '/elektronika/Gotovie-komputeri/servery-irabochie-stancii',
   },

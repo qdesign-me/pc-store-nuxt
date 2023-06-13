@@ -1,11 +1,13 @@
 <template>
-  <main class="container flex flex-col space-y-10">
+  <main>
     <SliderBlock />
     <PromoBlock />
-    <TopSalesBlock />
-    <PopularCatsBlock />
-    <PopularSetsBlock />
-    <NewItemsBlock />
+    <div class="container">
+      <TopSalesBlock />
+      <PopularCatsBlock />
+      <PopularSetsBlock />
+      <NewItemsBlock />
+    </div>
   </main>
 </template>
 

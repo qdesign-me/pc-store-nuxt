@@ -1,5 +1,5 @@
 <template>
-  <div class="card border !pb-[115px] text-black">
+  <div class="card card-product border !pb-[115px] text-black">
     <div class="flex justify-between text-lightgray absolute left-4 right-4 top-3 z-10">
       <Add2Favorites :productID="props.product.productID" />
       <Add2Compare :productID="props.product.productID" />

@@ -1,8 +1,8 @@
 <template>
   <header>
     <div class="container">
-      <div class="grid grid-cols-5 gap-2.5 items-center py-4">
-        <div>
+      <div class="grid grid-cols-5 gap-2.5 items-center pt-4">
+        <div class="logo">
           <NuxtLink to="/"><img src="/img/logo.svg" alt="Viven" /></NuxtLink>
         </div>
         <nav class="col-span-3">
@@ -19,8 +19,18 @@
           <NuxtLink class="btn ml-auto" to="/"> <ConfiguratorIcon /> Конфигуратор ПК</NuxtLink>
         </div>
       </div>
+    </div>
+  </header>
+  <div class="sticky top-0 sticky-line" :class="{ 'is-scrolling': y > 130 }">
+    <div class="container">
       <div class="flex gap-6 items-center">
-        <a :href="`tel:${config.mainphone}`"><span class="mobile-logos"></span> {{ formatPhoneNumber(config.mainphone) }}</a>
+        <a :href="`tel:${config.mainphone}`"
+          ><span class="mobile-logos hide-if-scroll"></span>
+
+          <NuxtLink to="/" class="max-w-[44px] overflow-hidden show-if-scroll"><img src="/img/logo-sm.png" class="show-if-scroll graceful" alt="Viven" /></NuxtLink>
+
+          {{ formatPhoneNumber(config.mainphone) }}</a
+        >
         <ul>
           <li class="menu-trigger">
             <Menu />
@@ -34,6 +44,7 @@
           </form>
         </div>
         <div class="nav-links">
+          <CatalogLink />
           <NuxtLink to="/" class="a"><UserIcon />Войти</NuxtLink>
           <FavoritesLink />
           <CompareLink />
@@ -41,9 +52,13 @@
         </div>
       </div>
     </div>
-  </header>
+  </div>
 </template>
 <script setup>
+import { useWindowScroll } from '@vueuse/core';
+
+const { y } = useWindowScroll();
+
 import { useAppStore } from '~/stores/app';
 const { $state } = useAppStore();
 const config = $state?.config || {};

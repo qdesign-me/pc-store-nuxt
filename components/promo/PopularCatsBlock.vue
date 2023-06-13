@@ -1,9 +1,17 @@
 <template>
-  <div class="title">Популярные категории</div>
-  <div class="grid grid-cols-5 gap-2.5">
-    <NuxtLink v-for="(link, index) in links" :key="link.uri" :to="link.uri" class="card pt-0 bg-blue group h-[200px]">
+  <div class="title mb-6">Популярные категории</div>
+  <div class="grid gap-2.5 grid-cols-2 lg:grid-cols-5 box">
+    <NuxtLink v-for="(link, index) in links" :key="link.uri" :to="link.uri" class="card pt-0 bg-blue group height-xs overflow-hidden">
       <img :src="link.img" width="296" height="200" loading="lazy" class="promo-bg" />
       <ArrowLink class="absolute bottom-6">{{ link.title }}</ArrowLink>
+    </NuxtLink>
+    <NuxtLink to="/zakazat-sborku" class="card bg-blue group height-xs overflow-hidden lg:hidden">
+      <div class="title text-white">
+        Заказать
+        <br />
+        сборку
+      </div>
+      <ArrowRightIcon class="text-white mt-2 block group-hover:translate-x-2 transition" />
     </NuxtLink>
   </div>
 </template>
