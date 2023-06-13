@@ -83,7 +83,7 @@
       </div>
     </div>
   </div>
-  <footer>
+  <footer v-if="$state.config">
     <div class="container">
       <div class="grid gap-12 sm:grid-cols-2 sm:gap-5 lg:grid-cols-5 lg:gap-2.5">
         <div class="flex flex-col gap-4 lg:col-span-2">
