@@ -106,7 +106,7 @@
           <div class="w-10">
             <ValetIcon width="22" height="21" />
           </div>
-          <div class="font-sm">1 200 Br</div>
+          <div class="font-sm whitespace-nowrap">1 200 Br</div>
         </div>
 
         <div class="flex gap-4 items-center text-base font-semibold mb-8">

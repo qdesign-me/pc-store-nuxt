@@ -21,7 +21,7 @@
         <div class="w-10">
           <ValetIcon />
         </div>
-        <div class="font-sm">1 200 Br</div>
+        <div class="font-sm whitespace-nowrap">1 200 Br</div>
       </div>
 
       <div class="flex-1 flex justify-between">

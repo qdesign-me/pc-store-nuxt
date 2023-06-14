@@ -6,10 +6,7 @@
       <ArrowLink class="mt-3 relative"><span class="underline underline-offset-4">Все товары</span></ArrowLink>
     </NuxtLink>
     <div class="col-span-1 lg:col-span-4">
-      <div class="flex gap-5 overflow-auto lg:overflow-visible grid-cols-4 lg:grid lg:gap-2.5">
-        <ProductComboCard />
-        <ProductComboCard />
-      </div>
+      <div class="flex gap-2.5 -mr-5 pr-5 overflow-auto md:overflow-visible md:pr-0 md:mr-0 grid-cols-4 md:grid"><ProductComboCard /><ProductComboCard /></div>
     </div>
   </div>
 </template>

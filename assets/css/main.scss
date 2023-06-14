@@ -237,7 +237,7 @@
     max-width: 1540px !important;
   }
   .card {
-    @apply flex flex-col rounded relative py-6 px-6  hover:shadow h-[400px];
+    @apply flex flex-col rounded relative p-5  hover:shadow h-[400px];
     transition-property: box-shadow;
     &.height-sm {
       height: 350px;
@@ -282,17 +282,11 @@
         @apply text-white;
       }
     }
-    .tags {
-      @apply absolute right-0 bottom-16 min-h-[70px];
-      > div {
-        @apply pl-3 rounded-r-none;
-      }
-    }
   }
   .tags {
     @apply flex flex-col gap-2;
     > div {
-      @apply text-sm text-white leading-7 rounded w-[108px] text-center;
+      @apply text-white  rounded w-[108px] text-center text-[10px] leading-[21px] max-w-[85px];
     }
   }
 
@@ -672,7 +666,6 @@
   }
 
   .card {
-    @apply px-3 pb-5;
     box-shadow: none !important;
     .items a {
       gap: 3px !important;
@@ -735,10 +728,6 @@
     }
   }
 
-  .card-product {
-    width: 300px;
-    flex-shrink: 0;
-  }
   .can-expand {
     padding: 0 !important;
     .card {
@@ -752,10 +741,21 @@
     border-radius: 0;
   }
   footer {
-    padding-bottom: 120px !important;
+    padding-bottom: 100px !important;
   }
 }
-
+@media screen and (max-width: 768px) {
+  .card-product {
+    width: calc(50vw - 34px);
+    min-width: 290px;
+    flex-shrink: 0;
+  }
+  .card-combo {
+    width: calc(100vw - 58px);
+    min-width: 290px;
+    flex-shrink: 0;
+  }
+}
 @media screen and (max-width: 640px) {
   .box-promo {
     @apply py-10;
