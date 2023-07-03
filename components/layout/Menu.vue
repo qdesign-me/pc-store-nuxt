@@ -9,7 +9,6 @@
     </button>
     <div class="menu">
       <div class="container">
-        <div class="breadcrumbs"><span class="a">Главная</span><span>Каталог товаров</span></div>
         <div class="grid grid-cols-5 gap-2.5">
           <div>
             <div class="title"><NuxtLink to="/kompyutery">Компьютеры</NuxtLink></div>

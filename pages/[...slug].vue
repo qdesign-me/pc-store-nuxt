@@ -5,7 +5,7 @@
       <NuxtLink :to="page.uri" v-for="page in JSON.parse(category.data.breadcrumbs)" :key="page.uri">{{ page.name }} </NuxtLink>
       <span>{{ category.data.name }}</span>
     </div>
-    <h1 class="mb-10 h2">{{ category.data.name }}</h1>
+    <h1>{{ category.data.name }}</h1>
     <div class="grid grid-cols-5 gap-2.5">
       <div class="hidden xl:block">
         <Filters :blocks="category.blocks" />

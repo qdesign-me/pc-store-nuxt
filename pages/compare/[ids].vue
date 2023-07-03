@@ -1,10 +1,8 @@
 <template>
   <main class="container">
-    <div class="breadcrumbs">
-      <NuxtLink to="/">Главная </NuxtLink>
-      <span>Корзина</span>
-    </div>
-    <h1>Сравнение товаров</h1>
+    <div class="breadcrumbs"><NuxtLink to="/" class="">Главная </NuxtLink><span>Сравнение</span></div>
+
+    <h1>Сравнение</h1>
 
     <CompareTable :data="data.data" />
   </main>

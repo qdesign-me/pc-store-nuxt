@@ -2,9 +2,9 @@
   <button v-if="props.variant === 'primary'" class="btn w-full text-white" :class="{ 'is-plain': !inCart }"><CartIcon /> В корзину</button>
   <div v-else>
     <button v-if="!inCart" class="btn flex w-full relative is-plain" @click="store.addCart(props.productID, 1)"><CartIcon class="cursor-pointer" />В корзину</button>
-    <div v-else class="flex gap-2 w-full group">
+    <div v-else class="flex gap-2 w-full group add2cart">
       <NuxtLink to="/cart" class="btn flex relative flex-1 px-2"><CartIcon class="cursor-pointer group-hover:hidden" />В корзине</NuxtLink>
-      <div class="hidden group-hover:block relative w-1/2 min-w-[110px]">
+      <div class="cart-split hidden group-hover:block relative w-1/2 min-w-[110px]">
         <div class="flex border rounded absolute inset-0">
           <button class="bg-[#EFEFEF] w-[40px] flex items-center justify-center" @click="store.addCart(props.productID, store.$state.items[props.productID] - 1)">
             <MinusIcon />

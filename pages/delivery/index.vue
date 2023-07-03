@@ -1,9 +1,7 @@
 <template>
   <main class="container">
-    <div class="breadcrumbs">
-      <NuxtLink to="/">Главная </NuxtLink>
-      <span>Доставка</span>
-    </div>
+    <div class="breadcrumbs"><NuxtLink to="/" class="">Главная </NuxtLink><span>Доставка</span></div>
+
     <h1>Доставка</h1>
   </main>
 </template>

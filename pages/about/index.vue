@@ -1,16 +1,12 @@
 <template>
   <main class="text-sm text">
-    <div class="container">
-      <div class="breadcrumbs">
-        <NuxtLink to="/">Главная </NuxtLink>
-        <span>О компании</span>
-      </div>
-    </div>
     <div class="box-lg">
       <div class="container">
+        <div class="breadcrumbs"><NuxtLink to="/" class="">Главная </NuxtLink><span>О компании</span></div>
+
+        <h1>О компании</h1>
         <div class="flex flex-col xl:flex-row justify-between gap-10">
           <div class="flex-1 text-wrap">
-            <h1 class="h2">О компании</h1>
             <p>
               Компания ООО «Компьютеры Айвен» успешно работает на рынке компьютеров, компьютерных комплектующих и электроники с 1998 года. За это время мы зарекомендовали себя как
               надежный поставщик высококачественной техники в Беларуси. Наша команда профессионалов стремится удовлетворить потребности клиентов в области информационных

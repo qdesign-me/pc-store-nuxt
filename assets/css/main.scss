@@ -558,6 +558,14 @@
   body {
     font-size: 14px;
   }
+  .add2cart {
+    .btn svg {
+      display: none;
+    }
+    .cart-split {
+      display: block;
+    }
+  }
   .profile-cont {
     @apply flex-wrap;
   }
@@ -800,7 +808,7 @@
     }
   }
   .sticky-line .nav-links {
-    padding: 0 10px;
+    @apply px-5;
   }
   .social-links {
     position: absolute;
@@ -829,8 +837,6 @@
     }
   }
   .card .items {
-    margin-left: -10px;
-    margin-right: -10px;
     a {
       span {
         @apply whitespace-nowrap text-ellipsis overflow-hidden;

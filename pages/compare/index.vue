@@ -1,10 +1,8 @@
 <template>
   <main class="container">
-    <div class="breadcrumbs">
-      <NuxtLink to="/">Главная </NuxtLink>
-      <span>Корзина</span>
-    </div>
-    <h1>Сравнение товаров</h1>
+    <div class="breadcrumbs"><NuxtLink to="/" class="">Главная </NuxtLink><span>Сравнение</span></div>
+
+    <h1>Сравнение</h1>
     <div class="flex flex-col items-center justify-center">
       <CompareIcon width="100" height="90" class="text-blue mb-6" />
       <div class="mb-2">В сравнении пока ничего нет</div>

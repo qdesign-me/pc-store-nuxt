@@ -1,9 +1,7 @@
 <template>
   <main class="container">
-    <div class="breadcrumbs">
-      <NuxtLink to="/">Главная </NuxtLink>
-      <span>Гарантия и возврат</span>
-    </div>
+    <div class="breadcrumbs"><NuxtLink to="/" class="">Главная </NuxtLink><span>Гарантия</span></div>
+
     <h1>Гарантия и возврат</h1>
   </main>
 </template>

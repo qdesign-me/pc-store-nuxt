@@ -5,7 +5,7 @@
     <div class="container">
       <TopSalesBlock />
       <PopularCatsBlock />
-      <PopularSetsBlock />
+      <PopularSetsBlock v-if="false" />
       <NewItemsBlock />
     </div>
   </main>

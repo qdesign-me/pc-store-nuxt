@@ -1,9 +1,6 @@
 <template>
-  <main class="container !mb-0">
-    <div class="breadcrumbs">
-      <NuxtLink to="/">Главная </NuxtLink>
-      <span>Контактная информация</span>
-    </div>
+  <main class="container">
+    <div class="breadcrumbs"><NuxtLink to="/" class="">Главная </NuxtLink><span>Контакты</span></div>
   </main>
 </template>
 <script setup>
