@@ -4,7 +4,7 @@ export default defineEventHandler(async (event) => {
   const menumap = new Map();
 
   data.forEach((item) => {
-    menumap.set(item.categoryID, item);
+    menumap.set(item?.categoryID, item);
   });
 
   data.forEach((item) => {

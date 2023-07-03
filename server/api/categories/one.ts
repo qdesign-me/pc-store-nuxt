@@ -2,7 +2,7 @@ import db from '../../../db/db';
 
 const getFilters = async (category: { categoryID: number; uri: string }) => {
   const sql = `select spf.label, spf.tooltip, spf.alias, spf.suffix, spf.filter_type, spf.sort_value, spf.preffered_values, group_concat(distinct sfop.value) as value from  site_features_on_products sfop 
-  join site_features_on_categories sfoc on sfoc.featureID=sfop.featureID and sfoc.categoryID=${category.categoryID}
+  join site_features_on_categories sfoc on sfoc.featureID=sfop.featureID and sfoc.categoryID=${category?.categoryID}
   join site_products_features spf on spf.featureID=sfop.featureID 
   join site_products sp on sp.productID = sfop.productID 
   join site_categories sc on sc.categoryID = sp.categoryID and sc.uri like '${category.uri}%' 

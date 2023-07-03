@@ -27,6 +27,9 @@
   .box {
     @apply mb-10;
   }
+  .box-lg {
+    @apply mb-32;
+  }
   strong,
   .strong,
   b {
@@ -136,6 +139,10 @@
   .h2,
   .title {
     @apply text-3xl font-semibold;
+  }
+  h2,
+  .h2 {
+    @apply mb-8;
   }
   h3,
   .h3 {
@@ -361,16 +368,7 @@
       }
     }
   }
-  .temp {
-    width: 1520px;
-    height: auto;
-    opacity: 0.5;
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 11;
-  }
+
   main {
     @apply mb-20;
   }
@@ -559,6 +557,9 @@
 @media screen and (max-width: 1280px) {
   body {
     font-size: 14px;
+  }
+  .box-lg {
+    @apply mb-10;
   }
   .title-lg {
     font-weight: 900;
@@ -777,7 +778,9 @@
       height: auto;
     }
   }
-
+  .sticky-line .nav-links {
+    padding: 0 1rem;
+  }
   .social-links {
     position: absolute;
     margin-top: 0;
@@ -832,4 +835,38 @@
   25% {
     transform: translate3d(4px, 0, 0) scale(1);
   }
+}
+.text {
+  p + p {
+    @apply mt-4;
+  }
+}
+.text-wrap {
+  @apply xl:max-w-[630px];
+  .btn {
+    @apply w-[225px] mt-8 xl:mt-20;
+  }
+}
+.box-stick {
+  @apply relative;
+  clip-path: polygon(100% 0, 100% 200%, 50% 200%, 50% 100%, 0 100%, 0 0);
+  img {
+    @apply block mx-auto px-10;
+  }
+  .box-stick-wrap {
+    @apply xl:sticky top-[100px];
+
+    .in {
+      @apply xl:absolute;
+    }
+  }
+}
+
+.temp {
+  width: 1920px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -20px);
+  opacity: 0.5;
 }

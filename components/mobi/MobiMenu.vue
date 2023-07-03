@@ -1,7 +1,7 @@
 <template>
-  <button class="w-6 h-6 flex items-center justify-center p-1 lg:hidden text-[#A1A1A1] hover:text-blue transition">
-    <BarsIcon v-if="!showMenu" @click="showMenu = true" />
-    <CloseIcon v-else @click="showMenu = false" />
+  <button class="w-8 h-8 p-2flex items-center justify-center p-1 lg:hidden hover:text-blue transition" @click="showMenu = !showMenu">
+    <BarsIcon v-if="!showMenu" />
+    <CloseIcon v-else />
   </button>
 </template>
 

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <img v-if="show" src="/img/temp/1.png" alt="" class="temp" />
     <Header />
     <slot />
     <Footer />
@@ -7,6 +8,8 @@
 </template>
 
 <script setup>
+const show = ref(false);
+import { onKeyStroke } from '@vueuse/core';
 import { useAppStore } from '~/stores/app';
 const store = useAppStore();
 const cart = useCookie('cart', {
@@ -25,4 +28,7 @@ const favorites = useCookie('favorites', {
 store.favorites = favorites;
 store.cart = cart;
 store.compare = compare;
+onKeyStroke(['q'], (e) => {
+  //show.value = !show.value;
+});
 </script>
