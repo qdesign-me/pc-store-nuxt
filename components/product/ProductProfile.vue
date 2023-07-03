@@ -55,7 +55,7 @@
         </template>
 
         <ul class="flex flex-col gap-3" v-if="props.data.features.length">
-          <li v-for="feature in props.data.features" :key="feature.label">{{ feature.label }}: {{ feature.value }}</li>
+          <li v-for="feature in props.data.features" :key="feature.label">{{ feature.label }}: {{ feature.value }}{{ feature.suffix }}</li>
         </ul>
 
         <div class="mt-10 text-blue cursor-pointer text-base gap-6 items-center hidden xl:flex" v-if="props.data.description.length > 0">
@@ -87,7 +87,7 @@
             <div class="text-3xl font-semibold">{{ price(props.data.Price_bn) }}</div>
           </div>
 
-          <Add2Cart class="is-large" :productID="props.data.productID" />
+          <Add2Cart class="has-large" :productID="props.data.productID" />
 
           <div class="bg-[#EFEFEF] flex relative rounded mb-6 xl:mb-12 mt-4">
             <Add2Favorites variant="primary" :productID="props.data.productID" />

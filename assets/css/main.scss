@@ -50,6 +50,9 @@
       @apply w-52 h-52 object-contain mx-auto;
     }
   }
+  .products-grid .card-product {
+    @apply w-full min-w-[initial];
+  }
   .hoverable,
   header a,
   .box-promo a {
@@ -152,6 +155,9 @@
   .title-lg {
     @apply text-4xl leading-[48px] uppercase font-extrabold mb-4;
   }
+  .has-large .btn {
+    line-height: 50px;
+  }
   .pagination {
     @apply flex flex-wrap gap-2 text-xs mt-6;
     > button {
@@ -189,7 +195,7 @@
     }
   }
   .label-wrap {
-    @apply flex gap-6 cursor-pointer items-center relative justify-between min-w-[230px];
+    @apply flex gap-6 cursor-pointer items-center relative justify-between;
 
     &:hover svg {
       @apply text-blue;
@@ -198,6 +204,9 @@
   .input-group {
     @apply flex border rounded overflow-hidden outline-none relative;
     border: 1.5px solid #a1a1a1;
+    > button {
+      border-radius: 0;
+    }
     &:before {
       @apply absolute top-0 bottom-0 left-1/2 w-[1.5px] bg-lightgray;
       content: '';
@@ -219,7 +228,7 @@
     }
   }
   .count {
-    @apply absolute -top-3 left-1/2 translate-x-1 bg-orange w-4 h-4 flex items-center justify-center text-[10px] text-white rounded-full;
+    @apply absolute -top-3 left-1/2 translate-x-1 bg-orange w-4 h-4 flex items-center justify-center text-[9px] text-white rounded-full;
   }
   .mobi-call {
     @apply fixed right-4 top-[68px] z-[300] w-12 h-12 rounded-full bg-blue cursor-pointer  items-center justify-center hidden;
@@ -746,6 +755,9 @@
   }
 }
 @media screen and (max-width: 768px) {
+  .products-grid .card-product {
+    height: auto;
+  }
   .card-product {
     width: calc(50vw - 34px);
     min-width: 290px;

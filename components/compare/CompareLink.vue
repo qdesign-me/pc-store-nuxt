@@ -1,5 +1,5 @@
 <template>
-  <NuxtLink :to="link" class="a" :class="{ 'text-blue': store.$state.compare.length, disabled: store.$state.compare.length < 2 }">
+  <NuxtLink :to="link" class="a" :class="{ 'text-blue': store.$state.compare.length }">
     <div v-if="store.$state.compare.length > 0" class="count">{{ store.$state.compare.length }}</div>
 
     <CompareIcon />
@@ -10,5 +10,8 @@
 <script setup>
 import { useAppStore } from '~/stores/app';
 const store = useAppStore();
-const link = computed(() => `/compare/${store.$state.compare.join('+')}`);
+const link = computed(() => {
+  const items = store.$state.compare.join('+');
+  return items.length ? `/compare/${items}` : '/compare';
+});
 </script>

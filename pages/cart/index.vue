@@ -5,12 +5,18 @@
       <span>Корзина</span>
     </div>
     <h1>Корзина</h1>
-    <pre>{{ data }}</pre>
+    <div v-if="!total" class="flex flex-col items-center justify-center">
+      <CartIcon width="100" height="105" class="text-blue mb-6" />
+      <div class="mb-2">В корзине пока ничего нет</div>
+      <div class="opacity-50">Нажмите <CartIcon class="inline -mt-1" width="19" height="19" /> для добавления в корзину</div>
+      <NuxtLink to="/catalog" class="btn is-large mt-10 xl:mb-20 min-w-[300px]">Перейти в каталог</NuxtLink>
+    </div>
+    <pre v-else>{{ data }}</pre>
   </main>
 </template>
 <script setup>
-const items = useCookie('cart');
-items.value = items.value || [];
+const items = useCookie('items');
+items.value = items.value || {};
 
 const { data } = await useFetch('/api/products', {
   method: 'POST',
@@ -18,7 +24,7 @@ const { data } = await useFetch('/api/products', {
     sortby: 'popular',
     sortdir: 'desc',
     where: {
-      'productID:in': items.value.map((item) => +item),
+      'productID:in': Object.keys(items.value) ?? [0],
     },
   },
 });

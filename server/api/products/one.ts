@@ -27,8 +27,12 @@ export default defineEventHandler(async (event) => {
   );
 
   data['features'] = await getFeatures(
-    `select sfop.value,  sf.label, sf.tooltip, sf.suffix from site_features_on_products sfop join site_products_features sf on sf.featureID = sfop.featureID where sfop.productID=${data.productID} order by sf.sort_order`
+    `select sfop.value,  sf.label, sf.tooltip, sf.filter_type, sf.suffix from site_features_on_products sfop join site_products_features sf on sf.featureID = sfop.featureID where sfop.productID=${data.productID} order by sf.sort_order`
   );
+  data['features'] = data['features'].map((item: Record<string, any>) => ({
+    ...item,
+    value: item.filter_type !== 'boolean' ? item.value : item.value === '1' ? 'Да' : 'Нет',
+  }));
   const similar = {
     link: data.uri,
     products,
