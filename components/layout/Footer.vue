@@ -62,7 +62,7 @@
                     alt=""
                   />
                 </div>
-                <button class="btn mt-8 w-full sm:w-auto">
+                <button class="btn xl:mt-8 w-full sm:w-auto">
                   <CalcIcon />
                   Калькулятор рассрочки
                 </button>
@@ -98,7 +98,7 @@
 
     <footer>
       <div class="container">
-        <div class="grid grid-cols-1 ap-12 sm:grid-cols-2 sm:gap-5 xl:grid-cols-5 xl:gap-2.5">
+        <div class="grid grid-cols-1 gap-12 sm:grid-cols-2 sm:gap-5 xl:grid-cols-5 xl:gap-2.5">
           <div class="flex flex-col gap-4 xl:col-span-2">
             <p v-html="$state.config['footer.line1']" />
             <p v-html="$state.config['footer.line2']" />
