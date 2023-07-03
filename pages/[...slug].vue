@@ -30,6 +30,12 @@ provide('filters', filters);
 const searchQuery = computed(() => buildQuery(filters));
 const uri = route.path;
 
+if (1) {
+  throw createError({ statusCode: 404, statusMessage: 'Page Not Found' });
+}
+const category = null;
+const products = null;
+/*
 const { data: category } = await useFetch('/api/categories/one', {
   method: 'POST',
   body: {
@@ -62,4 +68,5 @@ useSeoMeta({
   description: () => description,
   ogDescription: () => description,
 });
+*/
 </script>

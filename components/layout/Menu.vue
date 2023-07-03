@@ -1,6 +1,6 @@
 <template>
   <div ref="target">
-    <button class="btn menu-button" :class="{ opened: showMenu }" @click.stop.prevent="showMenu = !showMenu">
+    <button class="btn is-large menu-button" :class="{ opened: showMenu }" @click.stop.prevent="showMenu = !showMenu">
       <div class="w-6 flex items-center justify-center">
         <CatalogIcon v-if="!showMenu" />
         <div v-else class="text-2xl"><CloseIcon /></div>

@@ -1,5 +1,5 @@
 <template>
-  <button class="w-8 h-8 p-2flex items-center justify-center p-1 lg:hidden hover:text-blue transition" @click="showMenu = !showMenu">
+  <button class="w-8 h-8 p-2flex items-center justify-center p-1 lg:hidden hover:text-blue" @click="showMenu = !showMenu">
     <BarsIcon v-if="!showMenu" />
     <CloseIcon v-else />
   </button>

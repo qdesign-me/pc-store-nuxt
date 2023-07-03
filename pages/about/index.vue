@@ -1,7 +1,7 @@
 <template>
   <main class="text-sm text">
-    <div class="breadcrumbs">
-      <div class="container">
+    <div class="container">
+      <div class="breadcrumbs">
         <NuxtLink to="/">Главная </NuxtLink>
         <span>О компании</span>
       </div>

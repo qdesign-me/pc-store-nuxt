@@ -3,16 +3,18 @@ const store = {
   state: () => ({
     config: null,
     compare: [],
-    cart: [],
+    items: {},
     favorites: [],
   }),
 
   actions: {
-    toggleCart(productID) {
+    addCart(productID, count) {
       this.$patch((state) => {
-        const items = state.cart.includes(productID) ? state.cart.filter((item) => item !== productID) : [...state.cart, productID];
-        Cookies.set('cart', JSON.stringify(items), { expires: 1000000, path: '/' });
-        state.cart = items;
+        const items = { ...state.items, [productID]: count };
+        if (count === 0) delete items[productID];
+        Cookies.set('items', JSON.stringify(items), { expires: 1000000, path: '/' });
+        console.log(state, items);
+        state.items = items;
       });
     },
     toggleCompare(productID) {

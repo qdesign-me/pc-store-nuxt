@@ -7,7 +7,7 @@
           <br />
           сборку
         </div>
-        <ArrowRightIcon width="35" height="35" class="text-white mt-10 block group-hover:translate-x-2 transition" />
+        <ArrowRightIcon width="35" height="35" class="text-white mt-10 block group-hover:translate-x-2" />
       </NuxtLink>
       <div class="card more-padding col-span-2 bg-milk height-xs box-links">
         <div class="title">Готовые сборки</div>

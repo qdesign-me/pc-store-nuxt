@@ -11,7 +11,7 @@
         <br />
         сборку
       </div>
-      <ArrowRightIcon class="text-white mt-2 block group-hover:translate-x-2 transition" />
+      <ArrowRightIcon class="text-white mt-2 block group-hover:translate-x-2" />
     </NuxtLink>
   </div>
 </template>

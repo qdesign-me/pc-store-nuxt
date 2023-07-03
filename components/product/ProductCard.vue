@@ -1,34 +1,30 @@
 <template>
   <div class="card card-product border !pb-[115px] text-black">
-    <div class="flex justify-between text-lightgray absolute left-4 right-4 top-3 z-10">
-      <Add2Favorites :productID="props.product.productID" />
-      <Add2Compare :productID="props.product.productID" />
+    <div class="tags min-h-[21px] -mb-3 relative z-10">
+      <div v-if="props.product.is_auction" class="bg-[#4DB732]">Аукцион</div>
+      <div v-if="props.product.Price_bn > 500" class="bg-[#F54D4D]">В рассрочку</div>
+      <div v-if="props.product.PriceSale_bn > 0" class="bg-[#FFAC2F]">На акции</div>
     </div>
-
     <div>
       <NuxtLink :to="uri" class="block">
         <ProductThumbs :data="props.product" />
       </NuxtLink>
     </div>
 
-    <NuxtLink :to="uri" class="text-sm font-light mt-4 leading-4 block"
-      ><div class="line-clamp-3">{{ props.product.name }}</div>
+    <NuxtLink :to="uri" class="text-sm font-light leading-4 block mt-2">
+      <div class="mb-2">ID: {{ props.product.productID }}</div>
+      <div class="line-clamp-3">{{ props.product.name }}</div>
     </NuxtLink>
-    <div class="tags mt-4">
-      <div v-if="props.product.is_auction" class="bg-[#4DB732]">Аукцион</div>
-      <div v-if="props.product.Price_bn > 500" class="bg-[#F54D4D]">В рассрочку</div>
-      <div v-if="props.product.PriceSale_bn > 0" class="bg-[#FFAC2F]">На акции</div>
-    </div>
 
     <div class="price-info">
-      <div>
-        <div class="w-10">
-          <BankIcon class="text-[#E5A35B]" />
-        </div>
+      <div class="flex justify-between gap-2 my-2">
         <div class="text-2xl whitespace-nowrap">{{ price(props.product.Price_bn) }}</div>
-
-        <Add2Cart class="text-lightgray" :productID="props.product.productID" />
+        <div class="flex justify-between text-lightgray -mr-2">
+          <Add2Favorites :productID="props.product.productID" />
+          <Add2Compare :productID="props.product.productID" />
+        </div>
       </div>
+      <Add2Cart :productID="props.product.productID" />
     </div>
 
     <div class="info">

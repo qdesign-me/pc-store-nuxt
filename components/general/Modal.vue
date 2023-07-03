@@ -4,7 +4,7 @@
     <div class="shadow fixed z-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded min-w-[400px]">
       <div class="px-6 py-4 flex justify-between items-center border-b">
         <h3>{{ props.title }}</h3>
-        <button class="bg-none border-none text-[30px] hover:text-blue transition" @click="emit('close')"><CloseIcon /></button>
+        <button class="bg-none border-none text-[30px] hover:text-blue" @click="emit('close')"><CloseIcon /></button>
       </div>
       <div class="p-6"><slot /></div>
     </div>

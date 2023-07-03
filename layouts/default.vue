@@ -12,8 +12,8 @@ const show = ref(false);
 import { onKeyStroke } from '@vueuse/core';
 import { useAppStore } from '~/stores/app';
 const store = useAppStore();
-const cart = useCookie('cart', {
-  default: () => [],
+const items = useCookie('items', {
+  default: () => {},
   watch: false,
 }).value;
 const compare = useCookie('compare', {
@@ -26,7 +26,7 @@ const favorites = useCookie('favorites', {
 }).value;
 
 store.favorites = favorites;
-store.cart = cart;
+store.items = items;
 store.compare = compare;
 onKeyStroke(['q'], (e) => {
   //show.value = !show.value;

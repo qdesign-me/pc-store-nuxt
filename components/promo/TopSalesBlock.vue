@@ -9,7 +9,7 @@
     </NuxtLink>
     <div class="lg:col-span-4">
       <div class="flex gap-2.5 -mr-5 pr-5 overflow-auto md:overflow-visible md:pr-0 md:mr-0 grid-cols-4 md:grid">
-        <ProductCard v-for="product in data.data" :key="product.productID" :product="product" />
+        <ProductCard v-for="product in data?.data" :key="product.productID" :product="product" />
       </div>
     </div>
   </div>
