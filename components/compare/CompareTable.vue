@@ -9,44 +9,26 @@
     <button class="btn is-underlined" @click="handleRemoveAll"><DeleteIcon /> Очистить сравнение</button>
   </div>
   <div>
-    <table class="compare-table">
-      <thead>
-        <tr>
-          <th></th>
-          <th v-for="product in props.data.products" :key="product.productID">
-            <CompareCard :product="product" @remove="handleRemove" />
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <template v-for="key in Object.keys(props.data.features)" :key="key">
-          <tr v-if="key !== 'price'" class="bg-lightbeige/10" :class="{ hidden: hideEqual && props.data.features[key].every((item) => item.equal) }">
-            <td :colspan="props.data.products.length + 1">{{ groups[key] }}</td>
-          </tr>
-          <tr v-for="row in props.data.features[key]" :key="row" :class="{ hidden: hideEqual && row.equal }">
-            <td>
-              <div class="label-wrap">
-                <div class="label flex items-center gap-2">
-                  <template v-if="row.label === 'Стоимость при оплате единым платежом'"><ValetIcon width="27" height="26" /></template>
-                  {{ row.label }}
-                </div>
-                <Tooltip v-if="row.tooltip">
-                  <div class="help-trigger"></div>
-                  <template #text>{{ row.tooltip }}</template>
-                </Tooltip>
-              </div>
-            </td>
-            <td v-for="(item, index) in props.data.products" :class="row.bg[index]">
-              {{ row.items[index] }}<template v-if="row.items[index]">{{ row.suffix }}</template>
-            </td>
-          </tr>
-        </template>
-      </tbody>
-    </table>
+    <NuxtErrorBoundary>
+      <Swiper class="swiper" :modules="[Navigation]" :slidesPerView="5" :spaceBetween="0">
+        <SwiperSlide v-for="id in Object.keys(props.data.products)">
+          <div class="relative">
+            <div class="sticky top-[100px] bg-white z-10 border-b">
+              <CompareCard :product="props.data.products[id]" @remove="handleRemove" />
+            </div>
+            <div v-for="key in Object.keys(props.data.features).filter((item) => item !== 'null')" class="border-b h-[50px]">
+              <small class="opacity-50">{{ key }}</small>
+              <div>{{ props.data.products[id].features[key] }}</div>
+            </div>
+          </div>
+        </SwiperSlide>
+      </Swiper>
+    </NuxtErrorBoundary>
   </div>
 </template>
 
 <script setup>
+import { Navigation } from 'swiper';
 const router = useRouter();
 import { useAppStore } from '~/stores/app';
 const hideEqual = ref(false);
@@ -70,3 +52,10 @@ const groups = {
   tech: 'Технические характеристики',
 };
 </script>
+
+<style>
+.swiper,
+.swiper-container {
+  overflow: clip;
+}
+</style>

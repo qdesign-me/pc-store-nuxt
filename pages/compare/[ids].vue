@@ -14,7 +14,6 @@ definePageMeta({
 
 const route = useRoute();
 const id = route.params.ids.split('+');
-console.log('ID', id);
 const { data } = await useFetch('/api/products/compare', {
   method: 'POST',
   body: {
