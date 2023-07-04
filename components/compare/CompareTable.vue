@@ -10,7 +10,30 @@
   </div>
   <div>
     <NuxtErrorBoundary>
-      <Swiper class="swiper" :modules="[Navigation]" :slidesPerView="5" :spaceBetween="0">
+      <Swiper
+        class="swiper"
+        :modules="[Navigation]"
+        :navigation="true"
+        :slidesPerView="5"
+        :spaceBetween="0"
+        :breakpoints="{
+          310: {
+            slidesPerView: 2,
+          },
+          640: {
+            slidesPerView: 2,
+          },
+          768: {
+            slidesPerView: 3,
+          },
+          1240: {
+            slidesPerView: 3,
+          },
+          1650: {
+            slidesPerView: 5,
+          },
+        }"
+      >
         <SwiperSlide v-for="id in Object.keys(props.data.products)">
           <div class="relative">
             <div class="sticky top-[100px] bg-white z-10 border-b">
