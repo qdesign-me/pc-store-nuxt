@@ -41,7 +41,7 @@
                 <MessageIcon />
                 <a :href="`mailto:${$state.config.email}`" class="underline underline-offset-4">{{ $state.config.email }}</a>
               </div>
-              <div class="flex gap-6 mt-10 social-links" :class="{ '!top-[-5px]': route.href === '/contacts' }"><SocialLinks :social="$state.config.social" /></div>
+              <div class="flex gap-6 mt-10 social-links"><SocialLinks :social="$state.config.social" /></div>
             </div>
 
             <div class="col-span-2">

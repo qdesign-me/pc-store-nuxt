@@ -171,6 +171,7 @@
     @apply whitespace-nowrap text-ellipsis overflow-hidden;
   }
   .tabs {
+    @apply max-w-[1100px];
     .tabs-header {
       @apply flex gap-10 items-end;
       div {
@@ -865,7 +866,8 @@
 }
 .has-table {
   @apply max-w-full overflow-auto;
-  table {
+  table td {
+    @apply min-w-[250px] py-0.5;
   }
 }
 .text {
