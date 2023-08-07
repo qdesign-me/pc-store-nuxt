@@ -27,7 +27,7 @@ module.exports = {
   },
   purge: {
     options: {
-      safelist: ['swiper-pagination', 'swiper-pagination-bullet'],
+      safelist: ['swiper-pagination', 'swiper-pagination-bullet', 'router-link-active'],
     },
   },
   plugins: [],

@@ -121,7 +121,7 @@
           </div>
 
           <div>
-            <img src="/img/about/1.png" alt="" width="613" height="385" />
+            <img class="box-stick-img" src="/img/about/1.png" alt="" width="613" height="385" />
           </div>
         </div>
       </div>
@@ -142,7 +142,7 @@
             </div>
           </div>
           <div>
-            <img src="/img/about/2.png" alt="" width="648" height="578" class="xl:-mb-28" />
+            <img class="box-stick-img xl:-mb-28" src="/img/about/2.png" alt="" width="648" height="578" />
           </div>
         </div>
       </div>
@@ -164,7 +164,7 @@
         <div class="flex flex-wrap gap-y-6 gap-x-20">
           <div
             class="flex items-center gap-6 max-w-[380px] text-[20px] underline"
-            v-for="(item, index) in ['Программа лояльпости', 'Профессиональные сотрудники', 'Ускоренный обмен либо возврат комплектующих']"
+            v-for="(item, index) in ['Программа лояльности', 'Профессиональные сотрудники', 'Ускоренный обмен либо возврат комплектующих']"
           >
             <img :src="`/img/about/service/${index + 1}.svg`" alt="" />
             <div class="mt-2">{{ item }}</div>
@@ -192,7 +192,7 @@
             </div>
           </div>
           <div>
-            <img src="/img/about/3.png" width="457" height="454" alt="" />
+            <img class="box-stick-img" src="/img/about/3.png" width="457" height="454" alt="" />
           </div>
         </div>
       </div>
@@ -217,7 +217,9 @@
           <img src="/img/info/belarusb-logo.png" loading="lazy" width="180" height="25" alt="" />
         </div>
 
-        <button class="btn mt-20" to="/"><CalcIcon /> Калькулятор рассрочки</button>
+        <NuxtLink to="/payment#credit"
+          ><button class="btn mt-20"><CalcIcon /> Калькулятор рассрочки</button></NuxtLink
+        >
       </div>
     </div>
   </main>

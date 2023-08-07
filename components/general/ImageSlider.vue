@@ -1,7 +1,7 @@
 <template>
   <div class="carousel">
     <NuxtErrorBoundary>
-      <Swiper v-if="images?.length > 1" class="swiper" :modules="[Pagination]" :pagination="{ clickable: true }">
+      <Swiper v-if="images?.length > 1" class="swiper">
         <SwiperSlide v-for="img in images" :key="img.img" class="slide">
           <img :src="img.img" :width="img.width" :height="img.height" :alt="img.alt" />
         </SwiperSlide>
@@ -12,6 +12,6 @@
 </template>
 
 <script setup>
-import { Pagination } from 'swiper';
+// import { Pagination } from 'swiper'; :modules="[Pagination]" :pagination="{ clickable: true }"
 const props = defineProps(['images']);
 </script>

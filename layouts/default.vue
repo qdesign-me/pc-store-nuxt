@@ -29,6 +29,6 @@ store.favorites = favorites;
 store.items = items;
 store.compare = compare;
 onKeyStroke(['q'], (e) => {
-  //show.value = !show.value;
+  show.value = !show.value;
 });
 </script>

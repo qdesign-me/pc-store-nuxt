@@ -1,6 +1,6 @@
 <template>
   <template v-if="$state.config">
-    <div class="box-promo" :class="{ '!bg-white !pt-0': route.href === '/contacts' }">
+    <div class="box-promo" :class="{ '!bg-white !pt-0': $route.href === '/contacts' }">
       <div class="container">
         <div class="grid gap-5 grid-cols-4 xl:grid-cols-5 xl:gap-2.5">
           <div class="col-span-4 grid grid-cols-2 gap-x-5 xl:grid-cols-4 xl:gap-x-14">
@@ -62,10 +62,12 @@
                     alt=""
                   />
                 </div>
-                <button class="btn xl:mt-8 w-full sm:w-auto">
-                  <CalcIcon />
-                  Калькулятор рассрочки
-                </button>
+                <NuxtLink to="/payment#credit">
+                  <button class="btn xl:mt-8 w-full sm:w-auto">
+                    <CalcIcon />
+                    Калькулятор рассрочки
+                  </button>
+                </NuxtLink>
               </div>
             </div>
           </div>
@@ -85,16 +87,7 @@
       </div>
     </div>
 
-    <iframe
-      v-if="route.href === '/contacts'"
-      :src="`https://www.google.com/maps/embed?pb=${$state.config.map}`"
-      width="100%"
-      height="500"
-      style="border: 0"
-      allowfullscreen=""
-      loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade"
-    ></iframe>
+    <Map v-if="$route.href === '/contacts'" />
 
     <footer>
       <div class="container">
@@ -112,8 +105,8 @@
             </div>
           </div>
           <div class="flex flex-col gap-4 -order-10 xl:order-1">
-            <a href="#">Договор публичной оферты</a><a href="#">Политика обработки персональных данных</a><a href="#">Свидетельство о регистрации</a
-            ><a href="#">Сертификат соответствия на ПК</a><a href="#">Кассовый чек</a><a href="#">Гарантийный талон</a>
+            <NuxtLink to="/public-offer">Договор публичной оферты</NuxtLink><NuxtLink to="/privacy-and-terms">Политика обработки персональных данных</NuxtLink
+            ><a href="#">Свидетельство о регистрации</a><a href="#">Сертификат соответствия на ПК</a><a href="#">Кассовый чек</a><a href="#">Гарантийный талон</a>
           </div>
         </div>
       </div>
@@ -122,7 +115,6 @@
 </template>
 
 <script setup>
-const route = useRoute();
 import { useAppStore } from '~/stores/app';
 const { $state } = useAppStore();
 </script>

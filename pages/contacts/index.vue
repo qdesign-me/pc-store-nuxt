@@ -1,5 +1,5 @@
 <template>
-  <main class="container">
+  <main class="container -mb-6 text-sm text">
     <div class="breadcrumbs"><NuxtLink to="/" class="">Главная </NuxtLink><span>Контакты</span></div>
   </main>
 </template>

@@ -137,7 +137,7 @@
     }
   }
   h1 {
-    @apply text-2xl mb-6;
+    @apply text-3xl mb-6 font-semibold;
   }
   h2,
   .h2,
@@ -151,6 +151,9 @@
   h3,
   .h3 {
     @apply text-xl font-semibold;
+  }
+  nav .router-link-active {
+    color: #e5a35b !important;
   }
   .title-lg {
     @apply text-4xl leading-[48px] uppercase font-extrabold mb-4;
@@ -359,21 +362,19 @@
     .title {
       @apply text-2xl font-semibold mb-6;
     }
+  }
+  .with-icon {
+    @apply relative pl-10;
+    + .with-icon {
+      @apply mt-6;
+    }
+    svg {
+      @apply absolute top-1 left-0;
+    }
     a {
       @apply block;
     }
-
-    .with-icon {
-      @apply relative pl-10;
-      + .with-icon {
-        @apply mt-6;
-      }
-      svg {
-        @apply absolute top-1 left-0;
-      }
-    }
   }
-
   main {
     @apply mb-20;
   }
@@ -401,7 +402,7 @@
     .nav-links {
       @apply flex gap-6 text-sm;
       .a {
-        @apply flex flex-col items-center justify-center gap-1 relative cursor-pointer hover:text-blue  h-[50px];
+        @apply flex flex-col items-center justify-center gap-1 relative cursor-pointer hover:text-[#E5A35B]  h-[50px];
       }
     }
     a[href^='tel:'] {
@@ -548,6 +549,7 @@
   opacity: 1;
 }
 @media screen and (max-width: 1500px) {
+  h1,
   h2,
   .h2,
   .title {
@@ -558,6 +560,10 @@
 @media screen and (max-width: 1280px) {
   body {
     font-size: 14px;
+  }
+  .box-stick-img {
+    width: 100%;
+    max-width: 500px;
   }
   .add2cart {
     .btn svg {
@@ -585,6 +591,7 @@
     line-height: 24px;
   }
 
+  h1,
   h2,
   .h2,
   .title,
@@ -904,6 +911,6 @@
   position: absolute;
   top: 0;
   left: 50%;
-  transform: translate(-50%, -20px);
+  transform: translate(-50%, 0px);
   opacity: 0.5;
 }
