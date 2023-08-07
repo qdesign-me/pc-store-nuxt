@@ -4,7 +4,7 @@
 
     <h1>Сравнение</h1>
 
-    <!-- <CompareTable :data="data.data" /> -->
+    <CompareTable :data="data.data" />
   </main>
 </template>
 <script setup>

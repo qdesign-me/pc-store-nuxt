@@ -12,8 +12,6 @@
     <NuxtErrorBoundary>
       <Swiper
         class="swiper"
-        :modules="[Navigation]"
-        :navigation="true"
         :slidesPerView="5"
         :spaceBetween="0"
         :breakpoints="{
@@ -51,7 +49,7 @@
 </template>
 
 <script setup>
-import { Navigation } from 'swiper';
+//import { Navigation } from 'swiper';  :modules="[Navigation]" :navigation="true"
 const router = useRouter();
 import { useAppStore } from '~/stores/app';
 const hideEqual = ref(false);
