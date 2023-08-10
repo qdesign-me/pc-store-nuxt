@@ -812,13 +812,15 @@
   .payment-logos {
     width: 100%;
     > img {
-      width: calc(50% - 0.25rem);
+      height: auto;
     }
   }
   .card-logos {
     width: 100%;
+
     > img {
       width: calc(25% - 0.05rem);
+      max-height: 40px;
       height: auto;
     }
   }

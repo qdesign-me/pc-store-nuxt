@@ -119,7 +119,7 @@
     <div class="py-10 bg-[#00B3D7]/10 box-warranty" ref="target">
       <div class="container">
         <div class="grid xl:grid-cols-2 gap-10">
-          <div class="text-wrap box-stick-wrap">
+          <div class="text-wrap">
             <div class="in">
               <div class="h2">Заявка на гарантийное обслуживание</div>
 
