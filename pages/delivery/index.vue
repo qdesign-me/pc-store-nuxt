@@ -4,9 +4,9 @@
       <div class="container">
         <div class="breadcrumbs"><NuxtLink to="/" class="">Главная </NuxtLink><span>Доставка</span></div>
 
-        <h1>Пункт выдачи заказов в Минске</h1>
         <div class="flex flex-col xl:flex-row justify-between gap-10">
           <div class="flex-1 text-wrap">
+            <h1>Пункт выдачи заказов в Минске</h1>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-[550px]">
               <div class="sm:max-w-[250px]">
                 <div class="with-icon">

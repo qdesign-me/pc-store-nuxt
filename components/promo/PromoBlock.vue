@@ -18,7 +18,7 @@
           <PcTypesBlock />
         </div>
       </div>
-      <div class="card more-padding col-span-2 bg-blue/10 height-xs box-subscribe">
+      <div class="card more-padding col-span-2 bg-[#dbf4f9] height-xs box-subscribe">
         <div class="title">Хочу быть в курсе акций и новинок!</div>
 
         <SubscribeBlock />

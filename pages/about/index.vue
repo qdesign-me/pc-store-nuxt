@@ -4,9 +4,9 @@
       <div class="container">
         <div class="breadcrumbs"><NuxtLink to="/" class="">Главная </NuxtLink><span>О компании</span></div>
 
-        <h1>О компании</h1>
         <div class="flex flex-col xl:flex-row justify-between gap-10">
           <div class="flex-1 text-wrap">
+            <h1>О компании</h1>
             <p>
               Компания ООО «Компьютеры Айвен» успешно работает на рынке компьютеров, компьютерных комплектующих и электроники с 1998 года. За это время мы зарекомендовали себя как
               надежный поставщик высококачественной техники в Беларуси. Наша команда профессионалов стремится удовлетворить потребности клиентов в области информационных
@@ -174,11 +174,7 @@
         <NuxtLink class="btn mt-10 lg:mt-20" to="/warranty">Обратиться по гарантии</NuxtLink>
       </div>
     </div>
-    <div class="bg-blue py-10 text-white">
-      <div class="container">
-        <div class="h2">Конфигуратор ПК</div>
-      </div>
-    </div>
+
     <div class="py-10 box-stick">
       <div class="container">
         <div class="grid xl:grid-cols-2 items-start gap-10">

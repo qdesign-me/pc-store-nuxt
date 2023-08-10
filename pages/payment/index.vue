@@ -1,23 +1,26 @@
 <template>
   <main class="text-sm text">
-    <div class="box">
+    <div class="box-lg">
       <div class="container">
         <div class="breadcrumbs"><NuxtLink to="/" class="">Главная </NuxtLink><span>Оплата</span></div>
 
-        <h1>Оплата наличными</h1>
         <div class="flex flex-col xl:flex-row justify-between gap-10 items-start">
           <div class="flex-1 text-wrap">
-            <p>Оплату наличными можно осуществить в пункте самовывоза или курьеру при получении товара.</p>
+            <h1>Оплата наличными</h1>
+            <div class="box-lg">
+              <p>Оплату наличными можно осуществить в пункте самовывоза или курьеру при получении товара.</p>
+            </div>
+            <div class="box-lg">
+              <h2>Оплата банковской картой</h2>
+              <p>Оплату банковской картой можно осуществить в пункте самовывоза или курьеру при получении товара.</p>
 
-            <h2 class="mt-6">Оплата банковской картой</h2>
-            <p>Оплату банковской картой можно осуществить в пункте самовывоза или курьеру при получении товара.</p>
+              <p>В том числе, принимаем к оплате карты рассрочки:</p>
 
-            <p>В том числе, принимаем к оплате карты рассрочки:</p>
-
-            <div class="flex gap-2 card-logos mt-2">
-              <img src="/img/info/vtb.png" loading="lazy" width="64" height="40" alt="" />
-              <img src="/img/info/halva.png" loading="lazy" width="64" height="40" alt="" />
-              <img src="/img/info/magnit.png" loading="lazy" width="64" height="40" alt="" />
+              <div class="flex gap-2 card-logos mt-2">
+                <img src="/img/info/vtb.png" loading="lazy" width="64" height="40" alt="" />
+                <img src="/img/info/halva.png" loading="lazy" width="64" height="40" alt="" />
+                <img src="/img/info/magnit.png" loading="lazy" width="64" height="40" alt="" />
+              </div>
             </div>
 
             <h2 class="mt-10">Оплата через ЕРИП</h2>
