@@ -7,7 +7,5 @@
 </template>
 
 <script setup>
-import { useAppStore } from '~/stores/app';
-const store = useAppStore();
-const total = computed(() => Object.values(store.$state.items ?? {}).reduce((acc, item) => acc + +item, 0));
+const { items, total } = useCart();
 </script>

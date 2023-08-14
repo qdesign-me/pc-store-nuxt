@@ -21,7 +21,24 @@
       }
     }
   }
-
+  .radio-card {
+    @apply relative border rounded py-2 px-4 text-sm text-[#7C7C7C] h-full flex flex-col gap-3 pr-6 leading-[1.3] select-none;
+    label {
+      @apply cursor-pointer;
+    }
+    input {
+      @apply absolute right-2 top-2;
+    }
+  }
+  .ir {
+    @apply mb-8 relative;
+  }
+  .is-error .input {
+    @apply border-red-600;
+  }
+  .error {
+    @apply text-[10px] text-red-600 absolute bottom-[-16px];
+  }
   .box {
     @apply mb-10;
   }
@@ -48,13 +65,13 @@
   }
   .carousel {
     img {
-      @apply w-52 h-52 object-contain mx-auto;
+      @apply object-contain mx-auto;
     }
   }
   .products-grid .card-product {
     @apply w-full min-w-[initial];
   }
-  .box-warranty {
+  .box-scroll2 {
     scroll-margin-top: 80px;
   }
   .hoverable,
@@ -73,6 +90,9 @@
   }
   .input {
     @apply border border-blue rounded leading-10 py-0 px-4 w-full outline-none text-sm font-medium;
+  }
+  textarea.input {
+    @apply leading-5 py-4;
   }
   .checkbox-wrap {
     @apply relative cursor-pointer;
@@ -312,6 +332,26 @@
   .items {
     svg {
       @apply h-6 object-contain;
+    }
+  }
+  .list-items {
+    > div {
+      @apply border-b flex  py-2 items-center;
+      &:first-child {
+        @apply border-t;
+      }
+      > div {
+        @apply px-8;
+      }
+    }
+    .name {
+      @apply flex-1;
+    }
+    .price {
+      @apply whitespace-nowrap;
+    }
+    .qty div {
+      @apply h-[40px] flex min-w-[130px];
     }
   }
   .mobile-logos {
@@ -631,7 +671,7 @@
   .mobi-call {
     @apply flex;
   }
-  .box-warranty {
+  .box-scroll2 {
     scroll-margin-top: 60px;
   }
   header {
@@ -918,7 +958,7 @@
 .temp {
   width: 1920px;
   position: absolute;
-  top: 0;
+  top: -410px;
   left: 50%;
   transform: translate(-50%, 0px);
   opacity: 0.5;

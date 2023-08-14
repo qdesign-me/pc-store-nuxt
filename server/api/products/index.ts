@@ -3,7 +3,7 @@ import db from '../../../db/db';
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   const { take = 100, sortby = 'popular', sortdir = 'desc', where = {} } = body;
-  const select = `(select group_concat(ip.filename) from site_pictures ip where ip.productID=site_products.productID group by ip.productID) as img, productID, name, Price_bn, PriceSale_bn, uri, is_auction, is_new`;
+  const select = `(select group_concat(ip.filename) from site_pictures ip where ip.productID=site_products.productID group by ip.productID) as img, productID, name,  model, Price_bn, PriceSale_bn, uri, is_auction, is_new`;
   const sorttypes: Record<string, string> = {
     name: 'name',
     popular: 'viewed_times',

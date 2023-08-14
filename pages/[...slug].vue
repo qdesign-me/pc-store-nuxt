@@ -2,7 +2,7 @@
   <main class="container">
     <div class="breadcrumbs">
       <NuxtLink to="/">Главная </NuxtLink>
-      <NuxtLink :to="page.uri" v-for="page in JSON.parse(category.data.breadcrumbs)" :key="page.uri">{{ page.name }} </NuxtLink>
+      <NuxtLink :to="page?.uri" v-for="page in JSON.parse(category.data.breadcrumbs)" :key="page.uri">{{ page.name }} </NuxtLink>
       <span>{{ category.data.name }}</span>
     </div>
     <h1>{{ category.data.name }}</h1>

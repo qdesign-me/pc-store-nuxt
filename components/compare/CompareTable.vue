@@ -51,19 +51,19 @@
 <script setup>
 //import { Navigation } from 'swiper';  :modules="[Navigation]" :navigation="true"
 const router = useRouter();
-import { useAppStore } from '~/stores/app';
+
 const hideEqual = ref(false);
 const props = defineProps(['data']);
-const store = useAppStore();
+const { clear, remove } = useCompare();
 const handleHideEqual = () => (hideEqual.value = !hideEqual.value);
 const handleRemoveAll = () => {
-  store.clearCompare();
+  clear();
   router.push('/');
 };
 const handleRemove = (productID) => {
   const ids = router.currentRoute.value.params.ids.split('+').filter((item) => +item !== productID);
   const link = ids.length === 0 ? '/' : `/compare/${ids.join('+')}`;
-  store.removeCompare(productID);
+  remove(productID);
   router.push(link);
 };
 
