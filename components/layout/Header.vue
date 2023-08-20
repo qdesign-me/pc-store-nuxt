@@ -9,6 +9,7 @@
         <MobiMenu />
         <MobiSearch />
         <MobiCall>
+          <div class="animate-ping mobi-call"></div>
           <a :href="`tel:${config.mainphone}`" class="mobi-call"><PhoneIcon /></a>
         </MobiCall>
         <nav class="col-span-3">
@@ -20,6 +21,26 @@
             <li><NuxtLink class="py-2 px-4" to="/payment">Оплата</NuxtLink></li>
             <li><NuxtLink class="py-2 px-4" to="/warranty">Гарантия</NuxtLink></li>
           </ul>
+          <div class="nav-contact">
+            <div class="relative -mx-6 bg-white border-1 h-[80px]">
+              <div class="flex gap-6 mt-10 social-links"><SocialLinks :social="$state.config.social" /></div>
+            </div>
+            <div class="py-8">
+              <div class="with-icon">
+                <MapPinIcon />
+                <a href="#" class="underline underline-offset-4">{{ $state.config.address }}</a>
+              </div>
+
+              <div class="with-icon">
+                <MessageIcon />
+                <a :href="`mailto:${$state.config.email}`" class="underline underline-offset-4">{{ $state.config.email }}</a>
+              </div>
+              <div class="with-icon">
+                <ClockIcon />
+                <div v-html="$state.config.timetable"></div>
+              </div>
+            </div>
+          </div>
         </nav>
 
         <div class="flex">

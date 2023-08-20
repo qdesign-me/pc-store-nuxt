@@ -26,7 +26,9 @@
           <RemoveButton @click="remove(row.item.productID)" />
         </template>
         <template #price="row">
-          <Add2Cart :productID="row.item.productID" />
+          <div class="w-[188px]">
+            <Add2Cart :productID="row.item.productID" />
+          </div>
         </template>
       </ProductList>
     </div>

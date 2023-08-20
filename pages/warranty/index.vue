@@ -137,9 +137,13 @@
 
                   <div class="relative">
                     <input type="file" class="opacity-0 absolute inset-0 z-" />
-                    <div class="flex gap-4 cursor-pointer relative">
+                    <div class="flex gap-4 cursor-pointer relative items-center" items-center>
                       <UploadIcon />
-                      <div class="underline underline-offset-4">Загрузите фото гарантийного талона</div>
+                      <template v-if="file"> {{ file }} <RemoveButton @click="file = null" /> </template>
+                      <template v-else>
+                        <input type="file" class="absolute inset-0 opacity-0" @change="handleFileChange" accept="image/*" />
+                        <div class="underline underline-offset-4 mt-1">Загрузите фото гарантийного талона</div>
+                      </template>
                     </div>
                   </div>
                 </div>
@@ -166,7 +170,7 @@
 </template>
 <script setup>
 const target = ref(null);
-
+const file = ref(null);
 definePageMeta({
   layout: 'default',
 });
@@ -185,6 +189,11 @@ useSeoMeta({
 
 const handleClick = () => {
   target.value.scrollIntoView({ behavior: 'smooth', block: 'start' });
+};
+const handleFileChange = (event) => {
+  const fileData = event.target.files[0];
+  console.log({ fileData });
+  file.value = fileData.name;
 };
 </script>
 

@@ -10,8 +10,23 @@
     &.with-open-mmenu {
       @apply overflow-hidden;
       nav {
-        position: fixed;
-        top: 60px;
+        @apply fixed top-[60px] bg-[#dbf4f9];
+        ul {
+          @apply -mx-6 px-6;
+        }
+        .nav-contact {
+          @apply block;
+        }
+        .social-links {
+          @apply top-0 border-t mx-6 pt-6;
+          position: absolute;
+          margin-top: 0;
+          left: 0;
+          right: 0;
+          display: flex;
+          justify-content: center;
+          gap: 40px;
+        }
       }
     }
     &.with-open-menu {
@@ -261,9 +276,6 @@
   .mobi-call {
     @apply fixed right-4 top-[68px] z-[300] w-12 h-12 rounded-full bg-blue cursor-pointer  items-center justify-center hidden;
     color: white !important;
-    animation: shake 2s infinite alternate;
-    transform: translate3d(0, 0, 0);
-    transform-origin: 50% 50%;
   }
   .container {
     @apply mx-auto px-5;
@@ -353,6 +365,9 @@
     .qty div {
       @apply h-[40px] flex min-w-[130px];
     }
+  }
+  nav .nav-contact {
+    @apply hidden;
   }
   .mobile-logos {
     @apply w-11 h-10;
@@ -697,6 +712,7 @@
       right: 0;
       padding-left: 1.5rem;
       padding-right: 1.5rem;
+
       ul {
         display: flex;
         flex-direction: column;
@@ -899,25 +915,6 @@
         @apply whitespace-nowrap text-ellipsis overflow-hidden;
       }
     }
-  }
-}
-@keyframes shake {
-  5%,
-  40% {
-    transform: translate3d(-1px, 0, 0) scale(1.05);
-  }
-  10%,
-  40% {
-    transform: translate3d(2px, 0, 0) scale(0.95);
-  }
-  10%,
-  20%,
-  30% {
-    transform: translate3d(-4px, 0, 0) scale(1.1);
-  }
-  15%,
-  25% {
-    transform: translate3d(4px, 0, 0) scale(1);
   }
 }
 .has-table {
