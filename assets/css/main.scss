@@ -7,16 +7,42 @@
 @layer base {
   body {
     font-family: 'Inter', sans-serif;
+    &.menu-mode-2 {
+      .mode-1 {
+        @apply hidden;
+      }
+      .mode-2 {
+        @apply block;
+        + .nav-contact > div:first-child {
+          @apply hidden;
+        }
+      }
+      nav,
+      .mode-2 {
+        background: #82daeb !important;
+      }
+      nav ul li {
+        border-color: #7bd2e4 !important;
+      }
+    }
     &.with-open-mmenu {
       @apply overflow-hidden;
+      .mobi-button {
+        @apply flex;
+      }
+      .animate-ping.mobi-call {
+        z-index: 250 !important;
+      }
       nav {
         @apply fixed top-[60px] bg-[#dbf4f9];
+
         ul {
           @apply -mx-6 px-6;
         }
         .nav-contact {
           @apply block;
         }
+
         .social-links {
           @apply top-0 border-t mx-6 pt-6;
           position: absolute;
@@ -274,9 +300,13 @@
   .count {
     @apply absolute -top-3 left-1/2 translate-x-1 bg-orange w-4 h-4 flex items-center justify-center text-[9px] text-white rounded-full;
   }
-  .mobi-call {
-    @apply fixed right-4 top-[68px] z-[300] w-12 h-12 rounded-full bg-blue cursor-pointer  items-center justify-center hidden;
+  .mobi-call,
+  .mobi-button {
+    @apply fixed right-4 top-[68px] z-[100] w-12 h-12 rounded-full bg-blue cursor-pointer  items-center justify-center hidden;
     color: white !important;
+  }
+  .mobi-button {
+    @apply z-[300];
   }
   .container {
     @apply mx-auto px-5;
@@ -367,7 +397,18 @@
       @apply h-[40px] flex min-w-[130px];
     }
   }
-  nav .nav-contact {
+  .mode-2-items {
+    @apply flex flex-col gap-2 py-[20px];
+  }
+
+  .mode-2-item {
+    @apply border h-[50px] flex items-center justify-center px-6 bg-white text-center cursor-pointer rounded-[10px] text-[#00B3D7] font-medium relative;
+    img {
+      @apply absolute top-1/2 -translate-y-1/2 left-4;
+    }
+  }
+  nav .nav-contact,
+  nav .mode-2 {
     @apply hidden;
   }
   .mobile-logos {

@@ -11,15 +11,44 @@
         <MobiCall>
           <div class="animate-ping mobi-call"></div>
           <a :href="`tel:${config.mainphone}`" class="mobi-call"><PhoneIcon /></a>
+          <div class="mobi-button" @click="setMenuMode('show')"><PhoneIcon /></div>
         </MobiCall>
         <nav class="col-span-3">
-          <ul class="flex justify-between text-sm">
+          <ul class="mode-1 flex justify-between text-sm">
             <li><NuxtLink class="py-2 px-4" to="/about">О компании</NuxtLink></li>
             <li><NuxtLink class="py-2 px-4" to="/contacts">Контакты</NuxtLink></li>
             <li><NuxtLink class="py-2 px-4" to="/news">Новости</NuxtLink></li>
             <li><NuxtLink class="py-2 px-4" to="/delivery">Доставка</NuxtLink></li>
             <li><NuxtLink class="py-2 px-4" to="/payment">Оплата</NuxtLink></li>
             <li><NuxtLink class="py-2 px-4" to="/warranty">Гарантия</NuxtLink></li>
+          </ul>
+          <ul class="mode-2 flex justify-between text-sm">
+            <li><NuxtLink class="py-2 px-4" to="/about">О компании</NuxtLink></li>
+            <li><NuxtLink class="py-2 px-4" to="/contacts">Контакты</NuxtLink></li>
+            <li>
+              <div class="mode-2-items">
+                <a class="mode-2-item" :href="`tel:+37529${config.mainphone}`">
+                  <img src="/img/logos/a1.png" alt="" />
+                  +375-29-{{ formatPhoneNumber(config.mainphone) }}</a
+                >
+
+                <a class="mode-2-item" :href="`tel:+37544${config.mainphone}`">
+                  <img src="/img/logos/mts.png" alt="" />
+                  +375-44-{{ formatPhoneNumber(config.mainphone) }}</a
+                >
+
+                <a class="mode-2-item" :href="`tel:+37525${config.mainphone}`">
+                  <img src="/img/logos/life.png" alt="" />
+                  +375-25-{{ formatPhoneNumber(config.mainphone) }}</a
+                >
+
+                <a class="mode-2-item" :href="`tel:+37517${config.mainphone}`">
+                  <img src="/img/logos/iven.png" alt="" />
+                  +375-17-{{ formatPhoneNumber(config.mainphone) }}</a
+                >
+                <div class="mode-2-item" @click="setMenuMode('hide')">Закрыть</div>
+              </div>
+            </li>
           </ul>
           <div class="nav-contact">
             <div class="relative -mx-6 bg-white border-1 h-[80px]">
@@ -86,6 +115,10 @@
 import { useWindowScroll } from '@vueuse/core';
 
 const { y } = useWindowScroll();
+
+const setMenuMode = (value) => {
+  value === 'show' ? document.querySelector('body').classList.add('menu-mode-2') : document.querySelector('body').classList.remove('menu-mode-2');
+};
 
 import { useAppStore } from '~/stores/app';
 const { $state } = useAppStore();
