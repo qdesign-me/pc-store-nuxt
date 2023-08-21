@@ -4,7 +4,7 @@
     <button v-if="!inCart" class="btn flex w-full relative is-plain" @click="add(props.productID, 1)"><CartIcon class="cursor-pointer" />В корзину</button>
     <div v-else class="flex gap-2 w-full add2cart">
       <NuxtLink to="/cart" class="btn flex relative flex-1 px-2.5">В корзине</NuxtLink>
-      <InputQty :productID="props.productID" />
+      <InputQty :productID="props.productID" v-bind="$attrs" />
     </div>
   </div>
 </template>

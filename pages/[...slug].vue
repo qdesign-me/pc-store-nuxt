@@ -33,9 +33,9 @@ provide('filters', filters);
 const searchQuery = computed(() => buildQuery(filters));
 const uri = route.path;
 
-// if (1) {
-//   throw createError({ statusCode: 404, statusMessage: 'Page Not Found' });
-// }
+if (1) {
+  throw createError({ statusCode: 404, statusMessage: 'Page Not Found' });
+}
 
 const { data: category } = await useFetch('/api/categories/one', {
   method: 'POST',

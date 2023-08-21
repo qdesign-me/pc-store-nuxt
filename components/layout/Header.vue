@@ -43,7 +43,7 @@
           </div>
         </nav>
 
-        <div class="flex">
+        <div class="flex" v-if="false">
           <NuxtLink class="btn is-large ml-auto" to="/"> <ConfiguratorIcon /> Конфигуратор ПК</NuxtLink>
         </div>
       </div>

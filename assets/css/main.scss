@@ -105,6 +105,7 @@
   }
   .input {
     @apply border border-blue rounded leading-10 py-0 px-4 w-full outline-none text-sm font-medium;
+    scroll-margin-top: 110px;
   }
   textarea.input {
     @apply leading-5 py-4;
@@ -375,6 +376,14 @@
   }
   .disabled {
     @apply opacity-50 pointer-events-none;
+  }
+  .order-area {
+    .add2cart {
+      @apply h-[40px];
+    }
+    .router-link-active {
+      display: none !important;
+    }
   }
   .icon {
     @apply w-7 h-7 bg-center bg-no-repeat bg-contain;
@@ -688,6 +697,9 @@
   }
   .box-scroll2 {
     scroll-margin-top: 60px;
+  }
+  .input {
+    scroll-margin-top: 90px;
   }
   header {
     position: sticky;

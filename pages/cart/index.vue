@@ -1,5 +1,11 @@
 <template>
-  <main class="container">
+  <main class="container mt-[50px] sm:mt-[110px]" v-if="mode === 'thankyou'">
+    <div class="flex justify-center align-center flex-col text-center">
+      <h2>Ваш заказ принят!</h2>
+      <p class="text-sm max-w-[375px] mx-auto">Менеджер свяжется с Вами в ближайшее время для подтверждения заказа по указанным контактам.</p>
+    </div>
+  </main>
+  <main class="container" v-else>
     <div class="breadcrumbs"><NuxtLink to="/">Главная </NuxtLink><span>Корзина</span></div>
     <div class="flex justify-between gap-6 items-start">
       <h1>Корзина</h1>
@@ -18,47 +24,368 @@
     <div v-else>
       <div class="text-[#E5A35B] text-sm font-medium mb-10">В корзине {{ pluralize(data?.data?.length, ['товар', 'товара', 'товаров']) }}</div>
       <div class="grid grid-cols-4 relative items-start gap-6">
-        <div class="col-span-3">
-          <ProductList :data="data.data">
+        <div class="col-span-3 order-area">
+          <ProductList :data="data?.data" class="mb-10">
             <template #controls="row">
               <Add2Favorites productID="row.item.productID" />
               <Add2Compare :productID="row.item.productID" />
-              <RemoveButton @click="remove(row.item.productID)" />
+              <RemoveButton @click="onRemove(row.item.productID)" />
             </template>
             <template #price="row">
-              <Add2Cart :productID="row.item.productID" />
+              <Add2Cart :productID="row.item.productID" @qty="(qty) => onQty(row.item.productID, qty)" />
             </template>
           </ProductList>
+          <div>
+            <h2>Данные получателя</h2>
+
+            <div class="grid grid-cols-10 gap-4">
+              <div class="col-span-6">
+                <div class="grid grid-cols-6 gap-2">
+                  <div class="col-span-4">
+                    <div class="ir">
+                      <div class="flex input-group">
+                        <button class="text-center flex-1 w-10 text-xs leading-[38px] btn" :class="{ 'is-plain': who === 'business' }" @click.prevent="who = 'person'">
+                          Частное лицо
+                        </button>
+                        <button class="text-center flex-1 w-10 text-xs leading-[38px] btn" :class="{ 'is-plain': who === 'person' }" @click.prevent="who = 'business'">
+                          Юридическое лицо
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-span-2"></div>
+                </div>
+                <Form :model="person" :onFinish="onFinish" :class="who === 'person' ? 'block' : 'hidden'">
+                  <div class="grid grid-cols-6 gap-2">
+                    <div class="col-span-4">
+                      <FormItem name="name" :rules="[{ required: true }]">
+                        <input name="name" type="text" class="input" placeholder="Укажите ваше имя и фамилию" v-model="person.name" />
+                      </FormItem>
+                    </div>
+                    <div class="col-span-2"></div>
+                    <div class="col-span-2">
+                      <FormItem name="phone" :rules="[{ required: true }]">
+                        <input name="phone" type="tel" class="input" placeholder="+375 (__) ___-__-__" v-model="person.phone" v-maska data-maska="+375 (##) ###-##-##" />
+                      </FormItem>
+                    </div>
+                    <div class="col-span-4"></div>
+                    <div class="col-span-2">
+                      <FormItem name="email" :rules="[{ email: true }]">
+                        <input name="email" type="email" class="input" placeholder="Укажите ваш E-mail" v-model="person.email" />
+                      </FormItem>
+                    </div>
+                    <div class="col-span-4"></div>
+
+                    <div class="col-span-6 mt-8">
+                      <h2>Способ получения</h2>
+                    </div>
+
+                    <div class="col-span-2">
+                      <div class="radio-card">
+                        <label class="absolute inset-0">
+                          <input name="delivery" type="radio" v-model="person.delivery" value="Самовывоз" />
+                        </label>
+                        <div class="text-black font-medium">Самовывоз</div>
+                        <div>Бесплатно</div>
+                      </div>
+                    </div>
+                    <div class="col-span-2">
+                      <div class="radio-card">
+                        <label class="absolute inset-0">
+                          <input name="delivery" type="radio" v-model="person.delivery" value="Доставка в пределах МКАД" />
+                        </label>
+                        <div class="text-black font-medium">Доставка в пределах МКАД</div>
+                        <div>Бесплатно при стоимости товара от <span class="whitespace-nowrap">220 Br</span></div>
+                        <div>При стоимости товара до <span class="whitespace-nowrap">220 Br</span>, стоимость доставки — <span class="whitespace-nowrap">6 Br</span></div>
+                      </div>
+                    </div>
+                    <div class="col-span-2">
+                      <div class="radio-card">
+                        <label class="absolute inset-0">
+                          <input name="delivery" type="radio" v-model="person.delivery" value="Доставка в регионы РБ" />
+                        </label>
+                        <div class="text-black font-medium">Доставка в регионы РБ</div>
+                        <div>Стоимость доставки — от 12 Br</div>
+                      </div>
+                    </div>
+                    <template v-if="person.delivery !== 'Самовывоз'">
+                      <div class="col-span-6 text-sm text-black mt-4">
+                        Сроки доставки уточнит менеджер при подтверждении заказа.
+
+                        <h2 class="mt-16">Адрес получателя</h2>
+                      </div>
+                      <div class="col-span-2">
+                        <FormItem>
+                          <input name="zip" type="text" class="input" placeholder="Почтовый индекс" v-model="person.zip" />
+                        </FormItem>
+                      </div>
+                      <div class="col-span-4"></div>
+                      <div class="col-span-2">
+                        <FormItem name="city" :rules="[{ required: true }]">
+                          <input name="city" type="text" class="input" placeholder="Город" v-model="person.city" />
+                        </FormItem>
+                      </div>
+
+                      <div class="col-span-2">
+                        <FormItem name="street" :rules="[{ required: true }]">
+                          <input name="street" type="text" class="input" placeholder="Улица" v-model="person.street" />
+                        </FormItem>
+                      </div>
+                      <div class="col-span-2"></div>
+                      <div>
+                        <FormItem name="building" :rules="[{ required: true }]">
+                          <input name="building" type="text" class="input" placeholder="Номер дома" v-model="person.building" />
+                        </FormItem>
+                      </div>
+                      <div>
+                        <FormItem>
+                          <input name="block" type="text" class="input" placeholder="Корпус" v-model="person.block" />
+                        </FormItem>
+                      </div>
+                      <div>
+                        <FormItem name="apt" :rules="[{ required: true }]">
+                          <input name="apt" type="text" class="input" placeholder="Квартира" v-model="person.apt" />
+                        </FormItem>
+                      </div>
+                    </template>
+                    <div class="col-span-6 mt-6">
+                      <h2>Способ оплаты</h2>
+                    </div>
+                    <div class="col-span-2">
+                      <div class="radio-card">
+                        <label class="absolute inset-0"> <input type="radio" name="payment" v-model="person.payment" value="Наличными" /> </label>
+                        <div class="text-black font-medium">Наличными</div>
+                        <div>В пункте самовывоза или курьеру при получении</div>
+                      </div>
+                    </div>
+                    <div class="col-span-2">
+                      <div class="radio-card">
+                        <label class="absolute inset-0"> <input type="radio" name="payment" v-model="person.payment" value="Оплата банковской картой" /> </label>
+                        <div class="text-black font-medium">Оплата банковской картой</div>
+                        <div>В пункте самовывоза или курьеру при получении</div>
+                      </div>
+                    </div>
+                    <div class="col-span-2">
+                      <div class="radio-card">
+                        <label class="absolute inset-0"> <input type="radio" name="payment" v-model="person.payment" value="Оплата через ЕРИП" /> </label>
+                        <div class="text-black font-medium">Оплата через ЕРИП</div>
+                        <div>Менеджер сообщит реквизиты оплаты после подтверждения заказа</div>
+                        <img src="/img/info/erip.png" loading="lazy" width="125" height="40" alt="" />
+                      </div>
+                    </div>
+                    <div class="col-span-2">
+                      <div class="radio-card">
+                        <label class="absolute inset-0"> <input type="radio" name="payment" v-model="person.payment" value="Рассрочка" /> </label>
+                        <div class="text-black font-medium">Рассрочка</div>
+                        <div>Оплата картой рассрочки в пункте самовывоза или курьеру при получении</div>
+                        <div class="flex gap-2 card-logos">
+                          <img src="/img/info/vtb.png" loading="lazy" width="64" height="40" alt="" class="h-[30px] w-auto" />
+                          <img src="/img/info/halva.png" loading="lazy" width="64" height="40" alt="" class="h-[30px] w-auto" />
+                          <img src="/img/info/magnit.png" loading="lazy" width="64" height="40" alt="" class="h-[30px] w-auto" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-span-2">
+                      <div class="radio-card">
+                        <label class="absolute inset-0">
+                          <input type="radio" v-model="person.payment" name="payment" value="Оплата в кредит" />
+                        </label>
+                        <div class="text-black font-medium">Оплата в кредит</div>
+                        <div>Банки-партнёры:</div>
+                        <div class="flex flex-wrap gap-2 payment-logos">
+                          <img src="/img/info/belarusb-logo.png" loading="lazy" width="175" height="25" alt="" />
+                          <img src="/img/info/vtb-logo.png" loading="lazy" width="70" height="25" alt="" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-span-2"></div>
+                    <div class="col-span-6">
+                      <h2 class="mt-20">Дополнительная информация</h2>
+                    </div>
+                    <div class="col-span-6">
+                      <FormItem>
+                        <textarea placeholder="Комментарий к заказу" name="comment" v-model="person.comment" cols="30" rows="8" class="input"></textarea>
+                      </FormItem>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn">Оформить заказ</button>
+                </Form>
+
+                <Form :model="ur" :onFinish="onFinish" :class="who === 'business' ? 'block' : 'hidden'">
+                  <div class="grid grid-cols-6 gap-2">
+                    <div class="col-span-4">
+                      <FormItem name="company" :rules="[{ required: true }]">
+                        <input name="company" type="text" class="input" placeholder="Укажите наименование организации" v-model="ur.company" />
+                      </FormItem>
+                    </div>
+                    <div class="col-span-2"></div>
+                    <div class="col-span-2">
+                      <FormItem name="unp" :rules="[{ required: true }]">
+                        <input name="unp" type="text" class="input" placeholder="УНП" v-model="ur.unp" />
+                      </FormItem>
+                    </div>
+                    <div class="col-span-4"></div>
+
+                    <div class="col-span-2">
+                      <FormItem name="account" :rules="[{ required: true }]">
+                        <input name="account" type="text" class="input" placeholder="Р/с" v-model="ur.account" />
+                      </FormItem>
+                    </div>
+                    <div class="col-span-4"></div>
+                    <div class="col-span-2">
+                      <FormItem name="bankaddress" :rules="[{ required: true }]">
+                        <input name="bankaddress" type="text" class="input" placeholder="Адрес банка" v-model="ur.bankaddress" />
+                      </FormItem>
+                    </div>
+                    <div class="col-span-4"></div>
+                    <div class="col-span-2">
+                      <FormItem name="bankbic" :rules="[{ required: true }]">
+                        <input name="bankbic" type="text" class="input" placeholder="БИК банка" v-model="ur.bankbic" />
+                      </FormItem>
+                    </div>
+                    <div class="col-span-4"></div>
+                    <div class="col-span-4">
+                      <FormItem name="reason" :rules="[{ required: true }]">
+                        <input name="reason" type="text" class="input" placeholder="На каком основании заключает договор от имени организации" v-model="ur.reason" />
+                      </FormItem>
+                    </div>
+                    <div class="col-span-2"></div>
+                    <div class="col-span-4">
+                      <FormItem name="fio" :rules="[{ required: true }]">
+                        <input name="fio" type="text" class="input" placeholder="ФИО того, в чьем лице действует организация" v-model="ur.fio" />
+                      </FormItem>
+                    </div>
+                    <div class="col-span-2"></div>
+
+                    <div class="col-span-2">
+                      <FormItem name="phone" :rules="[{ required: true }]">
+                        <input name="phone" type="tel" placeholder="+375 (__) ___-__-__" class="input" v-model="ur.phone" v-maska data-maska="+375 (##) ###-##-##" />
+                      </FormItem>
+                    </div>
+                    <div class="col-span-4"></div>
+                    <div class="col-span-2">
+                      <FormItem name="uremail" :rules="[{ email: true }]">
+                        <input name="uremail" type="email" class="input" placeholder="Контактный  E-mail" v-model="ur.email" />
+                      </FormItem>
+                    </div>
+                    <div class="col-span-4"></div>
+
+                    <div class="col-span-6 mt-8">
+                      <h2>Способ получения</h2>
+                    </div>
+
+                    <div class="col-span-2">
+                      <div class="radio-card">
+                        <label class="absolute inset-0">
+                          <input name="delivery" type="radio" v-model="ur.delivery" value="Самовывоз" />
+                        </label>
+                        <div class="text-black font-medium">Самовывоз</div>
+                        <div>Бесплатно</div>
+                      </div>
+                    </div>
+                    <div class="col-span-2">
+                      <div class="radio-card">
+                        <label class="absolute inset-0">
+                          <input name="delivery" type="radio" v-model="ur.delivery" value="Доставка в пределах МКАД" />
+                        </label>
+                        <div class="text-black font-medium">Доставка в пределах МКАД</div>
+                        <div>Бесплатно при стоимости товара от <span class="whitespace-nowrap">220 Br</span></div>
+                        <div>При стоимости товара до <span class="whitespace-nowrap">220 Br</span>, стоимость доставки — <span class="whitespace-nowrap">6 Br</span></div>
+                      </div>
+                    </div>
+                    <div class="col-span-2">
+                      <div class="radio-card">
+                        <label class="absolute inset-0">
+                          <input name="delivery" type="radio" v-model="ur.delivery" value="Доставка в регионы РБ" />
+                        </label>
+                        <div class="text-black font-medium">Доставка в регионы РБ</div>
+                        <div>Стоимость доставки — от 12 Br</div>
+                      </div>
+                    </div>
+                    <template v-if="ur.delivery !== 'Самовывоз'">
+                      <div class="col-span-6 text-sm text-black mt-4">
+                        Сроки доставки уточнит менеджер при подтверждении заказа.
+
+                        <h2 class="mt-16">Адрес получателя</h2>
+                      </div>
+                      <div class="col-span-2">
+                        <FormItem>
+                          <input name="zip" type="text" class="input" placeholder="Почтовый индекс" v-model="ur.zip" />
+                        </FormItem>
+                      </div>
+                      <div class="col-span-4"></div>
+                      <div class="col-span-2">
+                        <FormItem name="city" :rules="[{ required: true }]">
+                          <input name="city" type="text" class="input" placeholder="Город" v-model="ur.city" />
+                        </FormItem>
+                      </div>
+
+                      <div class="col-span-2">
+                        <FormItem name="street" :rules="[{ required: true }]">
+                          <input name="street" type="text" class="input" placeholder="Улица" v-model="ur.street" />
+                        </FormItem>
+                      </div>
+                      <div class="col-span-2"></div>
+                      <div>
+                        <FormItem name="building" :rules="[{ required: true }]">
+                          <input name="building" type="text" class="input" placeholder="Номер дома" v-model="ur.building" />
+                        </FormItem>
+                      </div>
+                      <div>
+                        <FormItem>
+                          <input name="block" type="text" class="input" placeholder="Корпус" v-model="ur.block" />
+                        </FormItem>
+                      </div>
+                      <div>
+                        <FormItem name="apt" :rules="[{ required: true }]">
+                          <input name="apt" type="text" class="input" placeholder="Квартира" v-model="ur.apt" />
+                        </FormItem>
+                      </div>
+                    </template>
+
+                    <div class="col-span-6">
+                      <h2 class="mt-20">Дополнительная информация</h2>
+                    </div>
+                    <div class="col-span-6">
+                      <FormItem>
+                        <textarea placeholder="Комментарий к заказу" name="comment" v-model="ur.comment" cols="30" rows="8" class="input"></textarea>
+                      </FormItem>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn">Оформить заказ</button>
+                </Form>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="sticky top-[100px] bg-[#E5A35B]/10 px-6 py-4 flex flex-col gap-4 text-sm">
           <div class="text-[24px] font-semibold text-black mb-4">Детали заказа:</div>
+
           <div class="flex justify-between gap-4">
             <div>Всего товаров:</div>
-            <div>4</div>
+            <div>{{ summary.qty }}</div>
           </div>
           <div class="flex justify-between gap-4">
             <div>Сумма заказа:</div>
-            <div>4</div>
+            <div>{{ price(summary.price) }}</div>
           </div>
           <div class="flex justify-between gap-4">
             <div>Способ получения:</div>
-            <div>4</div>
+            <div>{{ summary.delivery }}</div>
           </div>
           <div class="flex justify-between gap-4">
             <div>Стоимость доставки:</div>
-            <div>4</div>
+            <div>{{ price(summary.deliveryPrice) }}</div>
           </div>
-
-          {{ summary }}
 
           <div class="border-t-2 border-[#E5A35B]"></div>
 
           <div class="text-[18px] font-semibold text-black flex justify-between gap-4">
             <div>Итого к оплате:</div>
-            <div>6400 Br</div>
+            <div>{{ price(summary.total) }}</div>
           </div>
 
-          <div class="mx-auto"><button class="btn min-w-[200px]">Оформить заказ</button></div>
+          <div class="mx-auto"><button class="btn min-w-[200px]" @click="onOrder">Оформить заказ</button></div>
 
           <div class="text-[12px] font-light text-center">
             Нажимая на кнопку «‎Оформить заказ», Вы соглашаетесь с
@@ -68,280 +395,69 @@
         </div>
       </div>
     </div>
-    <div>
-      <h2>Данные получателя</h2>
-
-      <Form :model="model">
-        <div class="grid grid-cols-10 gap-4">
-          <div class="col-span-6">
-            <div class="grid grid-cols-6 gap-2">
-              <div class="col-span-4">
-                <div class="ir">
-                  <div class="flex input-group">
-                    <button class="text-center flex-1 w-10 text-xs leading-[38px] btn" :class="{ 'is-plain': model.who === 'business' }" @click.prevent="model.who = 'person'">
-                      Частное лицо
-                    </button>
-                    <button class="text-center flex-1 w-10 text-xs leading-[38px] btn" :class="{ 'is-plain': model.who === 'person' }" @click.prevent="model.who = 'business'">
-                      Юридическое лицо
-                    </button>
-                  </div>
-                </div>
-              </div>
-              <div class="col-span-2"></div>
-              <template v-if="model.who === 'person'">
-                <div class="col-span-4">
-                  <FormItem name="name" :rules="[{ required: true }]">
-                    <input type="text" class="input" placeholder="Укажите ваше имя и фамилию" v-model="model.name" />
-                  </FormItem>
-                </div>
-                <div class="col-span-2"></div>
-                <div class="col-span-2">
-                  <FormItem name="phone" :rules="[{ required: true }]">
-                    <input type="tel" class="input" placeholder="" v-model="model.phone" />
-                  </FormItem>
-                </div>
-                <div class="col-span-4"></div>
-                <div class="col-span-2">
-                  <FormItem name="email" :rules="[{ email: true }]">
-                    <input type="email" novalidate class="input" placeholder="Укажите ваш E-mail" v-model="model.email" />
-                  </FormItem>
-                </div>
-                <div class="col-span-4"></div>
-
-                <div class="col-span-6 mt-8">
-                  <h2>Способ получения</h2>
-                </div>
-
-                <div class="col-span-2">
-                  <div class="radio-card">
-                    <label class="absolute inset-0">
-                      <input type="radio" v-model="model.delivery" value="Самовывоз" />
-                    </label>
-                    <div class="text-black font-medium">Самовывоз</div>
-                    <div>Бесплатно</div>
-                  </div>
-                </div>
-                <div class="col-span-2">
-                  <div class="radio-card">
-                    <label class="absolute inset-0">
-                      <input type="radio" v-model="model.delivery" value="Доставка в пределах МКАД" />
-                    </label>
-                    <div class="text-black font-medium">Доставка в пределах МКАД</div>
-                    <div>Бесплатно при стоимости товара от 220 Br</div>
-                    <div>При стоимости товара до 220 Br,стоимость доставки — 6 Br</div>
-                  </div>
-                </div>
-                <div class="col-span-2">
-                  <div class="radio-card">
-                    <label class="absolute inset-0">
-                      <input type="radio" v-model="model.delivery" value="Доставка в регионы РБ" />
-                    </label>
-                    <div class="text-black font-medium">Доставка в регионы РБ</div>
-                    <div>Стоимость доставки — от 12 Br</div>
-                  </div>
-                </div>
-                <template v-if="model.delivery !== 'Самовывоз'">
-                  <div class="col-span-6 text-sm text-black mt-4">
-                    Сроки доставки уточнит менеджер при подтверждении заказа.
-
-                    <h2 class="mt-16">Адрес получателя</h2>
-                  </div>
-                  <div class="col-span-2">
-                    <FormItem>
-                      <input type="text" class="input" placeholder="Почтовый индекс" v-model="model.zip" />
-                    </FormItem>
-                  </div>
-                  <div class="col-span-4"></div>
-                  <div class="col-span-2">
-                    <FormItem name="city" :rules="[{ required: true }]">
-                      <input type="text" class="input" placeholder="Город" v-model="model.city" />
-                    </FormItem>
-                  </div>
-
-                  <div class="col-span-2">
-                    <FormItem name="street" :rules="[{ required: true }]">
-                      <input type="text" class="input" placeholder="Улица" v-model="model.street" />
-                    </FormItem>
-                  </div>
-                  <div class="col-span-2"></div>
-                  <div>
-                    <FormItem name="building" :rules="[{ required: true }]">
-                      <input type="text" class="input" placeholder="Номер дома" v-model="model.building" />
-                    </FormItem>
-                  </div>
-                  <div>
-                    <FormItem>
-                      <input type="text" class="input" placeholder="Корпус" v-model="model.block" />
-                    </FormItem>
-                  </div>
-                  <div>
-                    <FormItem name="apt" :rules="[{ required: true }]">
-                      <input type="text" class="input" placeholder="Квартира" v-model="model.apt" />
-                    </FormItem>
-                  </div>
-                </template>
-                <div class="col-span-6 mt-6">
-                  <h2>Способ оплаты</h2>
-                </div>
-                <div class="col-span-2">
-                  <div class="radio-card">
-                    <label class="absolute inset-0"> <input type="radio" id="Наличными" v-model="model.payment" value="Наличными" /> </label>
-                    <div class="text-black font-medium">Наличными</div>
-                    <div>В пункте самовывоза или курьеру при получении</div>
-                  </div>
-                </div>
-                <div class="col-span-2">
-                  <div class="radio-card">
-                    <label class="absolute inset-0"> <input type="radio" id="Оплата банковской картой" v-model="model.payment" value="Оплата банковской картой" /> </label>
-                    <div class="text-black font-medium">Оплата банковской картой</div>
-                    <div>В пункте самовывоза или курьеру при получении</div>
-                    <input type="radio" />
-                  </div>
-                </div>
-                <div class="col-span-2">
-                  <div class="radio-card">
-                    <label class="absolute inset-0"> <input type="radio" v-model="model.payment" value="Оплата через ЕРИП" /> </label>
-                    <div class="text-black font-medium">Оплата через ЕРИП</div>
-                    <div>Менеджер сообщит реквизиты оплаты после подтверждения заказа</div>
-                    <input type="radio" />
-                    <img src="/img/info/erip.png" loading="lazy" width="125" height="40" alt="" />
-                  </div>
-                </div>
-                <div class="col-span-2">
-                  <div class="radio-card">
-                    <label class="absolute inset-0"> <input type="radio" v-model="model.payment" value="Рассрочка" /> </label>
-                    <div class="text-black font-medium">Рассрочка</div>
-                    <div>Оплата картой рассрочки в пункте самовывоза или курьеру при получении</div>
-                    <input type="radio" />
-                    <div class="flex gap-2 card-logos">
-                      <img src="/img/info/vtb.png" loading="lazy" width="64" height="40" alt="" class="h-[30px] w-auto" />
-                      <img src="/img/info/halva.png" loading="lazy" width="64" height="40" alt="" class="h-[30px] w-auto" />
-                      <img src="/img/info/magnit.png" loading="lazy" width="64" height="40" alt="" class="h-[30px] w-auto" />
-                    </div>
-                  </div>
-                </div>
-                <div class="col-span-2">
-                  <div class="radio-card">
-                    <label class="absolute inset-0">
-                      <input type="radio" v-model="model.payment" value="Оплата в кредит" />
-                    </label>
-                    <div class="text-black font-medium">Оплата в кредит</div>
-                    <div>Банки-партнёры:</div>
-                    <input type="radio" />
-                    <div class="flex flex-wrap gap-2 payment-logos">
-                      <img src="/img/info/belarusb-logo.png" loading="lazy" width="175" height="25" alt="" />
-                      <img src="/img/info/vtb-logo.png" loading="lazy" width="70" height="25" alt="" />
-                    </div>
-                  </div>
-                </div>
-                <div class="col-span-2"></div>
-                <div class="col-span-6">
-                  <h2 class="mt-20">Дополнительная информация</h2>
-                </div>
-                <div class="col-span-6">
-                  <FormItem>
-                    <textarea placeholder="Комментарий к заказу" id="" cols="30" rows="8" class="input"></textarea>
-                  </FormItem>
-                </div>
-              </template>
-              <template v-if="model.who === 'business'">
-                <div class="col-span-4">
-                  <FormItem name="company" :rules="[{ required: true }]">
-                    <input type="text" class="input" placeholder="Укажите наименование организации" v-model="model.company" />
-                  </FormItem>
-                </div>
-                <div class="col-span-2"></div>
-                <div class="col-span-2">
-                  <FormItem name="unp" :rules="[{ required: true }]">
-                    <input type="text" class="input" placeholder="УНП" v-model="model.unp" />
-                  </FormItem>
-                </div>
-                <div class="col-span-4"></div>
-
-                <div class="col-span-2">
-                  <FormItem name="account" :rules="[{ required: true }]">
-                    <input type="text" class="input" placeholder="Р/с" v-model="model.account" />
-                  </FormItem>
-                </div>
-                <div class="col-span-4"></div>
-                <div class="col-span-2">
-                  <FormItem name="bankaddress" :rules="[{ required: true }]">
-                    <input type="text" class="input" placeholder="Адрес банка" v-model="model.bankaddress" />
-                  </FormItem>
-                </div>
-                <div class="col-span-4"></div>
-                <div class="col-span-2">
-                  <FormItem name="bankbic" :rules="[{ required: true }]">
-                    <input type="text" class="input" placeholder="БИК банка" v-model="model.bankbic" />
-                  </FormItem>
-                </div>
-                <div class="col-span-4"></div>
-                <div class="col-span-4">
-                  <FormItem name="reason" :rules="[{ required: true }]">
-                    <input type="text" class="input" placeholder="На каком основании заключает договор от имени организации" v-model="model.reason" />
-                  </FormItem>
-                </div>
-                <div class="col-span-2"></div>
-                <div class="col-span-4">
-                  <FormItem name="fio" :rules="[{ required: true }]">
-                    <input type="text" class="input" placeholder="ФИО того, в чьем лице действует организация" v-model="model.fio" />
-                  </FormItem>
-                </div>
-                <div class="col-span-2"></div>
-
-                <div class="col-span-2">
-                  <FormItem name="urphone" :rules="[{ required: true }]">
-                    <input type="tel" novalidate class="input" placeholder="+ 375 ( _ _ )  _ _ _  _ _  _ _ " v-model="model.urphone" />
-                  </FormItem>
-                </div>
-                <div class="col-span-4"></div>
-                <div class="col-span-2">
-                  <FormItem name="uremail" :rules="[{ email: true }]">
-                    <input type="email" novalidate class="input" placeholder="Контактный  E-mail" v-model="model.uremail" />
-                  </FormItem>
-                </div>
-                <div class="col-span-4"></div>
-              </template>
-            </div>
-          </div>
-        </div>
-        <button type="submit" class="btn">Оформить заказ</button>
-      </Form>
-    </div>
   </main>
 </template>
 <script setup>
-const model = useState(() => ({
-  who: 'person',
+const who = ref('person');
+const mode = ref('cart');
+const person = useState(() => ({
   delivery: 'Самовывоз',
   payment: 'Наличными',
 }));
+
+const ur = useState(() => ({
+  delivery: 'Самовывоз',
+}));
+
+const { add: add2favorites } = useFavorites();
 const { items, hasItems, remove, clear } = useCart();
 
-const products = computed(() => Object.keys(items.value));
-
-const { data } = await useFetch('/api/products', {
+const { data } = await useFetch('/api/products/cart', {
   method: 'POST',
   body: {
     sortby: 'popular',
     sortdir: 'desc',
-    where: {
-      'productID:in': products,
-    },
+    items: items,
   },
 });
 
-const summary = computed(() => {
-  const total = {
-    price: 0,
-    items: 0,
-  };
-  console.log(items.value);
-  data.value.data.forEach((item) => {
-    console.log(item);
-  });
+const onFinish = (data) => {
+  mode.value = 'thankyou';
+  clear();
+};
 
-  return total;
+const onRemove = (id) => {
+  add2favorites(id);
+  remove(id);
+};
+
+const onQty = (productID, qty) => {
+  if (qty === 0) onRemove(productID);
+};
+
+const onOrder = () => {
+  const form = document.querySelector(`.order-area form.block button[type="submit"]`);
+  form.click();
+};
+
+const summary = computed(() => {
+  const price = data.value.total?.price;
+  const delivery = person.value.delivery;
+  let deliveryPrice = 0;
+  if (delivery === 'Доставка в пределах МКАД') {
+    if (price < 220) deliveryPrice = 6;
+  }
+  if (delivery === 'Доставка в регионы РБ') {
+    deliveryPrice = 12;
+  }
+  const total = price + deliveryPrice;
+  return {
+    qty: data.value.total?.qty,
+    price,
+    delivery,
+    deliveryPrice,
+    total,
+  };
 });
 
 definePageMeta({

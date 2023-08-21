@@ -10,5 +10,6 @@
 const props = defineProps(['name', 'rules']);
 const form = inject('form');
 
-if (props.rules) form.registerRule(props.name, props.rules);
+onMounted(() => form.registerRule(props.name, props.rules));
+onUnmounted(() => form.unregisterRule(props.name));
 </script>
