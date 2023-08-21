@@ -8,7 +8,7 @@ export default defineEventHandler(async (event) => {
 
   const whereCond = `productID in (${ids})`;
 
-  const sql = `select (select group_concat(ip.filename) from site_pictures ip where ip.productID=site_products.productID group by ip.productID) as img, productID, name,  model, Price_bn, PriceSale_bn, uri, is_auction, is_new from site_products where enabled=1 and ${whereCond}`;
+  const sql = `select (select ip.filename from site_pictures ip where ip.productID=site_products.productID  limit 1) as img, productID, name,  model, Price_bn, PriceSale_bn, uri, is_auction, is_new from site_products where enabled=1 and ${whereCond}`;
 
   let [data] = await db.execute(sql);
 
@@ -19,9 +19,10 @@ export default defineEventHandler(async (event) => {
 
   data = data.map((item: Record<string, any>) => {
     const qty = items[item.productID];
+    const itemTotal = qty * item.Price_bn;
     total.qty += qty;
-    total.price += qty * item.Price_bn;
-    return { ...item, qty };
+    total.price += itemTotal;
+    return { ...item, qty, itemTotal };
   });
 
   return {

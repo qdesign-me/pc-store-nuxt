@@ -4,7 +4,7 @@
     <div class="flex justify-between gap-6 items-start">
       <h1>Сохранённые товары</h1>
       <div v-if="hasItems" class="text-blue flex gap-6 text-sm underline underline-offset-4">
-        <button class="flex items-center gap-2"><PrinterIcon />Распечатать список</button>
+        <button class="hidden md:flex items-center gap-2" @click="onPrint"><PrinterIcon />Распечатать список</button>
         <button class="flex items-center gap-2" @click="clear"><DeleteIcon />Очистить список</button>
       </div>
     </div>
@@ -35,6 +35,7 @@
   </main>
 </template>
 <script setup>
+const router = useRouter();
 const { items, hasItems, remove, clear } = useFavorites();
 
 const { data } = await useFetch('/api/products', {
@@ -56,6 +57,8 @@ const meta = {
   title: 'Отложенные товары | Интернет-магазин Iven',
   description: 'Отложенные товары.',
 };
+
+const onPrint = () => router.push('/print/favorites');
 
 useSeoMeta({
   title: () => meta.title,

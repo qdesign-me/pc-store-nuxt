@@ -10,7 +10,7 @@
     <div class="flex justify-between gap-6 items-start">
       <h1>Корзина</h1>
       <div v-if="hasItems" class="text-blue flex gap-6 text-sm underline underline-offset-4">
-        <button class="flex items-center gap-2"><PrinterIcon />Распечатать список</button>
+        <button class="items-center gap-2 hidden md:flex" @click="onPrint"><PrinterIcon />Распечатать список</button>
         <button class="flex items-center gap-2" @click="clear"><DeleteIcon />Очистить список</button>
       </div>
     </div>
@@ -398,6 +398,7 @@
   </main>
 </template>
 <script setup>
+const router = useRouter();
 const who = ref('person');
 const mode = ref('cart');
 const person = useState(() => ({
@@ -420,6 +421,8 @@ const { data } = await useFetch('/api/products/cart', {
     items: items,
   },
 });
+
+const onPrint = () => router.push('/print/cart');
 
 const onFinish = (data) => {
   mode.value = 'thankyou';

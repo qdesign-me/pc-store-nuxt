@@ -409,6 +409,24 @@
       background-image: url(/img/icons/skype.png);
     }
   }
+  .simple-table {
+    @apply text-sm leading-5 relative table-fixed w-full;
+    td,
+    th {
+      @apply font-normal;
+    }
+    th {
+      @apply bg-[#eee];
+      padding: 7px 20px;
+    }
+
+    td {
+      padding: 7px 20px;
+    }
+    tr + tr td {
+      border-top: 1px solid #eee;
+    }
+  }
   .compare-table {
     @apply text-sm leading-5 relative table-fixed w-full;
 

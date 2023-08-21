@@ -3,7 +3,7 @@
     <div class="container">
       <div class="grid grid-cols-5 gap-2.5 items-center pt-4">
         <div class="logo">
-          <NuxtLink to="/"><img src="/img/logo.svg" alt="Viven" /></NuxtLink>
+          <NuxtLink to="/"><img src="/img/logo.svg" alt="Iven" /></NuxtLink>
         </div>
 
         <MobiMenu />
@@ -55,7 +55,7 @@
         <a :href="`tel:${config.mainphone}`"
           ><span class="mobile-logos hide-if-scroll"></span>
 
-          <NuxtLink to="/" class="max-w-[44px] overflow-hidden show-if-scroll"><img src="/img/logo-sm.png" class="show-if-scroll graceful" alt="Viven" /></NuxtLink>
+          <NuxtLink to="/" class="max-w-[44px] overflow-hidden show-if-scroll"><img src="/img/logo-sm.png" class="show-if-scroll graceful" alt="Iven" /></NuxtLink>
 
           {{ formatPhoneNumber(config.mainphone) }}</a
         >
