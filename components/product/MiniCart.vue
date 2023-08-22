@@ -166,7 +166,7 @@ watch(highlight, () => {
   setTimeout(() => {
     clearHighlight();
     modal.value.mini = false;
-  }, 5000);
+  }, 3500);
 });
 
 useSeoMeta({

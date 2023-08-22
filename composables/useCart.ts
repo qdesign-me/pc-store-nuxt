@@ -7,6 +7,7 @@ export const useCart = () => {
     const newItems = { ...items.value, [productID]: qty } as Record<string, number>;
     if (!qty) delete newItems[String(productID)];
     items.value = newItems;
+
     if (isNew) highlight.value = { [productID]: 1 };
   };
 
@@ -18,7 +19,7 @@ export const useCart = () => {
     delete newItems[String(productID)];
     items.value = [newItems];
   };
-  const clear = () => (items.value = []);
+  const clear = () => (items.value = {});
 
   const total = computed(() => Object.values(items.value ?? {}).reduce((acc, item) => acc + +item, 0));
 
