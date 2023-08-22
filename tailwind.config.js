@@ -30,5 +30,5 @@ module.exports = {
       safelist: ['swiper-pagination', 'swiper-pagination-bullet', 'router-link-active'],
     },
   },
-  plugins: [],
+  plugins: [require('tailwind-scrollbar')],
 };

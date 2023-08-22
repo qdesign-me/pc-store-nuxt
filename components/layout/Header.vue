@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header v-if="config">
     <div class="container">
       <div class="grid grid-cols-5 gap-2.5 items-center pt-4">
         <div class="logo">
@@ -52,21 +52,21 @@
           </ul>
           <div class="nav-contact">
             <div class="relative -mx-6 bg-white border-1 h-[80px]">
-              <div class="flex gap-6 mt-10 social-links"><SocialLinks :social="$state.config.social" /></div>
+              <div class="flex gap-6 mt-10 social-links"><SocialLinks :social="config.social" /></div>
             </div>
             <div class="py-8">
               <div class="with-icon">
                 <MapPinIcon />
-                <a href="#" class="underline underline-offset-4">{{ $state.config.address }}</a>
+                <a href="#" class="underline underline-offset-4">{{ config.address }}</a>
               </div>
 
               <div class="with-icon">
                 <MessageIcon />
-                <a :href="`mailto:${$state.config.email}`" class="underline underline-offset-4">{{ $state.config.email }}</a>
+                <a :href="`mailto:${config.email}`" class="underline underline-offset-4">{{ config.email }}</a>
               </div>
               <div class="with-icon">
                 <ClockIcon />
-                <div v-html="$state.config.timetable"></div>
+                <div v-html="config.timetable"></div>
               </div>
             </div>
           </div>
@@ -78,6 +78,7 @@
       </div>
     </div>
   </header>
+
   <div class="sticky top-0 sticky-line" :class="{ 'is-scrolling': y > 130 }">
     <div class="container">
       <div class="flex gap-6 items-center">
@@ -105,7 +106,7 @@
           <NuxtLink to="/" class="a"><UserIcon />Войти</NuxtLink>
           <FavoritesLink />
           <CompareLink />
-          <CartLink />
+          <MiniCart />
         </div>
       </div>
     </div>
