@@ -28,7 +28,7 @@ export default defineNuxtConfig({
     },
   },
   css: ['~/assets/css/main.scss'],
-  modules: ['@pinia/nuxt', 'nuxt-swiper'],
+  modules: ['@pinia/nuxt', 'nuxt-swiper', '@ant-design-vue/nuxt'],
   pinia: {
     autoImports: ['defineStore', 'acceptHMRUpdate'],
   },

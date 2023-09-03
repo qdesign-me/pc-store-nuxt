@@ -2,9 +2,12 @@
   <div class="overflow-auto">
     <div class="list-items">
       <div v-for="item in props.data" :key="item.id">
-        <div class="img max-w-[200px] flex-shrink-0"><ProductThumbs :data="item" :size="160" /></div>
+        <div class="img max-w-[80px] lg:max-w-[200px] flex-shrink-0">
+          <div class="text-[12px] text-[#3F3F3F] mb-1 block sm:hidden">ID: {{ item.model }}</div>
+          <ProductThumbs :data="item" :size="160" />
+        </div>
         <div class="name">
-          <div class="flex gap-6 items-center mb-1">
+          <div class="flex gap-6 items-center mb-3">
             <div class="tags flex-row min-h-[21px]">
               <div v-if="item.is_auction" class="bg-[#4DB732]">Аукцион</div>
               <div v-if="item.Price_bn > 500" class="bg-[#F54D4D]">В рассрочку</div>
@@ -15,8 +18,8 @@
               <PercentIcon v-if="item.is_sale" />
             </div>
           </div>
-          <div class="text-[12px] text-[#3F3F3F]">ID: {{ item.model }}</div>
-          <div class="text-lg font-semibold mb-2 my-1">{{ item.name }}</div>
+          <div class="text-[12px] text-[#3F3F3F] mb-1 hidden sm:block">ID: {{ item.model }}</div>
+          <div class="lg:text-lg font-semibold mb-2">{{ item.name }}</div>
           <div class="text-sm font-light"></div>
         </div>
 

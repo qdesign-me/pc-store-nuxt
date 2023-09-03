@@ -397,12 +397,9 @@
   }
   .list-items {
     > div {
-      @apply border-b flex items-center py-2;
+      @apply border-b flex items-start md:items-center py-2 gap-6 lg:gap-10;
       &:first-child {
         @apply border-t;
-      }
-      > div {
-        @apply px-8;
       }
     }
     .name {
@@ -623,6 +620,9 @@
       @apply py-1.5 block;
     }
   }
+}
+.cart-summary {
+  @apply sticky top-[100px] lg:bg-[#E5A35B]/10 lg:px-6 py-4 flex flex-col gap-4 text-sm;
 }
 
 .help-trigger {
@@ -923,6 +923,39 @@
   }
 }
 @media screen and (max-width: 768px) {
+  .list-items {
+    > div {
+      position: relative;
+      padding-left: 100px;
+      flex-direction: column;
+      gap: 0;
+      padding-top: 15px;
+      padding-bottom: 15px;
+    }
+    .tags {
+      display: block;
+    }
+    .img {
+      position: absolute;
+      left: 0;
+      top: 15px;
+    }
+    .price {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      flex-direction: row-reverse;
+      gap: 10px;
+    }
+    .controls {
+      position: absolute;
+      top: 5px;
+      right: 0;
+      > div {
+        padding-top: 0;
+      }
+    }
+  }
   .products-grid .card-product {
     height: auto;
   }
@@ -947,6 +980,12 @@
   }
 }
 @media screen and (max-width: 640px) {
+  textarea {
+    height: 100px;
+  }
+  .ir {
+    @apply mb-6;
+  }
   .box-promo {
     @apply py-10;
     padding-top: 0 !important;
@@ -964,7 +1003,7 @@
     width: 100%;
 
     > img {
-      width: calc(25% - 0.05rem);
+      max-width: calc(25% - 0.05rem);
       max-height: 40px;
       height: auto;
     }
@@ -1048,4 +1087,13 @@
   left: 50%;
   transform: translate(-50%, 0px);
   opacity: 0.5;
+}
+
+@media screen and (max-width: 480px) {
+  .list-items {
+    .price {
+      flex-direction: column;
+      gap: 0;
+    }
+  }
 }

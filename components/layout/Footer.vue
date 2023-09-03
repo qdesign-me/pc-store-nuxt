@@ -107,9 +107,24 @@
       </div>
     </footer>
   </template>
+  <a-button type="primary" @click="() => setVisible('https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png')">show image preview</a-button>
+  <a-image
+    :width="100"
+    :style="{ display: 'none' }"
+    :preview="{
+      visible: !!visible,
+      onVisibleChange: () => setVisible(false),
+    }"
+    :src="visible"
+  />
 </template>
 
 <script setup>
+import { ref } from 'vue';
+const visible = ref(false);
+const setVisible = (value) => {
+  visible.value = value;
+};
 import { useAppStore } from '~/stores/app';
 const { $state } = useAppStore();
 </script>
