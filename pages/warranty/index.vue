@@ -116,7 +116,7 @@
         </div>
       </div>
     </div>
-    <div class="py-10 bg-[#00B3D7]/10 box-scroll2" ref="target">
+    <div class="py-10 bg-[#00B3D7]/10 box-scroll2" ref="target" id="warranty">
       <div class="container">
         <div class="grid xl:grid-cols-2 gap-10">
           <div class="text-wrap">

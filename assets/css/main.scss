@@ -54,7 +54,7 @@
           @apply block;
         }
 
-        .social-links1 {
+        .social-links {
           @apply top-0 border-t mx-6 pt-6;
           position: absolute;
           margin-top: 0;
@@ -63,9 +63,6 @@
           display: flex;
           justify-content: center;
           gap: 40px;
-        }
-        .social-links {
-          @apply hidden;
         }
       }
     }
@@ -817,6 +814,7 @@
       left: 50%;
       transform: translate(-50%, -50%);
       overflow: hidden;
+      height: 99%;
     }
     nav {
       position: absolute;

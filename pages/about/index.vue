@@ -171,7 +171,7 @@
           </div>
         </div>
 
-        <NuxtLink class="btn mt-10 lg:mt-20" to="/warranty">Обратиться по гарантии</NuxtLink>
+        <NuxtLink class="btn mt-10 lg:mt-20" to="/warranty#warranty">Обратиться по гарантии</NuxtLink>
       </div>
     </div>
 

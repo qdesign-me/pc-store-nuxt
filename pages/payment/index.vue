@@ -1,6 +1,6 @@
 <template>
   <main class="text-sm text">
-    <div class="box-lg">
+    <div class="box">
       <div class="container">
         <div class="breadcrumbs"><NuxtLink to="/" class="">Главная </NuxtLink><span>Оплата</span></div>
 
@@ -76,8 +76,8 @@
         </div>
       </div>
     </div>
-    <div class="box">
-      <div class="container box-scroll2" id="credit">
+    <div class="box box-scroll2 pt-10" id="credit">
+      <div class="container">
         <h2>Оплата в кредит</h2>
         <p class="mb-6 -mt-1">Возможно оформление кредита в банках-партнёрах:</p>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
