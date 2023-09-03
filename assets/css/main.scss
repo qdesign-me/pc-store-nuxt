@@ -7,12 +7,11 @@
 @layer base {
   body {
     font-family: 'Inter', sans-serif;
-    .menu-closer {
+    .menu-closer,
+    .menu-opener {
       @apply hidden;
     }
-    .menu-opener {
-      @apply block;
-    }
+
     &.menu-mode-2 {
       .mode-1 {
         @apply hidden;
@@ -55,7 +54,7 @@
           @apply block;
         }
 
-        .social-links {
+        .social-links1 {
           @apply top-0 border-t mx-6 pt-6;
           position: absolute;
           margin-top: 0;
@@ -64,6 +63,9 @@
           display: flex;
           justify-content: center;
           gap: 40px;
+        }
+        .social-links {
+          @apply hidden;
         }
       }
     }
@@ -724,6 +726,9 @@
 }
 
 @media screen and (max-width: 1280px) {
+  body .menu-opener {
+    @apply block;
+  }
   body {
     font-size: 14px;
   }

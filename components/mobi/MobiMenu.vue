@@ -1,8 +1,8 @@
 <template>
-  <button class="menu-opener w-8 h-8 p-2 flex items-center justify-center lg:hidden hover:text-blue" @click="showMenu(true)">
+  <button class="menu-opener w-8 h-8 p-2 flex items-center justify-center hover:text-blue" @click="showMenu(true)">
     <BarsIcon />
   </button>
-  <button class="menu-closer w-8 h-8 p-2 flex items-center justify-center lg:hidden hover:text-blue" @click="showMenu(false)">
+  <button class="menu-closer w-8 h-8 p-2 flex items-center justify-center hover:text-blue" @click="showMenu(false)">
     <CloseIcon />
   </button>
 </template>
