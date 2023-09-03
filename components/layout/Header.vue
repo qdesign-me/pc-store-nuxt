@@ -11,7 +11,7 @@
         <MobiCall>
           <div class="animate-ping mobi-call"></div>
           <div class="mobi-call" @click="setMenuMode('show')"><PhoneIcon /></div>
-          <div class="mobi-button"><PhoneIcon /></div>
+          <div class="mobi-button" @click="setMenuMode('show')"><PhoneIcon /></div>
         </MobiCall>
         <nav class="col-span-3">
           <ul class="mode-1 flex justify-between text-sm">
@@ -84,9 +84,7 @@
       <div class="flex gap-6 items-center">
         <a :href="`tel:${config.mainphone}`"
           ><span class="mobile-logos hide-if-scroll"></span>
-
           <NuxtLink to="/" class="max-w-[44px] overflow-hidden show-if-scroll"><img src="/img/logo-sm.png" class="show-if-scroll graceful" alt="Iven" /></NuxtLink>
-
           {{ formatPhoneNumber(config.mainphone) }}</a
         >
         <ul>
@@ -118,7 +116,10 @@ import { useWindowScroll } from '@vueuse/core';
 const { y } = useWindowScroll();
 
 const setMenuMode = (value) => {
-  value === 'show' ? document.querySelector('body').classList.add('with-open-mmenu', 'menu-mode-2') : document.querySelector('body').classList.remove('menu-mode-2');
+  console.log(value);
+  value === 'show'
+    ? document.querySelector('body').classList.add('with-open-mmenu', 'menu-mode-2')
+    : document.querySelector('body').classList.remove('with-open-mmenu', 'menu-mode-2');
 };
 
 import { useAppStore } from '~/stores/app';

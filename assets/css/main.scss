@@ -7,6 +7,12 @@
 @layer base {
   body {
     font-family: 'Inter', sans-serif;
+    .menu-closer {
+      @apply hidden;
+    }
+    .menu-opener {
+      @apply block;
+    }
     &.menu-mode-2 {
       .mode-1 {
         @apply hidden;
@@ -27,6 +33,12 @@
     }
     &.with-open-mmenu {
       @apply overflow-hidden;
+      .menu-closer {
+        @apply block;
+      }
+      .menu-opener {
+        @apply hidden;
+      }
       .mobi-button {
         @apply flex;
       }
@@ -799,6 +811,7 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+      overflow: hidden;
     }
     nav {
       position: absolute;

@@ -1,18 +1,13 @@
 <template>
-  <button class="w-8 h-8 p-2 flex items-center justify-center lg:hidden hover:text-blue" @click="showMenu = !showMenu">
-    <BarsIcon v-if="!showMenu" />
-    <CloseIcon v-else />
+  <button class="menu-opener w-8 h-8 p-2 flex items-center justify-center lg:hidden hover:text-blue" @click="showMenu(true)">
+    <BarsIcon />
+  </button>
+  <button class="menu-closer w-8 h-8 p-2 flex items-center justify-center lg:hidden hover:text-blue" @click="showMenu(false)">
+    <CloseIcon />
   </button>
 </template>
 
 <script setup>
-const route = useRoute();
-const showMenu = ref(false);
-watch(route, () => {
-  showMenu.value = false;
-});
-
-watch(showMenu, () => {
-  showMenu.value ? document.querySelector('body').classList.add('with-open-mmenu') : document.querySelector('body').classList.remove('with-open-mmenu');
-});
+const showMenu = (value) =>
+  value ? document.querySelector('body').classList.add('with-open-mmenu') : document.querySelector('body').classList.remove('with-open-mmenu', 'menu-mode-2');
 </script>
