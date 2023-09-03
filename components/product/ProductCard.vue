@@ -12,7 +12,7 @@
     </div>
 
     <NuxtLink :to="uri" class="text-sm font-light leading-4 block mt-2">
-      <div class="mb-2">ID: {{ props.product.productID }}</div>
+      <div class="mb-2">{{ props.product.productID }}</div>
       <div class="line-clamp-3">{{ props.product.name }}</div>
     </NuxtLink>
 

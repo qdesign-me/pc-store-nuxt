@@ -12,9 +12,15 @@
       <AvailableIcon />
       Товар в наличии
     </div>
+    <div class="tags flex-row mb-6 sm:hidden">
+      <div v-if="props.data.PriceSale_bn > 0" class="bg-[#FFAC2F] flex-1">На акции</div>
+      <div v-if="props.data.is_auction > 0" class="bg-[#4DB732] flex-1">Аукцион</div>
+      <div v-if="props.data.Price_bn > 500" class="bg-[#F54D4D] flex-1">В рассрочку</div>
+    </div>
+
     <div class="flex profile-cont gap-6 mb-10 flex-row">
       <div class="flex gap-6 profile-img">
-        <div class="border rounded px-8 py-12">
+        <div class="sm:border rounded px-8 py-12">
           <img :src="props.data.img" alt="" loading="lazy" width="395" height="395" class="block" />
         </div>
         <div class="flex flex-col justify-center gap-4" v-if="0">
@@ -41,8 +47,8 @@
         </div>
       </div>
       <div class="text-sm flex flex-col gap-4 flex-1 min-w-[200px] profile-short">
-        <div class="text-base font-semibld mb-4 hidden xl:block">Код товара: {{ props.data.model }}</div>
-        <div class="font-semibold md:hidden">Коротко о товаре</div>
+        <div class="text-sm sm:text-base font-semibld mb-4 hidden xl:block">Код товара: {{ props.data.model }}</div>
+
         <template v-if="0">
           <div>
             <strong> Модификация:</strong>
@@ -64,7 +70,7 @@
         </div>
       </div>
       <div class="max-w-[420px] text-sm flex flex-col">
-        <div class="block xl:hidden text-base font-semibld mb-4">Код товара: {{ props.data.model }}</div>
+        <div class="block xl:hidden text-sm font-semibld mb-4">Код товара: {{ props.data.model }}</div>
 
         <div class="flex gap-2 mb-6" v-if="0">
           Рейтинг товара
@@ -77,7 +83,7 @@
             <div class="underline underline-offset-4 cursor-pointer">13 Отзывов</div>
           </div>
         </div>
-        <div class="tags flex-row mb-6">
+        <div class="tags hidden sm:flex-row mb-6">
           <div v-if="props.data.PriceSale_bn > 0" class="bg-[#FFAC2F] flex-1">На акции</div>
           <div v-if="props.data.is_auction > 0" class="bg-[#4DB732] flex-1">Аукцион</div>
           <div v-if="props.data.Price_bn > 500" class="bg-[#F54D4D] flex-1">В рассрочку</div>
@@ -97,9 +103,9 @@
           </div>
 
           <div class="text mt-4">
-            <p>Самовывоз только в Минске.</p>
+            <p class="hidden sm:block">Самовывоз только в Минске.</p>
 
-            <p>Стоимость и сроки доставки по РБ уточняйте в отделе продаж.</p>
+            <p class="hidden sm:block">Стоимость и сроки доставки по РБ уточняйте в отделе продаж.</p>
 
             <p>Возможность и стоимость доставки по стране в удобный для Вас день уточняйте у специалиста call-центра.</p>
           </div>
@@ -109,14 +115,18 @@
 
     <div class="tabs" ref="target">
       <div class="tabs-header">
-        <div v-for="(tab, index) in tabs" :class="{ active: index === activeTab }" @click="activeTab = index" :key="tab.title">{{ tab.title }}</div>
+        <div v-for="(tab, index) in tabs" :class="{ active: index === activeTab }" @click="activeTab = index" :key="tab.title">
+          <CogIcon class="sm:hidden" />
+          {{ tab.title }}
+          <ChevronRightIcon class="tab-arrow" />
+        </div>
       </div>
-      <div class="tabs-content text" v-for="(tab, index) in tabs" :key="tab.title" :class="{ hidden: index !== activeTab }">
+      <div class="tabs-content text" v-for="(tab, index) in tabs" :key="tab.title" :class="{ active: index === activeTab }">
         <div v-html="tab.content" class="has-table"></div>
       </div>
     </div>
 
-    <div class="text-blue cursor-pointer underline underline-offset-4 mt-6" @click="modalVisible = true">Сообщить об ошибке в описании</div>
+    <div class="text-blue cursor-pointer underline underline-offset-4 mt-6 hidden sm:block" @click="modalVisible = true">Сообщить об ошибке в описании</div>
 
     <Modal :visible="modalVisible" @close="modalVisible = false" title="Сообщить об ошибке">
       <form @submit="modalVisible = false">
@@ -138,7 +148,7 @@ const tabs = computed(() => {
   if (props.data.description) tabs.push({ title: 'Характеристики', content: props.data.description });
   return tabs;
 });
-const activeTab = ref(0);
+const activeTab = ref(null);
 const modalVisible = ref(false);
 const props = defineProps(['data']);
 

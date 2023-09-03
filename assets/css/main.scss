@@ -242,16 +242,25 @@
   .tabs {
     @apply max-w-[1100px];
     .tabs-header {
-      @apply flex gap-10 items-end;
+      @apply flex gap-10 items-end flex-1;
+      .tab-arrow {
+        @apply ml-auto sm:hidden;
+      }
+      .active .tab-arrow {
+        @apply rotate-90;
+      }
       div {
-        @apply font-semibold text-lightgray py-3 text-xl cursor-pointer;
+        @apply font-semibold sm:text-lightgray py-3 sm:text-xl cursor-pointer items-center flex gap-4 border-t border-b sm:border-transparent w-full;
         &.active {
-          @apply text-blue text-3xl;
+          @apply sm:text-blue;
         }
       }
     }
     .tabs-content {
-      @apply py-4 text-sm;
+      @apply hidden py-4 text-sm;
+      &.active {
+        @apply block;
+      }
     }
   }
 
@@ -287,7 +296,7 @@
     }
   }
   .breadcrumbs {
-    @apply text-xs text-gray-400 font-medium mt-4 mb-8;
+    @apply text-xs text-gray-400 font-medium mt-4 mb-8 whitespace-nowrap overflow-auto;
     a,
     .a {
       @apply text-inherit inline-block;
@@ -980,6 +989,13 @@
   }
 }
 @media screen and (max-width: 640px) {
+  .tabs .tabs-header {
+    margin: 0 -20px;
+    > div {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
   textarea {
     height: 100px;
   }
@@ -1090,7 +1106,7 @@
 }
 
 @media screen and (max-width: 480px) {
-  .list-items {
+  .items-favorites .list-items {
     .price {
       flex-direction: column;
       gap: 0;

@@ -3,7 +3,7 @@
     <div class="list-items">
       <div v-for="item in props.data" :key="item.id">
         <div class="img max-w-[80px] lg:max-w-[200px] flex-shrink-0">
-          <div class="text-[12px] text-[#3F3F3F] mb-1 block sm:hidden">ID: {{ item.model }}</div>
+          <div class="text-[12px] text-[#3F3F3F] mb-1 block sm:hidden">{{ item.model }}</div>
           <ProductThumbs :data="item" :size="160" />
         </div>
         <div class="name">
@@ -18,7 +18,7 @@
               <PercentIcon v-if="item.is_sale" />
             </div>
           </div>
-          <div class="text-[12px] text-[#3F3F3F] mb-1 hidden sm:block">ID: {{ item.model }}</div>
+          <div class="text-[12px] text-[#3F3F3F] mb-1 hidden sm:block">{{ item.model }}</div>
           <div class="lg:text-lg font-semibold mb-2">{{ item.name }}</div>
           <div class="text-sm font-light"></div>
         </div>

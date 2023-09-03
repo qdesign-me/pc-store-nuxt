@@ -9,7 +9,7 @@
 
     <NuxtLink :to="uri" class="max-w-[240px] mx-auto line-clamp-2">{{ props.product.name }}</NuxtLink>
 
-    <div>ID: {{ props.product.productID }}</div>
+    <div>{{ props.product.productID }}</div>
 
     <Add2Cart :productID="props.product.productID" />
   </div>

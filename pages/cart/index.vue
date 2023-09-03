@@ -11,7 +11,7 @@
       <h1>Корзина</h1>
       <div v-if="hasItems" class="text-blue flex gap-6 text-sm underline underline-offset-4">
         <button class="items-center gap-2 hidden md:flex" @click="onPrint"><PrinterIcon />Распечатать список</button>
-        <button class="flex items-center gap-2" @click="clear"><DeleteIcon />Очистить список</button>
+        <button class="flex items-center gap-2" @click="clear"><DeleteIcon /><span class="hidden sm:block">Очистить список</span></button>
       </div>
     </div>
 

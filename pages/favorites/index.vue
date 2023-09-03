@@ -5,7 +5,7 @@
       <h1>Сохранённые товары</h1>
       <div v-if="hasItems" class="text-blue flex gap-6 text-sm underline underline-offset-4">
         <button class="hidden md:flex items-center gap-2" @click="onPrint"><PrinterIcon />Распечатать список</button>
-        <button class="flex items-center gap-2" @click="clear"><DeleteIcon />Очистить список</button>
+        <button class="flex items-center gap-2" @click="clear"><DeleteIcon /><span class="hidden sm:block">Очистить список</span></button>
       </div>
     </div>
 
@@ -19,7 +19,7 @@
     <div v-if="hasItems">
       <div class="text-[#E5A35B] text-sm font-medium mb-10">Вы сохранили {{ pluralize(data.data.length, ['товар', 'товара', 'товаров']) }}</div>
 
-      <ProductList :data="data.data">
+      <ProductList :data="data.data" class="items-favorites">
         <template #controls="row">
           <Add2Compare :productID="row.item.productID" />
 

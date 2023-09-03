@@ -10,8 +10,8 @@
         <MobiSearch />
         <MobiCall>
           <div class="animate-ping mobi-call"></div>
-          <a :href="`tel:${config.mainphone}`" class="mobi-call"><PhoneIcon /></a>
-          <div class="mobi-button" @click="setMenuMode('show')"><PhoneIcon /></div>
+          <div class="mobi-call" @click="setMenuMode('show')"><PhoneIcon /></div>
+          <div class="mobi-button"><PhoneIcon /></div>
         </MobiCall>
         <nav class="col-span-3">
           <ul class="mode-1 flex justify-between text-sm">
@@ -118,7 +118,7 @@ import { useWindowScroll } from '@vueuse/core';
 const { y } = useWindowScroll();
 
 const setMenuMode = (value) => {
-  value === 'show' ? document.querySelector('body').classList.add('menu-mode-2') : document.querySelector('body').classList.remove('menu-mode-2');
+  value === 'show' ? document.querySelector('body').classList.add('with-open-mmenu', 'menu-mode-2') : document.querySelector('body').classList.remove('menu-mode-2');
 };
 
 import { useAppStore } from '~/stores/app';
