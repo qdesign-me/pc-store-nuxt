@@ -145,15 +145,6 @@ const onClick = () => {
   return router.push('/cart');
 };
 
-definePageMeta({
-  layout: 'default',
-});
-
-const meta = {
-  title: 'Корзина | Интернет-магазин Iven',
-  description: 'Корзина товаров.',
-};
-
 watch(router.currentRoute, () => {
   modal.value = {
     cart: false,
@@ -167,13 +158,5 @@ watch(highlight, () => {
     clearHighlight();
     modal.value.mini = false;
   }, 3500);
-});
-
-useSeoMeta({
-  title: () => meta.title,
-  ogTitle: () => meta.title,
-  description: () => meta.description,
-  ogDescription: () => meta.description,
-  robots: 'noindex',
 });
 </script>
