@@ -1021,6 +1021,9 @@
   .box-promo {
     @apply py-10;
     padding-top: 0 !important;
+    .social-links {
+      display: none;
+    }
   }
   footer {
     @apply py-10;
