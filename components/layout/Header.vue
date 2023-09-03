@@ -22,7 +22,7 @@
             <li><NuxtLink class="py-2 px-4" to="/payment">Оплата</NuxtLink></li>
             <li><NuxtLink class="py-2 px-4" to="/warranty">Гарантия</NuxtLink></li>
           </ul>
-          <ul class="mode-2 flex justify-between text-sm">
+          <ul class="mode-2 flex justify-between text-sm -mb-5">
             <li><NuxtLink class="py-2 px-4" to="/about">О компании</NuxtLink></li>
             <li><NuxtLink class="py-2 px-4" to="/contacts">Контакты</NuxtLink></li>
             <li>
