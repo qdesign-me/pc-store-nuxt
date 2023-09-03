@@ -322,7 +322,7 @@
   }
   .mobi-call,
   .mobi-button {
-    @apply fixed right-4 top-[68px] z-[100] w-12 h-12 rounded-full bg-blue cursor-pointer  items-center justify-center hidden;
+    @apply fixed right-4 top-[63px] z-[100] w-[44px] h-[44px] rounded-full bg-blue cursor-pointer  items-center justify-center hidden;
     color: white !important;
   }
   .mobi-button {
