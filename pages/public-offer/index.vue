@@ -155,3 +155,23 @@
     </div>
   </main>
 </template>
+
+
+<script setup>
+
+definePageMeta({
+  layout: 'default',
+});
+
+const meta = {
+  title: 'Договор публичной оферты | Интернет-магазин Iven',
+  description: 'Договор публичной оферты на приобретение товаров через интернет-магазин компании ООО «Компьютеры Айвен».',
+};
+
+useSeoMeta({
+  title: () => meta.title,
+  ogTitle: () => meta.title,
+  description: () => meta.description,
+  ogDescription: () => meta.description,
+});
+</script>

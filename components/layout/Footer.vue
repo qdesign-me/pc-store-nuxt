@@ -101,7 +101,7 @@
           </div>
           <div class="flex flex-col gap-4 -order-10 xl:order-1">
             <NuxtLink to="/public-offer">Договор публичной оферты</NuxtLink>
-            <NuxtLink to="/privacy-and-terms">Политика обработки персональных данных</NuxtLink>
+            <NuxtLink to="/privacy-and-terms">Политика защиты персональных данных</NuxtLink>
             <CompanyLinks />
           </div>
         </div>
