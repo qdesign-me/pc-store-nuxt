@@ -39,18 +39,17 @@
             <h2>Данные получателя</h2>
 
             <div>
-              <Form :model="person" :onFinish="onFinish" :class="who === 'person' ? 'block' : 'hidden'">
-                <div class="ir">
-                  <div class="flex input-group">
-                    <button class="text-center flex-1 w-10 text-xs leading-[38px] btn" :class="{ 'is-plain': who === 'business' }" @click.prevent="who = 'person'">
-                      Частное лицо
-                    </button>
-                    <button class="text-center flex-1 w-10 text-xs leading-[38px] btn" :class="{ 'is-plain': who === 'person' }" @click.prevent="who = 'business'">
-                      Юридическое лицо
-                    </button>
-                  </div>
+              <div class="ir">
+                <div class="flex input-group">
+                  <button class="text-center flex-1 w-10 text-xs leading-[38px] btn" :class="{ 'is-plain': who === 'business' }" @click.prevent="who = 'person'">
+                    Частное лицо
+                  </button>
+                  <button class="text-center flex-1 w-10 text-xs leading-[38px] btn" :class="{ 'is-plain': who === 'person' }" @click.prevent="who = 'business'">
+                    Юридическое лицо
+                  </button>
                 </div>
-
+              </div>
+              <Form :model="person" :onFinish="onFinish" :class="who === 'person' ? 'block' : 'hidden'">
                 <div class="grid grid-cols-6 gap-2">
                   <div class="col-span-6 lg:col-span-2">
                     <FormItem name="name" :rules="[{ required: true }]">

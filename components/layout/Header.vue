@@ -17,7 +17,7 @@
           <ul class="mode-1 flex justify-between text-sm" @click="closeMenu">
             <li><NuxtLink class="py-2 px-4" to="/about">О компании</NuxtLink></li>
             <li><NuxtLink class="py-2 px-4" to="/contacts">Контакты</NuxtLink></li>
-            <li><NuxtLink class="py-2 px-4" to="/news">Новости</NuxtLink></li>
+            <li v-if="false"><NuxtLink class="py-2 px-4" to="/news">Новости</NuxtLink></li>
             <li><NuxtLink class="py-2 px-4" to="/delivery">Доставка</NuxtLink></li>
             <li><NuxtLink class="py-2 px-4" to="/payment">Оплата</NuxtLink></li>
             <li><NuxtLink class="py-2 px-4" to="/warranty">Гарантия</NuxtLink></li>

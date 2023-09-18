@@ -95,36 +95,22 @@
           </div>
           <div class="col-span-2 hidden xl:block">
             <div class="main-links -mt-2">
-              <a href="/about">О компании</a><a href="/contacts">Контакты</a><a href="/news">Новости</a><a href="/delivery">Доставка</a><a href="/payment">Оплата</a
+              <a href="/about">О компании</a><a href="/contacts">Контакты</a><a v-if="false" href="/news">Новости</a><a href="/delivery">Доставка</a><a href="/payment">Оплата</a
               ><a href="/warranty">Гарантия</a>
             </div>
           </div>
           <div class="flex flex-col gap-4 -order-10 xl:order-1">
-            <NuxtLink to="/public-offer">Договор публичной оферты</NuxtLink><NuxtLink to="/privacy-and-terms">Политика обработки персональных данных</NuxtLink
-            ><a href="#">Свидетельство о регистрации</a><a href="#">Сертификат соответствия на ПК</a><a href="#">Кассовый чек</a><a href="#">Гарантийный талон</a>
+            <NuxtLink to="/public-offer">Договор публичной оферты</NuxtLink>
+            <NuxtLink to="/privacy-and-terms">Политика обработки персональных данных</NuxtLink>
+            <CompanyLinks />
           </div>
         </div>
       </div>
     </footer>
   </template>
-  <a-button type="primary" @click="() => setVisible('https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png')">show image preview</a-button>
-  <a-image
-    :width="100"
-    :style="{ display: 'none' }"
-    :preview="{
-      visible: !!visible,
-      onVisibleChange: () => setVisible(false),
-    }"
-    :src="visible"
-  />
 </template>
 
 <script setup>
-import { ref } from 'vue';
-const visible = ref(false);
-const setVisible = (value) => {
-  visible.value = value;
-};
 import { useAppStore } from '~/stores/app';
 const { $state } = useAppStore();
 </script>

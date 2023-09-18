@@ -23,7 +23,7 @@
               товарной позиции указан в гарантийных обязательствах.
             </p>
             <div class="mt-6 underline text-xs">
-              <a href="#">Гарантийный талон</a>
+              <CompanyLinks link="warranty" />
             </div>
           </div>
         </div>

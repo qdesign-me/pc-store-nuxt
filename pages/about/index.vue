@@ -28,9 +28,7 @@
                 тел. <a href="tel:+375173783627">+375-17-378-36-27</a>
               </p>
 
-              <div class="flex flex-col gap-3 underline">
-                <a href="#">Свидетельство о регистрации</a><a href="#">Сертификат соответствия на ПК</a><a href="#">Кассовый чек</a><a href="#">Гарантийный талон</a>
-              </div>
+              <div class="flex flex-col gap-3 underline"><CompanyLinks /></div>
             </div>
           </div>
         </div>

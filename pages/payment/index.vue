@@ -63,7 +63,7 @@
                 </p>
 
                 <div class="flex flex-col gap-3 underline">
-                  <a href="#">Свидетельство о регистрации</a><a href="#">Сертификат соответствия на ПК</a><a href="#">Кассовый чек</a><a href="#">Гарантийный талон</a>
+                  <CompanyLinks />
                 </div>
               </div>
             </div>
