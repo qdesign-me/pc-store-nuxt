@@ -31,7 +31,7 @@ export default defineEventHandler(async (event) => {
   const data = await getCategory(body.uri);
   const blocks = await getFilters(data);
   const minmax = await getMinMax(body.uri);
-  console.log('API CATEGORIES HIT');
+
   return {
     blocks,
     data,

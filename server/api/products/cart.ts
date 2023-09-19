@@ -4,6 +4,12 @@ export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   const { items } = body;
 
+  if (!items)
+    return {
+      total: 0,
+      data: [],
+    };
+
   const ids = Object.keys(items);
 
   const whereCond = `productID in (${ids})`;

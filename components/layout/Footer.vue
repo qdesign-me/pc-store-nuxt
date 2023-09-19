@@ -68,15 +68,20 @@
           </div>
           <div class="bg-[#cee7ec] p-6 rounded hidden xl:block pt-0">
             <div class="title mt-10">Хочу быть в курсе акций и новинок!</div>
-            <form action="#" class="flex flex-col gap-6">
-              <input class="input mt-4" placeholder="Укажите ваш E-mail" type="email" /><input class="input" placeholder="Либо Viber" type="text" /><input
-                class="input mb-4"
-                placeholder="Либо Telegram"
-                type="text"
-              /><button type="submit" class="btn w-full">
+            <Form :model="model" class="flex flex-col" :onFinish="onFinish">
+              <FormItem name="email">
+                <input name="email" class="input" placeholder="Укажите ваш E-mail" type="email" v-model="model.email" />
+              </FormItem>
+              <FormItem name="viber">
+                <input name="viber" class="input" placeholder="Либо Viber" type="text" v-model="model.viber" />
+              </FormItem>
+              <FormItem name="telegram">
+                <input name="telegram" class="input" placeholder="Либо Telegram" type="text" v-model="model.telegram" />
+              </FormItem>
+              <button type="submit" class="btn w-full mt-1" :disabled="!formValid">
                 <span>Подписаться <span class="hidden xl:inline">на акции</span></span>
               </button>
-            </form>
+            </Form>
           </div>
         </div>
       </div>
@@ -111,6 +116,28 @@
 </template>
 
 <script setup>
+const DEFAULT_DATA = {
+  action: 'subscribe-details',
+  subject: 'Подписка на новости',
+  email: '',
+  viber: '',
+  telegram: '',
+};
+const model = useState(() => DEFAULT_DATA);
+const onFinish = async () => {
+  console.log('on finish 2');
+  message.info('Ваше сообщение отправлено');
+
+  useFetch('/api/email', {
+    method: 'POST',
+    body: model.value,
+  });
+
+  Object.assign(model.value, clone(DEFAULT_DATA));
+  return false;
+};
 import { useAppStore } from '~/stores/app';
 const { $state } = useAppStore();
+
+const formValid = computed(() => model.value.email.length || model.value.viber.length || model.value.telegram);
 </script>

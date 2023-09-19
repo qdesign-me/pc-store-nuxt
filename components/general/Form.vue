@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="submit" @input="input" novalidate>
+  <form @submit.prevent.prevent="submit" @input.prevent="input" novalidate>
     <slot />
   </form>
 </template>
@@ -55,8 +55,11 @@ const checkErrors = (input = null) => {
   }
 };
 
-const input = (event) => checkErrors(event.target.name);
-
+const input = (event) => {
+  console.log('input');
+  checkErrors(event.target.name);
+  return false;
+};
 const submit = () => {
   checkErrors();
   const isValid = Object.keys(errors).length === 0;

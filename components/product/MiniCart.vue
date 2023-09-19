@@ -38,8 +38,8 @@
         </div>
       </div>
     </div>
-    <div class="mini-cart" v-show="modal?.cart">
-      <div class="flex justify-between gap-6 items-center py-3">
+    <div class="mini-cart border rounded" v-show="modal?.cart">
+      <div class="flex justify-between gap-6 items-center pt-1 pb-3">
         <div class="font-semibold text-base text-black">Корзина</div>
         <button class="opacity-50" @click="modal.cart = false"><CloseIcon /></button>
       </div>

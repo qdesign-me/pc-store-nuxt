@@ -1,5 +1,53 @@
+import nodemailer from 'nodemailer';
+
+const processBody = (data: Record<string, any>) => {
+  const subject = data.subject;
+  let html = '';
+  if (data.action === 'subscribe') {
+    html = `Контакт: ${data.contact}`;
+  }
+  if (data.action === 'subscribe-details') {
+    if (data.email) html += `Email: ${data.email}<br>`;
+    if (data.viber) html += `Viber: ${data.viber}<br>`;
+    if (data.telegram) html += `Telegram: ${data.telegram}<br>`;
+  }
+  if (!html.length)
+    return {
+      status: 'error',
+    };
+  return {
+    subject,
+    html,
+  };
+};
+
 export default defineEventHandler(async (event) => {
-  return {};
+  const data = await readBody(event);
+
+  const email = 'qdesign.by@gmail.com';
+
+  const mailConfig = {
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false,
+    requireTLS: true,
+    auth: {
+      user: email,
+      pass: 'ypooounzqjxdhjqs',
+    },
+  };
+  const transporter = nodemailer.createTransport(mailConfig);
+
+  const info = processBody(data);
+
+  const res = await transporter.sendMail({
+    from: email,
+    to: email,
+    ...info,
+  });
+  return {
+    res,
+  };
 });
 // import formidable from 'formidable';
 // import nodemailer from 'nodemailer';

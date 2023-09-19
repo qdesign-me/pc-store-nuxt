@@ -80,6 +80,5 @@ export default defineEventHandler(async (event) => {
   from site_products p 
   join site_categories c on c.categoryID = p.categoryID  and c.uri like '${uri}%' 
   where 1 ${andFilters} `);
-  console.log('API HIT');
   return results;
 });

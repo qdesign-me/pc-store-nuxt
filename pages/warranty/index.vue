@@ -192,7 +192,6 @@ const handleClick = () => {
 };
 const handleFileChange = (event) => {
   const fileData = event.target.files[0];
-  console.log({ fileData });
   file.value = fileData.name;
 };
 </script>

@@ -12,6 +12,7 @@
     "@ant-design-vue/nuxt": "^1.1.1",
     "@pinia-plugin-persistedstate/nuxt": "^1.1.2",
     "@types/node": "^20.6.2",
+    "@types/nodemailer": "^6.4.10",
     "autoprefixer": "^10.4.14",
     "nuxt": "^3.6.5",
     "postcss": "^8.4.27",
@@ -28,6 +29,7 @@
     "js-cookie": "^3.0.5",
     "maska": "^2.1.10",
     "mysql2": "^3.6.0",
+    "nodemailer": "^6.9.5",
     "nuxt-swiper": "^1.1.1",
     "pinia": "^2.1.6"
   }

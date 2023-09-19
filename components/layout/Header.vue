@@ -93,11 +93,12 @@
           </li>
         </ul>
         <div class="flex-1">
-          <form action="#" class="relative">
-            <input class="input" placeholder="Введите наименование или артикул товара" type="text" /><button type="submit" class="absolute top-4 right-4">
+          <Form :model="model" class="relative" :onFinish="onFinish">
+            <input class="input" placeholder="Введите наименование или артикул товара" type="text" v-model="model.search" />
+            <button type="submit" class="absolute top-4 right-4" :disabled="!model.search.length">
               <SearchIcon />
             </button>
-          </form>
+          </Form>
         </div>
         <div class="nav-links">
           <CatalogLink />
@@ -111,12 +112,16 @@
   </div>
 </template>
 <script setup>
+const DEFAULT_DATA = {
+  search: '',
+};
+const model = useState(() => DEFAULT_DATA);
+
 import { useWindowScroll } from '@vueuse/core';
 const router = useRouter();
 const { y } = useWindowScroll();
 
 const setMenuMode = (value) => {
-  console.log(value);
   value === 'show'
     ? document.querySelector('body').classList.add('with-open-mmenu', 'menu-mode-2')
     : document.querySelector('body').classList.remove('with-open-mmenu', 'menu-mode-2');
@@ -130,4 +135,8 @@ watch(router.currentRoute, () => {
 import { useAppStore } from '~/stores/app';
 const { $state } = useAppStore();
 const config = $state?.config || {};
+
+const onFinish = async (event) => {
+  debugger;
+};
 </script>
