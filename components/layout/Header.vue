@@ -102,7 +102,7 @@
         </div>
         <div class="nav-links">
           <CatalogLink />
-          <NuxtLink to="/" class="a"><UserIcon />Войти</NuxtLink>
+          <NuxtLink v-if="false" to="/" class="a"><UserIcon />Войти</NuxtLink>
           <FavoritesLink />
           <CompareLink />
           <MiniCart />
