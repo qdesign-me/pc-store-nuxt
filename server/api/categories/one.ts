@@ -1,6 +1,7 @@
 import db from '../../../db/db';
 
 const getFilters = async (category: { categoryID: number; uri: string }) => {
+  return {};
   const sql = `select spf.label, spf.tooltip, spf.alias, spf.suffix, spf.filter_type, spf.sort_value, spf.preffered_values, group_concat(distinct sfop.value) as value from  site_features_on_products sfop 
   join site_features_on_categories sfoc on sfoc.featureID=sfop.featureID and sfoc.categoryID=${category?.categoryID}
   join site_products_features spf on spf.featureID=sfop.featureID 
@@ -22,6 +23,7 @@ const getMinMax = async (uri: string) => {
 
 const getCategory = async (uri: string) => {
   const sql = `select categoryID, name, uri, meta_description, breadcrumbs from site_categories where uri='${uri}'`;
+
   const [data] = await db.execute(sql);
   return data[0];
 };
@@ -31,7 +33,7 @@ export default defineEventHandler(async (event) => {
   const data = await getCategory(body.uri);
   const blocks = await getFilters(data);
   const minmax = await getMinMax(body.uri);
-
+  console.log('API CATEGORIES HIT');
   return {
     blocks,
     data,

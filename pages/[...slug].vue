@@ -1,5 +1,5 @@
 <template>
-  <main class="container">
+  <main class="container" v-if="category?.data">
     <div class="breadcrumbs">
       <NuxtLink to="/">Главная </NuxtLink>
       <NuxtLink :to="page?.uri" v-for="page in JSON.parse(category.data.breadcrumbs)" :key="page.uri">{{ page.name }} </NuxtLink>
@@ -31,7 +31,7 @@ const filters = reactive(route.query);
 
 provide('filters', filters);
 const searchQuery = computed(() => buildQuery(filters));
-const uri = route.path;
+const uri = route?.path;
 
 // if (1) {
 //   throw createError({ statusCode: 404, statusMessage: 'Page Not Found' });

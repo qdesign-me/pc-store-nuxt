@@ -40,7 +40,7 @@
 </template>
 
 <script setup>
-const route = useRoute();
+const router = useRouter();
 import { onClickOutside } from '@vueuse/core';
 const target = ref(null);
 onClickOutside(target, (e) => {
@@ -48,7 +48,8 @@ onClickOutside(target, (e) => {
 });
 const { data } = await useFetch('/api/categories/menu');
 const showMenu = ref(false);
-watch(route, () => {
+watch(router.currentRoute, () => {
+  debugger;
   showMenu.value = false;
 });
 
