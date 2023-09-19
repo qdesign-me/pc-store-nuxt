@@ -1,15 +1,7 @@
 <template>
   <div class="mt-4 lg:mt-6 flex flex-wrap gap-6">
-    <div class="flex justify-around w-10 flex-1 links">
-      <a href="#" target="_blank">
-        <div class="icon icon-viber"></div>
-      </a>
-      <a href="#" target="_blank">
-        <div class="icon icon-telegram"></div>
-      </a>
-      <a href="#" target="_blank">
-        <div class="icon icon-email"></div>
-      </a>
+    <div class="flex justify-center gap-6 w-10 flex-1 links">
+      <SocialLinks :social="$state.config.social" />
     </div>
     <div class="w-10 flex-1">
       <Form :model="model" class="flex flex-col gap-2 items-start" :onFinish="onFinish">
@@ -21,6 +13,8 @@
 </template>
 
 <script setup>
+import { useAppStore } from '~/stores/app';
+const { $state } = useAppStore();
 const DEFAULT_DATA = {
   action: 'subscribe',
   subject: 'Подписка на новости',
@@ -28,15 +22,13 @@ const DEFAULT_DATA = {
 };
 const model = useState(() => DEFAULT_DATA);
 const onFinish = async (event) => {
-  console.log('on finish 1');
   message.info('Ваше сообщение отправлено');
-
+  const body = clone(model.value);
   useFetch('/api/email', {
     method: 'POST',
-    body: model.value,
+    body,
   });
 
   Object.assign(model.value, clone(DEFAULT_DATA));
-  return false;
 };
 </script>

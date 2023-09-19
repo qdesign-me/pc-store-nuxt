@@ -75,6 +75,9 @@
         <div class="flex" v-if="false">
           <NuxtLink class="btn is-large ml-auto" to="/"> <ConfiguratorIcon /> Конфигуратор ПК</NuxtLink>
         </div>
+        <div class="flex">
+          <NuxtLink class="btn is-large ml-auto" to="/payment#credit"> <ConfiguratorIcon /> Калькулятор рассрочки</NuxtLink>
+        </div>
       </div>
     </div>
   </header>

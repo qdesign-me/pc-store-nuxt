@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent.prevent="submit" @input.prevent="input" novalidate>
+  <form @submit.prevent.stop="submit" @input="input" novalidate>
     <slot />
   </form>
 </template>
@@ -56,14 +56,15 @@ const checkErrors = (input = null) => {
 };
 
 const input = (event) => {
-  console.log('input');
   checkErrors(event.target.name);
   return false;
 };
-const submit = () => {
+const submit = (event) => {
   checkErrors();
   const isValid = Object.keys(errors).length === 0;
-  if (isValid) return props.onFinish(props.model);
+  if (isValid) {
+    return props.onFinish(props.model);
+  }
   const name = Object.keys(errors)[0];
   const el = document.querySelector(`[name=${name}]`);
 

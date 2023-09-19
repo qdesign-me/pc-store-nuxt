@@ -125,12 +125,11 @@ const DEFAULT_DATA = {
 };
 const model = useState(() => DEFAULT_DATA);
 const onFinish = async () => {
-  console.log('on finish 2');
   message.info('Ваше сообщение отправлено');
-
+  const body = clone(model.value);
   useFetch('/api/email', {
     method: 'POST',
-    body: model.value,
+    body,
   });
 
   Object.assign(model.value, clone(DEFAULT_DATA));
