@@ -168,8 +168,6 @@
                 <div class="pl-6 relative">
                   <button class="btn !mt-0" type="submit" :disabled="!model.fileData">Отправить заявку</button>
                 </div>
-
-                {{ model }}
               </Form>
             </div>
           </div>
