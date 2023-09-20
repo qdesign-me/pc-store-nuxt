@@ -49,7 +49,6 @@ onClickOutside(target, (e) => {
 const { data } = await useFetch('/api/categories/menu');
 const showMenu = ref(false);
 watch(router.currentRoute, () => {
-  debugger;
   showMenu.value = false;
 });
 

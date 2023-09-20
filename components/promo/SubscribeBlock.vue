@@ -28,7 +28,6 @@ const onFinish = async (event) => {
     method: 'POST',
     body,
   });
-
   Object.assign(model.value, clone(DEFAULT_DATA));
 };
 </script>

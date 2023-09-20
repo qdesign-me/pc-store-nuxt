@@ -129,19 +129,19 @@
     <div class="text-blue cursor-pointer underline underline-offset-4 mt-6 hidden sm:block" @click="modalVisible = true">Сообщить об ошибке в описании</div>
 
     <Modal :visible="modalVisible" @close="modalVisible = false" title="Сообщить об ошибке">
-      <form @submit="modalVisible = false">
-        <div class="mb-6">
-          <textarea placeholder="Укажите неточность в описании" class="input h-40"></textarea>
-        </div>
+      <Form :model="model" :onFinish="onFinish">
+        <FormItem name="message" :rules="[{ required: true }]">
+          <textarea name="message" placeholder="Укажите неточность в описании" class="input h-40" v-model="model.message"></textarea>
+        </FormItem>
         <button class="btn">Отправить</button>
-      </form>
+      </Form>
     </Modal>
   </div>
 </template>
 
 <script setup>
+const router = useRouter();
 const target = ref(null);
-
 const tabs = computed(() => {
   const tabs = [];
   if (props.data.about) tabs.push({ title: 'О товаре', content: props.data.about });
@@ -154,7 +154,26 @@ const props = defineProps(['data']);
 
 const showFeatures = () => {
   activeTab.value = tabs.value.findIndex((item) => item.title === 'Характеристики');
-
   target.value.scrollIntoView({ behavior: 'smooth', block: 'start' });
+};
+
+const DEFAULT_DATA = {
+  action: 'correct',
+  subject: 'Ошибка в описании товара',
+  page: `https://i-ven.by${router.currentRoute.value.fullPath}`,
+  message: '',
+};
+
+const model = useState(() => DEFAULT_DATA);
+
+const onFinish = async (event) => {
+  message.info('Ваше сообщение отправлено');
+  const body = clone(model.value);
+  useFetch('/api/email', {
+    method: 'POST',
+    body,
+  });
+  Object.assign(model.value, clone(DEFAULT_DATA));
+  modalVisible.value = false;
 };
 </script>

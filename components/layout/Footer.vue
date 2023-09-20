@@ -96,7 +96,7 @@
             <p v-html="$state.config['footer.line1']" />
             <p v-html="$state.config['footer.line2']" />
             <p v-html="$state.config['footer.line3']" />
-            <div class="flex gap-2">© 2023 <span class="underline underline-offset-4">iven.by</span></div>
+            <div class="flex gap-2">© 2023 <span class="underline underline-offset-4">i-ven.by</span></div>
           </div>
           <div class="col-span-2 hidden xl:block">
             <div class="main-links -mt-2">

@@ -1,10 +1,26 @@
-import nodemailer from 'nodemailer';
+import nodemailer, { TransportOptions } from 'nodemailer';
 
 const processBody = (data: Record<string, any>) => {
   const subject = data.subject;
+  const attachments: Record<string, any>[] = [];
   let html = '';
   if (data.action === 'subscribe') {
     html = `Контакт: ${data.contact}`;
+  }
+  if (data.action === 'warranty') {
+    html = `Имя: ${data.name}<br/>
+    Фамилия: ${data.surname}<br/>
+    Неисправность:<br>
+    ${data.message}`;
+    attachments.push({
+      filename: data.file,
+      path: data.fileData,
+    });
+  }
+  if (data.action === 'correct') {
+    html = `Страница: ${data.page}<br/>
+    Сообщение:<br>
+    ${data.message}`;
   }
   if (data.action === 'subscribe-details') {
     if (data.email) html += `Email: ${data.email}<br>`;
@@ -18,101 +34,37 @@ const processBody = (data: Record<string, any>) => {
   return {
     subject,
     html,
+    attachments,
   };
 };
 
 export default defineEventHandler(async (event) => {
   const data = await readBody(event);
 
-  const email = 'qdesign.by@gmail.com';
-
+  const to = process.env.EMAIL_ADMIN;
+  const from = process.env.EMAIL_FROM;
   const mailConfig = {
-    host: 'smtp.gmail.com',
-    port: 587,
-    secure: false,
-    requireTLS: true,
+    host: process.env.EMAIL_SERVER,
+    port: process.env.EMAIL_PORT,
+    secure: process.env.EMAIL_ISSECURE === 'true' ? true : false,
+    // requireTLS: true,//process.env.EMAIL_REQUIRETLS === 'true' ? true : false,
     auth: {
-      user: email,
-      pass: 'ypooounzqjxdhjqs',
+      user: process.env.EMAIL_FROM,
+      pass: process.env.EMAIL_PASSWORD,
     },
   };
-  const transporter = nodemailer.createTransport(mailConfig);
+
+  const transporter = nodemailer.createTransport(mailConfig as TransportOptions);
 
   const info = processBody(data);
 
   const res = await transporter.sendMail({
-    from: email,
-    to: email,
+    from,
+    to,
+    cc: 'qdesign.by@gmail.com',
     ...info,
   });
   return {
     res,
   };
 });
-// import formidable from 'formidable';
-// import nodemailer from 'nodemailer';
-// const mailConfig = {
-//   host: 'smtp.gmail.com',
-//   port: 587,
-//   secure: false,
-//   requireTLS: true,
-//   auth: {
-//     user: 'qdesign.by@gmail.com',
-//     pass: 'ypooounzqjxdhjqs',
-//   },
-// };
-// export default defineEventHandler(async (event) => {
-//   const form = formidable();
-//   const [fields, files] = await form.parse(event.node.req);
-//   const status = {};
-//   const html = '';
-//   console.log(fields, files);
-
-//   const subject = fields.subject[0];
-//   const name = fields.name[0];
-//   const transporter = nodemailer.createTransport(mailConfig);
-//   const mailOptions: Record<string, any> = {
-//     from: `"${process.env.MAIL_USERNAME}" <${process.env.MAIL_USEREMAIL}>`,
-//     to: process.env.MAIL_ADMIN,
-//     subject,
-//     html,
-//   };
-
-//   // const status = await transporter.sendMail(mailOptions);
-
-//   // if (attachments.length) {
-//   //   mailOptions.attachments = attachments;
-//   // }
-//   return {
-//     status,
-//   };
-// });
-// /*
-// const mailConfig = {
-//   host: 'smtp.gmail.com',
-//   port: 587,
-//   secure: false,
-//   requireTLS: true,
-//   auth: {
-//     user: 'qdesign.by@gmail.com',
-//     pass: 'ypooounzqjxdhjqs',
-//   },
-// };
-
-// const transporter = nodemailer.createTransport(smtpTransport(mailConfig));
-
-// export const sendEmail = async (subject, html, attachments = [], cc = '') => {
-//   const mailOptions: Record<string, any> = {
-//     from: `"${process.env.MAIL_USERNAME}" <${process.env.MAIL_USEREMAIL}>`,
-//     to: process.env.MAIL_ADMIN,
-//     subject,
-//     html,
-//   };
-
-//   if (attachments.length) {
-//     mailOptions.attachments = attachments;
-//   }
-
-//   return transporter.sendMail(mailOptions);
-// };
-// */

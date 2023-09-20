@@ -9,7 +9,7 @@
         <a :href="`mailto:${$state.config.email}`">{{ $state.config.email }}</a>
       </div>
 
-      <div>www.iven.by</div>
+      <div>www.i-ven.by</div>
     </div>
     <div>
       <div class="flex gap-x-6 my-6 text-[12px]">

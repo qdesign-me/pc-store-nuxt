@@ -123,23 +123,34 @@
             <div class="in">
               <div class="h2">Заявка на гарантийное обслуживание</div>
 
-              <form action="#" class="flex flex-col gap-6">
+              <Form :model="model" :onFinish="onFinish" action="#" class="flex flex-col gap-6">
                 <div class="pl-6 relative">
                   <div class="num">1.</div>
-                  <input type="text" class="input" placeholder="Укажите Ваше Имя" />
+                  <FormItem name="name" :rules="[{ required: true }]">
+                    <input name="name" v-model="model.name" type="text" class="input" placeholder="Укажите Ваше Имя" />
+                  </FormItem>
                 </div>
                 <div class="pl-6 relative">
                   <div class="num">2.</div>
-                  <input type="text" class="input" placeholder="Укажите Вашу Фамилию" />
+                  <FormItem name="surname" :rules="[{ required: true }]">
+                    <input name="surname" v-model="model.surname" type="text" class="input" placeholder="Укажите Вашу Фамилию" />
+                  </FormItem>
                 </div>
                 <div class="pl-6 relative">
                   <div class="num">3.</div>
-
                   <div class="relative">
                     <input type="file" class="opacity-0 absolute inset-0 z-" />
                     <div class="flex gap-4 cursor-pointer relative items-center" items-center>
                       <UploadIcon />
-                      <template v-if="file"> {{ file }} <RemoveButton @click="file = null" /> </template>
+                      <template v-if="model.file">
+                        {{ model.file }}
+                        <RemoveButton
+                          @click="
+                            model.file = null;
+                            model.fileData = null;
+                          "
+                        />
+                      </template>
                       <template v-else>
                         <input type="file" class="absolute inset-0 opacity-0" @change="handleFileChange" accept="image/*" />
                         <div class="underline underline-offset-4 mt-1">Загрузите фото гарантийного талона</div>
@@ -149,13 +160,17 @@
                 </div>
                 <div class="pl-6 relative">
                   <div class="num">4.</div>
-                  <textarea rows="5" placeholder="Опишите неисправность" class="input"></textarea>
+                  <FormItem name="message" :rules="[{ required: true }]">
+                    <textarea name="message" v-model="model.message" rows="5" placeholder="Опишите неисправность" class="input"></textarea>
+                  </FormItem>
                 </div>
 
                 <div class="pl-6 relative">
-                  <button class="btn !mt-0" type="submit">Отправить заявку</button>
+                  <button class="btn !mt-0" type="submit" :disabled="!model.fileData">Отправить заявку</button>
                 </div>
-              </form>
+
+                {{ model }}
+              </Form>
             </div>
           </div>
 
@@ -192,7 +207,35 @@ const handleClick = () => {
 };
 const handleFileChange = (event) => {
   const fileData = event.target.files[0];
-  file.value = fileData.name;
+  model.value.file = fileData.name;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    model.value.fileData = e.target.result;
+  };
+  reader.readAsDataURL(fileData);
+};
+
+const DEFAULT_DATA = {
+  action: 'warranty',
+  subject: 'Заявка на гарантийное обслуживание',
+  name: '',
+  file: '',
+  surname: '',
+  message: '',
+  fileData: '',
+};
+
+const model = useState(() => DEFAULT_DATA);
+
+const onFinish = async (event) => {
+  message.info('Ваше сообщение отправлено');
+  const body = clone(model.value);
+  useFetch('/api/email', {
+    method: 'POST',
+    body,
+  });
+  Object.assign(model.value, clone(DEFAULT_DATA));
+  modalVisible.value = false;
 };
 </script>
 
