@@ -5,8 +5,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap');
 
 @layer base {
+  .menu-open-false {
+    @apply hidden;
+  }
+  .with-open-menu {
+    .menu-open-true {
+      @apply hidden;
+    }
+    .menu-open-false {
+      @apply block;
+    }
+  }
   a {
     @apply cursor-pointer;
+  }
+  .mainmenu-item:not(.active) {
+    display: none !important;
   }
   [disabled],
   .is-disabled {
@@ -75,6 +89,10 @@
     }
     &.with-open-menu {
       @apply overflow-hidden;
+      &:before {
+        @apply fixed left-0 right-0 bottom-0 top-[100px] bg-black/20 z-10;
+        content: '';
+      }
       .menu {
         @apply block;
       }
@@ -493,18 +511,18 @@
     }
   }
   .simple-table {
-    @apply text-sm leading-5 relative table-fixed w-full;
+    @apply leading-5 relative table-fixed w-full;
     td,
     th {
-      @apply font-normal;
+      @apply font-normal text-xs;
     }
     th {
       @apply bg-[#eee];
-      padding: 7px 20px;
+      padding: 7px 0;
     }
 
     td {
-      padding: 7px 20px;
+      padding: 7px 0;
     }
     tr + tr td {
       border-top: 1px solid #eee;
@@ -548,7 +566,7 @@
     @apply mb-[110px];
   }
   .is-scrolling {
-    @apply border-b;
+    box-shadow: 0 0.9375rem 0.625rem -0.9375rem rgba(0, 0, 0, 0.16);
     .hide-if-scroll {
       width: 0;
     }
@@ -575,7 +593,7 @@
       }
     }
     a[href^='tel:'] {
-      @apply text-blue text-3xl font-bold flex gap-3 items-center;
+      @apply text-blue text-3xl font-semibold  flex gap-3 items-center;
     }
   }
   footer {
@@ -628,23 +646,42 @@
   .menu {
     @apply text-sm font-bold py-10 absolute z-20 bg-white left-0 right-0 hidden;
     transform: translateY(1px);
+
     ul ul {
       @apply ml-4 font-normal mb-1;
       a {
         @apply py-0 leading-4;
       }
     }
+    li {
+      @apply mb-4;
+    }
+    .sublinks {
+      @apply font-normal text-sm leading-tight;
+      a {
+        @apply py-[2px];
+      }
+    }
     .title {
       @apply border-b-2 border-[#E5A35B] inline-block pb-3 mb-3 text-2xl;
     }
-    .items a {
-      @apply flex items-center gap-2 flex-1;
+    .items {
+      @apply text-sm font-normal mr-6;
+      > div {
+        @apply border-b cursor-pointer leading-[60px] flex items-center gap-4 px-4 transition whitespace-nowrap;
+        &.active {
+          @apply bg-black/5;
+        }
+      }
       svg {
         @apply w-8;
       }
     }
     a {
-      @apply py-1.5 block;
+      @apply py-1.5 flex gap-2 items-center;
+      svg {
+        @apply text-[#00B3D7];
+      }
     }
   }
 }

@@ -2,11 +2,13 @@
   <main class="container" v-if="category?.data">
     <div class="breadcrumbs">
       <NuxtLink to="/">Главная </NuxtLink>
-      <NuxtLink :to="page?.uri" v-for="page in JSON.parse(category.data.breadcrumbs)" :key="page.uri">{{ page.name }} </NuxtLink>
+      <NuxtLink v-if="category.data.breadcrumbs" :to="page?.uri" v-for="page in JSON.parse(category.data.breadcrumbs)" :key="page.uri">{{ page.name }} </NuxtLink>
       <span>{{ category.data.name }}</span>
     </div>
     <h1>{{ category.data.name }}</h1>
-    <div class="grid grid-cols-5 gap-2.5">
+    <Loading v-if="pending" />
+
+    <div class="grid grid-cols-5 gap-2.5" v-if="!pending && products">
       <div class="hidden xl:block">
         <Filters :blocks="category.blocks" />
       </div>
@@ -39,12 +41,17 @@ const uri = route?.path;
 
 const { data: category } = await useFetch('/api/categories/one', {
   method: 'POST',
+  onResponse: () => {
+    document.querySelector('body').classList.remove('with-open-menu');
+  },
   body: {
     uri,
   },
 });
 
-const { data: products } = await useFetch('/api/categories/products', {
+const { pending, data: products } = await useFetch('/api/categories/products', {
+  lazy: true,
+
   method: 'POST',
   body: {
     uri,

@@ -45,13 +45,11 @@ const { data } = await useFetch('/api/products', {
   },
 });
 
-// setTimeout(() => window.print(), 2000);
-
 definePageMeta({ layout: 'print' });
 
 const meta = {
-  title: 'Отложенные товары | Интернет-магазин Iven',
-  description: 'Отложенные товары.',
+  title: 'Сохранённые товары | Интернет-магазин Iven',
+  description: 'Сохранённые товары.',
 };
 useSeoMeta({
   title: () => meta.title,

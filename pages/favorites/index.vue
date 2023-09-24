@@ -54,8 +54,8 @@ definePageMeta({
 });
 
 const meta = {
-  title: 'Отложенные товары | Интернет-магазин Iven',
-  description: 'Отложенные товары.',
+  title: 'Сохранённые товары | Интернет-магазин Iven',
+  description: 'Сохранённые товары.',
 };
 
 const onPrint = () => router.push('/print/favorites');

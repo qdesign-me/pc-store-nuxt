@@ -3,12 +3,12 @@
     <table class="simple-table mb-4">
       <thead>
         <tr>
-          <th width="120"></th>
-          <th width="120"><strong>ID</strong></th>
-          <th><strong>Наименование</strong></th>
-          <th width="120"><strong>Цена, руб.</strong></th>
-          <th class="text-center" width="120"><strong>Кол-во</strong></th>
-          <th class="text-right" width="140"><strong>Сумма, руб.</strong></th>
+          <th width="90"></th>
+          <th width="80" class="text-left"><strong>ID</strong></th>
+          <th class="w-auto text-left"><strong>Наименование</strong></th>
+          <th width="80" class="text-center"><strong>Цена, руб.</strong></th>
+          <th width="80" class="text-center"><strong>Кол-во</strong></th>
+          <th width="80" class="text-right"><strong>Сумма, руб.</strong></th>
         </tr>
       </thead>
       <tbody>
@@ -22,7 +22,7 @@
           <td>
             {{ item.name }}
           </td>
-          <td>
+          <td class="text-center">
             {{ price(item.Price_bn) }}
           </td>
           <td class="text-center">

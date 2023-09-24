@@ -1,5 +1,5 @@
 <template>
-  <header v-if="config">
+  <header v-if="$state.config">
     <div class="container">
       <div class="grid grid-cols-5 gap-2.5 items-center pt-4">
         <div class="logo">
@@ -27,24 +27,24 @@
             <li><NuxtLink class="py-2 px-4" to="/contacts">Контакты</NuxtLink></li>
             <li>
               <div class="mode-2-items">
-                <a class="mode-2-item" :href="`tel:+37529${config.mainphone}`">
+                <a class="mode-2-item" :href="`tel:+37529${$state.config.mainphone}`">
                   <img src="/img/logos/a1.png" alt="" />
-                  +375-29-{{ formatPhoneNumber(config.mainphone) }}</a
+                  +375-29-{{ formatPhoneNumber($state.config.mainphone) }}</a
                 >
 
-                <a class="mode-2-item" :href="`tel:+37544${config.mainphone}`">
+                <a class="mode-2-item" :href="`tel:+37544${$state.config.mainphone}`">
                   <img src="/img/logos/mts.png" alt="" />
-                  +375-44-{{ formatPhoneNumber(config.mainphone) }}</a
+                  +375-44-{{ formatPhoneNumber($state.config.mainphone) }}</a
                 >
 
-                <a class="mode-2-item" :href="`tel:+37525${config.mainphone}`">
+                <a class="mode-2-item" :href="`tel:+37525${$state.config.mainphone}`">
                   <img src="/img/logos/life.png" alt="" />
-                  +375-25-{{ formatPhoneNumber(config.mainphone) }}</a
+                  +375-25-{{ formatPhoneNumber($state.config.mainphone) }}</a
                 >
 
-                <a class="mode-2-item" :href="`tel:+37517${config.mainphone}`">
+                <a class="mode-2-item" :href="`tel:+37517${$state.config.mainphone}`">
                   <img src="/img/logos/iven.png" alt="" />
-                  +375-17-{{ formatPhoneNumber(config.mainphone) }}</a
+                  +375-17-{{ formatPhoneNumber($state.config.mainphone) }}</a
                 >
                 <div class="mode-2-item" @click="setMenuMode('hide')">Закрыть</div>
               </div>
@@ -52,21 +52,21 @@
           </ul>
           <div class="nav-contact">
             <div class="relative -mx-6 bg-white border-1 h-[80px]">
-              <div class="flex gap-6 mt-10 social-links"><SocialLinks :social="config.social" /></div>
+              <div class="flex gap-6 mt-10 social-links"><SocialLinks :social="$state.config.social" /></div>
             </div>
             <div class="py-8">
               <div class="with-icon">
                 <MapPinIcon />
-                <a href="#" class="underline underline-offset-4">{{ config.address }}</a>
+                <a href="#" class="underline underline-offset-4">{{ $state.config.address }}</a>
               </div>
 
               <div class="with-icon">
                 <MessageIcon />
-                <a :href="`mailto:${config.email}`" class="underline underline-offset-4">{{ config.email }}</a>
+                <a :href="`mailto:${$state.config.email}`" class="underline underline-offset-4">{{ $state.config.email }}</a>
               </div>
               <div class="with-icon">
                 <ClockIcon />
-                <div v-html="config.timetable"></div>
+                <div v-html="$state.config.timetable"></div>
               </div>
             </div>
           </div>
@@ -85,10 +85,10 @@
   <div class="sticky top-0 sticky-line" :class="{ 'is-scrolling': y > 130 }">
     <div class="container">
       <div class="flex gap-6 items-center">
-        <a :href="`tel:${config.mainphone}`"
+        <a :href="`tel:${$state.config.mainphone}`"
           ><span class="mobile-logos hide-if-scroll"></span>
-          <NuxtLink to="/" class="max-w-[44px] overflow-hidden show-if-scroll"><img src="/img/logo-sm.png" class="show-if-scroll graceful" alt="Iven" /></NuxtLink>
-          {{ formatPhoneNumber(config.mainphone) }}</a
+          <div class="max-w-[44px] overflow-hidden show-if-scroll"><img src="/img/logo-sm.png" class="show-if-scroll graceful" alt="Iven" /></div>
+          {{ formatPhoneNumber($state.config.mainphone) }}</a
         >
         <ul>
           <li class="menu-trigger">
@@ -119,7 +119,6 @@ const DEFAULT_DATA = {
   search: '',
 };
 const model = useState(() => DEFAULT_DATA);
-
 import { useWindowScroll } from '@vueuse/core';
 const router = useRouter();
 const { y } = useWindowScroll();
@@ -129,7 +128,7 @@ const setMenuMode = (value) => {
     ? document.querySelector('body').classList.add('with-open-mmenu', 'menu-mode-2')
     : document.querySelector('body').classList.remove('with-open-mmenu', 'menu-mode-2');
 };
-const closeMenu = () => setTimeout(() => document.querySelector('body').classList.remove('with-open-mmenu', 'menu-mode-2'), 200);
+const closeMenu = () => document.querySelector('body').classList.remove('with-open-mmenu', 'menu-mode-2');
 
 watch(router.currentRoute, () => {
   document.querySelector('body').classList.remove('with-open-mmenu', 'menu-mode-2');
@@ -137,9 +136,8 @@ watch(router.currentRoute, () => {
 
 import { useAppStore } from '~/stores/app';
 const { $state } = useAppStore();
-const config = $state?.config || {};
 
-const onFinish = async (event) => {
-  debugger;
+const onFinish = () => {
+  router.push(`/search?q=${model.value.search}`);
 };
 </script>
