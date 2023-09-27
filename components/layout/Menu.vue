@@ -54,7 +54,7 @@
                   <NuxtLink :to="item.uri">{{ item.name }}</NuxtLink>
                 </div>
 
-                <ul class="lg:columns-3 gap-6">
+                <ul class="md:lg:columns-3 gap-6">
                   <li v-for="link in item.nodes" :key="link.uri" class="relative">
                     <NuxtLink :to="link.uri">
                       <component :is="linkIcon(link.uri)" />
@@ -70,7 +70,7 @@
                   </li>
                 </ul>
               </div>
-              <div class="w-[300px] hidden lg:block" v-if="item.product">
+              <div class="w-[300px] hidden xl:block" v-if="item.product">
                 <div class="text-[#E5A35B] text-[24px] mb-6">
                   Топ<br class="hidden lg:inline" />
                   продаж
