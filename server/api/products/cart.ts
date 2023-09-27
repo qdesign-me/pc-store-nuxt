@@ -4,11 +4,12 @@ export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   const { items } = body;
 
-  if (!items)
+  if (!items || Object.keys(items).length === 0)
     return {
       total: 0,
       data: [],
     };
+  console.log('API PRODUCTS/CART 1', JSON.stringify(body));
 
   const ids = Object.keys(items);
 

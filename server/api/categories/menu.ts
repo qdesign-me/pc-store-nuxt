@@ -7,6 +7,7 @@ const getPopularProduct = async (ids) => {
   return data?.[0];
 };
 export default defineEventHandler(async (event) => {
+  console.log('API CATEGORIES/MENU');
   const [data] = await db.execute(
     `select categoryID, name, uri, parent from site_categories where visible=1 and categoryId not in (213, 549, 908) and parent in (498, 365,28, 362,364, 497, 3,10, 9, 1, 0) order by parent, sort_order`
   );

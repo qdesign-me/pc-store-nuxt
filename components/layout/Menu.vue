@@ -55,12 +55,13 @@
                 </div>
 
                 <ul class="lg:columns-3 gap-6">
-                  <li v-for="link in item.nodes" :key="link.uri">
+                  <li v-for="link in item.nodes" :key="link.uri" class="relative">
                     <NuxtLink :to="link.uri">
                       <component :is="linkIcon(link.uri)" />
                       {{ link.name }}
                     </NuxtLink>
-                    <div v-if="link.nodes && link.categoryID !== 28" class="sublinks">
+                    <div class="toggle-sublinks" v-if="link.nodes && link.categoryID !== 28" @click="toggleSublinks"><ChevronRightIcon /></div>
+                    <div v-if="link.nodes && link.categoryID !== 28" class="sublinks relative">
                       <NuxtLink v-for="childlink in link.nodes" :to="childlink.uri" :key="childlink.name">
                         {{ childlink.name }}
                       </NuxtLink>
@@ -136,7 +137,9 @@ watch(showMenu, () => {
   showMenu.value ? document.querySelector('body').classList.add('with-open-menu') : document.querySelector('body').classList.remove('with-open-menu');
 });
 const closeMenu = () => document.querySelector('body').classList.remove('with-open-menu');
-
+const toggleSublinks = (event) => {
+  event.currentTarget.classList.contains('sublinks-on') ? event.currentTarget.classList.remove('sublinks-on') : event.currentTarget.classList.add('sublinks-on');
+};
 const active = ref(null);
 const mactive = ref(null);
 const linkIcon = (uri) => {

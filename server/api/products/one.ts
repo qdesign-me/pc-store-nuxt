@@ -16,6 +16,7 @@ async function getFeatures(sql) {
 }
 
 export default defineEventHandler(async (event) => {
+  console.log('API PRODUCTS/ONE');
   const body = await readBody(event);
   const uri = body.uri;
 

@@ -15,6 +15,7 @@ const model = useState(() => DEFAULT_DATA);
 
 const onFinish = () => {
   router.push(`/search?q=${model.value.search}`);
+  document.querySelector('body').classList.remove('with-open-menu');
 };
 
 const router = useRouter();

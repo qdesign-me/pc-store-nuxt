@@ -1,6 +1,6 @@
 <template>
   <div class="relative" ref="target">
-    <div class="mini-cart" v-show="modal?.mini && minidata?.data">
+    <div class="mini-cart border rounded" v-show="modal?.mini && minidata?.data?.length">
       <div class="flex justify-between gap-6 items-center py-3">
         <div class="font-semibold text-base text-black">Товар добавлен в корзину</div>
       </div>
@@ -33,8 +33,8 @@
         </div>
 
         <div class="flex gap-2 justify-between">
-          <NuxtLink to="/catalog" class="btn is-plain w-full">Продолжить покупки</NuxtLink>
-          <NuxtLink to="/cart" class="btn w-full">Перейти в корзину</NuxtLink>
+          <NuxtLink to="/catalog" class="btn is-plain w-1 flex-1 with-animate">Продолжить покупки</NuxtLink>
+          <NuxtLink to="/cart" class="btn w-1 flex-1">Перейти в корзину</NuxtLink>
         </div>
       </div>
     </div>
@@ -151,12 +151,13 @@ watch(router.currentRoute, () => {
     mini: false,
   };
 });
-
+let timeout = null;
 watch(highlight, () => {
   modal.value.mini = true;
-  setTimeout(() => {
-    clearHighlight();
-    modal.value.mini = false;
+  if (timeout) clearTimeout(timeout);
+  timeout = setTimeout(() => {
+    // clearHighlight();
+    // modal.value.mini = false;
   }, 3500);
 });
 </script>

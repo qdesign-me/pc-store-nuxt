@@ -29,6 +29,7 @@ const getCategory = async (uri: string) => {
 };
 
 export default defineEventHandler(async (event) => {
+  console.log('API CATEGORIES/ONE');
   const body = await readBody(event);
   if (body.uri === '/search')
     return {
@@ -41,7 +42,7 @@ export default defineEventHandler(async (event) => {
   const data = await getCategory(body.uri);
   // const blocks = await getFilters(data);
   // const minmax = await getMinMax(body.uri);
-  console.log('API CATEGORIES HIT');
+
   return {
     // blocks,
     data,

@@ -2,6 +2,7 @@
 import db from '../../../db/db';
 
 export default defineEventHandler(async (event) => {
+  console.log('API PRODUCTS/COMPARE');
   const body = await readBody(event);
   const highlightUp = ['Ёмкость накопителя', 'Диагональ экрана', 'Дата выхода на рынок'];
   const highlightDown = ['Стоимость при оплате единым платежом'];

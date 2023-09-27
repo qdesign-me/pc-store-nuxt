@@ -12,6 +12,7 @@ async function fetchColumn(sql: string) {
 }
 
 export default defineEventHandler(async (event) => {
+  console.log('API CATEGORIES/PRODUCTS');
   const body = await readBody(event);
   const {
     uri,

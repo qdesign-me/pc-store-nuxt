@@ -1,6 +1,7 @@
 import db from '../../../db/db';
 
 export default defineEventHandler(async (event) => {
+  console.log('API PRODUCTS/INDEX');
   const body = await readBody(event);
   const { take = 100, sortby = 'popular', sortdir = 'desc', where = {} } = body;
   const select = `(select group_concat(ip.filename) from site_pictures ip where ip.productID=site_products.productID group by ip.productID) as img, productID, name,  model, Price_bn, PriceSale_bn, uri, is_auction, is_new`;

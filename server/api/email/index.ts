@@ -39,6 +39,7 @@ const processBody = (data: Record<string, any>) => {
 };
 
 export default defineEventHandler(async (event) => {
+  console.log('API BODY');
   const data = await readBody(event);
 
   const to = process.env.EMAIL_ADMIN;
