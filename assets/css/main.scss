@@ -30,6 +30,10 @@
     max-height: calc(100vh - 200px) !important;
     max-width: calc(100vw - 80px) !important;
   }
+  .only-mobi {
+    @apply lg:hidden;
+  }
+
   body {
     font-family: 'Inter', sans-serif;
     .menu-closer,
@@ -55,6 +59,7 @@
         border-color: #7bd2e4 !important;
       }
     }
+
     &.with-open-mmenu {
       @apply overflow-hidden;
       .menu-closer {
@@ -588,7 +593,7 @@
     }
 
     .input {
-      @apply pr-20  leading-[47px] border-2 border-[#A1A1A1];
+      @apply pr-10  leading-[47px] border-2 border-[#A1A1A1];
     }
     .nav-links {
       @apply flex gap-6 text-sm;
@@ -994,7 +999,61 @@
   footer {
     padding-bottom: 100px !important;
   }
+  body.with-open-menu {
+    @apply overflow-hidden;
+    .menu {
+      display: block;
+      position: fixed;
+      top: 0;
+      padding: 0;
+      bottom: 61px;
+      > .container > div {
+        display: flex;
+        width: 100%;
+      }
+      .mainmenu-item {
+        .title {
+          display: none;
+        }
+        .sublinks {
+          display: none !important;
+        }
+        ul {
+          overflow: auto;
+          height: calc(100vh - 200px);
+        }
+        li {
+          @apply m-0;
+          a {
+            @apply leading-[60px] border-b py-0;
+          }
+        }
+      }
+      .part-2 {
+        display: none;
+      }
+      .open-substep {
+        .part-2 {
+          display: block;
+        }
+        .part-1 {
+          display: none;
+        }
+      }
+      .items {
+        margin-right: 0;
+        flex: 1;
+        width: calc(100vw - 60px);
+        > div {
+          background: #fff !important;
+          padding-left: 0;
+          padding-right: 0;
+        }
+      }
+    }
+  }
 }
+
 @media screen and (max-width: 768px) {
   .list-items {
     > div {

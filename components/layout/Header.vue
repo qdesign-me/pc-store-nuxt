@@ -96,12 +96,7 @@
           </li>
         </ul>
         <div class="flex-1">
-          <Form :model="model" class="relative" :onFinish="onFinish">
-            <input class="input" placeholder="Введите наименование или артикул товара" type="text" v-model="model.search" />
-            <button type="submit" class="absolute top-4 right-4" :disabled="!model.search.length">
-              <SearchIcon />
-            </button>
-          </Form>
+          <SearchForm />
         </div>
         <div class="nav-links">
           <CatalogLink />
@@ -115,12 +110,7 @@
   </div>
 </template>
 <script setup>
-const DEFAULT_DATA = {
-  search: '',
-};
-const model = useState(() => DEFAULT_DATA);
 import { useWindowScroll } from '@vueuse/core';
-const router = useRouter();
 const { y } = useWindowScroll();
 
 const setMenuMode = (value) => {
@@ -131,8 +121,4 @@ const setMenuMode = (value) => {
 
 import { useAppStore } from '~/stores/app';
 const { $state } = useAppStore();
-
-const onFinish = () => {
-  router.push(`/search?q=${model.value.search}`);
-};
 </script>

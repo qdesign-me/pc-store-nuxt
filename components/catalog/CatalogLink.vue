@@ -8,6 +8,6 @@
 <script setup>
 const openMenu = () => {
   document.querySelector('body').classList.remove('with-open-mmenu', 'menu-mode-2');
-  document.querySelector('body').classList.add('with-open-mcatalog');
+  document.querySelector('body').classList.add('with-open-menu');
 };
 </script>

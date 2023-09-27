@@ -8,26 +8,53 @@
       Каталог товров
     </button>
     <div class="menu">
+      <div class="only-mobi">
+        <div class="border-b leading-[60px] cursor-pointer" v-if="mactive === null" @click.prevent.stop="closeMenu">
+          <div class="container flex items-center gap-2 font-bold"><ArrowLeftOutlined /> Каталог товаров</div>
+        </div>
+        <div class="border-b leading-[60px] cursor-pointer" v-if="mactive === 0" @click="mactive = null">
+          <div class="container flex items-center gap-2 font-bold"><ArrowLeftOutlined /> Готовые сборки ПК</div>
+        </div>
+        <div class="border-b leading-[60px] cursor-pointer" v-if="mactive === 1" @click="mactive = null">
+          <div class="container flex items-center gap-2 font-bold"><ArrowLeftOutlined />Комплектующие для ПК</div>
+        </div>
+        <div class="border-b leading-[60px] cursor-pointer" v-if="mactive === 3" @click="mactive = null">
+          <div class="container flex items-center gap-2 font-bold"><ArrowLeftOutlined /> Периферия</div>
+        </div>
+        <div class="border-b leading-[60px] cursor-pointer" v-if="mactive === 4" @click="mactive = null">
+          <div class="container flex items-center gap-2 font-bold"><ArrowLeftOutlined /> Электроника</div>
+        </div>
+        <div class="border-b py-2">
+          <div class="container"><SearchForm /></div>
+        </div>
+      </div>
       <div class="container">
-        <div class="flex gap-2.5">
-          <div>
+        <div class="flex gap-2.5" :class="{ 'open-substep': mactive !== null }">
+          <div class="part-1">
             <div class="items">
-              <div :class="{ active: active === 0 }" @mouseenter="active = 0"><PCSetsIcon />Готовые сборки ПК</div>
-              <div :class="{ active: active === 1 }" @mouseenter="active = 1"><PCAcessoriesIcon />Комплектующие для ПК</div>
-              <div :class="{ active: active === 2 }" @mouseenter="active = 2"><NotebooksIcon />Ноутбуки</div>
-              <div :class="{ active: active === 3 }" @mouseenter="active = 3"><OthersIcon />Периферия</div>
-              <div :class="{ active: active === 4 }" @mouseenter="active = 4"><ElectronicsIcon />Электроника</div>
-              <div :class="{ active: active === 5 }" @mouseenter="active = 5"><ServersIcon />Серверное оборудование</div>
+              <div :class="{ active: active === 0 }" @mouseenter="active = 0" @click="mactive = 0"><PCSetsIcon /> Готовые сборки ПК <ChevronRightIcon class="ml-auto -mr-2" /></div>
+              <div :class="{ active: active === 1 }" @mouseenter="active = 1" @click="mactive = 1">
+                <PCAcessoriesIcon />Комплектующие для ПК <ChevronRightIcon class="ml-auto -mr-2" />
+              </div>
+              <div :class="{ active: active === 2 }" @click="router.push('/elektronika/noutbuki')"><NotebooksIcon />Ноутбуки</div>
+              <div :class="{ active: active === 3 }" @mouseenter="active = 3" @click="mactive = 3"><OthersIcon />Периферия <ChevronRightIcon class="ml-auto -mr-2" /></div>
+              <div :class="{ active: active === 4 }" @mouseenter="active = 4" @click="mactive = 4"><ElectronicsIcon />Электроника <ChevronRightIcon class="ml-auto -mr-2" /></div>
+              <div :class="{ active: active === 5 }" @click="router.push('/komplektuyuszie/Servernoe-oborydovanie')"><ServersIcon />Серверное оборудование</div>
             </div>
           </div>
-          <div class="flex-1">
-            <div v-for="(item, index) in data" :key="item.name" class="flex gap-6 mainmenu-item" :class="{ active: active === index || (!index && !active) }">
+          <div class="flex-1 part-2">
+            <div
+              v-for="(item, index) in data"
+              :key="item.name"
+              class="flex gap-6 mainmenu-item"
+              :class="{ mactive: mactive === index, active: active === index || (!index && !active) }"
+            >
               <div class="flex-1">
                 <div class="title">
                   <NuxtLink :to="item.uri">{{ item.name }}</NuxtLink>
                 </div>
 
-                <ul class="columns-2 lg:columns-3 gap-6">
+                <ul class="lg:columns-3 gap-6">
                   <li v-for="link in item.nodes" :key="link.uri">
                     <NuxtLink :to="link.uri">
                       <component :is="linkIcon(link.uri)" />
@@ -42,7 +69,7 @@
                   </li>
                 </ul>
               </div>
-              <div class="w-[300px]" v-if="item.product">
+              <div class="w-[300px] hidden lg:block" v-if="item.product">
                 <div class="text-[#E5A35B] text-[24px] mb-6">
                   Топ<br class="hidden lg:inline" />
                   продаж
@@ -64,6 +91,7 @@
 </template>
 
 <script setup>
+const router = useRouter();
 const OfficeIcon = resolveComponent('OfficeIcon');
 const HomeIcon = resolveComponent('HomeIcon');
 const GraphicsIcon = resolveComponent('GraphicsIcon');
@@ -107,9 +135,10 @@ const showMenu = ref(false);
 watch(showMenu, () => {
   showMenu.value ? document.querySelector('body').classList.add('with-open-menu') : document.querySelector('body').classList.remove('with-open-menu');
 });
+const closeMenu = () => document.querySelector('body').classList.remove('with-open-menu');
 
 const active = ref(null);
-
+const mactive = ref(null);
 const linkIcon = (uri) => {
   const icon = links.find((item) => item.uri === uri)?.icon;
   return icon;
