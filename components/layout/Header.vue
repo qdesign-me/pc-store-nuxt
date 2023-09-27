@@ -14,7 +14,7 @@
           <div class="mobi-button" @click="setMenuMode('show')"><PhoneIcon /></div>
         </MobiCall>
         <nav class="col-span-3">
-          <ul class="mode-1 flex justify-between text-sm" @click="closeMenu">
+          <ul class="mode-1 flex justify-between text-sm">
             <li><NuxtLink class="py-2 px-4" to="/about">О компании</NuxtLink></li>
             <li><NuxtLink class="py-2 px-4" to="/contacts">Контакты</NuxtLink></li>
             <li v-if="false"><NuxtLink class="py-2 px-4" to="/news">Новости</NuxtLink></li>
@@ -128,11 +128,6 @@ const setMenuMode = (value) => {
     ? document.querySelector('body').classList.add('with-open-mmenu', 'menu-mode-2')
     : document.querySelector('body').classList.remove('with-open-mmenu', 'menu-mode-2');
 };
-const closeMenu = () => document.querySelector('body').classList.remove('with-open-mmenu', 'menu-mode-2');
-
-watch(router.currentRoute, () => {
-  document.querySelector('body').classList.remove('with-open-mmenu', 'menu-mode-2');
-});
 
 import { useAppStore } from '~/stores/app';
 const { $state } = useAppStore();

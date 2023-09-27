@@ -27,7 +27,7 @@ module.exports = {
   },
   purge: {
     options: {
-      safelist: ['swiper-pagination', 'swiper-pagination-bullet', 'router-link-active', 'mainmenu-item-0', 'mainmenu-item-1', 'mainmenu-item-2'],
+      safelist: ['swiper-pagination', 'swiper-pagination-bullet', 'router-link-active', 'ant-image-preview-img'],
     },
   },
   plugins: [require('tailwind-scrollbar')],

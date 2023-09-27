@@ -41,9 +41,6 @@ const uri = route?.path;
 
 const { data: category } = await useFetch('/api/categories/one', {
   method: 'POST',
-  onResponse: () => {
-    document.querySelector('body').classList.remove('with-open-menu');
-  },
   body: {
     uri,
   },

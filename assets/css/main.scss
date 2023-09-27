@@ -26,6 +26,10 @@
   .is-disabled {
     @apply opacity-50 cursor-not-allowed;
   }
+  .ant-image-preview-img {
+    max-height: calc(100vh - 200px) !important;
+    max-width: calc(100vw - 80px) !important;
+  }
   body {
     font-family: 'Inter', sans-serif;
     .menu-closer,
