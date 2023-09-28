@@ -15,7 +15,7 @@ export default defineEventHandler(async (event) => {
 
   const whereCond = `productID in (${ids})`;
 
-  const sql = `select (select ip.filename from site_pictures ip where ip.productID=site_products.productID  limit 1) as img, productID, name,  model, Price_bn, PriceSale_bn, uri, is_auction, is_new from site_products where enabled=1 and ${whereCond}`;
+  const sql = `select (select ip.filename from site_pictures ip where ip.productID=site_products.productID  limit 1) as img, productID, name, warranty, model, Price_bn, PriceSale_bn, uri, is_auction, is_new from site_products where enabled=1 and ${whereCond}`;
 
   let [data] = await db.execute(sql);
 

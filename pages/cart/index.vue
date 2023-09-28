@@ -207,8 +207,8 @@
               <Form :model="ur" :onFinish="onFinish" :class="who === 'business' ? 'block' : 'hidden'">
                 <div class="grid grid-cols-6 gap-2">
                   <div class="col-span-6">
-                    <FormItem name="company" :rules="[{ required: true }]">
-                      <input name="company" type="text" class="input" placeholder="Укажите наименование организации" v-model="ur.company" />
+                    <FormItem name="name" :rules="[{ required: true }]">
+                      <input name="name" type="text" class="input" placeholder="Укажите наименование организации" v-model="ur.name" />
                     </FormItem>
                   </div>
                   <div class="col-span-6 lg:col-span-2">
@@ -248,8 +248,8 @@
                     </FormItem>
                   </div>
                   <div class="col-span-6 lg:col-span-3">
-                    <FormItem name="uremail" :rules="[{ email: true }]">
-                      <input name="uremail" type="email" class="input" placeholder="Контактный  E-mail" v-model="ur.email" />
+                    <FormItem name="email" :rules="[{ email: true }]">
+                      <input name="email" type="email" class="input" placeholder="Контактный  E-mail" v-model="ur.email" />
                     </FormItem>
                   </div>
 
@@ -390,6 +390,7 @@ const person = useState(() => ({
 
 const ur = useState(() => ({
   delivery: 'Самовывоз',
+  payment: 'Банковский перевод',
 }));
 
 const { add: add2favorites } = useFavorites();
@@ -406,9 +407,29 @@ const { data } = await useFetch('/api/products/cart', {
 
 const onPrint = () => router.push('/print/cart');
 
-const onFinish = (data) => {
+const onFinish = async (info) => {
+  const cart = data.value;
+  const total = summary.value;
+  console.log(cart, total);
+  await $fetch('/api/orders/new', {
+    method: 'POST',
+    body: {
+      info,
+      cart,
+      total,
+    },
+  });
   mode.value = 'thankyou';
   clear();
+  person.value = {
+    delivery: 'Самовывоз',
+    payment: 'Наличными',
+  };
+
+  ur.value = {
+    delivery: 'Самовывоз',
+    payment: 'Банковский перевод',
+  };
 };
 
 const onRemove = (id) => {
