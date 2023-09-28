@@ -5,6 +5,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap');
 
 @layer base {
+  .arr {
+    @apply w-8;
+  }
   .with-animate {
     @apply relative;
     &:before {
@@ -446,7 +449,7 @@
   }
 
   .items {
-    svg {
+    svg.ico {
       @apply h-6 object-contain;
     }
   }
@@ -685,7 +688,7 @@
       @apply mb-4;
     }
     .toggle-sublinks {
-      @apply lg:hidden absolute -mt-16 right-[-25px] p-4 cursor-pointer;
+      @apply lg:hidden absolute -mt-16 right-0 p-4 cursor-pointer;
     }
 
     .sublinks {
@@ -938,6 +941,7 @@
       height: 60px;
       display: flex;
       align-items: center;
+      z-index: 1000;
       a {
         gap: 0 !important;
         justify-content: center;
@@ -1050,7 +1054,7 @@
           height: calc(100vh - 190px);
         }
         li {
-          @apply m-0 overflow-hidden;
+          @apply m-0 overflow-hidden px-[20px];
           a {
             @apply leading-[60px] border-b py-0;
           }
@@ -1064,6 +1068,7 @@
       }
       .part-2 {
         display: none;
+        margin: 0 -20px;
       }
       .open-substep {
         .part-2 {
@@ -1076,7 +1081,7 @@
       .items {
         margin-right: 0;
         flex: 1;
-        width: calc(100vw - 60px);
+        width: calc(100vw - 40px);
         > div {
           background: #fff !important;
           padding-left: 0;

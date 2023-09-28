@@ -32,14 +32,20 @@
         <div class="flex gap-2.5" :class="{ 'open-substep': mactive !== null }">
           <div class="part-1">
             <div class="items">
-              <div :class="{ active: active === 0 }" @mouseenter="active = 0" @click="mactive = 0"><PCSetsIcon /> Готовые сборки ПК <ChevronRightIcon class="ml-auto -mr-2" /></div>
-              <div :class="{ active: active === 1 }" @mouseenter="active = 1" @click="mactive = 1">
-                <PCAcessoriesIcon />Комплектующие для ПК <ChevronRightIcon class="ml-auto -mr-2" />
+              <div :class="{ active: active === 0 }" @mouseenter="active = 0" @click="mactive = 0">
+                <PCSetsIcon class="ico" /> Готовые сборки ПК <ChevronRightIcon class="ml-auto arr" />
               </div>
-              <div :class="{ active: active === 2 }" @click="router.push('/elektronika/noutbuki')"><NotebooksIcon />Ноутбуки</div>
-              <div :class="{ active: active === 3 }" @mouseenter="active = 3" @click="mactive = 3"><OthersIcon />Периферия <ChevronRightIcon class="ml-auto -mr-2" /></div>
-              <div :class="{ active: active === 4 }" @mouseenter="active = 4" @click="mactive = 4"><ElectronicsIcon />Электроника <ChevronRightIcon class="ml-auto -mr-2" /></div>
-              <div :class="{ active: active === 5 }" @click="router.push('/komplektuyuszie/Servernoe-oborydovanie')"><ServersIcon />Серверное оборудование</div>
+              <div :class="{ active: active === 1 }" @mouseenter="active = 1" @click="mactive = 1">
+                <PCAcessoriesIcon class="ico" />Комплектующие для ПК <ChevronRightIcon class="ml-auto arr" />
+              </div>
+              <div :class="{ active: active === 2 }" @click="router.push('/elektronika/noutbuki')"><NotebooksIcon class="ico" />Ноутбуки</div>
+              <div :class="{ active: active === 3 }" @mouseenter="active = 3" @click="mactive = 3">
+                <OthersIcon class="ico" />Периферия <ChevronRightIcon class="ml-auto arr" />
+              </div>
+              <div :class="{ active: active === 4 }" @mouseenter="active = 4" @click="mactive = 4">
+                <ElectronicsIcon class="ico" />Электроника <ChevronRightIcon class="ml-auto arr" />
+              </div>
+              <div :class="{ active: active === 5 }" @click="router.push('/komplektuyuszie/Servernoe-oborydovanie')"><ServersIcon class="ico" />Серверное оборудование</div>
             </div>
           </div>
           <div class="flex-1 part-2">
@@ -60,7 +66,7 @@
                       <component :is="linkIcon(link.uri)" />
                       {{ link.name }}
                     </NuxtLink>
-                    <div class="toggle-sublinks" v-if="link.nodes && link.categoryID !== 28" @click="toggleSublinks"><ChevronRightIcon /></div>
+                    <div class="toggle-sublinks" v-if="link.nodes && link.categoryID !== 28" @click="toggleSublinks"><ChevronRightIcon class="arr" /></div>
                     <div v-if="link.nodes && link.categoryID !== 28" class="sublinks relative">
                       <NuxtLink v-for="childlink in link.nodes" :to="childlink.uri" :key="childlink.name">
                         {{ childlink.name }}
