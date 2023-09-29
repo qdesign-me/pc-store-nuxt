@@ -18,8 +18,15 @@
 
     <div v-if="hasItems">
       <div class="text-[#E5A35B] text-sm font-medium mb-10">Вы сохранили {{ pluralize(data.data.length, ['товар', 'товара', 'товаров']) }}</div>
-
-      <ProductList :data="data.data" class="items-favorites">
+      <ProductList
+        :data="
+          data.data?.map((item) => ({
+            ...item,
+            img: item.img.split(',')[0],
+          }))
+        "
+        class="items-favorites"
+      >
         <template #controls="row">
           <Add2Compare :productID="row.item.productID" />
 

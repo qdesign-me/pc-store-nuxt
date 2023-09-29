@@ -1,4 +1,4 @@
-import nodemailer, { TransportOptions } from 'nodemailer';
+import { sendEmail } from '~/utils/sendEmail';
 
 const processBody = (data: Record<string, any>) => {
   const subject = data.subject;
@@ -39,32 +39,13 @@ const processBody = (data: Record<string, any>) => {
 };
 
 export default defineEventHandler(async (event) => {
-  console.log('API BODY');
   const data = await readBody(event);
-
-  const to = process.env.EMAIL_ADMIN;
-  const from = process.env.EMAIL_FROM;
-  const mailConfig = {
-    host: process.env.EMAIL_SERVER,
-    port: process.env.EMAIL_PORT,
-    secure: process.env.EMAIL_ISSECURE === 'true' ? true : false,
-    // requireTLS: true,//process.env.EMAIL_REQUIRETLS === 'true' ? true : false,
-    auth: {
-      user: process.env.EMAIL_FROM,
-      pass: process.env.EMAIL_PASSWORD,
-    },
-  };
-
-  const transporter = nodemailer.createTransport(mailConfig as TransportOptions);
 
   const info = processBody(data);
 
-  const res = await transporter.sendMail({
-    from,
-    to,
-    cc: 'qdesign.by@gmail.com',
-    ...info,
-  });
+  const to = process.env.EMAIL_ADMIN as string;
+
+  const res = await sendEmail(info, to);
   return {
     res,
   };

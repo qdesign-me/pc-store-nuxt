@@ -238,7 +238,7 @@
       opacity: 0.6;
     }
     span {
-      @apply w-12 h-8 bg-transparent relative;
+      @apply w-8 h-8 bg-transparent relative;
       margin: 0 3px !important;
       &.swiper-pagination-bullet-active:before {
         @apply bg-blue;
@@ -247,7 +247,7 @@
       &:before {
         content: '';
         transform: translate(-50%, -50%);
-        @apply w-[50px] h-[5px] rounded-full bg-[#D9D9D9] absolute top-1/2 left-1/2;
+        @apply w-[35px] h-[5px] rounded-full bg-[#D9D9D9] absolute top-1/2 left-1/2;
       }
     }
   }

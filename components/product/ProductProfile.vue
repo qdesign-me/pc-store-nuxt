@@ -5,7 +5,7 @@
     <span>{{ props.data.name }}</span>
   </div>
 
-  <h2 class="mb-10">{{ props.data.name }}</h2>
+  <h1 class="mb-10 max-w-[900px]">{{ props.data.name }}</h1>
 
   <div>
     <div class="flex gap-4 text-sm text-orange items-center mb-6" v-if="props.data.enabled === 1">

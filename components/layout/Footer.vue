@@ -100,8 +100,8 @@
           </div>
           <div class="col-span-2 hidden xl:block">
             <div class="main-links -mt-2">
-              <a href="/about">О компании</a><a href="/contacts">Контакты</a><a v-if="false" href="/news">Новости</a><a href="/delivery">Доставка</a><a href="/payment">Оплата</a
-              ><a href="/warranty">Гарантия</a>
+              <NuxtLink to="/about">О компании</NuxtLink><NuxtLink to="/contacts">Контакты</NuxtLink><NuxtLink v-if="false" to="/news">Новости</NuxtLink
+              ><NuxtLink to="/delivery">Доставка</NuxtLink><NuxtLink to="/payment">Оплата</NuxtLink><NuxtLink to="/warranty">Гарантия</NuxtLink>
             </div>
           </div>
           <div class="flex flex-col gap-4 -order-10 xl:order-1">

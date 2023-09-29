@@ -32,7 +32,10 @@ export default defineNuxtConfig({
   pinia: {
     autoImports: ['defineStore', 'acceptHMRUpdate'],
   },
+  antd: {
+    components: ['Image'],
+  },
   swiper: {
-    modules: ['navigation', 'pagination'],
+    modules: ['pagination'],
   },
 });

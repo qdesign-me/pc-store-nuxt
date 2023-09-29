@@ -3,7 +3,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-5 lg:gap-2.5 lg:box lg:mt-4">
       <div class="lg:col-span-4 slider">
         <NuxtErrorBoundary>
-          <Swiper class="swiper rounded overflow-hidden hover:shadow" :pagination="{ clickable: true }">
+          <Swiper class="swiper rounded overflow-hidden hover:shadow" :pagination="{ clickable: true }" :modules="[Pagination]">
             <SwiperSlide class="slide" v-for="(link, index) in links" :key="index">
               <NuxtLink class="card more-padding bg-blue py-0 height-sm justify-center" :to="link.uri">
                 <picture>
@@ -29,7 +29,7 @@
 </template>
 
 <script setup lang="ts">
-//import { Pagination } from 'swiper'; :modules="[Pagination]" :pagination="{ clickable: true }"
+import { Pagination } from 'swiper/modules';
 
 const links = [
   { img: '/img/promo/slide1.png', mobi: '/img/promo/slide1-mobi.png', uri: '/elektronika/noutbuki', title: 'ФАНТАСТИЧЕСКИЙ<br />КОРПУС JONSBO D30<br />УЖЕ В ПРОДАЖЕ' },

@@ -1,5 +1,6 @@
 <template>
   <main>
+    <h1 class="hidden">Iven — интернет магазин компьютеров и комплектующих</h1>
     <SliderBlock />
     <PromoBlock />
     <div class="container">

@@ -1,4 +1,6 @@
+import { sendEmail } from '~/utils/sendEmail';
 import db from '../../../db/db';
+import { getOrderDetailsEmail } from '../../../utils/getOrderDetailsEmail';
 
 function padTo2Digits(num: number) {
   return num.toString().padStart(2, '0');
@@ -14,14 +16,13 @@ function formatDate(date: any) {
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
-  console.log(body);
+  const phone = body.info.phone.replaceAll(' ', '').replaceAll('-', '').replaceAll('+375', '').replaceAll('(', '').replaceAll(')', '');
   body.info.order_time = formatDate(new Date());
-  body.info.customerID = 1;
   body.info.customer_ip = event.node.req.socket.remoteAddress || event.node.req.headers['x-forwarded-for'];
   body.info.statusID = 1;
   body.info.manager_comment = '';
   body.info.payment = body.info.unp ? 'Банковскиий перевод' : body.info.payment;
-  body.info.phone = body.info.phone.replaceAll(' ', '').replaceAll('-', '').replaceAll('+375', '').replaceAll('(', '').replaceAll(')', '');
+  body.info.phone = phone;
   body.info.rek = body.info.unp
     ? `${body.info.name}
 УНП ${body.info.unp}
@@ -31,6 +32,16 @@ ${body.info.bankaddress}
 BIC: ${body.info.bankbic}
 ${body.info.fio}, действующий(ая) на основании: ${body.info.reason}`
     : '';
+  body.info.rekHTML = body.info.unp
+    ? `${body.info.name}<br/>
+УНП ${body.info.unp}<br/>
+Банковские реквизиты:<br/>
+р/c: ${body.info.account}<br/>
+${body.info.bankaddress}<br/>
+BIC: ${body.info.bankbic}<br/>
+${body.info.fio},<br/>
+действующий(ая) на основании: ${body.info.reason}`
+    : '';
   body.info.city = body.info.city ?? '';
   body.info.address =
     body.info.delivery !== 'Самовывоз'
@@ -39,14 +50,33 @@ ${body.info.fio}, действующий(ая) на основании: ${body.i
         }`
       : '';
   body.total.order_discount = 0;
-  console.log({ body });
 
-  const sql = `insert into site_orders 
+  let customerID;
+  let sql = `SELECT customerID FROM site_customers where phone='${phone}' LIMIT 1`;
+  let res = await db.execute(sql);
+  customerID = res?.[0]?.[0]?.customerID;
+
+  if (!customerID) {
+    sql = `SELECT customerID FROM site_customers where email='${body.info.email}' LIMIT 1`;
+    res = await db.execute(sql);
+    customerID = res?.[0]?.[0]?.customerID;
+  }
+  if (!customerID) {
+    sql = `insert into site_customers 
+    (customerID, login, name, cust_password, Email, city, adress, phone, price, privelege)
+    values
+    (null, '${body.info.email}', '${body.info.name}', 'md5(1234)', '${body.info.email}', '${body.info.city ?? ''}', '${body.info.address}', '${body.info.phone}', 4,99)`;
+    res = await db.execute(sql);
+
+    customerID = res[0].insertId;
+  }
+
+  sql = `insert into site_orders 
   (orderID, customerID, order_time, customer_ip, shipping_type, payment_type, customers_comment, manager_comment, rek, statusID, shipping_cost, order_discount, order_amount, name, phone, email, city, address) 
   values
-  (null, '${body.info.customerID}', '${body.info.order_time}', '${body.info.customer_ip}', '${body.info.delivery}', '${body.info.payment}', '${body.info.comment}', '${body.info.manager_comment}', '${body.info.rek}', '${body.info.statusID}', '${body.total.deliveryPrice}', '${body.total.order_discount}', '${body.total.total}', '${body.info.name}', '${body.info.phone}', '${body.info.email}', '${body.info.city}', '${body.info.address}')`;
+  (null, '${customerID}', '${body.info.order_time}', '${body.info.customer_ip}', '${body.info.delivery}', '${body.info.payment}', '${body.info.comment}', '${body.info.manager_comment}', '${body.info.rek}', '${body.info.statusID}', '${body.total.deliveryPrice}', '${body.total.order_discount}', '${body.total.total}', '${body.info.name}', '${body.info.phone}', '${body.info.email}', '${body.info.city}', '${body.info.address}')`;
 
-  const res = await db.execute(sql);
+  res = await db.execute(sql);
 
   const orderID = res[0].insertId;
 
@@ -71,5 +101,24 @@ ${body.info.fio}, действующий(ая) на основании: ${body.i
   });
 
   await db.execute(productsSQL);
+
+  const html = getOrderDetailsEmail(orderID, body);
+
+  const to = process.env.EMAIL_ADMIN as string;
+
+  await sendEmail(
+    {
+      subject: 'Заказ на сайте i-ven.by',
+      html,
+    },
+    to
+  );
+  await sendEmail(
+    {
+      subject: 'Заказ на сайте i-ven.by',
+      html,
+    },
+    body.info.email
+  );
   return { status: 'ok' };
 });

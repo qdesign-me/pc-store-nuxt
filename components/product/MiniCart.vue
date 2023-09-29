@@ -10,7 +10,7 @@
           <div v-for="item in minidata?.data" :key="item.id" class="!border-b-0">
             <div class="img w-[60px] flex-shrink-0 overflow-hidden">
               <div class="text-[10px] text-[#3F3F3F] whitespace-nowrap text-ellipsis">{{ item.model }}</div>
-              <ProductThumbs :data="item" :size="60" />
+              <NuxtLink :to="`/p/${item.uri.replace('.html', '')}`"><ProductThumbs :data="item" :size="60" /></NuxtLink>
             </div>
             <div class="flex-1 flex flex-col justify-between">
               <div class="flex gap-6 items-center mb-1" v-if="item.is_auction || item.Price_bn > 500 || item.PriceSale_bn > 0">
@@ -21,7 +21,7 @@
                 </div>
               </div>
 
-              <div class="text-black font-semibold mb-2 mr-6">{{ item.name }}</div>
+              <NuxtLink :to="`/p/${item.uri.replace('.html', '')}`" class="text-black font-semibold mb-2 mr-6">{{ item.name }}</NuxtLink>
 
               <div class="flex gap-2 justify-between">
                 <div class="price text-[14px]">
@@ -56,7 +56,7 @@
             <RemoveButton @click="onRemove(item.productID)" class="absolute -top-1 -right-3 scale-50 opacity-50" />
             <div class="img w-[60px] flex-shrink-0 overflow-hidden">
               <div class="text-[10px] text-[#3F3F3F] whitespace-nowrap text-ellipsis">{{ item.model }}</div>
-              <ProductThumbs :data="item" :size="60" />
+              <NuxtLink :to="`/p/${item.uri.replace('.html', '')}`"><ProductThumbs :data="item" :size="60" /></NuxtLink>
             </div>
             <div class="flex-1 flex flex-col justify-between">
               <div class="flex gap-6 items-center mb-1" v-if="item.is_auction || item.Price_bn > 500 || item.PriceSale_bn > 0">
@@ -67,7 +67,7 @@
                 </div>
               </div>
 
-              <div class="text-black font-semibold mb-2 mr-6">{{ item.name }}</div>
+              <NuxtLink :to="`/p/${item.uri.replace('.html', '')}`" class="text-black font-semibold mb-2 mr-6">{{ item.name }}</NuxtLink>
 
               <div class="flex gap-2 justify-between">
                 <Add2Cart :productID="item.productID" @qty="(qty) => onQty(item.productID, qty)" />
@@ -156,8 +156,8 @@ watch(highlight, () => {
   modal.value.mini = true;
   if (timeout) clearTimeout(timeout);
   timeout = setTimeout(() => {
-    clearHighlight();
-    modal.value.mini = false;
+    // clearHighlight();
+    // modal.value.mini = false;
   }, 3500);
 });
 </script>
