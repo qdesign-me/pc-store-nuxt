@@ -73,13 +73,13 @@ export default defineEventHandler(async (event) => {
   const sql = `select ${select}
   from site_products p 
   join site_categories c on c.categoryID = p.categoryID and c.uri like '${uri}%' 
-   where 1 ${andFilters} order by ${sorttypes[sortby]} ${sortdir} limit ${skip}, ${take}`;
+   where p.enabled=1 ${andFilters} order by ${sorttypes[sortby]} ${sortdir} limit ${skip}, ${take}`;
 
   results.data = await fetchAll(sql);
 
   results.total = await fetchColumn(`select count(*) as total
   from site_products p 
   join site_categories c on c.categoryID = p.categoryID  and c.uri like '${uri}%' 
-  where 1 ${andFilters} `);
+  where p.enabled=1 ${andFilters} `);
   return results;
 });

@@ -27,7 +27,7 @@
         <div class="lg:col-span-3 order-area">
           <ProductList :data="data?.data" class="mb-10">
             <template #controls="row">
-              <Add2Favorites productID="row.item.productID" />
+              <Add2Favorites :productID="row.item.productID" />
               <Add2Compare :productID="row.item.productID" />
               <RemoveButton @click="onRemove(row.item.productID)" />
             </template>
@@ -410,7 +410,7 @@ const onPrint = () => router.push('/print/cart');
 const onFinish = async (info) => {
   const cart = data.value;
   const total = summary.value;
-  console.log(cart, total);
+
   await $fetch('/api/orders/new', {
     method: 'POST',
     body: {
