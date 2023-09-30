@@ -269,7 +269,8 @@
       @apply leading-[50px];
     }
   }
-  h1 {
+  h1,
+  .h1 {
     @apply text-3xl mb-9 font-semibold;
   }
   h2,
@@ -795,6 +796,7 @@
 }
 @media screen and (max-width: 1500px) {
   h1,
+  .h1,
   h2,
   .h2,
   .title {
@@ -837,6 +839,7 @@
   }
 
   h1,
+  .h1,
   h2,
   .h2,
   .title,

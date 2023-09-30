@@ -11,8 +11,11 @@
       </NuxtLink>
       <div class="card more-padding col-span-2 bg-milk height-xs box-links">
         <div class="title">Готовые сборки</div>
-
-        <NuxtLink class="btn leading-[50px]" to="/"> <ConfiguratorIcon class="!text-white" /> Конфигуратор ПК</NuxtLink>
+        <NuxtLink to="/payment#credit" class="btn leading-[50px]">
+          <CalcIcon />
+          Калькулятор рассрочки
+        </NuxtLink>
+        <!-- <NuxtLink class="btn leading-[50px]" to="/"> <ConfiguratorIcon class="!text-white" /> Конфигуратор ПК</NuxtLink> -->
 
         <div class="items">
           <PcTypesBlock />

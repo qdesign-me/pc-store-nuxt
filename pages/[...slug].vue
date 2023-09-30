@@ -8,35 +8,43 @@
       </NuxtLink>
       <span>{{ category.data.name }}</span>
     </div>
-    <h1>{{ category.data.name }}</h1>
-    <Loading v-if="pending" />
 
-    <div class="grid grid-cols-5 gap-2.5" v-if="!pending && products">
-      <div class="hidden xl:block">
-        <Filters :blocks="category.blocks" />
-      </div>
-      <div class="col-span-5 xl:col-span-4">
-        <template v-if="products.total === 0"> Результатов не найдено </template>
-        <template v-else>
+    <div v-if="category.data.name" class="flex items-start gap-3">
+      <h1>{{ category.data.name }}</h1>
+      <Loading v-if="pending" />
+    </div>
+
+    <div class="mb-6" v-if="!pending && filters.q && products.total === 0">По запросу «{{ filters.q }}» ничего не найдено.</div>
+    <div class="mb-6" v-else-if="!pending && !filters.q && products.total === 0">{{ category.data.name }}: ничего не найдено.</div>
+
+    <template v-if="!pending && products.total === 0">
+      <TopSalesBlock />
+      <PopularCatsBlock />
+      <NewItemsBlock />
+    </template>
+    <template v-if="products.total > 0">
+      <div class="grid grid-cols-5 gap-2.5">
+        <div class="hidden xl:block" v-if="products.total > 0">
+          <Filters :blocks="category.blocks" />
+        </div>
+        <div class="col-span-5 xl:col-span-4">
           <div class="text-[#E5A35B] mb-4">Всего {{ pluralize(products.total, ['товар', 'товара', 'товаров']) }}</div>
           <SortingLinks :uri="uri" />
-
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2.5 gap-y-8 products-grid">
             <ProductCard v-for="product in products.data" :key="product.productID" :product="product" />
           </div>
-          <PaginationBox :total="products.total" v-if="products.total > 12" />
-        </template>
+          <PaginationBox :uri="uri" :total="products.total" v-if="products.total > 12" />
+        </div>
       </div>
-    </div>
+    </template>
   </main>
 </template>
 <script async setup>
-const route = useRoute();
-const filters = reactive(route.query);
+const router = useRouter();
+const filters = computed(() => router.currentRoute.value.query);
 
 provide('filters', filters);
-const searchQuery = computed(() => buildQuery(filters));
-const uri = route?.path;
+const uri = router.currentRoute.value.path;
 
 // if (1) {
 //   throw createError({ statusCode: 404, statusMessage: 'Page Not Found' });
@@ -57,10 +65,6 @@ const { pending, data: products } = await useFetch('/api/categories/products', {
     uri,
     filters,
   },
-});
-
-watch(searchQuery, () => {
-  navigateTo(`${uri}${searchQuery.value}`);
 });
 
 definePageMeta({

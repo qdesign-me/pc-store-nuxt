@@ -433,6 +433,7 @@ const onFinish = async (info) => {
 };
 
 const onRemove = (id) => {
+  console.log(id);
   add2favorites(id);
   remove(id);
 };

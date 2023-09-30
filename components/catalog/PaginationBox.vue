@@ -1,14 +1,23 @@
 <template>
   <div class="pagination">
-    <button v-for="link in links" :key="link.page" :class="{ active: current === link.page }" @click="filters.page = link.page" :title="link.page">{{ link.label }}</button>
+    <button v-for="link in links" :key="link.page" :class="{ active: current === link.page }" @click="handleClick(link.page)" :title="link.page">{{ link.label }}</button>
   </div>
 </template>
 
 <script setup>
-const props = defineProps(['total']);
+const props = defineProps(['total', 'uri']);
 const filters = inject('filters');
 
-const current = computed(() => +(filters.page ?? 1));
+const current = computed(() => +(filters.value.page ?? 1));
+
+const handleClick = (page) => {
+  const newFitlers = { ...filters.value };
+  newFitlers.page = page;
+  const searchQuery = buildQuery(newFitlers);
+  const path = `${props.uri}${searchQuery}`;
+  navigateTo(path);
+};
+
 const links = computed(() => {
   const out = [];
   const max = Math.ceil(props.total / 12);

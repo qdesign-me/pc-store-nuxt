@@ -12,6 +12,7 @@
 </template>
 
 <script setup>
+const props = defineProps(['uri']);
 const links = {
   popular: 'по популярности',
   price: 'по цене',
@@ -24,7 +25,12 @@ const links = {
 const filters = inject('filters');
 
 const handleClick = (link) => {
-  filters['sortdir'] = link === 'popular' ? 'desc' : filters['sortby'] !== link ? 'asc' : filters['sortdir'] === 'asc' ? 'desc' : 'asc';
-  filters['sortby'] = link;
+  const newFitlers = { ...filters.value };
+  newFitlers['sortdir'] = link === 'popular' ? 'desc' : newFitlers['sortby'] !== link ? 'asc' : newFitlers['sortdir'] === 'asc' ? 'desc' : 'asc';
+  newFitlers['sortby'] = link;
+  newFitlers['page'] = undefined;
+  const searchQuery = buildQuery(newFitlers);
+  const path = `${props.uri}${searchQuery}`;
+  navigateTo(path);
 };
 </script>

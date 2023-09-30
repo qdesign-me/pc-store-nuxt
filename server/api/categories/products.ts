@@ -22,7 +22,7 @@ export default defineEventHandler(async (event) => {
   const skip = (page - 1) * 12;
 
   const select = `(select group_concat(ip.filename) from site_pictures ip where ip.productID=p.productID group by ip.productID) as img, 
-  c.uri, p.productID, p.name, p.Price_bn, p.PriceSale_bn, p.uri, p.is_auction, p.is_new `;
+   p.productID, p.name, p.Price_bn, p.PriceSale_bn, p.uri, p.is_auction, p.is_new `;
   const sorttypes: Record<string, string> = {
     name: 'p.name',
     popular: 'p.viewed_times',
@@ -51,6 +51,10 @@ export default defineEventHandler(async (event) => {
         const priceFrom = values.from ?? 0;
         return `and p.Price_bn between ${priceFrom} and ${priceTo}`;
       }
+      if (field === 'q') {
+        const q = values.value.trim();
+        return `and p.name like '%${q}%'`;
+      }
 
       if (values.to && !values.from) {
         condition = `(fop.value <= ${values.to})`;
@@ -70,16 +74,19 @@ export default defineEventHandler(async (event) => {
     .join(' ');
 
   const results = { data: [], total: 0 };
+
+  const urlCheck = uri !== '/search' ? `join site_categories c on c.categoryID = p.categoryID and c.uri like '${uri}%'` : '';
+
   const sql = `select ${select}
   from site_products p 
-  join site_categories c on c.categoryID = p.categoryID and c.uri like '${uri}%' 
-   where p.enabled=1 ${andFilters} order by ${sorttypes[sortby]} ${sortdir} limit ${skip}, ${take}`;
-
+  ${urlCheck}
+  where p.enabled=1 ${andFilters} order by ${sorttypes[sortby]} ${sortdir} limit ${skip}, ${take}`;
+  console.log({ sql });
   results.data = await fetchAll(sql);
 
   results.total = await fetchColumn(`select count(*) as total
   from site_products p 
-  join site_categories c on c.categoryID = p.categoryID  and c.uri like '${uri}%' 
+  ${urlCheck}
   where p.enabled=1 ${andFilters} `);
   return results;
 });

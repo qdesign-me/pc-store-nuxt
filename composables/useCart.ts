@@ -17,7 +17,7 @@ export const useCart = () => {
   const remove = (productID: number) => {
     const newItems = { ...items.value };
     delete newItems[String(productID)];
-    items.value = [newItems];
+    items.value = newItems;
   };
   const clear = () => (items.value = {});
 

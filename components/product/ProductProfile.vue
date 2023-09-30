@@ -115,7 +115,7 @@
 
     <div class="tabs" ref="target">
       <div class="tabs-header">
-        <div v-for="(tab, index) in tabs" :class="{ active: index === activeTab }" @click="activeTab = index" :key="tab.title">
+        <div v-for="(tab, index) in tabs" :class="{ active: index === activeTab }" @click="activeTab = activeTab === index ? null : index" :key="tab.title">
           <CogIcon class="sm:hidden" />
           {{ tab.title }}
           <ChevronRightIcon class="tab-arrow" />
