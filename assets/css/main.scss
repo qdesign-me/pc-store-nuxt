@@ -573,6 +573,27 @@
       border-bottom: 2px solid #eee;
     }
   }
+  .box-maincat .item {
+    @apply min-h-[296px] rounded border  py-5 px-2  hover:shadow relative overflow-hidden flex flex-col;
+    .note {
+      @apply text-xs font-light;
+    }
+    .img {
+      @apply absolute right-0 bottom-0 z-[0];
+    }
+    .bg {
+      @apply absolute bottom-0 right-0 z-[0];
+    }
+    .links {
+      @apply mt-auto z-[2] max-w-[70%] flex flex-wrap gap-1 pt-4;
+      a {
+        @apply text-xs font-medium rounded bg-[#E5A35B] leading-[20px] px-1 text-white lowercase inline-block;
+      }
+    }
+    .title-sm {
+      @apply text-[24px] text-[#CB863A] font-semibold my-1;
+    }
+  }
   .box-links .btn {
     @apply hidden;
   }
@@ -870,6 +891,9 @@
 }
 
 @media screen and (max-width: 1024px) {
+  .box-maincat .item {
+    @apply col-span-2;
+  }
   body .menu-opener {
     @apply block;
   }
@@ -1094,6 +1118,9 @@
 }
 
 @media screen and (max-width: 768px) {
+  .box-maincat .item {
+    @apply col-span-1;
+  }
   .list-items {
     > div {
       position: relative;

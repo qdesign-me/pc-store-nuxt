@@ -9,9 +9,9 @@
       <span>{{ category.data.name }}</span>
     </div>
 
-    <div v-if="category.data.name" class="flex items-start gap-3">
-      <h1>{{ category.data.name }}</h1>
-      <Loading v-if="pending" />
+    <div v-if="category.data.name" class="flex items-center gap-3 mb-6 lg:mb-10">
+      <h1 class="mb-0">{{ category.data.name }}</h1>
+      <Loading :class="{ 'opacity-0': !pending }" />
     </div>
 
     <div class="mb-6" v-if="!pending && filters.q && products.total === 0">По запросу «{{ filters.q }}» ничего не найдено.</div>

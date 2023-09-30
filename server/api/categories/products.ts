@@ -81,7 +81,10 @@ export default defineEventHandler(async (event) => {
   from site_products p 
   ${urlCheck}
   where p.enabled=1 ${andFilters} order by ${sorttypes[sortby]} ${sortdir} limit ${skip}, ${take}`;
-  console.log({ sql });
+  console.log(`select count(*) as total
+  from site_products p 
+  ${urlCheck}
+  where p.enabled=1 ${andFilters} `);
   results.data = await fetchAll(sql);
 
   results.total = await fetchColumn(`select count(*) as total

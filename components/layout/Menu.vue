@@ -57,7 +57,7 @@
             >
               <div class="flex-1">
                 <div class="title">
-                  <NuxtLink :to="item.uri">{{ item.name }}</NuxtLink>
+                  <NuxtLink :to="item.uri">{{ item.name }} =={{ item.categoryID }}</NuxtLink>
                 </div>
 
                 <ul class="md:lg:columns-3 gap-6">
