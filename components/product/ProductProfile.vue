@@ -20,31 +20,7 @@
 
     <div class="flex profile-cont gap-6 mb-10 flex-row">
       <div class="flex gap-6 profile-img">
-        <div class="sm:border rounded px-8 py-12">
-          <img :src="props.data.img" alt="" loading="lazy" width="395" height="395" class="block" />
-        </div>
-        <div class="flex flex-col justify-center gap-4" v-if="0">
-          <div class="p-3 cursor-pointer w-full flex justify-center">
-            <ChevronUpIcon />
-          </div>
-          <div class="flex flex-col gap-4">
-            <div class="border rounded p-1 hover:shadow cursor-pointer">
-              <img src="/img/products/1/1.jpg" alt="" loading="lazy" width="75" height="68" class="block" />
-            </div>
-            <div class="border rounded p-1 hover:shadow cursor-pointer">
-              <img src="/img/products/1/1.jpg" alt="" loading="lazy" width="75" height="68" class="block" />
-            </div>
-            <div class="border rounded p-1 hover:shadow cursor-pointer">
-              <img src="/img/products/1/1.jpg" alt="" loading="lazy" width="75" height="68" class="block" />
-            </div>
-            <div class="border rounded p-1 hover:shadow cursor-pointer">
-              <img src="/img/products/1/1.jpg" alt="" loading="lazy" width="75" height="68" class="block" />
-            </div>
-          </div>
-          <div class="p-3 cursor-pointer w-full flex justify-center">
-            <ChevronDownIcon />
-          </div>
-        </div>
+        <ProductProfileImages :data="props.data" />
       </div>
       <div class="text-sm flex flex-col gap-4 flex-1 min-w-[200px] profile-short">
         <div class="text-sm sm:text-base font-semibld mb-4 hidden xl:block">Код товара: {{ props.data.model }}</div>

@@ -21,6 +21,9 @@ export default defineEventHandler(async (event) => {
   const uri = body.uri;
 
   const data = await getProduct(
+    `select (select group_concat(ip.filename) from site_pictures ip where ip.productID=p.productID group by ip.productID) as img, p.productID, p.categoryID, p.model, p.name, p.description, p.enabled, p.meta_description, p.is_auction, p.is_new, p.Price_bn, p.PriceSale_bn, c.name as cat_name, c.uri , c.breadcrumbs from site_products p join site_categories c on c.categoryID=p.categoryID  where p.uri='${uri}' limit 1`
+  );
+  console.log(
     `select concat('https://win7.by/data/big/', ipp.enlarged) as img, p.productID, p.categoryID, p.model, p.name, p.description, p.enabled, p.meta_description, p.is_auction, p.is_new, p.Price_bn, p.PriceSale_bn, c.name as cat_name, c.uri , c.breadcrumbs from site_products p join site_categories c on c.categoryID=p.categoryID  left join iven_product_pictures ipp on ipp.photoID=p.default_picture where p.uri='${uri}' limit 1`
   );
   const products = await getSimilar(

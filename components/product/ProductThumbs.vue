@@ -1,5 +1,5 @@
 <template>
-  <ImageSlider :images="images" />
+  <ImageSlider :images="images" class="select-none" />
 </template>
 
 <script setup>

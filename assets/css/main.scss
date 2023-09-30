@@ -252,7 +252,7 @@
     }
   }
   .btn {
-    @apply leading-10 px-6 py-0 bg-blue text-white text-sm font-medium rounded inline-flex gap-4 items-center justify-center cursor-pointer whitespace-nowrap hover:text-white;
+    @apply leading-10 px-6 py-0 bg-blue text-white text-sm font-medium rounded inline-flex gap-4 items-center justify-center cursor-pointer whitespace-nowrap hover:text-white  select-none;
     &.is-plain {
       @apply text-blue bg-white border border-blue;
     }
@@ -826,9 +826,7 @@
   .profile-short {
     @apply min-w-full order-[99];
   }
-  .profile-img {
-    @apply max-w-[50%];
-  }
+
   .box-lg {
     @apply mb-10;
   }
