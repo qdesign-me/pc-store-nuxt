@@ -30,7 +30,7 @@
             <strong> Модификация:</strong>
           </div>
           <div class="border rounded px-4 py-3 flex items-center gap-8 cursor-pointer">
-            <img src="/img/products/1/1.jpg" alt="" loading="lazy" width="53" height="50" class="block" />
+            <!-- <img src="/img/products/1/1.jpg" alt="" loading="lazy" width="53" height="50" class="block" /> -->
             <div>Материнская плата MSI H510M-A PRO, LGA 1200, Intel H510, mATX, Ret</div>
             <ChevronDownIcon width="40" height="26" />
           </div>
