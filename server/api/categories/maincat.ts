@@ -19,7 +19,7 @@ export default defineEventHandler(async (event) => {
   };
   const current = mapping[body.categoryID];
   const [data] = await db.execute(
-    `select categoryID, name, meta_description uri, parent from site_categories where visible=1 and categoryId not in (7, 26, 497) and parent in (${current}) order by parent, sort_order`
+    `select categoryID, name, meta_description, uri, parent from site_categories where visible=1 and categoryId not in (7, 26, 497) and parent in (${current}) order by parent, sort_order`
   );
 
   const menumap = new Map();
