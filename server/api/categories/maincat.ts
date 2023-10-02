@@ -31,8 +31,10 @@ export default defineEventHandler(async (event) => {
   data.forEach(async (item) => {
     if (item.parent) {
       const parent = menumap.get(item.parent);
-      if (!parent.nodes) parent.nodes = [];
-      parent.nodes.push(item);
+      if (parent) {
+        if (!parent.nodes) parent.nodes = [];
+        parent.nodes.push(item);
+      }
     }
   });
 
