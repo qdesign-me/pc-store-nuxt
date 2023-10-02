@@ -1,5 +1,5 @@
 <template>
-  <div class="container can-expand">
+  <div class="container can-expand" v-if="0">
     <div class="grid grid-cols-2 gap-0 lg:grid-cols-5 lg:gap-2.5 box">
       <NuxtLink to="/zakazat-sborku" class="card more-padding bg-blue group height-xs hidden lg:block">
         <div class="title text-white">

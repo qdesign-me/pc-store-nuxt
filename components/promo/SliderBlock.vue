@@ -1,5 +1,5 @@
 <template>
-  <div class="container can-expand">
+  <div class="container can-expand" v-if="links">
     <div class="grid grid-cols-1 lg:grid-cols-5 lg:gap-2.5 lg:box lg:mt-4">
       <div class="lg:col-span-4 slider">
         <NuxtErrorBoundary>
@@ -30,9 +30,12 @@
 
 <script setup lang="ts">
 import { Pagination } from 'swiper/modules';
+import { useAppStore } from '~/stores/app';
 
-const links = [
-  { img: '/img/promo/slide1.png', mobi: '/img/promo/slide1-mobi.png', uri: '/elektronika/noutbuki', title: 'ФАНТАСТИЧЕСКИЙ<br />КОРПУС JONSBO D30<br />УЖЕ В ПРОДАЖЕ' },
-  { img: '/img/promo/slide1.png', mobi: '/img/promo/slide1-mobi.png', uri: '/elektronika/noutbuki', title: 'Текст 2' },
-];
+// const links = [
+//   { img: '/img/promo/slide1.png', mobi: '/img/promo/slide1-mobi.png', uri: '/elektronika/noutbuki', title: 'ФАНТАСТИЧЕСКИЙ<br />КОРПУС JONSBO D30<br />УЖЕ В ПРОДАЖЕ' },
+//   { img: '/img/promo/slide1.png', mobi: '/img/promo/slide1-mobi.png', uri: '/elektronika/noutbuki', title: 'Текст 2' },
+// ];
+const { $state } = useAppStore();
+const links = $state.config?.['slider'] ? JSON.parse($state.config['slider']) : null;
 </script>

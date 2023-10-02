@@ -156,8 +156,8 @@ watch(highlight, () => {
   modal.value.mini = true;
   if (timeout) clearTimeout(timeout);
   timeout = setTimeout(() => {
-    // clearHighlight();
-    // modal.value.mini = false;
+    clearHighlight();
+    modal.value.mini = false;
   }, 3500);
 });
 </script>

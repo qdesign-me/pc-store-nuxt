@@ -3,7 +3,7 @@
     <div class="container">
       <ProductProfile :data="data.data" />
       <div class="space-y-10 mt-16">
-        <ProductProfileRelated :data="data.similar" />
+        <ProductProfileRelated :data="data.similar" v-if="data.similar?.products?.length" />
         <ProductProfileCombo />
       </div>
     </div>

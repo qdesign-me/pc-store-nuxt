@@ -5,7 +5,7 @@
       <img :src="link.img" width="296" height="200" loading="lazy" class="promo-bg" />
       <ArrowLink class="absolute bottom-6">{{ link.title }}</ArrowLink>
     </NuxtLink>
-    <NuxtLink to="/zakazat-sborku" class="card bg-blue group height-xs overflow-hidden lg:hidden">
+    <NuxtLink to="/zakazat-sborku" class="card bg-blue group height-xs overflow-hidden lg:hidden !hidden">
       <div class="title text-white">
         Заказать
         <br />
