@@ -34,6 +34,5 @@ import { Pagination } from 'swiper/modules';
 const links = [
   { img: '/img/promo/slide1.png', mobi: '/img/promo/slide1-mobi.png', uri: '/elektronika/noutbuki', title: 'ФАНТАСТИЧЕСКИЙ<br />КОРПУС JONSBO D30<br />УЖЕ В ПРОДАЖЕ' },
   { img: '/img/promo/slide1.png', mobi: '/img/promo/slide1-mobi.png', uri: '/elektronika/noutbuki', title: 'Текст 2' },
-  { img: '/img/promo/slide1.png', mobi: '/img/promo/slide1-mobi.png', uri: '/elektronika/noutbuki', title: 'Текст 3' },
 ];
 </script>

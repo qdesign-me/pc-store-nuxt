@@ -9,7 +9,6 @@
 
     <div class="grid md:grid-cols-4 2xl:grid-cols-6 gap-2.5 box-maincat">
       <div class="item col-span-2" v-for="(node, index) in props?.data.nodes" :key="node.categoryID">
-        {{ node.categoryID }}
         <template v-if="node.nodes">
           <BigLogo class="bg z-[0]" v-if="!index" />
           <NuxtLink :to="node.uri" class="relative z-[10]">
