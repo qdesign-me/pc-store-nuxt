@@ -709,8 +709,11 @@
     li {
       @apply mb-4;
     }
+    .parentcat-icon {
+      @apply ml-auto  flex items-center justify-center w-[60px] h-[60px] -mr-[20px];
+    }
     .toggle-sublinks {
-      @apply lg:hidden absolute -mt-16 right-0 p-4 cursor-pointer;
+      @apply lg:hidden absolute -mt-[60px] right-0 cursor-pointer w-[60px] h-[60px] flex items-center justify-center;
     }
 
     .sublinks {

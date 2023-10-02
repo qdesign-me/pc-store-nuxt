@@ -32,18 +32,22 @@
         <div class="flex gap-2.5" :class="{ 'open-substep': mactive !== null }">
           <div class="part-1">
             <div class="items">
-              <div :class="{ active: active === 0 }" @mouseenter="active = 0" @click="mactive = 0">
-                <PCSetsIcon class="ico" /> Готовые сборки ПК <ChevronRightIcon class="ml-auto arr" />
+              <div :class="{ active: active === 0 }" @mouseenter="active = 0" @click="setActive(0)">
+                <PCSetsIcon class="ico" /> Готовые сборки ПК
+                <div class="parentcat-icon" @click.prevent.stop="mactive = 0"><ChevronRightIcon class="arr" /></div>
               </div>
-              <div :class="{ active: active === 1 }" @mouseenter="active = 1" @click="mactive = 1">
-                <PCAcessoriesIcon class="ico" />Комплектующие для ПК <ChevronRightIcon class="ml-auto arr" />
+              <div :class="{ active: active === 1 }" @mouseenter="active = 1" @click="setActive(1)">
+                <PCAcessoriesIcon class="ico" />Комплектующие для ПК
+                <div class="parentcat-icon" @click.prevent.stop="mactive = 1"><ChevronRightIcon class="arr" /></div>
               </div>
               <div :class="{ active: active === 2 }" @click="router.push('/elektronika/noutbuki')"><NotebooksIcon class="ico" />Ноутбуки</div>
-              <div :class="{ active: active === 3 }" @mouseenter="active = 3" @click="mactive = 3">
-                <OthersIcon class="ico" />Периферия <ChevronRightIcon class="ml-auto arr" />
+              <div :class="{ active: active === 3 }" @mouseenter="active = 3" @click="setActive(3)">
+                <OthersIcon class="ico" />Периферия
+                <div class="parentcat-icon" @click.prevent.stop="mactive = 3"><ChevronRightIcon class="arr" /></div>
               </div>
-              <div :class="{ active: active === 4 }" @mouseenter="active = 4" @click="mactive = 4">
-                <ElectronicsIcon class="ico" />Электроника <ChevronRightIcon class="ml-auto arr" />
+              <div :class="{ active: active === 4 }" @mouseenter="active = 4" @click="setActive(4)">
+                <ElectronicsIcon class="ico" />Электроника
+                <div class="parentcat-icon" @click.prevent.stop="mactive = 4"><ChevronRightIcon class="arr" /></div>
               </div>
               <div :class="{ active: active === 5 }" @click="router.push('/komplektuyuszie/Servernoe-oborydovanie')"><ServersIcon class="ico" />Серверное оборудование</div>
             </div>
@@ -151,5 +155,16 @@ const mactive = ref(null);
 const linkIcon = (uri) => {
   const icon = links.find((item) => item.uri === uri)?.icon;
   return icon;
+};
+
+const setActive = (value) => {
+  mactive.value = value;
+  const links = {
+    0: '/elektronika/Gotovie-komputeri',
+    1: '/komplektuyuszie',
+    3: '/periferiya-i-aksessuary',
+    4: '/elektronika',
+  };
+  router.push(links[value]);
 };
 </script>
