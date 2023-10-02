@@ -38,7 +38,6 @@
       </div>
     </template>
   </main>
-  =={{ category }}
 </template>
 <script async setup>
 const router = useRouter();
