@@ -573,7 +573,7 @@
       border-bottom: 2px solid #eee;
     }
   }
-  .box-maincat .item {
+  .box-maincat .it {
     @apply min-h-[296px] rounded border  py-5 px-2  hover:shadow relative overflow-hidden flex flex-col;
     .note {
       @apply text-xs font-light;
@@ -585,7 +585,7 @@
       @apply absolute bottom-0 right-0 z-[0];
     }
     .links {
-      @apply mt-auto z-[2] max-w-[70%] flex flex-wrap gap-1 pt-4;
+      @apply mt-auto z-[2] lg:max-w-[70%] flex flex-wrap gap-1 pt-4;
       a {
         @apply text-xs font-medium rounded bg-[#E5A35B] leading-[20px] px-1 text-white lowercase inline-block;
       }

@@ -24,8 +24,9 @@
               <NuxtLink :to="`/p/${item.uri.replace('.html', '')}`" class="text-black font-semibold mb-2 mr-6">{{ item.name }}</NuxtLink>
 
               <div class="flex gap-2 justify-between">
-                <div class="price text-[14px]">
-                  <div class="mb-2">{{ price(item.Price_bn) }}</div>
+                <div class="price text-[14px] flex gap-2">
+                  <span class="line-through text-[10px] translate-y-[1px]" v-if="item.PriceSale_bn">{{ price(item.PriceSale_bn) }} </span>
+                  <div class="mb-2" :class="{ 'text-red-600': item.PriceSale_bn > 0 }">{{ price(item.Price_bn) }}</div>
                 </div>
               </div>
             </div>
@@ -71,8 +72,9 @@
 
               <div class="flex gap-2 justify-between">
                 <Add2Cart :productID="item.productID" @qty="(qty) => onQty(item.productID, qty)" />
-                <div class="price text-[14px]">
-                  <div class="mb-2">{{ price(item.Price_bn) }}</div>
+                <div class="price text-[14px] flex gap-2">
+                  <span class="line-through text-[10px] translate-y-[1px]" v-if="item.PriceSale_bn">{{ price(item.PriceSale_bn) }} </span>
+                  <div class="mb-2" :class="{ 'text-red-600': item.PriceSale_bn > 0 }">{{ price(item.Price_bn) }}</div>
                 </div>
               </div>
             </div>

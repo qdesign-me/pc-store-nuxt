@@ -65,8 +65,10 @@
           <div v-if="props.data.Price_bn > 500" class="bg-[#F54D4D] flex-1">В рассрочку</div>
         </div>
         <div class="price-info flex flex-col flex-1">
-          <div class="flex gap-4 items-center text-base font-semibold mb-8">
-            <div class="text-3xl font-semibold">{{ price(props.data.Price_bn) }}</div>
+          <div class="flex gap-2 items-end text-base font-semibold mb-8">
+            <span class="line-through text-sm mr-2" v-if="props.data.PriceSale_bn">{{ price(props.data.PriceSale_bn) }} </span>
+
+            <div class="text-3xl font-semibold" :class="{ 'text-red-600': props.data.PriceSale_bn > 0 }">{{ price(props.data.Price_bn) }}</div>
           </div>
 
           <Add2Cart class="has-large" :productID="props.data.productID" />

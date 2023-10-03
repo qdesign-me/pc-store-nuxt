@@ -26,7 +26,12 @@
         </div>
 
         <div class="price text-[24px]">
-          <div class="mb-2">{{ price(item.Price_bn) }}</div>
+          <div class="mb-1" :class="{ 'text-red-600': item.PriceSale_bn > 0 }">
+            <span class="line-through text-xs translate-y-[5px] block text-[#000] 2xl:absolute 2xl:translate-y-[-7px]" v-if="item.PriceSale_bn"
+              >{{ price(item.PriceSale_bn) }}
+            </span>
+            {{ price(item.Price_bn) }}
+          </div>
           <slot name="price" :item="item" />
         </div>
         <div class="controls">

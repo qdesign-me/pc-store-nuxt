@@ -9,7 +9,7 @@
 
     <div class="grid md:grid-cols-4 2xl:grid-cols-6 gap-2.5 box-maincat">
       <div class="item col-span-2" v-for="(node, index) in props?.data.nodes" :key="node.categoryID">
-        <template v-if="node.nodes">
+        <div class="it" v-if="node.nodes">
           <BigLogo class="bg z-[0]" v-if="!index" />
           <NuxtLink :to="node.uri" class="relative z-[10]">
             <div class="note">{{ props.data.name }}</div>
@@ -25,8 +25,8 @@
           <div class="img">
             <img loading="lazy" :src="config[node.categoryID]" alt="" v-if="config[node.categoryID]" />
           </div>
-        </template>
-        <NuxtLink :to="node.uri" v-else>
+        </div>
+        <NuxtLink :to="node.uri" v-else class="it">
           <BigLogo class="bg" v-if="!index" />
           <div class="relative z-[10]">
             <div class="note">{{ props.data.name }}</div>

@@ -1,7 +1,7 @@
 <template>
-  <NuxtLink v-for="link in links" :to="link.uri" :key="link.uri">
-    <component :is="link.icon" />
-    <span v-html="link.title"></span>
+  <NuxtLink v-for="link in data.data" :to="link.uri" :key="link.uri">
+    <component :is="linkIcon(link.uri)" />
+    <span v-html="link.name"></span>
   </NuxtLink>
 </template>
 
@@ -38,5 +38,24 @@ const links = [
     icon: ServerIcon,
     uri: '/elektronika/Gotovie-komputeri/servery-irabochie-stancii',
   },
+  {
+    title: 'Системные блоки',
+    uri: '/elektronika/Gotovie-komputeri/Sistemnie-bloki',
+  },
+  {
+    title: 'Микро ПК',
+    uri: '/elektronika/Gotovie-komputeri/Mikro-PK',
+  },
+  {
+    title: 'Неттопы',
+    uri: '/elektronika/Gotovie-komputeri/nettopi',
+  },
 ];
+
+const linkIcon = (uri) => {
+  const icon = links.find((item) => item.uri === uri)?.icon;
+  return icon;
+};
+
+const { data } = await useFetch('/api/categories/pctypes');
 </script>
