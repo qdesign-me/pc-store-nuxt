@@ -512,7 +512,7 @@
   }
   .order-area {
     .add2cart {
-      @apply h-[40px];
+      @apply h-[40px] flex justify-end;
     }
     .router-link-active {
       display: none !important;

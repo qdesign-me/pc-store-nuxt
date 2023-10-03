@@ -28,7 +28,7 @@ export default defineNuxtConfig({
     },
   },
   css: ['~/assets/css/main.scss'],
-  modules: ['@pinia/nuxt', 'nuxt-swiper', '@ant-design-vue/nuxt'],
+  modules: ['@pinia/nuxt', 'nuxt-swiper', '@ant-design-vue/nuxt', 'nuxt-simple-sitemap'],
   pinia: {
     autoImports: ['defineStore', 'acceptHMRUpdate'],
   },
@@ -37,5 +37,15 @@ export default defineNuxtConfig({
   },
   swiper: {
     modules: ['pagination'],
+  },
+  nitro: {
+    prerender: {
+      crawlLinks: true,
+      routes: ['/', 'sitemap.xml'],
+      ignore: ['/cart'],
+    },
+  },
+  sitemap: {
+    inferStaticPagesAsRoutes: false,
   },
 });

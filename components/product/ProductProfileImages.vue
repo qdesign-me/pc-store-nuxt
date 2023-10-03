@@ -3,7 +3,7 @@
     <div class="border rounded px-8 py-12">
       <img :src="main" alt="" loading="lazy" width="395" height="395" class="block object-contain aspect-square" />
     </div>
-    <div v-if="images.length > 0" class="flex flex-col gap-2">
+    <div v-if="images?.length > 0" class="flex flex-col gap-2">
       <div v-for="image in images" :key="image">
         <img
           :src="image"
@@ -25,6 +25,6 @@
 
 <script setup>
 const props = defineProps(['data']);
-const images = props.data.img.split(',').map((item) => `https://win7.by/data/big/${item}`);
-const main = ref(images[0]);
+const images = props.data.img?.split(',')?.map((item) => `https://win7.by/data/big/${item}`);
+const main = ref(images?.[0] ?? '/img/no-image.jpg');
 </script>
