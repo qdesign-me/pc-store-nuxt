@@ -27,8 +27,8 @@
         <div class="col-span-5 xl:col-span-1" v-if="products?.total > 0">
           <Filters :blocks="category.blocks" :products="products" :uri="uri" />
         </div>
-        <div class="col-span-5 xl:col-span-4">
-          <div class="catlinks mb-4" v-if="category.children">
+        <div class="col-span-5 xl:col-span-4 flex flex-col">
+          <div class="catlinks order-[999] mt-5 xl:mt-0 xl:mb-4 xl:order-[0]" v-if="category.children">
             <NuxtLink :to="child.uri" v-for="child in category.children" :key="child.uri">{{ child.name }}</NuxtLink>
           </div>
           <div class="text-[#E5A35B] mb-4">Всего {{ pluralize(products?.total, ['товар', 'товара', 'товаров']) }}</div>

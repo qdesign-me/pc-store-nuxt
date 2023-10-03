@@ -11,12 +11,14 @@
   <div>
     <NuxtErrorBoundary>
       <Swiper
-        class="swiper"
+        class="swiper-init"
+        :modules="[Pagination]"
+        :pagination="{ clickable: true }"
         :slidesPerView="5"
         :spaceBetween="0"
         :breakpoints="{
           310: {
-            slidesPerView: 2,
+            slidesPerView: 1,
           },
           640: {
             slidesPerView: 2,
@@ -32,12 +34,12 @@
           },
         }"
       >
-        <SwiperSlide v-for="id in Object.keys(props.data.products)">
+        <SwiperSlide v-for="id in Object.keys(props.data.products)" :key="id">
           <div class="relative">
             <div class="sticky top-[100px] bg-white z-10 border-b">
               <CompareCard :product="props.data.products[id]" @remove="handleRemove" />
             </div>
-            <div v-for="key in Object.keys(props.data.features).filter((item) => item !== 'null')" class="border-b h-[50px]">
+            <div v-for="key in Object.keys(props.data.features).filter((item) => item !== 'null')" class="border-b h-[50px]" :key="key">
               <small class="opacity-50">{{ key }}</small>
               <div>{{ props.data.products[id].features[key] }}</div>
             </div>
@@ -49,7 +51,7 @@
 </template>
 
 <script setup>
-//import { Navigation } from 'swiper';  :modules="[Navigation]" :navigation="true"
+import { Pagination } from 'swiper/modules';
 const router = useRouter();
 
 const hideEqual = ref(false);

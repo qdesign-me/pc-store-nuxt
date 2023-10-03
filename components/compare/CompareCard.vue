@@ -5,7 +5,10 @@
       <ProductThumbs :data="props.product" class="mx-auto my-2" />
     </NuxtLink>
 
-    <div className="font-semibold text-lg">{{ props.product.Price_Bn }} Bn</div>
+    <div class="flex gap-2">
+      <div class="line-through text-xs translate-y-[7px]" v-if="props.product.PriceSale_bn">{{ price(props.product.PriceSale_bn) }}</div>
+      <div class="font-semibold text-lg" :class="{ 'text-red-600': props.product.PriceSale_bn > 0 }">{{ price(props.product.Price_Bn) }}</div>
+    </div>
 
     <NuxtLink :to="uri" class="max-w-[240px] mx-auto line-clamp-2">{{ props.product.name }}</NuxtLink>
 

@@ -14,7 +14,7 @@ export default defineEventHandler(async (event) => {
     products: {},
     features: {},
   };
-  sql = `select (select group_concat(ip.filename) from site_pictures ip where ip.productID=site_products.productID group by ip.productID) as img, productID, uri, name, Price_Bn, is_auction, is_new
+  sql = `select (select group_concat(ip.filename) from site_pictures ip where ip.productID=site_products.productID group by ip.productID) as img, productID, uri, name, Price_Bn, PriceSale_bn, is_auction, is_new
 from site_products where productID in (${id})`;
   const [products] = await db.execute(sql);
   data.products = products.reduce((acc, item) => {

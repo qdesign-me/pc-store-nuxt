@@ -5,6 +5,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap');
 
 @layer base {
+  .swiper-init:not(.swiper-initialized) {
+    opacity: 0;
+  }
   .catlinks {
     @apply flex flex-wrap gap-1;
     a {
