@@ -18,7 +18,7 @@
               <strong>{{ node.total }}</strong> {{ pluralize(node.total, ['товар', 'товара', 'товаров']).replace(node.total, '') }}
             </div>
           </NuxtLink>
-          <div class="links">
+          <div class="catlinks mt-auto lg:max-w-[70%] pt-4 z-[2]">
             <NuxtLink :to="link.uri" v-for="(link, index) in node?.nodes" :key="link.categoryID" v-show="index < 10">{{ link.name }}</NuxtLink>
             <div v-if="node?.nodes.length > 10" class="text-xs leading-[20px]">+ {{ node?.nodes.length - 10 }} еще</div>
           </div>

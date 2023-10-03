@@ -24,10 +24,13 @@
     </template>
     <template v-if="products?.total > 0 && products.uri === uri">
       <div class="grid grid-cols-5 gap-2.5">
-        <div class="hidden xl:block" v-if="products?.total > 0">
+        <div class="col-span-5 xl:col-span-1" v-if="products?.total > 0">
           <Filters :blocks="category.blocks" :products="products" :uri="uri" />
         </div>
         <div class="col-span-5 xl:col-span-4">
+          <div class="catlinks mb-4" v-if="category.children">
+            <NuxtLink :to="child.uri" v-for="child in category.children" :key="child.uri">{{ child.name }}</NuxtLink>
+          </div>
           <div class="text-[#E5A35B] mb-4">Всего {{ pluralize(products?.total, ['товар', 'товара', 'товаров']) }}</div>
           <SortingLinks :uri="uri" />
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2.5 gap-y-8 products-grid">

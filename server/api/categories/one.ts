@@ -19,6 +19,13 @@ const getCategory = async (uri: string) => {
   return data[0];
 };
 
+const getChildren = async (categoryID: number) => {
+  const sql = `SELECT name, uri FROM site_categories where visible=1 and parent=${categoryID}`;
+
+  const [data] = await db.execute(sql);
+  return data;
+};
+
 export default defineEventHandler(async (event) => {
   console.log('API CATEGORIES/ONE');
   const body = await readBody(event);
@@ -31,10 +38,11 @@ export default defineEventHandler(async (event) => {
       minmax: {},
     };
   const data = await getCategory(body.uri);
+  const children = await getChildren(data.categoryID);
   // const blocks = await getFilters(data);
 
   return {
-    // blocks,
+    children,
     data,
     // minmax,
   };

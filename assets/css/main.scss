@@ -5,6 +5,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap');
 
 @layer base {
+  .catlinks {
+    @apply flex flex-wrap gap-1;
+    a {
+      @apply text-xs font-medium rounded bg-[#E5A35B] leading-[20px] px-1 text-white lowercase inline-block;
+    }
+  }
   .mainmenu-item {
     .router-link-exact-active {
       @apply text-blue;
@@ -589,12 +595,7 @@
     .bg {
       @apply absolute bottom-0 right-0 z-[0];
     }
-    .links {
-      @apply mt-auto z-[2] lg:max-w-[70%] flex flex-wrap gap-1 pt-4;
-      a {
-        @apply text-xs font-medium rounded bg-[#E5A35B] leading-[20px] px-1 text-white lowercase inline-block;
-      }
-    }
+
     .title-sm {
       @apply text-[24px] text-[#CB863A] font-semibold my-1;
     }
