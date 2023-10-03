@@ -2,8 +2,6 @@
   <main class="container">
     <div class="breadcrumbs"><NuxtLink to="/" class="">Главная </NuxtLink><span>Сравнение</span></div>
 
-    <h1>Сравнение</h1>
-
     <CompareTable :data="data.data" />
   </main>
 </template>

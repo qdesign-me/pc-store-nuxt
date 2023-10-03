@@ -1,21 +1,24 @@
 <template>
-  <div class="flex justify-between gap-6 mb-4">
-    <button class="btn is-underlined" @click="handleHideEqual">
-      <HideSimilarIcon />
-      <template v-if="hideEqual"> Показать </template>
-      <template v-else>Скрыть</template> одинаковые параметры
-    </button>
-
-    <button class="btn is-underlined" @click="handleRemoveAll"><DeleteIcon /> Очистить сравнение</button>
+  <div class="flex justify-between gap-6 items-start">
+    <h1>Сравнение</h1>
+    <div class="text-blue flex gap-6 text-sm underline underline-offset-4">
+      <button class="hidden sm:flex items-center gap-2" @click="handleHideEqual">
+        <HideSimilarIcon />
+        <template v-if="hideEqual"> Показать </template>
+        <template v-else>Скрыть</template> одинаковые параметры
+      </button>
+      <button class="flex items-center gap-2" @click="handleRemoveAll"><DeleteIcon /> <span class="hidden sm:block">Очистить сравнение</span></button>
+    </div>
   </div>
-  <div>
+
+  <div class="flex justify-between gap-6 mb-4">
     <NuxtErrorBoundary>
       <Swiper
         class="swiper-init"
         :modules="[Pagination]"
         :pagination="{ clickable: true }"
         :slidesPerView="5"
-        :spaceBetween="0"
+        :spaceBetween="20"
         :breakpoints="{
           310: {
             slidesPerView: 1,
