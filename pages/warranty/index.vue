@@ -223,7 +223,7 @@ const DEFAULT_DATA = {
   fileData: '',
 };
 
-const model = useState(() => DEFAULT_DATA);
+const model = useState(() => clone(DEFAULT_DATA));
 
 const onFinish = async (event) => {
   message.info('Ваше сообщение отправлено');
@@ -233,7 +233,6 @@ const onFinish = async (event) => {
     body,
   });
   Object.assign(model.value, clone(DEFAULT_DATA));
-  modalVisible.value = false;
 };
 </script>
 

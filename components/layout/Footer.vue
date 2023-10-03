@@ -123,7 +123,7 @@ const DEFAULT_DATA = {
   viber: '',
   telegram: '',
 };
-const model = useState(() => DEFAULT_DATA);
+const model = useState(() => clone(DEFAULT_DATA));
 const onFinish = async () => {
   message.info('Ваше сообщение отправлено');
   const body = clone(model.value);

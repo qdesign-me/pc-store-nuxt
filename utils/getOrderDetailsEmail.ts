@@ -1,3 +1,13 @@
+function myprice(price: number | string) {
+  return price
+    ?.toLocaleString('ru-RU', {
+      style: 'currency',
+      currency: 'BYN',
+    })
+    .replace('BYN', 'Br')
+    .trim();
+}
+
 export function getOrderDetailsEmail(orderID: number, body: Record<string, any>) {
   return (
     `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -60,7 +70,7 @@ export function getOrderDetailsEmail(orderID: number, body: Record<string, any>)
                             </td>
                             <td style="font-family: Arial; text-align: left; color: #111111; padding-right: 20px;">${item.qty} шт.</td>
                             <td style="font-family: Arial; text-align: left; color: #111111">
-                              <span>${item.itemTotal}</span><small>&nbsp;Br</small>
+                              <span>${myprice(item.itemTotal).replace('Br', '')}</span><small>&nbsp;Br</small>
                             </td>
                           </tr>`;
       })
@@ -77,8 +87,7 @@ export function getOrderDetailsEmail(orderID: number, body: Record<string, any>)
                           ${body.info.comment ? '<strong>Комментарий</strong>: ' + body.info.comment + '<br />' : ''}
                           ${body.info.rekHTML.length > 0 ? '<strong>Реквизиты</strong>:<br/>' + body.info.rekHTML : ''}
                         </p>
-                        <h3>Итого: <span>${body.total.total}</span><small>&nbsp;Br</small></h3>
-    
+                        <h3>Итого: <span>${myprice(body.total.total).replace('Br', '')}</span><small>&nbsp;Br</small></h3>
                         <p>
                           <em>Благодарим за ваш выбор!<br />С наилучшими пожеланиями, компания I-Ven.</em>
                         </p>

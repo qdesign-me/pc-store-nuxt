@@ -20,8 +20,8 @@ const DEFAULT_DATA = {
   subject: 'Подписка на новости',
   contact: '',
 };
-const model = useState(() => DEFAULT_DATA);
-const onFinish = async (event) => {
+const model = useState(() => clone(DEFAULT_DATA));
+const onFinish = async () => {
   message.info('Ваше сообщение отправлено');
   const body = clone(model.value);
   useFetch('/api/email', {

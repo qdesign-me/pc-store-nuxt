@@ -26,9 +26,9 @@ export default defineEventHandler(async (event) => {
 
   data = data.map((item: Record<string, any>) => {
     const qty = items[item.productID];
-    const itemTotal = qty * item.Price_bn;
+    const itemTotal = (qty * item.Price_bn).toFixed(2);
     total.qty += qty;
-    total.price += itemTotal;
+    total.price += +itemTotal;
     return { ...item, qty, itemTotal };
   });
 
