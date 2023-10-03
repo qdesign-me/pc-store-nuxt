@@ -5,6 +5,10 @@ async function fetchAll(sql: string) {
   const [data] = await db.execute(sql);
   return data;
 }
+async function fetchRow(sql: string) {
+  const [data] = await db.execute(sql);
+  return data[0];
+}
 async function fetchColumn(sql: string) {
   const [data] = await db.execute(sql);
   const columns = Object.keys(data[0]);
@@ -31,7 +35,7 @@ export default defineEventHandler(async (event) => {
     reviews: 'p.name',
     video: 'p.name',
   };
-
+  let priceFilter = '';
   let andFilters = Object.entries(
     Object.keys(rest).reduce((acc, key) => {
       if (['', undefined, null].includes(rest[key])) return acc;
@@ -49,7 +53,8 @@ export default defineEventHandler(async (event) => {
       if (field === 'price') {
         const priceTo = values.to ?? 9999999;
         const priceFrom = values.from ?? 0;
-        return `and p.Price_bn between ${priceFrom} and ${priceTo}`;
+        priceFilter = `and p.Price_bn between ${priceFrom} and ${priceTo}`;
+        return priceFilter;
       }
       if (field === 'q') {
         const q = values.value.trim();
@@ -83,9 +88,10 @@ export default defineEventHandler(async (event) => {
     andFilters += ' and p.is_new > 0';
   }
   if (uri === '/top-prodazh') {
-    const [data] = await db.execute(`select ProductID as ids from site_products where enabled=1 order by viewed_times desc limit 100`);
-    const ids = data.map(({ ids }) => ids).join(',');
-    andFilters += ` and p.ProductID in (${ids})`;
+    // const [data] = await db.execute(`select ProductID as ids from site_products where enabled=1 order by viewed_times desc limit 100`);
+    // const ids = data.map(({ ids }) => ids).join(',');
+    // andFilters += ` and p.ProductID in (${ids})`;
+    andFilters += ` and p.viewed_times > 1000`;
   }
   const sql = `select ${select} 
   from site_products p 
@@ -95,10 +101,13 @@ export default defineEventHandler(async (event) => {
   console.log({ uri, sql, andFilters });
   results.data = await fetchAll(sql);
 
-  results.total = await fetchColumn(`select count(*) as total
+  const total = await fetchColumn(`select count(*) as total from site_products p 
+  ${urlCheck}
+  where p.enabled=1 ${andFilters}`);
+
+  const { price_min, price_max } = await fetchRow(`select min(p.Price_bn) as price_min, max(p.Price_bn) as price_max
   from site_products p 
   ${urlCheck}
-  where p.enabled=1 ${andFilters} `);
-  results.uri = uri;
-  return results;
+  where p.enabled=1 ${andFilters.replace(priceFilter, '')} `);
+  return { ...results, uri, total, price_min, price_max };
 });

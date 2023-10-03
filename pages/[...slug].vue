@@ -25,7 +25,7 @@
     <template v-if="products?.total > 0 && products.uri === uri">
       <div class="grid grid-cols-5 gap-2.5">
         <div class="hidden xl:block" v-if="products?.total > 0">
-          <Filters :blocks="category.blocks" />
+          <Filters :blocks="category.blocks" :products="products" :uri="uri" />
         </div>
         <div class="col-span-5 xl:col-span-4">
           <div class="text-[#E5A35B] mb-4">Всего {{ pluralize(products?.total, ['товар', 'товара', 'товаров']) }}</div>
