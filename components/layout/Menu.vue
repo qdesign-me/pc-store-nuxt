@@ -40,7 +40,7 @@
                 <PCAcessoriesIcon class="ico" />Комплектующие для ПК
                 <div class="parentcat-icon" @click.prevent.stop="mactive = 1"><ChevronRightIcon class="arr" /></div>
               </div>
-              <div :class="{ active: active === 2 }" @click="router.push('/elektronika/noutbuki')"><NotebooksIcon class="ico" />Ноутбуки</div>
+              <div :class="{ active: active === 2 }" @click="setActive(2)"><NotebooksIcon class="ico" />Ноутбуки</div>
               <div :class="{ active: active === 3 }" @mouseenter="active = 3" @click="setActive(3)">
                 <OthersIcon class="ico" />Периферия
                 <div class="parentcat-icon" @click.prevent.stop="mactive = 3"><ChevronRightIcon class="arr" /></div>
@@ -49,10 +49,10 @@
                 <ElectronicsIcon class="ico" />Электроника
                 <div class="parentcat-icon" @click.prevent.stop="mactive = 4"><ChevronRightIcon class="arr" /></div>
               </div>
-              <div :class="{ active: active === 5 }" @click="router.push('/komplektuyuszie/Servernoe-oborydovanie')"><ServersIcon class="ico" />Серверное оборудование</div>
+              <div :class="{ active: active === 5 }" @click="setActive(5)"><ServersIcon class="ico" />Серверное оборудование</div>
             </div>
           </div>
-          <div class="flex-1 part-2">
+          <div class="flex-1 part-2" @click="checkIfCurrent">
             <div
               v-for="(item, index) in data"
               :key="item.name"
@@ -61,7 +61,7 @@
             >
               <div class="flex-1">
                 <div class="title">
-                  <NuxtLink :to="item.uri">{{ item.name }}</NuxtLink>
+                  <NuxtLink :to="item.uri" class="!text-black">{{ item.name }}</NuxtLink>
                 </div>
 
                 <ul class="md:lg:columns-3 gap-6">
@@ -75,7 +75,7 @@
                       <NuxtLink v-for="childlink in link.nodes" :to="childlink.uri" :key="childlink.name">
                         {{ childlink.name }}
                       </NuxtLink>
-                      <NuxtLink :to="link.uri" class="text-[#E5A35B]"> Все категории</NuxtLink>
+                      <NuxtLink :to="link.uri" class="!text-[#E5A35B]"> Все категории</NuxtLink>
                     </div>
                   </li>
                 </ul>
@@ -162,9 +162,22 @@ const setActive = (value) => {
   const links = {
     0: '/elektronika/Gotovie-komputeri',
     1: '/komplektuyuszie',
+    2: '/elektronika/noutbuki',
     3: '/periferiya-i-aksessuary',
     4: '/elektronika',
+    5: '/komplektuyuszie/Servernoe-oborydovanie',
   };
-  router.push(links[value]);
+  const url = links[value];
+  if (url === router.currentRoute.value.path) return closeMenu();
+  router.push(url);
+};
+
+const checkIfCurrent = (event) => {
+  console.log(event);
+  const href = event.target?.href || event.target.parentElement?.href;
+  if (href) {
+    const url = href.replace('http://localhost:3000', '').replace('https://i-ven.by', '').replace('https://pc-store-nuxt.vercel.app', '');
+    if (url === router.currentRoute.value.path) closeMenu();
+  }
 };
 </script>

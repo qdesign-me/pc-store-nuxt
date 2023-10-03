@@ -38,13 +38,7 @@ export default defineNuxtConfig({
   swiper: {
     modules: ['pagination'],
   },
-  nitro: {
-    prerender: {
-      crawlLinks: true,
-      routes: ['/', 'sitemap.xml'],
-      ignore: ['/cart'],
-    },
-  },
+
   sitemap: {
     inferStaticPagesAsRoutes: false,
   },

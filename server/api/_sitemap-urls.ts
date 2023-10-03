@@ -15,6 +15,6 @@ export default cachedEventHandler(
   },
   {
     name: 'sitemap-dynamic-url',
-    maxAge: 0 * 60 * 10, // cache URLs for 10 minutes
+    maxAge: 60 * 10, // cache URLs for 10 minutes
   }
 );

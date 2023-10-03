@@ -5,6 +5,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap');
 
 @layer base {
+  .mainmenu-item {
+    .router-link-exact-active {
+      @apply text-blue;
+    }
+  }
   .arr {
     @apply w-8;
   }
@@ -1055,6 +1060,7 @@
   footer {
     padding-bottom: 100px !important;
   }
+
   body.with-open-menu {
     @apply overflow-hidden;
     .menu {
