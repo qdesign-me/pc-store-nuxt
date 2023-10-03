@@ -247,6 +247,7 @@
     }
   }
   .swiper-pagination {
+    user-select: none;
     bottom: 0 !important;
     .swiper-pagination-bullet:not(.swiper-pagination-bullet-active) {
       opacity: 0.6;

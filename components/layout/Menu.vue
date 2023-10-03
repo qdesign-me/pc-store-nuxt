@@ -158,7 +158,6 @@ const linkIcon = (uri) => {
 };
 
 const setActive = (value) => {
-  mactive.value = value;
   const links = {
     0: '/elektronika/Gotovie-komputeri',
     1: '/komplektuyuszie',
@@ -169,6 +168,7 @@ const setActive = (value) => {
   };
   const url = links[value];
   if (url === router.currentRoute.value.path) return closeMenu();
+
   router.push(url);
 };
 
