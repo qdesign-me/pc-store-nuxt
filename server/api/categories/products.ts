@@ -32,7 +32,7 @@ export default defineEventHandler(async (event) => {
     video: 'p.name',
   };
 
-  const andFilters = Object.entries(
+  let andFilters = Object.entries(
     Object.keys(rest).reduce((acc, key) => {
       if (['', undefined, null].includes(rest[key])) return acc;
       let clean = key.replace('[from]', '').replace('[to]', '');
@@ -75,21 +75,30 @@ export default defineEventHandler(async (event) => {
 
   const results = { data: [], total: 0 };
 
-  const urlCheck = uri !== '/search' ? `join site_categories c on c.categoryID = p.categoryID and c.uri like '${uri}%'` : '';
-
-  const sql = `select ${select}
+  const urlCheck = ['/search', '/top-prodazh', '/novinki', '/akcii'].includes(uri) ? '' : `join site_categories c on c.categoryID = p.categoryID and c.uri like '${uri}%'`;
+  if (uri === '/akcii') {
+    andFilters += ' and p.PriceSale_bn > 0';
+  }
+  if (uri === '/novinki') {
+    andFilters += ' and p.is_new > 0';
+  }
+  if (uri === '/top-prodazh') {
+    const [data] = await db.execute(`select ProductID as ids from site_products where enabled=1 order by viewed_times desc limit 100`);
+    const ids = data.map(({ ids }) => ids).join(',');
+    andFilters += ` and p.ProductID in (${ids})`;
+  }
+  const sql = `select ${select} 
   from site_products p 
   ${urlCheck}
   where p.enabled=1 ${andFilters} order by ${sorttypes[sortby]} ${sortdir} limit ${skip}, ${take}`;
-  console.log(`select count(*) as total
-  from site_products p 
-  ${urlCheck}
-  where p.enabled=1 ${andFilters} `);
+
+  console.log({ uri, sql, andFilters });
   results.data = await fetchAll(sql);
 
   results.total = await fetchColumn(`select count(*) as total
   from site_products p 
   ${urlCheck}
   where p.enabled=1 ${andFilters} `);
+  results.uri = uri;
   return results;
 });

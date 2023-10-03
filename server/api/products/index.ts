@@ -28,7 +28,7 @@ export default defineEventHandler(async (event) => {
         .join(' and ')
     : 1;
   const sql = `select ${select} from site_products  where enabled=1 and ${whereCond} order by ${sorttypes[sortby]} ${sortdir} limit ${take}`;
-  console.log(sql, body.where);
+
   const [data] = await db.execute(sql);
 
   return {

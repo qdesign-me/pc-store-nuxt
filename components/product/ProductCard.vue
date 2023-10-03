@@ -18,7 +18,10 @@
 
     <div class="price-info">
       <div class="flex justify-between gap-2 my-2">
-        <div class="text-2xl whitespace-nowrap">{{ price(props.product.Price_bn) }}</div>
+        <div class="text-2xl whitespace-nowrap">
+          <span class="line-through text-sm mr-2" v-if="props.product.PriceSale_bn">{{ price(props.product.PriceSale_bn) }} </span>
+          <span :class="{ 'text-red-600': props.product.PriceSale_bn > 0 }">{{ price(props.product.Price_bn) }}</span>
+        </div>
         <div class="flex justify-between text-lightgray -mr-2">
           <Add2Favorites :productID="props.product.productID" />
           <Add2Compare :productID="props.product.productID" />

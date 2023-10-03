@@ -11,7 +11,7 @@
 
     <div v-if="category.data.name" class="flex items-center gap-3 mb-6 lg:mb-10">
       <h1 class="mb-0">{{ category.data.name }}</h1>
-      <Loading :class="{ 'opacity-0': !pending }" />
+      <Loading :class="pending || uri !== products?.uri ? 'opacity-100' : 'opacity-0'" />
     </div>
 
     <div class="mb-6" v-if="!pending && filters.q && products?.total === 0">По запросу «{{ filters.q }}» ничего не найдено.</div>
@@ -22,7 +22,7 @@
       <PopularCatsBlock />
       <NewItemsBlock />
     </template>
-    <template v-if="products?.total > 0">
+    <template v-if="products?.total > 0 && products.uri === uri">
       <div class="grid grid-cols-5 gap-2.5">
         <div class="hidden xl:block" v-if="products?.total > 0">
           <Filters :blocks="category.blocks" />
