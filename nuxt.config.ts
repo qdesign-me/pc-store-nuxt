@@ -28,7 +28,7 @@ export default defineNuxtConfig({
     },
   },
   css: ['~/assets/css/main.scss'],
-  modules: ['@pinia/nuxt', 'nuxt-swiper', '@ant-design-vue/nuxt', 'nuxt-simple-sitemap'],
+  modules: ['@pinia/nuxt', 'nuxt-swiper', '@ant-design-vue/nuxt', 'nuxt-simple-sitemap', 'yandex-metrika-module-nuxt3', 'nuxt-gtag'],
   pinia: {
     autoImports: ['defineStore', 'acceptHMRUpdate'],
   },
@@ -41,5 +41,15 @@ export default defineNuxtConfig({
 
   sitemap: {
     inferStaticPagesAsRoutes: false,
+  },
+  yandexMetrika: {
+    id: process.env.YANDEX_METRIKA_ID,
+    clickmap: true,
+    trackLinks: true,
+    accurateTrackBounce: true,
+    webvisor: true,
+  },
+  gtag: {
+    id: 'G-L2CG7ZPL61',
   },
 });

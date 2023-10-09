@@ -4,7 +4,7 @@
 
 <script setup>
 const route = useRoute();
-const hostname = 'https://pc-store-nuxt.vercel.app';
+const hostname = 'https://i-ven.by';
 
 const path = route.path;
 
