@@ -23,7 +23,7 @@
             <div v-if="node?.nodes.length > 10" class="text-xs leading-[20px]">+ {{ node?.nodes.length - 10 }} еще</div>
           </div>
           <div class="img">
-            <img loading="lazy" :src="config[node.categoryID]" alt="" v-if="config[node.categoryID]" />
+            <img loading="lazy" :src="`/img/products/komplektuyuszie/${node.categoryID}.png`" alt="" v-if="config.includes(node.categoryID)" />
           </div>
         </div>
         <NuxtLink :to="node.uri" v-else class="it">
@@ -37,7 +37,8 @@
           </div>
 
           <div class="img">
-            <img loading="lazy" :src="config[node.categoryID]" alt="" v-if="config[node.categoryID]" />
+            {{ node.categoryID }}
+            <img loading="lazy" :src="`/img/products/komplektuyuszie/${node.categoryID}.png`" alt="" v-if="config.includes(node.categoryID)" />
           </div>
         </NuxtLink>
       </div>
@@ -47,17 +48,5 @@
 
 <script setup>
 const props = defineProps(['data']);
-const config = {
-  2: '/img/products/komplektuyuszie/intelcore.png',
-  4: '/img/products/komplektuyuszie/Intel-lga.png',
-  3: '/img/products/komplektuyuszie/cooler.png',
-  5: '/img/products/komplektuyuszie/operativka.png',
-  6: '/img/products/komplektuyuszie/ssd.png',
-  8: '/img/products/komplektuyuszie/videocard.png',
-  76: '/img/products/komplektuyuszie/audiocard.png',
-  9: '/img/products/komplektuyuszie/controller.png',
-  10: '/img/products/komplektuyuszie/optprivod.png',
-  16: '/img/products/komplektuyuszie/korpus.png',
-  19: '/img/products/komplektuyuszie/blockpit.png',
-};
+const config = [2, 4, 3, 5, 6, 8, 76, 9, 10, 16, 19, 178, 28, 18, 171, 215, 554, 378, 812];
 </script>

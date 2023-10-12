@@ -11,6 +11,8 @@ const HomeIcon = resolveComponent('HomeIcon');
 const GraphicsIcon = resolveComponent('GraphicsIcon');
 const PlayIcon = resolveComponent('PlayIcon');
 const ServerIcon = resolveComponent('ServerIcon');
+const NettopsIcon = resolveComponent('NettopsIcon');
+const SysblocksIcon = resolveComponent('SysblocksIcon');
 
 const links = [
   {
@@ -40,14 +42,17 @@ const links = [
   },
   {
     title: 'Системные блоки',
+    icon: ServerIcon,
     uri: '/elektronika/Gotovie-komputeri/Sistemnie-bloki',
   },
   {
     title: 'Микро ПК',
+    icon: SysblocksIcon,
     uri: '/elektronika/Gotovie-komputeri/Mikro-PK',
   },
   {
     title: 'Неттопы',
+    icon: NettopsIcon,
     uri: '/elektronika/Gotovie-komputeri/nettopi',
   },
 ];
