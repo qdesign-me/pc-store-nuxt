@@ -1,9 +1,9 @@
 <template>
   <div class="grid grid-cols-1 gap-5 lg:grid-cols-5 lg:gap-2.5 box">
     <NuxtLink :href="props.data.link" class="card bg-coral overflow-hidden group promo-link">
-      <img src="/img/promo/asus-laptop-cut.png" width="260" height="250" loading="lazy" class="-right-6 -bottom-4 absolute" />
+      <img src="/img/promo/similar.png" width="296" height="263" loading="lazy" class="right-0 bottom-0 absolute" />
 
-      <div class="title relative">Сопутствующие товары</div>
+      <div class="title relative">Похожие товары</div>
       <ArrowLink class="mt-3 relative">
         <span class="underline underline-offset-4">Все товары</span>
       </ArrowLink>
