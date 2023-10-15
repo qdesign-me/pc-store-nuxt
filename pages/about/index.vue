@@ -207,8 +207,8 @@
         </p>
 
         <div class="flex flex-wrap gap-2 payment-logos">
-          <img src="/img/info/belapb-logo.png" loading="lazy" width="175" height="25" alt="" />
-          <img src="/img/info/belarusb-logo.png" loading="lazy" width="180" height="25" alt="" />
+          <img src="/img/info/belarusb-logo.png" loading="lazy" width="175" height="25" alt="" />
+          <img src="/img/info/vtb-logo.png" loading="lazy" width="70" height="25" alt="" />
         </div>
 
         <NuxtLink to="/payment#credit"

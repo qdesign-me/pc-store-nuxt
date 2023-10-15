@@ -66,6 +66,9 @@
     max-height: calc(100vh - 200px) !important;
     max-width: calc(100vw - 80px) !important;
   }
+  .ant-image .ant-image-mask:hover {
+    opacity: 0 !important;
+  }
   .only-mobi {
     @apply lg:hidden;
   }

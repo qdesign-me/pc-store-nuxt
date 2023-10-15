@@ -1,6 +1,4 @@
-<template>
-  <ImageSlider :images="images" class="select-none" />
-</template>
+<template><ImageSlider :images="images" class="select-none" /></template>
 
 <script setup>
 const props = defineProps(['data', 'size']);

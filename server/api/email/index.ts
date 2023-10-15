@@ -5,7 +5,8 @@ const processBody = (data: Record<string, any>) => {
   const attachments: Record<string, any>[] = [];
   let html = '';
   if (data.action === 'subscribe') {
-    html = `Контакт: ${data.contact}`;
+    html = `Контакт: ${data.contact}<br/>
+    Способ связи: ${data.way}`;
   }
   if (data.action === 'warranty') {
     html = `Имя: ${data.name}<br/>
