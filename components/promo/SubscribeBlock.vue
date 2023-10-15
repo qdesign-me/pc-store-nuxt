@@ -1,9 +1,9 @@
 <template>
   <div class="mt-4 lg:mt-6 flex flex-wrap gap-6">
-    <div class="flex justify-center gap-6 w-10 flex-1 links">
-      <button :class="active === 'vk' ? 'scale-[1.05]' : 'opacity-70'" @click="setActive('vk')"><div class="icon icon-vk"></div></button>
-      <button :class="active === 'telegram' ? 'scale-[1.05]' : 'opacity-70'" @click="setActive('telegram')"><div class="icon icon-telegram"></div></button>
-      <button :class="active === 'email' ? 'scale-[1.05]' : 'opacity-70'" @click="setActive('email')"><div class="icon icon-email"></div></button>
+    <div class="flex justify-center gap-6 w-10 flex-1 links select-none">
+      <button :class="model.way === 'vk' ? 'scale-[1.05]' : 'opacity-70'" @click="setActive('vk')"><div class="icon icon-vk"></div></button>
+      <button :class="model.way === 'telegram' ? 'scale-[1.05]' : 'opacity-70'" @click="setActive('telegram')"><div class="icon icon-telegram"></div></button>
+      <button :class="model.way === 'email' ? 'scale-[1.05]' : 'opacity-70'" @click="setActive('email')"><div class="icon icon-email"></div></button>
     </div>
     <div class="w-10 flex-1">
       <Form :model="model" class="flex flex-col gap-2 items-start" :onFinish="onFinish">

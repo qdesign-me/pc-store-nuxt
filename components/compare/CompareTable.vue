@@ -14,7 +14,7 @@
   <div class="flex justify-between gap-6 mb-4">
     <NuxtErrorBoundary>
       <Swiper
-        class="swiper-init"
+        class="swiper-init w-full"
         :modules="[Pagination]"
         :pagination="{ clickable: true }"
         :slidesPerView="5"
