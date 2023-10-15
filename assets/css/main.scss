@@ -193,6 +193,16 @@
   .products-grid .card-product {
     @apply w-full min-w-[initial];
   }
+  .card-product {
+    img {
+      aspect-ratio: 1 / 1;
+      width: 100%;
+    }
+    .swiper-pagination {
+      position: absolute;
+      bottom: -15px !important;
+    }
+  }
   .box-scroll2 {
     scroll-margin-top: 80px;
   }

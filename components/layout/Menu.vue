@@ -87,7 +87,7 @@
                 </div>
 
                 <NuxtLink :to="item.uri" class="!flex gap-6 items-center text-sm font-normal mb-2">
-                  <span class="underline underline-offset-4">Все товары</span><ArrowRightIcon
+                  <span class="underline underline-offset-4">Все товары</span><ArrowRightIcon class="text-black"
                 /></NuxtLink>
                 <NuxtLink :to="`/p/${item.product.uri.replace('.html', '')}`">
                   <ProductThumbs :data="{ img: item.product.img }" />

@@ -1,6 +1,6 @@
 <template>
   <main class="text-sm text !mb-0">
-    <div class="box">
+    <div class="box xl:mb-[80px]">
       <div class="container">
         <div class="breadcrumbs"><NuxtLink to="/" class="">Главная </NuxtLink><span>Гарантия</span></div>
 
@@ -29,7 +29,7 @@
         </div>
       </div>
     </div>
-    <div class="box">
+    <div class="box lg:mb-[80px]">
       <div class="container">
         <div class="flex flex-col xl:flex-row justify-between gap-10 items-start">
           <div class="flex-1 text-wrap">

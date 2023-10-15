@@ -3,7 +3,7 @@
     <div class="border rounded px-8 py-12">
       <img :src="main" alt="" loading="lazy" width="395" height="395" class="block object-contain aspect-square" />
     </div>
-    <div v-if="images?.length > 0" class="flex flex-col gap-2">
+    <div v-if="images?.length > 1" class="flex flex-col gap-2">
       <div v-for="image in images" :key="image">
         <img
           :src="image"
@@ -18,6 +18,7 @@
       </div>
     </div>
   </div>
+
   <div class="lg:hidden max-w-[calc(100vw-60px)]">
     <ProductThumbs :data="props.data" :size="395" />
   </div>

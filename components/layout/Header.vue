@@ -96,7 +96,7 @@
           </li>
         </ul>
         <div class="flex-1">
-          <SearchForm />
+          <SearchForm class="-ml-3" />
         </div>
         <div class="nav-links">
           <CatalogLink />

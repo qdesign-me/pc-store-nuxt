@@ -3,60 +3,68 @@
     <div class="box-promo" :class="{ '!bg-white !pt-0': $route.href === '/contacts' }">
       <div class="container">
         <div class="grid gap-5 grid-cols-4 xl:grid-cols-5 xl:gap-2.5">
-          <div class="col-span-4 grid grid-cols-2 gap-x-5 xl:grid-cols-4 xl:gap-x-14">
-            <div class="col-span-2 sm:col-span-1">
-              <div class="title mt-10">Наши контакты:</div>
-              <div class="with-icon">
-                <MapPinIcon />
-                <a href="#" class="underline underline-offset-4"> {{ $state.config.address }}</a>
-              </div>
-
-              <div class="with-icon">
-                <PhoneIcon />
-                <a v-for="phone in $state.config.phones?.split(' ')" :key="phone" :href="`tel:${phone}`">
-                  {{ formatPhoneNumber(phone) }}
-                </a>
-              </div>
-              <div class="with-icon">
-                <MessageIcon />
-                <a :href="`mailto:${$state.config.email}`" class="underline underline-offset-4">{{ $state.config.email }}</a>
-              </div>
-
-              <div class="title mt-10">Режим работы:</div>
-              <div v-html="$state.config.timetable" class="xl:-mr-8"></div>
-            </div>
-            <div class="col-span-2 sm:col-span-1">
-              <div class="title mt-10">Гарантийное обслуживание:</div>
-              <div class="with-icon">
-                <MapPinIcon />
-                <a href="#" class="underline underline-offset-4">{{ $state.config.address }}</a>
-              </div>
-              <div class="with-icon xl:min-h-[65px]">
-                <PhoneIcon />
-                <a v-for="phone in $state.config['service.phone']?.split(' ')" :key="phone" :href="`tel:${phone}`" class="translate-y-1">
-                  {{ formatPhoneNumber(phone) }}
-                </a>
-              </div>
-              <div class="with-icon">
-                <MessageIcon />
-                <a :href="`mailto:${$state.config.email}`" class="underline underline-offset-4">{{ $state.config.email }}</a>
-              </div>
-              <div class="flex gap-6 mt-10 social-links"><SocialLinks :social="$state.config.social" /></div>
-            </div>
-
-            <div class="col-span-2">
-              <div class="title mt-10">Платежные системы:</div>
-              <div class="flex flex-col gap-6 items-start">
-                <div class="flex gap-2 card-logos">
-                  <img src="/img/info/vtb.png" loading="lazy" width="64" height="40" alt="" />
-                  <img src="/img/info/halva.png" loading="lazy" width="64" height="40" alt="" />
-                  <img src="/img/info/magnit.png" loading="lazy" width="64" height="40" alt="" /><img src="/img/info/erip.png" loading="lazy" width="125" height="40" alt="" />
+          <div class="col-span-4">
+            <div class="grid grid-cols-2 gap-x-5 xl:grid-cols-4 xl:gap-x-14">
+              <div class="col-span-2 sm:col-span-1 lg:mb-[50px]">
+                <div class="title mt-10 xl:h-[65px]">Наши контакты:</div>
+                <div class="with-icon">
+                  <MapPinIcon />
+                  <a href="#" class="underline underline-offset-4"> {{ $state.config.address }}</a>
                 </div>
-                <div class="xl:my-6">Наличный расчет и расчет банковской картой при получении. Возможно оформление кредита в банках-партнёрах:</div>
-                <div class="flex flex-wrap gap-2 payment-logos">
-                  <img src="/img/info/belarusb-logo.png" loading="lazy" width="175" height="25" alt="" />
-                  <img src="/img/info/vtb-logo.png" loading="lazy" width="70" height="25" alt="" />
+
+                <div class="with-icon">
+                  <PhoneIcon />
+                  <a v-for="phone in $state.config.phones?.split(' ')" :key="phone" :href="`tel:${phone}`">
+                    {{ formatPhoneNumber(phone) }}
+                  </a>
                 </div>
+                <div class="with-icon">
+                  <MessageIcon />
+                  <a :href="`mailto:${$state.config.email}`" class="underline underline-offset-4">{{ $state.config.email }}</a>
+                </div>
+              </div>
+              <div class="col-span-2 sm:col-span-1">
+                <div class="title mt-10 xl:h-[65px]">Гарантийное обслуживание:</div>
+                <div class="with-icon">
+                  <MapPinIcon />
+                  <a href="#" class="underline underline-offset-4">{{ $state.config.address }}</a>
+                </div>
+                <div class="with-icon xl:min-h-[65px]">
+                  <PhoneIcon />
+                  <a v-for="phone in $state.config['service.phone']?.split(' ')" :key="phone" :href="`tel:${phone}`" class="translate-y-1">
+                    {{ formatPhoneNumber(phone) }}
+                  </a>
+                </div>
+                <div class="with-icon">
+                  <MessageIcon />
+                  <a :href="`mailto:${$state.config.email}`" class="underline underline-offset-4">{{ $state.config.email }}</a>
+                </div>
+              </div>
+
+              <div class="col-span-2">
+                <div class="title mt-10 xl:h-[65px]">Платежные системы:</div>
+                <div class="flex flex-col gap-6 items-start">
+                  <div class="flex gap-2 card-logos">
+                    <img src="/img/info/vtb.png" loading="lazy" width="64" height="40" alt="" />
+                    <img src="/img/info/halva.png" loading="lazy" width="64" height="40" alt="" />
+                    <img src="/img/info/magnit.png" loading="lazy" width="64" height="40" alt="" /><img src="/img/info/erip.png" loading="lazy" width="125" height="40" alt="" />
+                  </div>
+                  <div class="xl:my-6">Наличный расчет и расчет банковской картой при получении. Возможно оформление кредита в банках-партнёрах:</div>
+                  <div class="flex flex-wrap gap-2 payment-logos">
+                    <img src="/img/info/belarusb-logo.png" loading="lazy" width="175" height="25" alt="" />
+                    <img src="/img/info/vtb-logo.png" loading="lazy" width="70" height="25" alt="" />
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div class="title mt-10">Режим работы:</div>
+                <div v-html="$state.config.timetable" class="xl:-mr-8"></div>
+              </div>
+              <div>
+                <div class="flex gap-6 mt-10 social-links"><SocialLinks :social="$state.config.social" /></div>
+              </div>
+              <div class="col-span-2">
                 <NuxtLink to="/payment#credit">
                   <button class="btn xl:mt-8 w-full sm:w-auto">
                     <CalcIcon />
