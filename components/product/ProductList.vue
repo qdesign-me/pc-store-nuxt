@@ -26,14 +26,16 @@
         </div>
 
         <div class="price text-[24px]">
+          <slot name="price" :item="item" />
+        </div>
+        <div class="price text-[24px] min-w-[120px]">
           <div :class="{ 'text-red-600 leading-[1] md:mb-1': item.PriceSale_bn > 0 }">
             <span class="line-through text-xs block text-[#000]" v-if="item.PriceSale_bn">{{ price(item.PriceSale_bn) }} </span>
             {{ price(item.Price_bn) }}
           </div>
-          <slot name="price" :item="item" />
         </div>
         <div class="controls">
-          <div class="flex justify-between text-lightgray gap-2 pt-10">
+          <div class="flex justify-between text-lightgray gap-2">
             <slot name="controls" :item="item" />
           </div>
         </div>
