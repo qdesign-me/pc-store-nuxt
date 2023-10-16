@@ -1,6 +1,6 @@
 1 созвон с Полиной по статусу
 1.5 выставление новых иконок и картинок
-3 выставление новых картинок, правки по гугл доку
+3.5 выставление новых картинок, правки по гугл доку
 
 
 yandex
@@ -10,5 +10,13 @@ yandex
 google
 win7@win7.by
 Ueukfrrfeynwin7
+
+
+
+
+scp -P 2253  root@93.125.2.1:/var/www/html/i-ven.by/rozn.zip c://Downloads.zip
+scp -P 2253 images.zip root@93.125.2.1:/var/www/html/i-ven.by/public/img
+SELECT currency_value FROM iven_currency_types where name='BYR' LIMIT 0,100
+
 
 

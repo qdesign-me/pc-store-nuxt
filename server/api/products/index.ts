@@ -1,14 +1,20 @@
 import db from '../../../db/db';
 
+async function getKurs() {
+  const [data] = await db.execute(`SELECT currency_value FROM iven_currency_types where name='BYR'`);
+  return data[0].currency_value;
+}
+
 export default defineEventHandler(async (event) => {
   console.log('API PRODUCTS/INDEX');
   const body = await readBody(event);
   const { take = 100, sortby = 'popular', sortdir = 'desc', where = {} } = body;
-  const select = `(select group_concat(ip.filename) from site_pictures ip where ip.productID=site_products.productID group by ip.productID) as img, productID, name,  model, Price_bn, PriceSale_bn, uri, is_auction, is_new`;
+  const kurs = await getKurs();
+  const select = `(select group_concat(ip.filename) from iven_product_pictures ip where ip.productID=iven_products.productID group by ip.productID) as img, productID, name,  model, ROUND(Price * ${kurs}, 2) as Price, PriceSale_bn, uri, is_auction, is_new`;
   const sorttypes: Record<string, string> = {
     name: 'name',
     popular: 'viewed_times',
-    price: 'Price_bn',
+    price: 'Price',
     rank: 'name',
     reviews: 'name',
     video: 'name',
@@ -27,7 +33,7 @@ export default defineEventHandler(async (event) => {
         })
         .join(' and ')
     : 1;
-  const sql = `select ${select} from site_products  where enabled=1 and ${whereCond} order by ${sorttypes[sortby]} ${sortdir} limit ${take}`;
+  const sql = `select ${select} from iven_products  where enabled=1 and ${whereCond} order by ${sorttypes[sortby]} ${sortdir} limit ${take}`;
 
   const [data] = await db.execute(sql);
 

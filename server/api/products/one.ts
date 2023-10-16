@@ -15,23 +15,30 @@ async function getFeatures(sql: string) {
   return data;
 }
 
+async function getKurs() {
+  const [data] = await db.execute(`SELECT currency_value FROM iven_currency_types where name='BYR'`);
+  return data[0].currency_value;
+}
+
 export default defineEventHandler(async (event) => {
   console.log('API PRODUCTS/ONE');
   const body = await readBody(event);
   const uri = body.uri;
 
+  const kurs = await getKurs();
+
   const data = await getProduct(
-    `select (select group_concat(ip.filename) from site_pictures ip where ip.productID=p.productID group by ip.productID) as img, p.productID, p.categoryID, p.model, p.name, c.uri as curi, p.description, p.enabled, p.meta_description, p.is_auction, p.is_new, p.Price_bn, p.PriceSale_bn, c.name as cat_name, c.uri , c.breadcrumbs from site_products p join site_categories c on c.categoryID=p.categoryID  where p.uri='${uri}' limit 1`
+    `select (select group_concat(ip.filename) from iven_product_pictures ip where ip.productID=p.productID group by ip.productID) as img, p.productID, p.categoryID, p.model, p.name, c.uri as curi, p.description, p.enabled, p.meta_description, p.is_auction, p.is_new, ROUND(p.Price * ${kurs}, 2) as Price, p.PriceSale_bn, c.name as cat_name, c.fullPath as uri , c.breadcrumbs from iven_products p join iven_categories c on c.categoryID=p.categoryID  where p.uri='${uri}' limit 1`
   );
 
-  await db.execute(`update site_products set viewed_times=viewed_times+1 where productID=${data['productID']}`);
+  await db.execute(`update iven_products set viewed_times=viewed_times+1 where productID=${data['productID']}`);
 
   let products = await getSimilar(
-    `select (select concat('https://win7.by/data/big/', thumbnail) from site_pictures where photoID=site_products.default_picture) as img, productID, name, Price_bn, PriceSale_bn, uri, is_auction, is_new from site_products where  categoryID='${data.categoryID}' and productID<>${data.productID} and enabled=1 limit 4`
+    `select (select concat('https://win7.by/data/big/', thumbnail) from iven_product_pictures where photoID=iven_products.default_picture) as img, productID, name, ROUND(Price * ${kurs}, 2) as Price, PriceSale_bn, uri, is_auction, is_new from iven_products where  categoryID='${data.categoryID}' and productID<>${data.productID} and enabled=1 limit 4`
   );
 
   data['features'] = await getFeatures(
-    `select sfop.value,  sf.label, sf.tooltip, sf.filter_type, sf.suffix from site_features_on_products sfop join site_products_features sf on sf.featureID = sfop.featureID where sfop.productID=${data.productID} order by sf.sort_order`
+    `select sfop.value,  sf.label, sf.tooltip, sf.filter_type, sf.suffix from iven_features_on_products sfop join iven_products_features sf on sf.featureID = sfop.featureID where sfop.productID=${data.productID} order by sf.sort_order`
   );
   data['features'] = data['features'].map((item: Record<string, any>) => ({
     ...item,

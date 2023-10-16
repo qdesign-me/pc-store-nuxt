@@ -173,7 +173,6 @@ const setActive = (value) => {
 };
 
 const checkIfCurrent = (event) => {
-  console.log(event);
   const href = event.target?.href || event.target.parentElement?.href;
   if (href) {
     const url = href.replace('http://localhost:3000', '').replace('https://i-ven.by', '').replace('http://i-ven.by', '').replace('https://pc-store-nuxt.vercel.app', '');

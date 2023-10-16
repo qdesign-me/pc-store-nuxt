@@ -14,6 +14,11 @@ function formatDate(date: any) {
   );
 }
 
+async function getKurs() {
+  const [data] = await db.execute(`SELECT currency_value FROM iven_currency_types where name='BYR'`);
+  return data[0].currency_value;
+}
+
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   const phone = body.info.phone.replaceAll(' ', '').replaceAll('-', '').replaceAll('+375', '').replaceAll('(', '').replaceAll(')', '');
@@ -52,17 +57,17 @@ ${body.info.fio},<br/>
   body.total.order_discount = 0;
 
   let customerID;
-  let sql = `SELECT customerID FROM site_customers where phone='${phone}' LIMIT 1`;
+  let sql = `SELECT customerID FROM win7_customers where phone='${phone}' LIMIT 1`;
   let res = await db.execute(sql);
   customerID = res?.[0]?.[0]?.customerID;
 
   if (!customerID) {
-    sql = `SELECT customerID FROM site_customers where email='${body.info.email}' LIMIT 1`;
+    sql = `SELECT customerID FROM win7_customers where email='${body.info.email}' LIMIT 1`;
     res = await db.execute(sql);
     customerID = res?.[0]?.[0]?.customerID;
   }
   if (!customerID) {
-    sql = `insert into site_customers 
+    sql = `insert into win7_customers 
     (customerID, login, name, cust_password, Email, city, adress, phone, price, privelege)
     values
     (null, '${body.info.email}', '${body.info.name}', 'md5(1234)', '${body.info.email}', '${body.info.city ?? ''}', '${body.info.address}', '${body.info.phone}', 4,99)`;
@@ -71,7 +76,7 @@ ${body.info.fio},<br/>
     customerID = res[0].insertId;
   }
 
-  sql = `insert into site_orders 
+  sql = `insert into win7_orders 
   (orderID, customerID, order_time, customer_ip, shipping_type, payment_type, customers_comment, manager_comment, rek, statusID, shipping_cost, order_discount, order_amount, name, phone, email, city, address) 
   values
   (null, '${customerID}', '${body.info.order_time}', '${body.info.customer_ip}', '${body.info.delivery}', '${body.info.payment}', '${body.info.comment}', '${body.info.manager_comment}', '${body.info.rek}', '${body.info.statusID}', '${body.total.deliveryPrice}', '${body.total.order_discount}', '${body.total.total}', '${body.info.name}', '${body.info.phone}', '${body.info.email}', '${body.info.city}', '${body.info.address}')`;
@@ -80,7 +85,7 @@ ${body.info.fio},<br/>
 
   const orderID = res[0].insertId;
 
-  let productsSQL = `insert into site_ordered_carts 
+  let productsSQL = `insert into win7_ordered_carts 
   (itemID, orderID, productID, name, serial, warranty, Price, Quantity, status_ID, seller_ID) 
   values`;
   body.cart.data.forEach((item: Record<string, any>, index: number) => {
@@ -90,7 +95,7 @@ ${body.info.fio},<br/>
       productID: item.productID,
       name: item.name,
       warranty: item.warranty,
-      Price: item.Price_bn,
+      Price: item.Price,
       Quantity: item.qty,
       serial: '',
       status_ID: 0,

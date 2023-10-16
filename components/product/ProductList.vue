@@ -10,7 +10,7 @@
           <div class="flex gap-6 items-center mb-3">
             <div class="tags flex-row min-h-[21px]">
               <div v-if="item.is_auction" class="bg-[#4DB732]">Аукцион</div>
-              <div v-if="item.Price_bn > 500" class="bg-[#F54D4D]">В рассрочку</div>
+              <div v-if="item.Price > 500" class="bg-[#F54D4D]">В рассрочку</div>
               <div v-if="item.PriceSale_bn > 0" class="bg-[#FFAC2F]">На акции</div>
             </div>
             <div class="info flex gap-2">
@@ -31,7 +31,7 @@
         <div class="price text-[24px] min-w-[120px]">
           <div :class="{ 'text-red-600 leading-[1] md:mb-1': item.PriceSale_bn > 0 }">
             <span class="line-through text-xs block text-[#000]" v-if="item.PriceSale_bn">{{ price(item.PriceSale_bn) }} </span>
-            {{ price(item.Price_bn) }}
+            {{ price(item.Price) }}
           </div>
         </div>
         <div class="controls">

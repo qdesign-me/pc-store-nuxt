@@ -1,15 +1,20 @@
 import db from '../../../db/db';
 
-const getPopularProduct = async (ids) => {
+const getPopularProduct = async (ids, kurs) => {
   const [data] = await db.execute(
-    `select  (select group_concat(ip.filename) from site_pictures ip where ip.productID=p.productID group by ip.productID) as img,  p.name, p.Price_bn, p.PriceSale_bn, p.uri from site_products p where p.enabled=1 and p.categoryID in (${ids}) order by p.viewed_times desc LIMIT 1`
+    `select  (select group_concat(ip.filename) from iven_product_pictures ip where ip.productID=p.productID group by ip.productID) as img,  p.name, ROUND(p.Price * ${kurs}, 2) as Price, p.PriceSale_bn, p.uri from iven_products p where p.enabled=1 and p.categoryID in (${ids}) order by p.viewed_times desc LIMIT 1`
   );
   return data?.[0];
 };
+async function getKurs() {
+  const [data] = await db.execute(`SELECT currency_value FROM iven_currency_types where name='BYR'`);
+  return data[0].currency_value;
+}
 export default defineEventHandler(async (event) => {
   console.log('API CATEGORIES/MENU');
+  const kurs = await getKurs();
   const [data] = await db.execute(
-    `select categoryID, name, uri, parent from site_categories where visible=1 and parent in (498, 365,28, 362,364, 497, 3,10, 9, 1, 0) order by parent, sort_order`
+    `select categoryID, name, fullPath as uri, parent from iven_categories where visible=1 and parent in (498, 365,28, 362,364, 497, 3,10, 9, 1, 0) order by parent, sort_order`
   );
   const menumap = new Map();
 
@@ -37,7 +42,7 @@ export default defineEventHandler(async (event) => {
   for (const item of data) {
     if (products[item.categoryID]) {
       const it = menumap.get(item.categoryID);
-      it.product = await getPopularProduct(products[item.categoryID].join(','));
+      it.product = await getPopularProduct(products[item.categoryID].join(','), kurs);
     }
   }
 

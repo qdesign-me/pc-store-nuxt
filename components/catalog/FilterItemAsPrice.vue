@@ -25,7 +25,6 @@ watchDebounced(
 
     const searchQuery = buildQuery(newFitlers);
     const path = `${props.uri}${searchQuery}`;
-    console.log(path);
     navigateTo(path);
   },
   { debounce: 500, maxWait: 1000 }

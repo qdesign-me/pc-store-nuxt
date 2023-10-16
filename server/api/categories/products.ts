@@ -15,6 +15,11 @@ async function fetchColumn(sql: string) {
   return data[0][columns[0]];
 }
 
+async function getKurs() {
+  const [data] = await db.execute(`SELECT currency_value FROM iven_currency_types where name='BYR'`);
+  return data[0].currency_value;
+}
+
 export default defineEventHandler(async (event) => {
   console.log('API CATEGORIES/PRODUCTS');
   const body = await readBody(event);
@@ -23,14 +28,16 @@ export default defineEventHandler(async (event) => {
     filters: { take = 12, sortby = 'popular', sortdir = 'desc', page = 1, ...rest },
   } = body;
 
+  const kurs = await getKurs();
+
   const skip = (page - 1) * 12;
 
-  const select = `(select group_concat(ip.filename) from site_pictures ip where ip.productID=p.productID group by ip.productID) as img, 
-   p.productID, p.name, p.Price_bn, p.PriceSale_bn, p.uri, p.is_auction, p.is_new `;
+  const select = `(select group_concat(ip.filename) from iven_product_pictures ip where ip.productID=p.productID group by ip.productID) as img, 
+   p.productID, p.name, ROUND(p.Price * ${kurs}, 2) as Price, p.PriceSale_bn, p.uri, p.is_auction, p.is_new `;
   const sorttypes: Record<string, string> = {
     name: 'p.name',
     popular: 'p.viewed_times',
-    price: 'p.Price_bn',
+    price: 'p.Price',
     rank: 'p.name',
     reviews: 'p.name',
     video: 'p.name',
@@ -53,12 +60,12 @@ export default defineEventHandler(async (event) => {
       if (field === 'price') {
         const priceTo = values.to ?? 9999999;
         const priceFrom = values.from ?? 0;
-        priceFilter = `and p.Price_bn between ${priceFrom} and ${priceTo}`;
+        priceFilter = `and ROUND(p.Price * ${kurs}, 2) between ${priceFrom} and ${priceTo}`;
         return priceFilter;
       }
       if (field === 'q') {
         const q = values.value.trim();
-        return `and p.name like '%${q}%'`;
+        return `and (p.name like '%${q}%' )`;
       }
 
       if (values.to && !values.from) {
@@ -74,13 +81,13 @@ export default defineEventHandler(async (event) => {
           .map((item: string) => "'" + item + "'")} )`;
       }
 
-      return `and productID in (select fop.productID  from site_features_on_products fop  join site_products_features spf on spf.featureID = fop.featureID and spf.alias='${field}' where ${condition})`;
+      return `and productID in (select fop.productID from iven_features_on_products fop  join iven_products_features spf on spf.featureID = fop.featureID and spf.alias='${field}' where ${condition})`;
     })
     .join(' ');
 
   const results = { data: [], total: 0 };
 
-  const urlCheck = ['/search', '/top-prodazh', '/novinki', '/akcii'].includes(uri) ? '' : `join site_categories c on c.categoryID = p.categoryID and c.uri like '${uri}%'`;
+  const urlCheck = ['/search', '/top-prodazh', '/novinki', '/akcii'].includes(uri) ? '' : `join iven_categories c on c.categoryID = p.categoryID and c.fullPath like '${uri}%'`;
   if (uri === '/akcii') {
     andFilters += ' and p.PriceSale_bn > 0';
   }
@@ -88,26 +95,25 @@ export default defineEventHandler(async (event) => {
     andFilters += ' and p.is_new > 0';
   }
   if (uri === '/top-prodazh') {
-    // const [data] = await db.execute(`select ProductID as ids from site_products where enabled=1 order by viewed_times desc limit 100`);
+    // const [data] = await db.execute(`select ProductID as ids from iven_products where enabled=1 order by viewed_times desc limit 100`);
     // const ids = data.map(({ ids }) => ids).join(',');
     // andFilters += ` and p.ProductID in (${ids})`;
     andFilters += ` and p.viewed_times > 1000`;
   }
   const sql = `select ${select} 
-  from site_products p 
+  from iven_products p 
   ${urlCheck}
   where p.enabled=1 ${andFilters} order by ${sorttypes[sortby]} ${sortdir} limit ${skip}, ${take}`;
 
-  console.log({ uri, sql, andFilters });
   results.data = await fetchAll(sql);
 
-  const total = await fetchColumn(`select count(*) as total from site_products p 
+  const total = await fetchColumn(`select count(*) as total from iven_products p 
   ${urlCheck}
   where p.enabled=1 ${andFilters}`);
 
-  const { price_min, price_max } = await fetchRow(`select min(p.Price_bn) as price_min, max(p.Price_bn) as price_max
-  from site_products p 
+  const { price_min, price_max } = await fetchRow(`select min(ROUND(p.Price * ${kurs}, 2)) as price_min, max(ROUND(p.Price * ${kurs}, 2)) as price_max
+  from iven_products p 
   ${urlCheck}
   where p.enabled=1 ${andFilters.replace(priceFilter, '')} `);
-  return { ...results, uri, total, price_min, price_max };
+  return { ...results, uri, total, price_min, price_max, kurs };
 });

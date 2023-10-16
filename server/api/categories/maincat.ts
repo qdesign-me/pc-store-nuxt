@@ -2,8 +2,8 @@ import db from '../../../db/db';
 
 const getTotal = async (uri: string) => {
   const sql = `select count(*) as total
-  from site_products p
-  join site_categories c on c.categoryID = p.categoryID and c.uri like '${uri}%'
+  from iven_products p
+  join iven_categories c on c.categoryID = p.categoryID and c.uri like '${uri}%'
   where p.enabled=1 LIMIT 0,100`;
   const [res] = await db.execute(sql);
   return res?.[0]?.total;
@@ -20,7 +20,7 @@ export default defineEventHandler(async (event) => {
   };
   const current = mapping[body.categoryID];
   const [data] = await db.execute(
-    `select categoryID, name, meta_description, uri, parent from site_categories where visible=1 and categoryId not in (7, 26, 497) and parent in (${current}) order by parent, sort_order`
+    `select categoryID, name, meta_description, fullPath as uri, parent from iven_categories where visible=1 and categoryId not in (7, 26, 497) and parent in (${current}) order by parent, sort_order`
   );
 
   const menumap = new Map();

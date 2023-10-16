@@ -1,5 +1,10 @@
 import db from '../../../db/db';
 
+async function getKurs() {
+  const [data] = await db.execute(`SELECT currency_value FROM iven_currency_types where name='BYR'`);
+  return data[0].currency_value;
+}
+
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   const { items } = body;
@@ -11,11 +16,13 @@ export default defineEventHandler(async (event) => {
     };
   console.log('API PRODUCTS/CART 1', JSON.stringify(body));
 
+  const kurs = await getKurs();
+
   const ids = Object.keys(items);
 
   const whereCond = `productID in (${ids})`;
 
-  const sql = `select (select ip.filename from site_pictures ip where ip.productID=site_products.productID  limit 1) as img, productID, name, warranty, model, Price_bn, PriceSale_bn, uri, is_auction, is_new from site_products where enabled=1 and ${whereCond}`;
+  const sql = `select (select ip.filename from iven_product_pictures ip where ip.productID=iven_products.productID  limit 1) as img, productID, name, warranty, model, ROUND(Price * ${kurs}, 2) as Price, PriceSale_bn, uri, is_auction, is_new from iven_products where enabled=1 and ${whereCond}`;
 
   let [data] = await db.execute(sql);
 
@@ -26,7 +33,7 @@ export default defineEventHandler(async (event) => {
 
   data = data.map((item: Record<string, any>) => {
     const qty = items[item.productID];
-    const itemTotal = (qty * item.Price_bn).toFixed(2);
+    const itemTotal = (qty * item.Price).toFixed(2);
     total.qty += qty;
     total.price += +itemTotal;
     return { ...item, qty, itemTotal };

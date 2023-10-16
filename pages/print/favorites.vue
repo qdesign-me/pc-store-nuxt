@@ -21,7 +21,7 @@
             {{ item.name }}
           </td>
           <td>
-            {{ price(item.Price_bn) }}
+            {{ price(item.Price) }}
           </td>
         </tr>
       </tbody>

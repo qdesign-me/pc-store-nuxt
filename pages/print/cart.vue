@@ -23,7 +23,7 @@
             {{ item.name }}
           </td>
           <td class="text-center">
-            {{ price(item.Price_bn) }}
+            {{ price(item.Price) }}
           </td>
           <td class="text-center">
             {{ item.qty }}

@@ -1,6 +1,11 @@
 //@ts-nocheck
 import db from '../../../db/db';
 
+async function getKurs() {
+  const [data] = await db.execute(`SELECT currency_value FROM iven_currency_types where name='BYR'`);
+  return data[0].currency_value;
+}
+
 export default defineEventHandler(async (event) => {
   console.log('API PRODUCTS/COMPARE');
   const body = await readBody(event);
@@ -14,16 +19,17 @@ export default defineEventHandler(async (event) => {
     products: {},
     features: {},
   };
-  sql = `select (select group_concat(ip.filename) from site_pictures ip where ip.productID=site_products.productID group by ip.productID) as img, productID, uri, name, Price_Bn, PriceSale_bn, is_auction, is_new
-from site_products where productID in (${id})`;
+  const kurs = await getKurs();
+  sql = `select (select group_concat(ip.filename) from iven_product_pictures ip where ip.productID=iven_products.productID group by ip.productID) as img, productID, uri, name, ROUND(Price * ${kurs}, 2) as Price, PriceSale_bn, is_auction, is_new
+from iven_products where productID in (${id})`;
   const [products] = await db.execute(sql);
   data.products = products.reduce((acc, item) => {
     return { ...acc, [item.productID]: { ...item, features: {} } };
   }, {});
 
-  sql = `select  p.productID, sfop.value, spf.label, spf.tooltip, spf.suffix, spf.filter_type, spf.feature_type from site_products p 
-  left join site_features_on_products sfop on p.productID=sfop.productID 
-  left join site_products_features spf on spf.featureID=sfop.featureID where p.productID in (${id}) order by spf.sort_order`;
+  sql = `select  p.productID, sfop.value, spf.label, spf.tooltip, spf.suffix, spf.filter_type, spf.feature_type from iven_products p 
+  left join iven_features_on_products sfop on p.productID=sfop.productID 
+  left join iven_products_features spf on spf.featureID=sfop.featureID where p.productID in (${id}) order by spf.sort_order`;
 
   const [features] = await db.execute(sql);
 
