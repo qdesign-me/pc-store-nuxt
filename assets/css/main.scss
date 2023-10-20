@@ -471,7 +471,7 @@
     }
   }
   .tags {
-    @apply flex flex-col gap-2;
+    @apply flex  gap-2;
     > div {
       @apply text-white  rounded w-[108px] text-center text-[10px] leading-[21px] max-w-[85px];
     }

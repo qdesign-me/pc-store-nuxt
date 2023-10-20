@@ -8,11 +8,11 @@
   <h1 class="mb-10 max-w-[900px]">{{ props.data.name }}</h1>
 
   <div>
-    <div class="flex gap-4 text-sm text-orange items-center mb-6" v-if="props.data.enabled === 1">
+    <div class="flex gap-4 text-sm text-[#E5A35B] items-center mb-6" v-if="props.data.enabled === 1">
       <AvailableIcon />
       Товар в наличии
     </div>
-    <div class="tags flex-row mb-6 sm:hidden">
+    <div class="tags mb-6 lg:hidden">
       <div v-if="props.data.PriceSale_bn > 0" class="bg-[#FFAC2F] flex-1">На акции</div>
       <div v-if="props.data.is_auction > 0" class="bg-[#4DB732] flex-1">Аукцион</div>
       <div v-if="props.data.Price > 500" class="bg-[#F54D4D] flex-1">В рассрочку</div>
@@ -23,7 +23,7 @@
         <ProductProfileImages :data="props.data" />
       </div>
       <div class="text-sm flex flex-col gap-4 flex-1 min-w-[200px] profile-short">
-        <div class="text-sm sm:text-base font-semibld mb-4 hidden xl:block">Код товара: {{ props.data.model }}</div>
+        <div class="text-sm sm:text-base font-semibold mb-4 hidden xl:block">Код товара: {{ props.data.model }}</div>
 
         <template v-if="0">
           <div>
@@ -37,7 +37,10 @@
         </template>
 
         <ul class="flex flex-col gap-3" v-if="props.data.features.length">
-          <li v-for="feature in props.data.features" :key="feature.label">{{ feature.label }}: {{ feature.value }}{{ feature.suffix }}</li>
+          <li v-for="feature in props.data.features" :key="feature.label">
+            <span class="font-semibold">{{ feature.label }}</span
+            >: {{ feature.value }}{{ feature.suffix }}
+          </li>
         </ul>
 
         <div class="mt-10 text-blue cursor-pointer text-base gap-6 items-center hidden xl:flex" v-if="props.data.description.length > 0">
@@ -46,7 +49,7 @@
         </div>
       </div>
       <div class="max-w-[420px] text-sm flex flex-col">
-        <div class="block xl:hidden text-sm font-semibld mb-4">Код товара: {{ props.data.model }}</div>
+        <div class="block xl:hidden text-sm font-semibold mb-4">Код товара: {{ props.data.model }}</div>
 
         <div class="flex gap-2 mb-6" v-if="0">
           Рейтинг товара
@@ -59,7 +62,7 @@
             <div class="underline underline-offset-4 cursor-pointer">13 Отзывов</div>
           </div>
         </div>
-        <div class="tags hidden sm:flex-row mb-6">
+        <div class="tags hidden lg:!flex mb-6">
           <div v-if="props.data.PriceSale_bn > 0" class="bg-[#FFAC2F] flex-1">На акции</div>
           <div v-if="props.data.is_auction > 0" class="bg-[#4DB732] flex-1">Аукцион</div>
           <div v-if="props.data.Price > 500" class="bg-[#F54D4D] flex-1">В рассрочку</div>

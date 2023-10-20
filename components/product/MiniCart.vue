@@ -14,7 +14,7 @@
             </div>
             <div class="flex-1 flex flex-col justify-between">
               <div class="flex gap-6 items-center mb-1" v-if="item.is_auction || item.Price > 500 || item.PriceSale_bn > 0">
-                <div class="tags flex-row min-h-[21px]">
+                <div class="tags min-h-[21px]">
                   <div v-if="item.is_auction" class="bg-[#4DB732]">Аукцион</div>
                   <div v-if="item.Price > 500" class="bg-[#F54D4D]">В рассрочку</div>
                   <div v-if="item.PriceSale_bn > 0" class="bg-[#FFAC2F]">На акции</div>
@@ -61,7 +61,7 @@
             </div>
             <div class="flex-1 flex flex-col justify-between">
               <div class="flex gap-6 items-center mb-1" v-if="item.is_auction || item.Price > 500 || item.PriceSale_bn > 0">
-                <div class="tags flex-row min-h-[21px]">
+                <div class="tags min-h-[21px]">
                   <div v-if="item.is_auction" class="bg-[#4DB732]">Аукцион</div>
                   <div v-if="item.Price > 500" class="bg-[#F54D4D]">В рассрочку</div>
                   <div v-if="item.PriceSale_bn > 0" class="bg-[#FFAC2F]">На акции</div>

@@ -1,3 +1,4 @@
+import { notAllowedCats } from '~/configs';
 import db from '../../../db/db';
 
 const getPopularProduct = async (ids, kurs) => {
@@ -14,7 +15,12 @@ export default defineEventHandler(async (event) => {
   console.log('API CATEGORIES/MENU');
   const kurs = await getKurs();
   const [data] = await db.execute(
-    `select categoryID, name, fullPath as uri, parent from iven_categories where visible=1 and parent in (498, 365,28, 362,364, 497, 3,10, 9, 1, 0) order by parent, sort_order`
+    `select categoryID, name, fullPath as uri, parent from iven_categories 
+    where 
+    visible=1  
+    and parent in (498, 365, 28, 362, 364, 497, 3,10, 9, 1, 0)  
+    and categoryId not in (${notAllowedCats.join(',')}) 
+    order by parent, sort_order`
   );
   const menumap = new Map();
 
@@ -22,7 +28,7 @@ export default defineEventHandler(async (event) => {
     498: [213, 499, 549, 908, 1025, 1026, 1027, 1028, 1029],
     365: [2, 3, 4, 5, 6, 7, 8, 9, 10, 16, 19, 26, 76, 497],
     28: [981, 982, 983],
-    362: [13, 14, 15, 17, 20, 21, 22, 23, 24, 25, 27, 67, 69, 117, 183, 368, 825, 972],
+    362: [13, 14, 15, 17, 20, 21, 22, 23, 24, 25, 67, 69, 117, 183, 368, 825, 972],
     364: [18, 28, 29, 30, 32, 34, 162, 171, 172, 175, 177, 178, 193, 215, 229, 241, 377, 378, 389, 423, 498, 554, 602, 605, 812, 1005, 1012],
     497: [383, 537, 538],
   };

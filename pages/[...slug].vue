@@ -45,7 +45,7 @@
 <script async setup>
 const router = useRouter();
 const filters = computed(() => router.currentRoute.value.query);
-
+import { notAllowedCats } from '../configs/index';
 provide('filters', filters);
 const uri = router.currentRoute.value.path;
 
@@ -66,6 +66,9 @@ const { pending, data: products } = await useFetch('/api/categories/products', {
 });
 
 if (!category?.value.data) {
+  throw createError({ statusCode: 404, statusMessage: 'Page Not Found' });
+}
+if (notAllowedCats.includes(category?.value.data.categoryID)) {
   throw createError({ statusCode: 404, statusMessage: 'Page Not Found' });
 }
 

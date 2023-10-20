@@ -37,7 +37,6 @@
           </div>
 
           <div class="img">
-            {{ node.categoryID }}
             <img loading="lazy" :src="`/img/products/komplektuyuszie/${node.categoryID}.png`" alt="" v-if="config.includes(node.categoryID)" />
           </div>
         </NuxtLink>
@@ -48,5 +47,8 @@
 
 <script setup>
 const props = defineProps(['data']);
-const config = [2, 4, 3, 5, 6, 8, 76, 9, 10, 16, 19, 178, 28, 18, 171, 215, 554, 378, 812, 423, 602, 162, 172, 29, 32, 389];
+const config = [
+  2, 4, 3, 5, 6, 8, 76, 9, 10, 16, 19, 178, 28, 18, 171, 215, 554, 378, 812, 423, 602, 162, 172, 29, 32, 389, 34, 229, 30, 498, 1005, 605, 175, 177, 241, 24, 368, 13, 14, 15, 17,
+  23, 25, 27, 69, 825, 67, 117, 972,
+];
 </script>

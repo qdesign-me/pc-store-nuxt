@@ -1,4 +1,5 @@
 //@ts-nocheck
+import { notAllowedCats } from '~/configs';
 import db from '../../../db/db';
 
 async function fetchAll(sql: string) {
@@ -103,17 +104,17 @@ export default defineEventHandler(async (event) => {
   const sql = `select ${select} 
   from iven_products p 
   ${urlCheck}
-  where p.enabled=1 ${andFilters} order by ${sorttypes[sortby]} ${sortdir} limit ${skip}, ${take}`;
+  where p.enabled=1 and p.categoryID not in (${notAllowedCats.join(',')})  ${andFilters} order by ${sorttypes[sortby]} ${sortdir} limit ${skip}, ${take}`;
 
   results.data = await fetchAll(sql);
 
   const total = await fetchColumn(`select count(*) as total from iven_products p 
   ${urlCheck}
-  where p.enabled=1 ${andFilters}`);
+  where p.enabled=1 and p.categoryID not in (${notAllowedCats.join(',')}) ${andFilters}`);
 
   const { price_min, price_max } = await fetchRow(`select min(ROUND(p.Price * ${kurs}, 2)) as price_min, max(ROUND(p.Price * ${kurs}, 2)) as price_max
   from iven_products p 
   ${urlCheck}
-  where p.enabled=1 ${andFilters.replace(priceFilter, '')} `);
+  where p.enabled=1 and p.categoryID not in (${notAllowedCats.join(',')}) ${andFilters.replace(priceFilter, '')} `);
   return { ...results, uri, total, price_min, price_max, kurs };
 });
