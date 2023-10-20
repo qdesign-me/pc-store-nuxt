@@ -23,6 +23,15 @@ const processBody = (data: Record<string, any>) => {
     Сообщение:<br>
     ${data.message}`;
   }
+  if (data.action === 'callmeback') {
+    html = `Страница: ${data.page}<br/>`;
+    if (data.name) html += `Имя: ${data.name}<br>`;
+    if (data.phone) html += `Телефон: ${data.phone}<br>`;
+    if (data.email) html += `Email: ${data.email}<br>`;
+    if (data.message)
+      html += `Сообщение:<br>
+    ${data.message}`;
+  }
   if (data.action === 'subscribe-details') {
     if (data.email) html += `Email: ${data.email}<br>`;
     if (data.viber) html += `Viber: ${data.viber}<br>`;

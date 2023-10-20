@@ -76,12 +76,13 @@
 
           <Add2Cart class="has-large" :productID="props.data.productID" />
 
-          <div class="bg-[#EFEFEF] flex relative rounded mb-6 xl:mb-12 mt-4">
+          <div class="bg-[#EFEFEF] flex relative rounded mt-4">
             <Add2Favorites variant="primary" :productID="props.data.productID" />
-
             <div class="border absolute top-[5px] bottom-[5px] left-1/2"></div>
             <Add2Compare variant="primary" :productID="props.data.productID" />
           </div>
+
+          <CallMeBack />
 
           <div class="text mt-4">
             <p class="hidden sm:block">Самовывоз только в Минске.</p>
@@ -107,21 +108,11 @@
       </div>
     </div>
 
-    <div class="text-blue cursor-pointer underline underline-offset-4 mt-6 hidden sm:block" @click="modalVisible = true">Сообщить об ошибке в описании</div>
-
-    <Modal :visible="modalVisible" @close="modalVisible = false" title="Сообщить об ошибке">
-      <Form :model="model" :onFinish="onFinish">
-        <FormItem name="message" :rules="[{ required: true }]">
-          <textarea name="message" placeholder="Укажите неточность в описании" class="input h-40" v-model="model.message"></textarea>
-        </FormItem>
-        <button class="btn">Отправить</button>
-      </Form>
-    </Modal>
+    <ReportError class="mt-6 hidden sm:block" />
   </div>
 </template>
 
 <script setup>
-const router = useRouter();
 const target = ref(null);
 const tabs = computed(() => {
   const tabs = [];
@@ -130,31 +121,10 @@ const tabs = computed(() => {
   return tabs;
 });
 const activeTab = ref(null);
-const modalVisible = ref(false);
 const props = defineProps(['data']);
 
 const showFeatures = () => {
   activeTab.value = tabs.value.findIndex((item) => item.title === 'Характеристики');
   target.value.scrollIntoView({ behavior: 'smooth', block: 'start' });
-};
-
-const DEFAULT_DATA = {
-  action: 'correct',
-  subject: 'Ошибка в описании товара',
-  page: `https://i-ven.by${router.currentRoute.value.fullPath}`,
-  message: '',
-};
-
-const model = useState(() => DEFAULT_DATA);
-
-const onFinish = async (event) => {
-  message.info('Ваше сообщение отправлено');
-  const body = clone(model.value);
-  useFetch('/api/email', {
-    method: 'POST',
-    body,
-  });
-  Object.assign(model.value, clone(DEFAULT_DATA));
-  modalVisible.value = false;
 };
 </script>
