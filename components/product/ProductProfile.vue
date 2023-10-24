@@ -43,7 +43,7 @@
           </li>
         </ul>
 
-        <div class="mt-10 text-blue cursor-pointer text-base gap-6 items-center hidden xl:flex" v-if="props.data.description?.length > 0">
+        <div class="mt-10 text-blue cursor-pointer text-base gap-6 items-center hidden xl:flex" v-if="props.data.description?.length > 6">
           <div class="underline underline-offset-4" @click="showFeatures">Все характеристики товара</div>
           <ArrowRightIcon />
         </div>
@@ -117,7 +117,7 @@ const target = ref(null);
 const tabs = computed(() => {
   const tabs = [];
   if (props.data.about) tabs.push({ title: 'О товаре', content: props.data.about });
-  if (props.data.description) tabs.push({ title: 'Характеристики', content: props.data.description });
+  if (props.data.description?.length > 6) tabs.push({ title: 'Характеристики', content: props.data.description });
   return tabs;
 });
 const activeTab = ref(null);

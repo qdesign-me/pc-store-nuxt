@@ -6,7 +6,6 @@ async function getProduct(sql: string) {
 }
 
 async function getSimilar(sql: string) {
-  console.log('similar', sql);
   const [data] = await db.execute(sql);
   return data;
 }
