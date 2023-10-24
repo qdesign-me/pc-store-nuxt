@@ -173,7 +173,7 @@
           </div>
 
           <div class="flex items-center justify-center">
-            <img class="box-stick-img" src="/img/about/4.png" alt="" width="595" height="480" />
+            <img class="box-stick-img" src="/img/about/4.png" alt="i-ven.by" width="595" height="480" />
           </div>
         </div>
       </div>

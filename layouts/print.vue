@@ -18,7 +18,7 @@
         v-for="(item, index) in ['Программа лояльности', 'Профессиональные сотрудники', 'Ускоренный обмен либо возврат комплектующих']"
         class="flex-1 w-10 flex flex-col items-center gap-2"
       >
-        <img :src="`/img/about/service/${index + 1}.svg`" alt="" />
+        <img :src="`/img/about/service/${index + 1}.svg`" :alt="item" />
         {{ item }}
       </div>
     </div>

@@ -67,7 +67,7 @@
             ]"
             :key="item"
           >
-            <img :src="`/img/logos/${item}.png`" alt="" />
+            <img :src="`/img/logos/${item}.png`" :alt="item" />
           </div>
         </div>
       </div>
@@ -92,7 +92,7 @@
             :key="item"
             class="relative flex gap-6 items-center xl:items-start"
           >
-            <div class="w-12 h-12 shrink-0"><img :src="`/img/about/advantages/${index + 1}.svg`" alt="" /></div>
+            <div class="w-12 h-12 shrink-0"><img :src="`/img/about/advantages/${index + 1}.svg`" alt="i-ven.by" /></div>
             <div>{{ item }}</div>
           </div>
         </div>
@@ -118,7 +118,7 @@
           </div>
 
           <div>
-            <img class="box-stick-img" src="/img/about/1.png" alt="" width="613" height="385" />
+            <img class="box-stick-img" src="/img/about/1.png" alt="i-ven.by" width="613" height="385" />
           </div>
         </div>
       </div>
@@ -139,7 +139,7 @@
             </div>
           </div>
           <div>
-            <img class="box-stick-img xl:-mb-28" src="/img/about/2.png" alt="" width="648" height="578" />
+            <img class="box-stick-img xl:-mb-28" src="/img/about/2.png" width="648" height="578" alt="i-ven.by" />
           </div>
         </div>
       </div>
@@ -163,7 +163,7 @@
             class="flex items-center gap-6 max-w-[380px] text-[20px] underline"
             v-for="(item, index) in ['Программа лояльности', 'Профессиональные сотрудники', 'Ускоренный обмен либо возврат комплектующих']"
           >
-            <img :src="`/img/about/service/${index + 1}.svg`" alt="" />
+            <img :src="`/img/about/service/${index + 1}.svg`" alt="i-ven.by" />
             <div class="mt-2">{{ item }}</div>
           </div>
         </div>
@@ -185,7 +185,7 @@
             </div>
           </div>
           <div>
-            <img class="box-stick-img" src="/img/about/3.png" width="457" height="454" alt="" />
+            <img class="box-stick-img" src="/img/about/3.png" width="457" height="454" alt="i-ven.by" />
           </div>
         </div>
       </div>
@@ -195,9 +195,9 @@
         <div class="h2">Способы оплаты</div>
 
         <div class="flex gap-2 card-logos">
-          <img src="/img/info/vtb.png" loading="lazy" width="64" height="40" alt="" />
-          <img src="/img/info/halva.png" loading="lazy" width="64" height="40" alt="" />
-          <img src="/img/info/magnit.png" loading="lazy" width="64" height="40" alt="" /><img src="/img/info/erip.png" loading="lazy" width="125" height="40" alt="" />
+          <img src="/img/info/vtb.png" loading="lazy" width="64" height="40" alt="ВТБ" />
+          <img src="/img/info/halva.png" loading="lazy" width="64" height="40" alt="Халва" />
+          <img src="/img/info/magnit.png" loading="lazy" width="64" height="40" alt="Магнит" /><img src="/img/info/erip.png" loading="lazy" width="125" height="40" alt="Ерип" />
         </div>
 
         <p class="my-6">
@@ -206,8 +206,8 @@
         </p>
 
         <div class="flex flex-wrap gap-2 payment-logos">
-          <img src="/img/info/belarusb-logo.png" loading="lazy" width="175" height="25" alt="" />
-          <img src="/img/info/vtb-logo.png" loading="lazy" width="70" height="25" alt="" />
+          <img src="/img/info/belarusb-logo.png" loading="lazy" width="175" height="25" alt="Беларусбанк" />
+          <img src="/img/info/vtb-logo.png" loading="lazy" width="70" height="25" alt="ВТБ" />
         </div>
 
         <NuxtLink to="/payment#credit"

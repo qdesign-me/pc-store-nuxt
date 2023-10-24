@@ -23,7 +23,7 @@
             <div v-if="node?.nodes.length > 10" class="text-xs leading-[20px]">+ {{ node?.nodes.length - 10 }} еще</div>
           </div>
           <div class="img">
-            <img loading="lazy" :src="`/img/products/komplektuyuszie/${node.categoryID}.png`" alt="" v-if="config.includes(node.categoryID)" />
+            <img loading="lazy" :src="`/img/products/komplektuyuszie/${node.categoryID}.png`" :alt="node.name" v-if="config.includes(node.categoryID)" />
           </div>
         </div>
         <NuxtLink :to="node.uri" v-else class="it">
@@ -37,7 +37,7 @@
           </div>
 
           <div class="img">
-            <img loading="lazy" :src="`/img/products/komplektuyuszie/${node.categoryID}.png`" alt="" v-if="config.includes(node.categoryID)" />
+            <img loading="lazy" :src="`/img/products/komplektuyuszie/${node.categoryID}.png`" :alt="node.name" v-if="config.includes(node.categoryID)" />
           </div>
         </NuxtLink>
       </div>

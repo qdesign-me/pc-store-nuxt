@@ -24,7 +24,7 @@ definePageMeta({
 });
 
 const meta = {
-  title: `${data.value.data.name} | Интернет-магазин Iven`,
+  title: `${data.value.data.name} | Iven`,
   description: data.value.data?.meta_description ? data.value.data?.meta_description : `${data.value.data?.name} в интернет-магазине Iven.`,
   ogImage: data.value.data.img,
   ogType: 'product',

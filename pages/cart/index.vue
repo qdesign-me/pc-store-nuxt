@@ -172,9 +172,9 @@
                       <div class="text-black font-medium">Рассрочка</div>
                       <div>Оплата картой рассрочки в пункте самовывоза или курьеру при получении</div>
                       <div class="flex gap-2 card-logos">
-                        <img src="/img/info/vtb.png" loading="lazy" width="64" height="40" alt="" class="h-[30px] w-auto" />
-                        <img src="/img/info/halva.png" loading="lazy" width="64" height="40" alt="" class="h-[30px] w-auto" />
-                        <img src="/img/info/magnit.png" loading="lazy" width="64" height="40" alt="" class="h-[30px] w-auto" />
+                        <img src="/img/info/vtb.png" loading="lazy" width="64" height="40" alt="ВТБ" class="h-[30px] w-auto" />
+                        <img src="/img/info/halva.png" loading="lazy" width="64" height="40" alt="Халва" class="h-[30px] w-auto" />
+                        <img src="/img/info/magnit.png" loading="lazy" width="64" height="40" alt="Магнит" class="h-[30px] w-auto" />
                       </div>
                     </div>
                   </div>
@@ -186,8 +186,8 @@
                       <div class="text-black font-medium">Оплата в кредит</div>
                       <div>Банки-партнёры:</div>
                       <div class="flex flex-wrap gap-2 payment-logos">
-                        <img src="/img/info/belarusb-logo.png" loading="lazy" width="175" height="25" alt="" />
-                        <img src="/img/info/vtb-logo.png" loading="lazy" width="70" height="25" alt="" />
+                        <img src="/img/info/belarusb-logo.png" loading="lazy" width="175" height="25" alt="Беларусбанк" />
+                        <img src="/img/info/vtb-logo.png" loading="lazy" width="70" height="25" alt="ВТБ" />
                       </div>
                     </div>
                   </div>

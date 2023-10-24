@@ -1,5 +1,5 @@
 <template>
-  <div class="text-blue cursor-pointer underline underline-offset-4" @click="modalVisible = true">Сообщить об ошибке в описании</div>
+  <div class="text-blue cursor-pointer underline underline-offset-4 mt-6" @click="modalVisible = true">Сообщить об ошибке в описании</div>
 
   <Modal :visible="modalVisible" @close="modalVisible = false" title="Сообщить об ошибке">
     <Form :model="model" :onFinish="onFinish">

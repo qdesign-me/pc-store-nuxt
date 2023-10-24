@@ -45,23 +45,29 @@
                 <div class="title mt-10 xl:h-[65px]">Платежные системы:</div>
                 <div class="flex flex-col gap-6 items-start">
                   <div class="flex gap-2 card-logos">
-                    <img src="/img/info/vtb.png" loading="lazy" width="64" height="40" alt="" />
-                    <img src="/img/info/halva.png" loading="lazy" width="64" height="40" alt="" />
-                    <img src="/img/info/magnit.png" loading="lazy" width="64" height="40" alt="" /><img src="/img/info/erip.png" loading="lazy" width="125" height="40" alt="" />
+                    <img src="/img/info/vtb.png" loading="lazy" width="64" height="40" alt="ВТБ" />
+                    <img src="/img/info/halva.png" loading="lazy" width="64" height="40" alt="Халва" />
+                    <img src="/img/info/magnit.png" loading="lazy" width="64" height="40" alt="Магнит" /><img
+                      src="/img/info/erip.png"
+                      loading="lazy"
+                      width="125"
+                      height="40"
+                      alt="Ерип"
+                    />
                   </div>
                   <div class="xl:my-6">Наличный расчет и расчет банковской картой при получении. Возможно оформление кредита в банках-партнёрах:</div>
                   <div class="flex flex-wrap gap-2 payment-logos">
-                    <img src="/img/info/belarusb-logo.png" loading="lazy" width="175" height="25" alt="" />
-                    <img src="/img/info/vtb-logo.png" loading="lazy" width="70" height="25" alt="" />
+                    <img src="/img/info/belarusb-logo.png" loading="lazy" width="175" height="25" alt="Беларусбанк" />
+                    <img src="/img/info/vtb-logo.png" loading="lazy" width="70" height="25" alt="ВТБ" />
                   </div>
                 </div>
               </div>
 
-              <div>
+              <div class="col-span-2 sm:col-span-1 mb-6">
                 <div class="title mt-10">Режим работы:</div>
                 <div v-html="$state.config.timetable" class="xl:-mr-8"></div>
               </div>
-              <div>
+              <div class="col-span-2 sm:col-span-1 mb-6">
                 <div class="flex gap-6 mt-10 social-links"><SocialLinks :social="$state.config.social" /></div>
               </div>
               <div class="col-span-2">

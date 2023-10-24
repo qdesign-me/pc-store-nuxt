@@ -17,14 +17,14 @@
               <p>В том числе, принимаем к оплате карты рассрочки:</p>
 
               <div class="flex gap-2 card-logos mt-2">
-                <img src="/img/info/vtb.png" loading="lazy" width="64" height="40" alt="" />
-                <img src="/img/info/halva.png" loading="lazy" width="64" height="40" alt="" />
-                <img src="/img/info/magnit.png" loading="lazy" width="64" height="40" alt="" />
+                <img src="/img/info/vtb.png" loading="lazy" width="64" height="40" alt="ВТБ" />
+                <img src="/img/info/halva.png" loading="lazy" width="64" height="40" alt="Халва" />
+                <img src="/img/info/magnit.png" loading="lazy" width="64" height="40" alt="Магнит" />
               </div>
             </div>
 
             <h2 class="mt-10">Оплата через ЕРИП</h2>
-            <img src="/img/info/erip.png" loading="lazy" width="125" height="40" alt="" class="mb-4" />
+            <img src="/img/info/erip.png" loading="lazy" width="125" height="40" alt="Ерип" class="mb-4" />
 
             <p>Инструкция по оплате в системе ЕРИП:</p>
 
@@ -82,7 +82,7 @@
         <p class="mb-6 -mt-1">Возможно оформление кредита в банках-партнёрах:</p>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="card border h-auto md:pt-6 md:pb-8 md:px-10">
-            <img src="/img/info/belarusb-logo.png" loading="lazy" width="280" height="40" class="mb-4" alt="" />
+            <img src="/img/info/belarusb-logo.png" loading="lazy" width="280" height="40" class="mb-4" alt="Беларусбанк" />
             <div class="text-[20px] font-medium">Кредит «Партнер Online» от Беларусбанка</div>
             <p class="my-4">Потребительский кредит</p>
             <div class="flex flex-col gap-2">
@@ -96,7 +96,7 @@
             >
           </div>
           <div class="card h-auto border md:pt-6 md:pb-8 md:px-10">
-            <img src="/img/info/vtb-logo.png" loading="lazy" width="91" height="33" class="mb-4" alt="" />
+            <img src="/img/info/vtb-logo.png" loading="lazy" width="91" height="33" class="mb-4" alt="ВТБ" />
             <div class="text-[20px] font-medium">«Экспресс-кредит» от Банка ВТБ (Беларусь)</div>
             <p class="my-4">Потребительский кредит</p>
             <div class="flex flex-col gap-2">

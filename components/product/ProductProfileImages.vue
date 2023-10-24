@@ -1,13 +1,13 @@
 <template>
   <div class="gap-6 select-none hidden lg:flex">
     <div class="border rounded px-8 py-12">
-      <img :src="main" alt="" width="395" height="395" class="block cursor-pointer object-contain aspect-square" @click="setVisible(main)" />
+      <img :src="main" :alt="props.data.name" width="395" height="395" class="block cursor-pointer object-contain aspect-square" @click="setVisible(main)" />
     </div>
     <div v-if="images?.length > 1" class="flex flex-col gap-2">
       <div v-for="image in images" :key="image">
         <img
           :src="image"
-          alt=""
+          :alt="props.data.name"
           loading="lazy"
           width="68"
           height="68"

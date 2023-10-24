@@ -3,7 +3,7 @@
     <div class="container py-20 pt-10 md:pt-20">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-16 items-center">
         <div>
-          <img :src="img" alt="" width="800" height="645" />
+          <img :src="img" alt="404" width="800" height="645" />
         </div>
         <div class="text">
           <div class="h2">Увы, страница не найдена</div>

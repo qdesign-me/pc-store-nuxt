@@ -8,7 +8,7 @@
               <NuxtLink class="card more-padding bg-blue py-0 height-sm justify-center" :to="link.uri">
                 <picture>
                   <source media="(max-width: 1024px)" :srcset="link.mobi" />
-                  <img :src="link.img" alt="" loading="lazy" width="450" height="350" class="slider-bg" />
+                  <img :src="link.img" :alt="link.title" loading="lazy" width="450" height="350" class="slider-bg" />
                 </picture>
 
                 <div class="title-lg text-white mb-0 relative" v-html="link.title" />
@@ -20,7 +20,7 @@
       <NuxtLink class="card rounded overflow-hidden more-padding bg-blue pb-0 height-sm link-alt" to="/akcii">
         <picture>
           <source media="(max-width: 1024px)" srcset="/img/promo/sale-mobi.png" />
-          <img src="/img/promo/sale.png" alt="" loading="lazy" width="295" height="350" class="promo-bg" />
+          <img src="/img/promo/sale.png" alt="Скидка" loading="lazy" width="295" height="350" class="promo-bg" />
         </picture>
         <div class="title-lg text-white relative">Все <br />акции</div>
       </NuxtLink>

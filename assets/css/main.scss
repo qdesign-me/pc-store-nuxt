@@ -354,6 +354,9 @@
     }
     .tabs-content {
       @apply hidden py-4 text-sm;
+      td:first-child {
+        @apply pr-2;
+      }
       &.active {
         @apply block;
       }
@@ -1330,5 +1333,11 @@
       flex-direction: column;
       gap: 0;
     }
+  }
+}
+
+@media screen and (min-width: 640px) {
+  .tabs .tabs-content {
+    display: block !important;
   }
 }
