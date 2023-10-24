@@ -1,0 +1,3 @@
+User-agent: *
+Host: i-ven.by
+Sitemap: https://i-ven.by/sitemap.xml

@@ -76,13 +76,21 @@ definePageMeta({
   layout: 'default',
 });
 
-const title = `${category.value.data?.name} | Интернет-магазин Iven`;
-const description = category.value.data?.meta_description ? category.value.data?.meta_description : `${category.value.data?.name} в интернет-магазине Iven.`;
+const getMeta = (category) => {
+  let t = category.name;
+  const breadcrumbs = JSON.parse(category.breadcrumbs);
+  if (breadcrumbs) {
+    t = breadcrumbs.map((item) => item.name).join(' / ');
+  }
+  const title = `${t} | Интернет-магазин Iven`;
+  const description = category.meta_description ? category.meta_description : `${t} в интернет-магазине Iven.`;
+  return {
+    title: () => title,
+    ogTitle: () => title,
+    description: () => description,
+    ogDescription: () => description,
+  };
+};
 
-useSeoMeta({
-  title: () => title,
-  ogTitle: () => title,
-  description: () => description,
-  ogDescription: () => description,
-});
+useSeoMeta(getMeta(category.value.data));
 </script>
