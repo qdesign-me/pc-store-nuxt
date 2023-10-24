@@ -45,9 +45,8 @@
             </p>
           </div>
 
-          <NuxtLink
+          <div
             class="flex justify-center items-center"
-            :to="`/brend/${item}`"
             v-for="item in [
               'sonic',
               'palit',
@@ -69,7 +68,7 @@
             :key="item"
           >
             <img :src="`/img/logos/${item}.png`" alt="" />
-          </NuxtLink>
+          </div>
         </div>
       </div>
     </div>

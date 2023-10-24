@@ -36,14 +36,14 @@
           </div>
         </template>
 
-        <ul class="flex flex-col gap-3" v-if="props.data.features.length">
+        <ul class="flex flex-col gap-3" v-if="props.data.features?.length">
           <li v-for="feature in props.data.features" :key="feature.label">
             <span class="font-semibold">{{ feature.label }}</span
             >: {{ feature.value }}{{ feature.suffix }}
           </li>
         </ul>
 
-        <div class="mt-10 text-blue cursor-pointer text-base gap-6 items-center hidden xl:flex" v-if="props.data.description.length > 0">
+        <div class="mt-10 text-blue cursor-pointer text-base gap-6 items-center hidden xl:flex" v-if="props.data.description?.length > 0">
           <div class="underline underline-offset-4" @click="showFeatures">Все характеристики товара</div>
           <ArrowRightIcon />
         </div>

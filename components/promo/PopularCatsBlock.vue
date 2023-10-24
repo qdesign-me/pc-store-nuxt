@@ -5,13 +5,13 @@
       <img :src="link.img" width="296" height="200" loading="lazy" class="promo-bg" />
       <ArrowLink class="absolute bottom-6">{{ link.title }}</ArrowLink>
     </NuxtLink>
-    <NuxtLink to="/zakazat-sborku" class="card bg-blue group height-xs overflow-hidden lg:hidden !hidden">
+    <NuxtLink to="/" class="card bg-blue group height-xs overflow-hidden lg:hidden !hidden">
       <div class="title text-white">
         Заказать
         <br />
         сборку
       </div>
-      <ArrowRightIcon class="text-white mt-2 block group-hover:translate-x-2" />
+      <ArrowRightIcon class="text-white mt-2 block group-hover:translate-x-2" v-if="0" />
     </NuxtLink>
   </div>
 </template>
