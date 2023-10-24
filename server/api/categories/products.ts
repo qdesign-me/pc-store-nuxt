@@ -33,8 +33,8 @@ export default defineEventHandler(async (event) => {
 
   const skip = (page - 1) * 12;
 
-  const select = `(select group_concat(ip.filename) from iven_product_pictures ip where ip.productID=p.productID group by ip.productID) as img, 
-   p.productID, p.name, ROUND(p.Price * ${kurs}, 2) as Price, ROUND(p.PriceSale * ${kurs}, 2) as PriceSale, p.uri, p.is_auction, p.is_new `;
+  const select = `(select group_concat(ip.filename separator '|') from iven_product_pictures ip where ip.productID=p.productID group by ip.productID) as img, 
+   p.productID, p.name, ROUND(p.Price * ${kurs}, 2) as Price, ROUND(p.PriceSale * ${kurs}, 2) as PriceSale, LOWER(p.uri) as uri, p.is_auction, p.is_new `;
   const sorttypes: Record<string, string> = {
     name: 'p.name',
     popular: 'p.viewed_times',
@@ -105,7 +105,6 @@ export default defineEventHandler(async (event) => {
   from iven_products p 
   ${urlCheck}
   where p.enabled=1 and p.categoryID not in (${notAllowedCats.join(',')})  ${andFilters} order by ${sorttypes[sortby]} ${sortdir} limit ${skip}, ${take}`;
-  console.log({ sql });
   results.data = await fetchAll(sql);
 
   const total = await fetchColumn(`select count(*) as total from iven_products p 

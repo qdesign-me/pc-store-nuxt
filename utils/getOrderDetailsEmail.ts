@@ -50,7 +50,7 @@ export function getOrderDetailsEmail(orderID: number, body: Record<string, any>)
     body.cart.data
       .map((item: Record<string, any>) => {
         const link = `https://i-ven.by/p/${item.uri.replace('.html', '')}`;
-        const src = 'https://win7.by/data/big/' + item.img.split(',')[0];
+        const src = 'https://win7.by/data/big/' + item.img.split('|')[0];
         return `<tr>
                             <td style="font-family: Arial; text-align: left; color: #111111;padding-right:20px">
                               <a href="${link}" style="color: #348eda">

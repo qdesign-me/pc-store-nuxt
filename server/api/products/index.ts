@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   const { take = 100, sortby = 'popular', sortdir = 'desc', where = {} } = body;
   const kurs = await getKurs();
-  const select = `(select group_concat(ip.filename) from iven_product_pictures ip where ip.productID=iven_products.productID group by ip.productID) as img, productID, name,  model, ROUND(Price * ${kurs}, 2) as Price, ROUND(PriceSale * ${kurs}, 2) as PriceSale, uri, is_auction, is_new`;
+  const select = `(select group_concat(ip.filename separator '|') from iven_product_pictures ip where ip.productID=iven_products.productID group by ip.productID) as img, productID, name,  model, ROUND(Price * ${kurs}, 2) as Price, ROUND(PriceSale * ${kurs}, 2) as PriceSale, LOWER(uri) as uri, is_auction, is_new`;
   const sorttypes: Record<string, string> = {
     name: 'name',
     popular: 'viewed_times',

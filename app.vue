@@ -11,6 +11,6 @@ const path = route.path;
 useSeoMeta({
   ogImage: `${hostname}/img/logo.png`,
   twitterCard: 'summary_large_image',
-  canonical: `${hostname}${path}`,
+  canonical: `${hostname}${path}`.toLowerCase(),
 });
 </script>

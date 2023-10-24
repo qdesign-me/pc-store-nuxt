@@ -22,7 +22,7 @@ export default defineEventHandler(async (event) => {
 
   const whereCond = `productID in (${ids})`;
 
-  const sql = `select (select ip.filename from iven_product_pictures ip where ip.productID=iven_products.productID  limit 1) as img, productID, name, warranty, model, ROUND(Price * ${kurs}, 2) as Price, ROUND(PriceSale * ${kurs}, 2) as PriceSale, uri, is_auction, is_new from iven_products where enabled=1 and ${whereCond}`;
+  const sql = `select (select ip.filename from iven_product_pictures ip where ip.productID=iven_products.productID  limit 1) as img, productID, name, warranty, model, ROUND(Price * ${kurs}, 2) as Price, ROUND(PriceSale * ${kurs}, 2) as PriceSale, LOWER(uri) as uri, is_auction, is_new from iven_products where enabled=1 and ${whereCond}`;
 
   let [data] = await db.execute(sql);
 

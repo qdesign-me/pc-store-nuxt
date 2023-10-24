@@ -4,8 +4,8 @@ import db from '../../db/db';
 const routes = ['/about', '/contacts', '/delivery', '/payment', '/warranty', '/public-offer', '/privacy-and-terms'];
 export default cachedEventHandler(
   async (e) => {
-    const [categories] = await db.execute(`SELECT fullPath as uri FROM iven_categories where visible=1 and categoryID not in (${notAllowedCats.join(',')}) LIMIT 10000`);
-    const [products] = await db.execute('SELECT uri FROM iven_products where enabled=1 LIMIT 10000');
+    const [categories] = await db.execute(`SELECT LOWER(fullPath) as uri FROM iven_categories where visible=1 and categoryID not in (${notAllowedCats.join(',')}) LIMIT 10000`);
+    const [products] = await db.execute('SELECT LOWER(uri) as uri FROM iven_products where enabled=1 LIMIT 10000');
 
     const posts = [...routes, ...categories.map((item: any) => item.uri), ...products.map((item: any) => '/p/' + item.uri.replace('.html', ''))];
     return posts.map((p) => {
