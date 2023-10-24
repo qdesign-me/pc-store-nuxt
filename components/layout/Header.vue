@@ -28,17 +28,17 @@
             <li>
               <div class="mode-2-items">
                 <a class="mode-2-item" :href="`tel:+37529${$state.config.mainphone}`">
-                  <img src="/img/logos/a1.png" alt="" />
+                  <img src="/img/logos/a1.png" alt="A1" />
                   +375-29-{{ formatPhoneNumber($state.config.mainphone) }}</a
                 >
 
                 <a class="mode-2-item" :href="`tel:+37544${$state.config.mainphone}`">
-                  <img src="/img/logos/mts.png" alt="" />
+                  <img src="/img/logos/mts.png" alt="МТС" />
                   +375-44-{{ formatPhoneNumber($state.config.mainphone) }}</a
                 >
 
                 <a class="mode-2-item" :href="`tel:+37525${$state.config.mainphone}`">
-                  <img src="/img/logos/life.png" alt="" />
+                  <img src="/img/logos/life.png" alt="Life" />
                   +375-25-{{ formatPhoneNumber($state.config.mainphone) }}</a
                 >
 

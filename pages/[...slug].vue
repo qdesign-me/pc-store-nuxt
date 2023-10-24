@@ -80,7 +80,9 @@ const getMeta = (category) => {
   let t = category.name;
   const breadcrumbs = JSON.parse(category.breadcrumbs);
   if (breadcrumbs) {
-    t = breadcrumbs.map((item) => item.name).join(' / ');
+    const els = breadcrumbs.map((item) => item.name);
+    if (els[els.length - 1] !== t) els.push(t);
+    t = els.join(' / ');
   }
   const title = `${t} | Интернет-магазин Iven`;
   const description = category.meta_description ? category.meta_description : `${t} в интернет-магазине Iven.`;
