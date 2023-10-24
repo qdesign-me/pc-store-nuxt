@@ -3,10 +3,12 @@
     <NuxtErrorBoundary>
       <Swiper v-if="images?.length > 1" class="swiper" :modules="[Pagination]" :pagination="{ clickable: true }">
         <SwiperSlide v-for="img in images" :key="img.img" class="slide">
-          <NuxtImg :src="img.img" :width="img.width" :height="img.height" :alt="img.alt" class="aspect-square object-contain" />
+          <!-- <NuxtImg/> -->
+          <img :src="img.img" :width="img.width" :height="img.height" :alt="img.alt" class="aspect-square object-contain" />
         </SwiperSlide>
       </Swiper>
-      <NuxtImg
+      <!-- <NuxtImg/> -->
+      <img
         v-else
         :src="images[0].img"
         :width="images[0].width"
