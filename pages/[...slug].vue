@@ -84,7 +84,7 @@ const getMeta = (category) => {
     if (els[els.length - 1] !== t) els.push(t);
     t = els.join(' / ');
   }
-  const title = `${t} | Интернет-магазин Iven`;
+  const title = `${t} | Iven`;
   const description = category.meta_description ? category.meta_description : `${t} в интернет-магазине Iven.`;
   return {
     title: () => title,

@@ -28,7 +28,7 @@ export default defineNuxtConfig({
     },
   },
   css: ['~/assets/css/main.scss'],
-  modules: ['@pinia/nuxt', 'nuxt-swiper', '@ant-design-vue/nuxt', 'nuxt-simple-sitemap', 'yandex-metrika-module-nuxt3', 'nuxt-gtag'],
+  modules: ['@pinia/nuxt', 'nuxt-swiper', '@ant-design-vue/nuxt', 'nuxt-simple-sitemap', 'yandex-metrika-module-nuxt3', 'nuxt-gtag', '@nuxt/image'],
   pinia: {
     autoImports: ['defineStore', 'acceptHMRUpdate'],
   },
@@ -51,5 +51,9 @@ export default defineNuxtConfig({
   },
   gtag: {
     id: 'G-L2CG7ZPL61',
+  },
+  image: {
+    quality: 90,
+    domains: ['win7.by'],
   },
 });
