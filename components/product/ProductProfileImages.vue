@@ -1,7 +1,14 @@
 <template>
   <div class="gap-6 select-none hidden lg:flex">
     <div class="border rounded px-8 py-12">
-      <NuxtImg :src="main" :alt="props.data.name" width="395" height="395" class="block cursor-pointer object-contain aspect-square" @click="setVisible(main)" />
+      <NuxtImg
+        :src="main"
+        :alt="props.data.name"
+        width="600"
+        height="600"
+        class="w-[395px] h-[395px] block cursor-pointer object-contain aspect-square"
+        @click="setVisible(main)"
+      />
     </div>
     <div v-if="images?.length > 1" class="flex flex-col gap-2">
       <div v-for="image in images" :key="image">
@@ -9,9 +16,9 @@
           :src="image"
           :alt="props.data.name"
           loading="lazy"
-          width="68"
-          height="68"
-          class="cursor-pointer py-[2px] px-[5px] border rounded object-contain aspect-square"
+          width="600"
+          height="600"
+          class="cursor-pointer py-[2px] px-[5px] border rounded object-contain aspect-square w-[68px] h-[68px]"
           :class="{ 'shadow-md': main === image }"
           @click="main = image"
         />
@@ -20,7 +27,7 @@
   </div>
 
   <div class="lg:hidden max-w-[calc(100vw-60px)]">
-    <ProductThumbs :data="props.data" :size="395" />
+    <ProductThumbs :data="props.data" :size="600" />
   </div>
 
   <a-image
