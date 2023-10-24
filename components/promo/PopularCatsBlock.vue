@@ -18,8 +18,8 @@
 
 <script setup>
 const links = [
-  { img: '/img/categories/1.png', uri: '/elektronika/Gotovie-komputeri', title: 'Компьютеры' },
-  { img: '/img/categories/2.png', uri: '/elektronika/noutbuki', title: 'Ноутбуки' },
+  { img: '/img/categories/1.png', uri: '/noutbuki-i-aksessuary/gotovie-komputeri', title: 'Компьютеры' },
+  { img: '/img/categories/2.png', uri: '/noutbuki-i-aksessuary/noutbuki', title: 'Ноутбуки' },
   { img: '/img/categories/3.png', uri: '/komplektuyuszie', title: 'Комплектующие' },
   { img: '/img/categories/4.png', uri: '/periferiya-i-aksessuary', title: 'Периферия' },
   { img: '/img/categories/5.png', uri: '/elektronika', title: 'Электроника' },

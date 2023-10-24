@@ -11,7 +11,7 @@
             <div class="tags min-h-[21px]">
               <div v-if="item.is_auction" class="bg-[#4DB732]">Аукцион</div>
               <div v-if="item.Price > 500" class="bg-[#F54D4D]">В рассрочку</div>
-              <div v-if="item.PriceSale_bn > 0" class="bg-[#FFAC2F]">На акции</div>
+              <div v-if="item.PriceSale > 0" class="bg-[#FFAC2F]">На акции</div>
             </div>
             <div class="info flex gap-2">
               <OkIcon v-if="item.is_new" />
@@ -29,8 +29,8 @@
           <slot name="price" :item="item" />
         </div>
         <div class="price text-[24px] min-w-[120px]">
-          <div :class="{ 'text-red-600 leading-[1] md:mb-1': item.PriceSale_bn > 0 }">
-            <span class="line-through text-xs block text-[#000]" v-if="item.PriceSale_bn">{{ price(item.PriceSale_bn) }} </span>
+          <div :class="{ 'text-red-600 leading-[1] md:mb-1': item.PriceSale > 0 }">
+            <span class="line-through text-xs block text-[#000]" v-if="item.PriceSale">{{ price(item.PriceSale) }} </span>
             {{ price(item.Price) }}
           </div>
         </div>

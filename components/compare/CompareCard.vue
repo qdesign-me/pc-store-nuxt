@@ -6,8 +6,8 @@
     </NuxtLink>
 
     <div class="flex gap-2">
-      <div class="line-through text-xs translate-y-[7px]" v-if="props.product.PriceSale_bn">{{ price(props.product.PriceSale_bn) }}</div>
-      <div class="font-semibold text-lg" :class="{ 'text-red-600': props.product.PriceSale_bn > 0 }">{{ price(props.product.Price) }}</div>
+      <div class="line-through text-xs translate-y-[7px]" v-if="props.product.PriceSale">{{ price(props.product.PriceSale) }}</div>
+      <div class="font-semibold text-lg" :class="{ 'text-red-600': props.product.PriceSale > 0 }">{{ price(props.product.Price) }}</div>
     </div>
 
     <NuxtLink :to="uri" class="line-clamp-2 min-h-[40px]">{{ props.product.name }}</NuxtLink>

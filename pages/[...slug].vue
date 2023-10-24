@@ -3,9 +3,7 @@
     <div class="breadcrumbs">
       <NuxtLink to="/">Главная </NuxtLink>
 
-      <NuxtLink v-if="category.data.breadcrumbs" :to="`/${page?.uri}`.replace('//', '/')" v-for="page in JSON.parse(category.data.breadcrumbs)" :key="page.uri"
-        >{{ page.name }}
-      </NuxtLink>
+      <NuxtLink v-if="category.data.breadcrumbs" :to="page?.uri" v-for="page in JSON.parse(category.data.breadcrumbs).slice(0, -1)" :key="page.uri">{{ page.name }} </NuxtLink>
       <span>{{ category.data.name }}</span>
     </div>
 
@@ -79,7 +77,7 @@ definePageMeta({
 const getMeta = (category) => {
   let t = category.name;
   const breadcrumbs = JSON.parse(category.breadcrumbs);
-  if (breadcrumbs) {
+  if (breadcrumbs && false) {
     const els = breadcrumbs.map((item) => item.name);
     if (els[els.length - 1] !== t) els.push(t);
     t = els.join(' / ');
@@ -94,5 +92,5 @@ const getMeta = (category) => {
   };
 };
 
-useSeoMeta(getMeta(category.value.data));
+useSeoMeta(getMeta(category.value?.data));
 </script>

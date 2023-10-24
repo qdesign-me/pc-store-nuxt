@@ -53,7 +53,6 @@ export default defineNuxtConfig({
     id: 'G-L2CG7ZPL61',
   },
   image: {
-    quality: 90,
     domains: ['win7.by'],
   },
 });

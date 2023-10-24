@@ -18,42 +18,42 @@ const links = [
   {
     title: 'Для офиса',
     icon: OfficeIcon,
-    uri: '/elektronika/Gotovie-komputeri/dlya-ofisa',
+    uri: '/noutbuki-i-aksessuary/gotovie-komputeri/dlya-ofisa',
   },
   {
     title: 'Для дома',
     icon: HomeIcon,
-    uri: '/elektronika/Gotovie-komputeri/dlya-doma',
+    uri: '/noutbuki-i-aksessuary/gotovie-komputeri/dlya-doma',
   },
   {
     title: 'Для графики',
     icon: GraphicsIcon,
-    uri: '/elektronika/Gotovie-komputeri/dlya-grafiki',
+    uri: '/noutbuki-i-aksessuary/gotovie-komputeri/dlya-grafiki',
   },
   {
     title: 'Игровые',
     icon: PlayIcon,
-    uri: '/elektronika/Gotovie-komputeri/igrovye',
+    uri: '/noutbuki-i-aksessuary/gotovie-komputeri/igrovye',
   },
   {
     title: 'Серверы <span>и станции</span>',
     icon: ServerIcon,
-    uri: '/elektronika/Gotovie-komputeri/servery-irabochie-stancii',
+    uri: '/noutbuki-i-aksessuary/gotovie-komputeri/servery-irabochie-stancii',
   },
   {
     title: 'Системные блоки',
     icon: ServerIcon,
-    uri: '/elektronika/Gotovie-komputeri/Sistemnie-bloki',
+    uri: '/noutbuki-i-aksessuary/gotovie-komputeri/sistemnie-bloki',
   },
   {
     title: 'Микро ПК',
     icon: SysblocksIcon,
-    uri: '/elektronika/Gotovie-komputeri/Mikro-PK',
+    uri: '/noutbuki-i-aksessuary/gotovie-komputeri/mikro-pk',
   },
   {
     title: 'Неттопы',
     icon: NettopsIcon,
-    uri: '/elektronika/Gotovie-komputeri/nettopi',
+    uri: '/noutbuki-i-aksessuary/gotovie-komputeri/nettopi',
   },
 ];
 

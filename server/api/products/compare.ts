@@ -20,7 +20,7 @@ export default defineEventHandler(async (event) => {
     features: {},
   };
   const kurs = await getKurs();
-  sql = `select (select group_concat(ip.filename) from iven_product_pictures ip where ip.productID=iven_products.productID group by ip.productID) as img, productID, uri, name, ROUND(Price * ${kurs}, 2) as Price, PriceSale_bn, is_auction, is_new
+  sql = `select (select group_concat(ip.filename) from iven_product_pictures ip where ip.productID=iven_products.productID group by ip.productID) as img, productID, uri, name, ROUND(Price * ${kurs}, 2) as Price, ROUND(PriceSale * ${kurs}, 2) as PriceSale, is_auction, is_new
 from iven_products where productID in (${id})`;
   const [products] = await db.execute(sql);
   data.products = products.reduce((acc, item) => {

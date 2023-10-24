@@ -4,8 +4,9 @@ import db from '../../../db/db';
 const getTotal = async (uri: string) => {
   const sql = `select count(*) as total
   from iven_products p
-  join iven_categories c on c.categoryID = p.categoryID and c.uri like '${uri}%'
+  join iven_categories c on c.categoryID = p.categoryID and c.fullPath like '${uri}%'
   where p.enabled=1 LIMIT 0,100`;
+
   const [res] = await db.execute(sql);
   return res?.[0]?.total;
 };

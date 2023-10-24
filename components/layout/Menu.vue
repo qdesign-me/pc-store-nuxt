@@ -113,27 +113,27 @@ const links = [
   {
     title: 'Для офиса',
     icon: OfficeIcon,
-    uri: '/elektronika/Gotovie-komputeri/dlya-ofisa',
+    uri: 'noutbuki-i-aksessuary/gotovie-komputeri/dlya-ofisa',
   },
   {
     title: 'Для дома',
     icon: HomeIcon,
-    uri: '/elektronika/Gotovie-komputeri/dlya-doma',
+    uri: 'noutbuki-i-aksessuary/gotovie-komputeri/dlya-doma',
   },
   {
     title: 'Для графики',
     icon: GraphicsIcon,
-    uri: '/elektronika/Gotovie-komputeri/dlya-grafiki',
+    uri: 'noutbuki-i-aksessuary/gotovie-komputeri/dlya-grafiki',
   },
   {
     title: 'Игровые',
     icon: PlayIcon,
-    uri: '/elektronika/Gotovie-komputeri/igrovye',
+    uri: 'noutbuki-i-aksessuary/gotovie-komputeri/igrovye',
   },
   {
     title: 'Серверы <span>и станции</span>',
     icon: ServerIcon,
-    uri: '/elektronika/Gotovie-komputeri/servery-irabochie-stancii',
+    uri: 'noutbuki-i-aksessuary/gotovie-komputeri/servery-irabochie-stancii',
   },
 ];
 import { onClickOutside } from '@vueuse/core';
@@ -160,12 +160,12 @@ const linkIcon = (uri) => {
 
 const setActive = (value) => {
   const links = {
-    0: '/elektronika/Gotovie-komputeri',
+    0: 'noutbuki-i-aksessuary/gotovie-komputeri',
     1: '/komplektuyuszie',
-    2: '/elektronika/noutbuki',
+    2: '/noutbuki-i-aksessuary/noutbuki',
     3: '/periferiya-i-aksessuary',
     4: '/elektronika',
-    5: '/komplektuyuszie/Servernoe-oborydovanie',
+    5: '/komplektuyuszie/servernoe-oborydovanie',
   };
   const url = links[value];
   if (url === router.currentRoute.value.path) return closeMenu();

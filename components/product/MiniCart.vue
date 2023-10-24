@@ -13,11 +13,11 @@
               <NuxtLink :to="`/p/${item.uri.replace('.html', '')}`"><ProductThumbs :data="item" :size="60" /></NuxtLink>
             </div>
             <div class="flex-1 flex flex-col justify-between">
-              <div class="flex gap-6 items-center mb-1" v-if="item.is_auction || item.Price > 500 || item.PriceSale_bn > 0">
+              <div class="flex gap-6 items-center mb-1" v-if="item.is_auction || item.Price > 500 || item.PriceSale > 0">
                 <div class="tags min-h-[21px]">
                   <div v-if="item.is_auction" class="bg-[#4DB732]">Аукцион</div>
                   <div v-if="item.Price > 500" class="bg-[#F54D4D]">В рассрочку</div>
-                  <div v-if="item.PriceSale_bn > 0" class="bg-[#FFAC2F]">На акции</div>
+                  <div v-if="item.PriceSale > 0" class="bg-[#FFAC2F]">На акции</div>
                 </div>
               </div>
 
@@ -25,8 +25,8 @@
 
               <div class="flex gap-2 justify-between">
                 <div class="price text-[14px] flex gap-2">
-                  <span class="line-through text-[10px] translate-y-[1px]" v-if="item.PriceSale_bn">{{ price(item.PriceSale_bn) }} </span>
-                  <div class="mb-2" :class="{ 'text-red-600': item.PriceSale_bn > 0 }">{{ price(item.Price) }}</div>
+                  <span class="line-through text-[10px] translate-y-[1px]" v-if="item.PriceSale">{{ price(item.PriceSale) }} </span>
+                  <div class="mb-2" :class="{ 'text-red-600': item.PriceSale > 0 }">{{ price(item.Price) }}</div>
                 </div>
               </div>
             </div>
@@ -60,11 +60,11 @@
               <NuxtLink :to="`/p/${item.uri.replace('.html', '')}`"><ProductThumbs :data="item" :size="60" /></NuxtLink>
             </div>
             <div class="flex-1 flex flex-col justify-between">
-              <div class="flex gap-6 items-center mb-1" v-if="item.is_auction || item.Price > 500 || item.PriceSale_bn > 0">
+              <div class="flex gap-6 items-center mb-1" v-if="item.is_auction || item.Price > 500 || item.PriceSale > 0">
                 <div class="tags min-h-[21px]">
                   <div v-if="item.is_auction" class="bg-[#4DB732]">Аукцион</div>
                   <div v-if="item.Price > 500" class="bg-[#F54D4D]">В рассрочку</div>
-                  <div v-if="item.PriceSale_bn > 0" class="bg-[#FFAC2F]">На акции</div>
+                  <div v-if="item.PriceSale > 0" class="bg-[#FFAC2F]">На акции</div>
                 </div>
               </div>
 
@@ -73,8 +73,8 @@
               <div class="flex gap-2 justify-between">
                 <Add2Cart :productID="item.productID" @qty="(qty) => onQty(item.productID, qty)" />
                 <div class="price text-[14px] flex gap-2">
-                  <span class="line-through text-[10px] translate-y-[1px]" v-if="item.PriceSale_bn">{{ price(item.PriceSale_bn) }} </span>
-                  <div class="mb-2" :class="{ 'text-red-600': item.PriceSale_bn > 0 }">{{ price(item.Price) }}</div>
+                  <span class="line-through text-[10px] translate-y-[1px]" v-if="item.PriceSale">{{ price(item.PriceSale) }} </span>
+                  <div class="mb-2" :class="{ 'text-red-600': item.PriceSale > 0 }">{{ price(item.Price) }}</div>
                 </div>
               </div>
             </div>

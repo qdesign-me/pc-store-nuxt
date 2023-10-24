@@ -28,13 +28,13 @@ export default defineEventHandler(async (event) => {
   const kurs = await getKurs();
 
   const data = await getProduct(
-    `select (select group_concat(ip.filename) from iven_product_pictures ip where ip.productID=p.productID group by ip.productID) as img, p.productID, p.categoryID, p.model, p.name, c.uri as curi, p.description, p.enabled, p.meta_description, p.is_auction, p.is_new, ROUND(p.Price * ${kurs}, 2) as Price, p.PriceSale_bn, c.name as cat_name, c.fullPath as uri , c.breadcrumbs from iven_products p join iven_categories c on c.categoryID=p.categoryID  where p.uri='${uri}' limit 1`
+    `select (select group_concat(ip.filename) from iven_product_pictures ip where ip.productID=p.productID group by ip.productID) as img, p.productID, p.categoryID, p.model, p.name, c.uri as curi, p.description, p.enabled, p.meta_description, p.is_auction, p.is_new, ROUND(p.Price * ${kurs}, 2) as Price, ROUND(p.PriceSale * ${kurs}, 2) as PriceSale, c.name as cat_name, c.fullPath as uri , c.breadcrumbs from iven_products p join iven_categories c on c.categoryID=p.categoryID  where p.uri='${uri}' limit 1`
   );
 
   await db.execute(`update iven_products set viewed_times=viewed_times+1 where productID=${data['productID']}`);
 
   let products = await getSimilar(
-    `select (select concat('https://win7.by/data/big/', thumbnail) from iven_product_pictures where photoID=iven_products.default_picture) as img, productID, name, ROUND(Price * ${kurs}, 2) as Price, PriceSale_bn, uri, is_auction, is_new from iven_products where  categoryID='${data.categoryID}' and productID<>${data.productID} and enabled=1 limit 4`
+    `select (select concat('https://win7.by/data/big/', thumbnail) from iven_product_pictures where photoID=iven_products.default_picture) as img, productID, name, ROUND(Price * ${kurs}, 2) as Price, ROUND(PriceSale * ${kurs}, 2) as PriceSale, uri, is_auction, is_new from iven_products where  categoryID='${data.categoryID}' and productID<>${data.productID} and enabled=1 limit 4`
   );
 
   data['features'] = await getFeatures(

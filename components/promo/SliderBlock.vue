@@ -32,10 +32,6 @@
 import { Pagination } from 'swiper/modules';
 import { useAppStore } from '~/stores/app';
 
-// const links = [
-//   { img: '/img/promo/slide1.png', mobi: '/img/promo/slide1-mobi.png', uri: '/elektronika/noutbuki', title: 'ФАНТАСТИЧЕСКИЙ<br />КОРПУС JONSBO D30<br />УЖЕ В ПРОДАЖЕ' },
-//   { img: '/img/promo/slide1.png', mobi: '/img/promo/slide1-mobi.png', uri: '/elektronika/noutbuki', title: 'Текст 2' },
-// ];
 const { $state } = useAppStore();
 const links = $state.config?.['slider'] ? JSON.parse($state.config['slider']) : null;
 </script>

@@ -3,7 +3,7 @@ import db from '../../../db/db';
 
 const getPopularProduct = async (ids, kurs) => {
   const [data] = await db.execute(
-    `select  (select group_concat(ip.filename) from iven_product_pictures ip where ip.productID=p.productID group by ip.productID) as img,  p.name, ROUND(p.Price * ${kurs}, 2) as Price, p.PriceSale_bn, p.uri from iven_products p where p.enabled=1 and p.categoryID in (${ids}) order by p.viewed_times desc LIMIT 1`
+    `select  (select group_concat(ip.filename) from iven_product_pictures ip where ip.productID=p.productID group by ip.productID) as img,  p.name, ROUND(p.Price * ${kurs}, 2) as Price, ROUND(p.PriceSale * ${kurs}, 2) as PriceSale, p.uri from iven_products p where p.enabled=1 and p.categoryID in (${ids}) order by p.viewed_times desc LIMIT 1`
   );
   return data?.[0];
 };

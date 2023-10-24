@@ -13,7 +13,7 @@
       Товар в наличии
     </div>
     <div class="tags mb-6 lg:hidden">
-      <div v-if="props.data.PriceSale_bn > 0" class="bg-[#FFAC2F] flex-1">На акции</div>
+      <div v-if="props.data.PriceSale > 0" class="bg-[#FFAC2F] flex-1">На акции</div>
       <div v-if="props.data.is_auction > 0" class="bg-[#4DB732] flex-1">Аукцион</div>
       <div v-if="props.data.Price > 500" class="bg-[#F54D4D] flex-1">В рассрочку</div>
     </div>
@@ -63,15 +63,15 @@
           </div>
         </div>
         <div class="tags hidden lg:!flex mb-6">
-          <div v-if="props.data.PriceSale_bn > 0" class="bg-[#FFAC2F] flex-1">На акции</div>
+          <div v-if="props.data.PriceSale > 0" class="bg-[#FFAC2F] flex-1">На акции</div>
           <div v-if="props.data.is_auction > 0" class="bg-[#4DB732] flex-1">Аукцион</div>
           <div v-if="props.data.Price > 500" class="bg-[#F54D4D] flex-1">В рассрочку</div>
         </div>
         <div class="price-info flex flex-col flex-1">
           <div class="flex gap-2 items-end text-base font-semibold mb-8">
-            <span class="line-through text-sm mr-2" v-if="props.data.PriceSale_bn">{{ price(props.data.PriceSale_bn) }} </span>
+            <span class="line-through text-sm mr-2" v-if="props.data.PriceSale">{{ price(props.data.PriceSale) }} </span>
 
-            <div class="text-3xl font-semibold" :class="{ 'text-red-600': props.data.PriceSale_bn > 0 }">{{ price(props.data.Price) }}</div>
+            <div class="text-3xl font-semibold" :class="{ 'text-red-600': props.data.PriceSale > 0 }">{{ price(props.data.Price) }}</div>
           </div>
 
           <Add2Cart class="has-large" :productID="props.data.productID" />

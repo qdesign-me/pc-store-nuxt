@@ -6,14 +6,14 @@ const getFilters = async (category: { categoryID: number; uri: string }) => {
   join iven_features_on_categories sfoc on sfoc.featureID=sfop.featureID and sfoc.categoryID=${category?.categoryID}
   join iven_products_features spf on spf.featureID=sfop.featureID 
   join iven_products sp on sp.productID = sfop.productID 
-  join iven_categories sc on sc.categoryID = sp.categoryID and sc.uri like '${category.uri}%' 
+  join iven_categories sc on sc.categoryID = sp.categoryID and sc.fullPath like '${category.uri}%' 
   group by label, tooltip, alias `;
   const [data] = await db.execute(sql);
   return data;
 };
 
 const getCategory = async (uri: string) => {
-  const sql = `select categoryID, name, fullPath as uri, meta_description, breadcrumbs from iven_categories where uri='${uri}'`;
+  const sql = `select categoryID, name, fullPath as uri, meta_description, breadcrumbs from iven_categories where fullPath='${uri}'`;
 
   const [data] = await db.execute(sql);
   return data[0];
@@ -33,6 +33,7 @@ export default defineEventHandler(async (event) => {
     return {
       data: {
         name: 'Поиск',
+        breadcrumbs: '[]',
       },
       blocks: [],
       minmax: {},

@@ -34,7 +34,7 @@ export default defineEventHandler(async (event) => {
   const skip = (page - 1) * 12;
 
   const select = `(select group_concat(ip.filename) from iven_product_pictures ip where ip.productID=p.productID group by ip.productID) as img, 
-   p.productID, p.name, ROUND(p.Price * ${kurs}, 2) as Price, p.PriceSale_bn, p.uri, p.is_auction, p.is_new `;
+   p.productID, p.name, ROUND(p.Price * ${kurs}, 2) as Price, ROUND(p.PriceSale * ${kurs}, 2) as PriceSale, p.uri, p.is_auction, p.is_new `;
   const sorttypes: Record<string, string> = {
     name: 'p.name',
     popular: 'p.viewed_times',
@@ -90,7 +90,7 @@ export default defineEventHandler(async (event) => {
 
   const urlCheck = ['/search', '/top-prodazh', '/novinki', '/akcii'].includes(uri) ? '' : `join iven_categories c on c.categoryID = p.categoryID and c.fullPath like '${uri}%'`;
   if (uri === '/akcii') {
-    andFilters += ' and p.PriceSale_bn > 0';
+    andFilters += ' and p.PriceSale > 0';
   }
   if (uri === '/novinki') {
     andFilters += ' and p.is_new > 0';
@@ -105,7 +105,7 @@ export default defineEventHandler(async (event) => {
   from iven_products p 
   ${urlCheck}
   where p.enabled=1 and p.categoryID not in (${notAllowedCats.join(',')})  ${andFilters} order by ${sorttypes[sortby]} ${sortdir} limit ${skip}, ${take}`;
-
+  console.log({ sql });
   results.data = await fetchAll(sql);
 
   const total = await fetchColumn(`select count(*) as total from iven_products p 

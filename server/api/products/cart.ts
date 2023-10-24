@@ -14,7 +14,7 @@ export default defineEventHandler(async (event) => {
       total: 0,
       data: [],
     };
-  console.log('API PRODUCTS/CART 1', JSON.stringify(body));
+  console.log('API PRODUCTS/CART');
 
   const kurs = await getKurs();
 
@@ -22,7 +22,7 @@ export default defineEventHandler(async (event) => {
 
   const whereCond = `productID in (${ids})`;
 
-  const sql = `select (select ip.filename from iven_product_pictures ip where ip.productID=iven_products.productID  limit 1) as img, productID, name, warranty, model, ROUND(Price * ${kurs}, 2) as Price, PriceSale_bn, uri, is_auction, is_new from iven_products where enabled=1 and ${whereCond}`;
+  const sql = `select (select ip.filename from iven_product_pictures ip where ip.productID=iven_products.productID  limit 1) as img, productID, name, warranty, model, ROUND(Price * ${kurs}, 2) as Price, ROUND(PriceSale * ${kurs}, 2) as PriceSale, uri, is_auction, is_new from iven_products where enabled=1 and ${whereCond}`;
 
   let [data] = await db.execute(sql);
 
