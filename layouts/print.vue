@@ -9,7 +9,7 @@
       <a :href="`mailto:${$state.config.email}`">{{ $state.config.email }}</a>
     </div>
 
-    <div>www.i-ven.by</div>
+    <div>i-ven.by</div>
   </div>
 
   <div>

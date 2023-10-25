@@ -65,7 +65,7 @@ export function getOrderDetailsEmail(orderID: number, body: Record<string, any>)
                                ${item.name}
                               </a>
                               <div>
-                                <small>Артикул: <b>${item.model}</b></small>
+                                <small>Артикул: <b>${item.productID}</b></small>
                               </div>
                             </td>
                             <td style="font-family: Arial; text-align: left; color: #111111; padding-right: 20px;">${item.qty} шт.</td>

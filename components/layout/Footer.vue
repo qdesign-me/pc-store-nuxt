@@ -9,7 +9,7 @@
                 <div class="title mt-10 xl:h-[65px]">Наши контакты:</div>
                 <div class="with-icon">
                   <MapPinIcon />
-                  <a href="#" class="underline underline-offset-4"> {{ $state.config.address }}</a>
+                  <div class="underline underline-offset-4">{{ $state.config.address }}</div>
                 </div>
 
                 <div class="with-icon">
@@ -27,7 +27,7 @@
                 <div class="title mt-10 xl:h-[65px]">Гарантийное обслуживание:</div>
                 <div class="with-icon">
                   <MapPinIcon />
-                  <a href="#" class="underline underline-offset-4">{{ $state.config.address }}</a>
+                  <div class="underline underline-offset-4">{{ $state.config.address2 }}</div>
                 </div>
                 <div class="with-icon xl:min-h-[65px]">
                   <PhoneIcon />
@@ -83,7 +83,7 @@
           <div class="bg-[#cee7ec] p-6 rounded hidden xl:block pt-0">
             <div class="title mt-10">Хочу быть в курсе акций и новинок!</div>
             <Form :model="model" class="flex flex-col" :onFinish="onFinish">
-              <FormItem name="email">
+              <FormItem name="email" :rules="[{ email: true }]">
                 <input name="email" class="input" placeholder="Укажите ваш E-mail" type="email" v-model="model.email" />
               </FormItem>
               <FormItem name="viber">

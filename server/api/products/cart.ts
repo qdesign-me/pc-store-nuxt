@@ -7,14 +7,14 @@ async function getKurs() {
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
-  const { items } = body;
-
+  let { items } = body;
+  if (typeof items === 'string') items = JSON.parse(items);
+  console.log('API PRODUCTS/CART', items);
   if (!items || Object.keys(items).length === 0)
     return {
       total: 0,
       data: [],
     };
-  console.log('API PRODUCTS/CART');
 
   const kurs = await getKurs();
 

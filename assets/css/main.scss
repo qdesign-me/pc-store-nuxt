@@ -610,7 +610,7 @@
       @apply text-xs font-light;
     }
     .img {
-      @apply absolute right-0 bottom-0 z-[0];
+      @apply absolute right-0 top-1/2 -translate-y-1/2 z-[0];
     }
     .bg {
       @apply absolute bottom-0 right-0 z-[0];

@@ -9,7 +9,7 @@
         <div class="list-items-mini">
           <div v-for="item in minidata?.data" :key="item.id" class="!border-b-0">
             <div class="img w-[60px] flex-shrink-0 overflow-hidden">
-              <div class="text-[10px] text-[#3F3F3F] whitespace-nowrap text-ellipsis">{{ item.model }}</div>
+              <div class="text-[10px] text-[#3F3F3F] whitespace-nowrap text-ellipsis">{{ item.productID }}</div>
               <NuxtLink :to="`/p/${item.uri.replace('.html', '')}`"><ProductThumbs :data="item" :size="60" /></NuxtLink>
             </div>
             <div class="flex-1 flex flex-col justify-between">
@@ -56,7 +56,7 @@
           <div v-for="item in data.data" :key="item.id">
             <RemoveButton @click="onRemove(item.productID)" class="absolute -top-1 -right-3 scale-50 opacity-50" />
             <div class="img w-[60px] flex-shrink-0 overflow-hidden">
-              <div class="text-[10px] text-[#3F3F3F] whitespace-nowrap text-ellipsis">{{ item.model }}</div>
+              <div class="text-[10px] text-[#3F3F3F] whitespace-nowrap text-ellipsis">Код: {{ item.productID }}</div>
               <NuxtLink :to="`/p/${item.uri.replace('.html', '')}`"><ProductThumbs :data="item" :size="60" /></NuxtLink>
             </div>
             <div class="flex-1 flex flex-col justify-between">

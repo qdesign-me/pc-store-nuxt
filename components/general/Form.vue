@@ -33,7 +33,7 @@ const checkErrors = (input = null) => {
         errors[input] = { ...errors[input], required: true };
       }
 
-      if (it.email && !/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/.test(value)) {
+      if (it.email && value?.length > 0 && !/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/.test(value)) {
         errors[input] = { ...errors[input], email: true };
       }
     }, {});
@@ -47,7 +47,7 @@ const checkErrors = (input = null) => {
           errors[item] = { ...errors[item], required: true };
         }
 
-        if (it.email && !/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/.test(value)) {
+        if (it.email && value?.length > 0 && !/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/.test(value)) {
           errors[item] = { ...errors[item], email: true };
         }
       }, {});

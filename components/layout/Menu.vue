@@ -80,7 +80,7 @@
                   </li>
                 </ul>
               </div>
-              <div class="w-[300px] hidden xl:block" v-if="item.product">
+              <div class="w-[300px] hidden xl:block" v-if="item.product?.img">
                 <div class="text-[#E5A35B] text-[24px] mb-6">
                   Топ<br class="hidden lg:inline" />
                   продаж
@@ -91,7 +91,8 @@
                 /></NuxtLink>
                 <NuxtLink :to="`/p/${item.product.uri.replace('.html', '')}`" class="flex flex-col gap-2 !items-start">
                   <div>{{ item.product.name }}</div>
-                  <ProductThumbs :data="{ img: item.product.img }" />
+
+                  <ProductThumbs :data="{ img: item.product.img.split('|')[0] }" />
                 </NuxtLink>
               </div>
             </div>
@@ -160,7 +161,7 @@ const linkIcon = (uri) => {
 
 const setActive = (value) => {
   const links = {
-    0: 'noutbuki-i-aksessuary/gotovie-komputeri',
+    0: '/noutbuki-i-aksessuary/gotovie-komputeri',
     1: '/komplektuyuszie',
     2: '/noutbuki-i-aksessuary/noutbuki',
     3: '/periferiya-i-aksessuary',

@@ -8,7 +8,7 @@
       <FormItem name="phone" :rules="[{ required: true }]">
         <input name="phone" type="tel" class="input" placeholder="+375 (__) ___-__-__" v-model="model.phone" v-maska data-maska="+375 (##) ###-##-##" />
       </FormItem>
-      <FormItem name="email">
+      <FormItem name="email" :rules="[{ email: true }]">
         <input name="email" type="email" class="input" placeholder="Укажите ваш E-mail" v-model="model.email" />
       </FormItem>
       <FormItem name="message" :rules="[{ required: true }]">
