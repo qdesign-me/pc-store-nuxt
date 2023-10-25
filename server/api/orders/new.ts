@@ -75,11 +75,26 @@ ${body.info.fio},<br/>
 
     customerID = res[0].insertId;
   }
+  const deliveries: Record<string, any> = {
+    Самовывоз: 'Самовывоз',
+    'Доставка в пределах МКАД': 'Курьер Минск',
+    'Доставка в регионы РБ': 'Курьер РБ',
+  };
+  const delivery: Record<string, any> = deliveries[body.info.delivery];
+  const payments: Record<string, any> = {
+    Наличными: 'Наличные',
+    'Оплата банковской картой': 'Карточка',
+    'Оплата через ЕРИП': 'ЕРИП',
+    'Банковский перевод': 'Безнал',
+    'Оплата в кредит': 'Кредит',
+    Рассрочка: 'Рассрочка',
+  };
+  const payment = payments[body.info.payment];
 
   sql = `insert into win7_orders 
   (orderID, customerID, order_time, customer_ip, shipping_type, payment_type, customers_comment, manager_comment, rek, statusID, shipping_cost, order_discount, order_amount, name, phone, email, city, address) 
   values
-  (null, '${customerID}', '${body.info.order_time}', '${body.info.customer_ip}', '${body.info.delivery}', '${body.info.payment}', '${body.info.comment}', '${body.info.manager_comment}', '${body.info.rek}', '${body.info.statusID}', '${body.total.deliveryPrice}', '${body.total.order_discount}', '${body.total.total}', '${body.info.name}', '${body.info.phone}', '${body.info.email}', '${body.info.city}', '${body.info.address}')`;
+  (null, '${customerID}', '${body.info.order_time}', '${body.info.customer_ip}', '${delivery}', '${payment}', '${body.info.comment}', '${body.info.manager_comment}', '${body.info.rek}', '${body.info.statusID}', '${body.total.deliveryPrice}', '${body.total.order_discount}', '${body.total.total}', '${body.info.name}', '${body.info.phone}', '${body.info.email}', '${body.info.city}', '${body.info.address}')`;
 
   res = await db.execute(sql);
 
