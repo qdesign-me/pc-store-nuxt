@@ -1,11 +1,11 @@
 <template>
   <div class="card card-product border !pb-[115px] text-black">
-    <div class="tags min-h-[21px] -mb-3 absolute z-10">
+    <div class="tags min-h-[21px] absolute z-10">
       <div v-if="props.product.is_auction" class="bg-[#4DB732]">Аукцион</div>
       <div v-if="props.product.Price > 500" class="bg-[#F54D4D]">В рассрочку</div>
       <div v-if="props.product.PriceSale > 0" class="bg-[#FFAC2F]">На акции</div>
     </div>
-    <div>
+    <div class="pt-[30px]">
       <NuxtLink :to="uri" class="block">
         <ProductThumbs :data="props.product" />
       </NuxtLink>
