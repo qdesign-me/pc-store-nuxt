@@ -28,7 +28,7 @@
             уже сегодня!
           </div>
           <div class="w-full sm:w-auto">
-            <button class="btn-white w-full"><CartIcon class="static" />Купить готовый компьютер</button>
+            <NuxtLink to="/noutbuki-i-aksessuary/gotovie-komputeri" class="btn-white w-full"><CartIcon class="static" />Купить готовый компьютер</NuxtLink>
           </div>
         </div>
 
