@@ -1,7 +1,7 @@
 <template>
   <div class="a" :class="{ 'text-blue': total > 0 }">
     <div v-if="total" class="count">{{ total }}</div>
-    <CartIcon />Купить
+    <CartIconAlt />Купить
   </div>
 </template>
 

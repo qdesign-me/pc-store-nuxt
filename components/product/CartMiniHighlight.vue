@@ -1,6 +1,6 @@
 <template>
   <div class="relative" ref="target">
-    <div class="mini-cart border rounded" v-show="modal && minidata?.data?.length">
+    <div class="mini-cart border rounded -mt-12" v-show="modal && minidata?.data?.length">
       <div class="flex justify-between gap-6 items-center py-3">
         <div class="font-semibold text-base text-black">Товар добавлен в корзину</div>
       </div>

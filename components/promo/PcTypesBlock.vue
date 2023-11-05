@@ -1,7 +1,9 @@
 <template>
-  <NuxtLink v-for="link in data.data" :to="link.uri" :key="link.uri">
-    <component :is="linkIcon(link.uri)" />
-    <span v-html="link.name"></span>
+  <NuxtLink v-for="link in data.data" :to="link.uri" :key="link.uri" class="hover:text-white opacity-100">
+    <div class="bg-white flex items-center justify-center rounded-full w-[46px] h-[46px]" style="filter: drop-shadow(0px 4px 4px rgba(0, 179, 215, 0.49))">
+      <component :is="linkIcon(link.uri)" />
+    </div>
+    <span v-html="link.name" class="text-[#000000] transition duration-300 underline underline-offset-2"></span>
   </NuxtLink>
 </template>
 

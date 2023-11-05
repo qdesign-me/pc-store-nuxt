@@ -84,7 +84,7 @@
             <div class="title mt-10">Хочу быть в курсе акций и новинок!</div>
             <Form :model="model" class="flex flex-col" :onFinish="onFinish">
               <FormItem name="email" :rules="[{ email: true }]">
-                <input name="email" class="input" placeholder="Укажите ваш E-mail" type="email" v-model="model.email" />
+                <input name="email" class="input" placeholder="Укажите Ваш E-mail" type="email" v-model="model.email" />
               </FormItem>
               <FormItem name="viber">
                 <input name="viber" class="input" placeholder="Либо Viber" type="text" v-model="model.viber" />

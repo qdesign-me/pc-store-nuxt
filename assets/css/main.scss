@@ -5,6 +5,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap');
 
 @layer base {
+  .lgr {
+    background: linear-gradient(152deg, #00a2c1 0%, #87ebff 99.41%);
+  }
   .swiper-init:not(.swiper-initialized) {
     opacity: 0;
   }
@@ -200,6 +203,7 @@
     img {
       aspect-ratio: 1 / 1;
       width: 100%;
+      max-height: 220px;
     }
     .swiper-pagination {
       position: absolute;
@@ -279,6 +283,11 @@
       }
     }
   }
+  .btn-white {
+    @apply whitespace-nowrap overflow-hidden text-ellipsis leading-[50px] bg-white rounded-[5px] border-[#00B3D7] border-solid border-[1.5px] text-sm text-[#00B3D7] text-center relative px-4 flex items-center gap-4;
+    box-shadow: 0px 4px 4px 0px rgba(0, 179, 215, 0.7);
+  }
+
   .btn {
     @apply leading-10 px-6 py-0 bg-blue text-white text-sm font-medium rounded inline-flex gap-4 items-center justify-center cursor-pointer whitespace-nowrap hover:text-white  select-none;
     &.is-plain {
@@ -313,6 +322,9 @@
   h3,
   .h3 {
     @apply text-xl font-semibold;
+  }
+  .title-md {
+    @apply text-lg lg:text-[24px] font-semibold leading-[1.2];
   }
   nav .router-link-active {
     color: #e5a35b !important;
@@ -430,7 +442,7 @@
       height: 350px;
     }
     &.height-xs {
-      height: 200px;
+      height: 205px;
     }
     .note {
       @apply flex items-center gap-10;
@@ -920,6 +932,13 @@
 }
 
 @media screen and (max-width: 1024px) {
+  .title-md br {
+    display: none;
+  }
+  .card.height-xs {
+    height: auto;
+    gap: 20px;
+  }
   .box-maincat .item {
     @apply col-span-2;
   }
@@ -1016,9 +1035,7 @@
   .card.height-sm {
     height: 220px;
   }
-  .card.height-xs {
-    height: 115px;
-  }
+
   .link-alt {
     transform: translateY(165px);
     .title-lg {
