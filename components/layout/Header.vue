@@ -103,7 +103,7 @@
           <NuxtLink v-if="false" to="/" class="a"><UserIcon />Войти</NuxtLink>
           <FavoritesLink />
           <CompareLink />
-          <MiniCart />
+          <MiniCartInfo />
         </div>
       </div>
     </div>

@@ -53,16 +53,15 @@ const date = new Date();
 const display = date.getMonth() + 1 + '/' + date.getDate() + '/' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes();
 const { items } = useCart();
 
-const { data, status } = await useFetch('/api/products/cart', {
+const { data } = await useFetch('/api/products/cart', {
   method: 'POST',
   body: {
     sortby: 'popular',
     sortdir: 'desc',
     items: items,
+    trigger: 'print',
   },
 });
-
-// setTimeout(() => window.print(), 2000);
 
 definePageMeta({ layout: 'print' });
 

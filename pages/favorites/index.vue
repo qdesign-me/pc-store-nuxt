@@ -17,7 +17,7 @@
     </div>
 
     <div v-if="hasItems">
-      <div class="text-[#E5A35B] text-sm font-medium mb-10">Вы сохранили {{ pluralize(data.data.length, ['товар', 'товара', 'товаров']) }}</div>
+      <div class="text-[#E5A35B] text-sm font-medium mb-10">Вы сохранили {{ pluralize(data.data?.length, ['товар', 'товара', 'товаров']) }}</div>
       <ProductList
         :data="
           data.data?.map((item) => ({

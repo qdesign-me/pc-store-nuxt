@@ -32,6 +32,6 @@ const { $state } = useAppStore();
 const config = $state?.config || {};
 
 onMounted(() => {
-  window.print();
+  setTimeout(() => window.print(), 1000);
 });
 </script>

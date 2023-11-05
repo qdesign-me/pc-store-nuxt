@@ -6,5 +6,5 @@
 </template>
 
 <script setup>
-const { items, total } = useCart();
+const { total } = useCart();
 </script>

@@ -9,20 +9,20 @@
     <div class="breadcrumbs"><NuxtLink to="/">Главная </NuxtLink><span>Корзина</span></div>
     <div class="flex justify-between gap-6 items-start">
       <h1>Корзина</h1>
-      <div v-if="hasItems" class="text-blue flex gap-6 text-sm underline underline-offset-4">
+      <div v-if="total" class="text-blue flex gap-6 text-sm underline underline-offset-4">
         <button class="items-center gap-2 hidden md:flex" @click="onPrint"><PrinterIcon />Распечатать список</button>
-        <button class="flex items-center gap-2" @click="clear"><DeleteIcon /><span class="hidden sm:block">Очистить список</span></button>
+        <button class="flex items-center gap-2" @click="handleClear"><DeleteIcon /><span class="hidden sm:block">Очистить список</span></button>
       </div>
     </div>
 
-    <div v-if="!hasItems" class="flex flex-col items-center justify-center">
+    <div v-if="!total" class="flex flex-col items-center justify-center">
       <CartIcon width="100" height="105" class="text-blue mb-6" />
       <div class="mb-2">В корзине пока ничего нет</div>
       <div class="opacity-50">Нажмите <CartIcon class="inline -mt-1" width="19" height="19" /> для добавления в корзину</div>
       <NuxtLink to="/catalog" class="btn is-large mt-10 xl:mb-20 min-w-[300px]">Перейти в каталог</NuxtLink>
     </div>
     <div v-else>
-      <div class="text-[#E5A35B] text-sm font-medium mb-10">В корзине {{ pluralize(data?.data?.length, ['товар', 'товара', 'товаров']) }}</div>
+      <div class="text-[#E5A35B] text-sm font-medium mb-10">В корзине {{ pluralize(data?.total?.qty, ['товар', 'товара', 'товаров']) }}</div>
       <div class="grid grid-cols-1 lg:grid-cols-4 relative items-start gap-6">
         <div class="lg:col-span-3 order-area">
           <ProductList :data="data?.data" class="mb-10">
@@ -31,9 +31,7 @@
               <Add2Compare :productID="row.item.productID" />
               <RemoveButton @click="onRemove(row.item.productID)" />
             </template>
-            <template #price="row">
-              <Add2Cart :productID="row.item.productID" @qty="(qty) => onQty(row.item.productID, qty)" />
-            </template>
+            <template #price="row"> <Add2CartSimple :items="items" :add="add" :productID="row.item.productID" @qty="(qty) => onQty(row.item.productID, qty)" /> </template>
           </ProductList>
           <div>
             <h2>Данные получателя</h2>
@@ -394,16 +392,25 @@ const ur = useState(() => ({
 }));
 
 const { add: add2favorites } = useFavorites();
-const { items, hasItems, remove, clear } = useCart();
-
-const { data } = await useFetch('/api/products/cart', {
-  method: 'POST',
-  body: {
-    sortby: 'popular',
-    sortdir: 'desc',
-    items: items,
+const { items, add, total, remove, clear, itemshash } = useCart();
+const { data } = await useAsyncData(
+  'cart',
+  () => {
+    console.log('items', items.value);
+    return $fetch('/api/products/cart', {
+      method: 'POST',
+      body: {
+        sortby: 'popular',
+        sortdir: 'desc',
+        items: items.value,
+        trigger: 'cart',
+      },
+    });
   },
-});
+  {
+    watch: [itemshash],
+  }
+);
 
 const onPrint = () => router.push('/print/cart');
 
@@ -434,9 +441,8 @@ const onFinish = async (info) => {
 
 const onRemove = (id) => {
   add2favorites(id);
-  remove(id);
+  setTimeout(() => remove(id), 10);
 };
-
 const onQty = (productID, qty) => {
   if (qty === 0) onRemove(productID);
 };
@@ -482,4 +488,8 @@ useSeoMeta({
   ogDescription: () => meta.description,
   robots: 'noindex',
 });
+
+const handleClear = () => {
+  clear();
+};
 </script>

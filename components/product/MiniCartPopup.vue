@@ -45,7 +45,7 @@
         <button class="opacity-50" @click="modal.cart = false"><CloseIcon /></button>
       </div>
 
-      <div v-if="!hasItems" class="flex flex-col items-center justify-center text-[12px] border-t">
+      <div v-if="!total" class="flex flex-col items-center justify-center text-[12px] border-t">
         <CartIcon width="50" height="53" class="text-blue my-6" />
         <div class="mb-2">В корзине пока ничего нет</div>
         <div class="opacity-50">Нажмите <CartIcon class="inline -mt-1" width="19" height="19" /> для добавления в корзину</div>
@@ -93,7 +93,7 @@
 const router = useRouter();
 import { onClickOutside } from '@vueuse/core';
 const { add: add2favorites } = useFavorites();
-const { items, hasItems, remove, clear, highlight, clearHighlight } = useCart();
+const { items, total, remove, clear, highlight, clearHighlight, itemshash } = useCart();
 const target = ref(null);
 const modal = ref({
   cart: false,
@@ -106,17 +106,26 @@ const { data: minidata } = await useFetch('/api/products/cart', {
     sortby: 'popular',
     sortdir: 'desc',
     items: highlight,
+    trigger: 'highlight',
   },
 });
 
-const { data } = await useFetch('/api/products/cart', {
-  method: 'POST',
-  body: {
-    sortby: 'popular',
-    sortdir: 'desc',
-    items: items,
-  },
-});
+const { data } = await useAsyncData(
+  'cart',
+  () =>
+    $fetch('/api/products/cart', {
+      method: 'POST',
+      body: {
+        sortby: 'popular',
+        sortdir: 'desc',
+        items: items.value,
+        trigger: 'minicart',
+      },
+    }),
+  {
+    watch: [itemshash],
+  }
+);
 
 const onRemove = (id) => {
   add2favorites(id);
