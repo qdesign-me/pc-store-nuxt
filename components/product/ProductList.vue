@@ -19,7 +19,7 @@
             </div>
           </div>
           <NuxtLink :to="`/p/${item.uri.replace('.html', '')}`">
-            <div class="text-[12px] text-[#3F3F3F] mb-1 hidden sm:block">Код товара: {{ item.productID }}</div>
+            <div class="text-[12px] text-[#3F3F3F] mb-1 hidden sm:block">ID: {{ item.productID }}</div>
             <div class="lg:text-lg font-semibold mb-2">{{ item.name }}</div>
             <div class="text-sm font-light"></div>
           </NuxtLink>

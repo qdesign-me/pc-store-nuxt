@@ -1,6 +1,6 @@
 <template>
   <div class="grid grid-cols-1 gap-5 lg:grid-cols-5 lg:gap-2.5 box">
-    <NuxtLink :href="props.data.link" class="card bg-[#00B3D7] overflow-hidden group promo-link">
+    <NuxtLink :href="props.data.link" class="card pt-5 px-8 bg-[#00B3D7] overflow-hidden group promo-link">
       <img src="/img/promo/similar.png" width="296" height="263" loading="lazy" class="right-0 bottom-0 absolute" />
 
       <div class="title relative text-white">Похожие товары</div>

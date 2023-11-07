@@ -5,19 +5,20 @@
         <NuxtErrorBoundary>
           <Swiper class="swiper rounded overflow-hidden hover:shadow" :pagination="{ clickable: true }" :modules="[Pagination]">
             <SwiperSlide class="slide" v-for="(link, index) in links" :key="index">
-              <NuxtLink class="card more-padding bg-blue py-0 height-sm justify-center" :to="link.uri">
+              <NuxtLink class="card more-padding bg-blue py-0 height-sm justify-center relative" :to="link.uri">
                 <picture>
                   <source media="(max-width: 1024px)" :srcset="link.mobi" />
                   <img :src="link.img" :alt="link.title" loading="lazy" width="450" height="350" class="slider-bg" />
                 </picture>
+                <div class="slider-bg"></div>
 
-                <div class="text-white absolute top-8 bottom-8 left-6 flex flex-col justify-between lg:text-[24px] leading-[1.3]" v-html="link.title" />
+                <div class="text-white absolute top-8 bottom-8 left-6 flex flex-col lg:text-[24px] leading-[1.3]" v-html="link.title" />
               </NuxtLink>
             </SwiperSlide>
           </Swiper>
         </NuxtErrorBoundary>
       </div>
-      <NuxtLink class="card rounded overflow-hidden more-padding bg-blue pb-0 height-sm link-alt hidden lg:block" to="/payment#credit">
+      <NuxtLink class="card pt-5 px-4 rounded overflow-hidden more-padding bg-blue pb-0 height-sm link-alt hidden lg:block" to="/payment#credit">
         <picture>
           <source media="(max-width: 1024px)" srcset="/img/promo/sale-mobi.png" />
           <img src="/img/promo/zero.png" alt="Скидка" loading="lazy" width="190" height="200" class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 mt-4" />

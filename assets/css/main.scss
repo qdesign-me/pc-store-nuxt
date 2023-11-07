@@ -435,8 +435,14 @@
   .tags:empty {
     @apply hidden;
   }
+
+  .slider-bg {
+    @apply absolute inset-0;
+    content: '';
+    background: linear-gradient(90deg, #000 -2.99%, rgba(196, 196, 196, 0) 50.25%);
+  }
   .card {
-    @apply flex flex-col rounded relative p-5  hover:shadow h-[450px];
+    @apply flex flex-col rounded relative p-3  hover:shadow h-[450px];
 
     &.height-sm {
       height: 350px;
@@ -467,7 +473,7 @@
     }
 
     .price-info {
-      @apply absolute bottom-5 left-5 right-5;
+      @apply absolute bottom-[15px] left-3 right-3;
       > div {
         @apply flex items-center;
       }

@@ -1,6 +1,6 @@
 <template>
   <div class="grid grid-cols-1 gap-5 lg:grid-cols-5 lg:gap-2.5 box">
-    <NuxtLink to="/top-prodazh" class="card bg-blue overflow-hidden group promo-link">
+    <NuxtLink to="/top-prodazh" class="card pt-5 px-8 bg-blue overflow-hidden group promo-link">
       <div class="title relative">Топ продаж</div>
       <ArrowLink class="mt-3 relative">
         <span class="underline underline-offset-4">Все новинки</span>

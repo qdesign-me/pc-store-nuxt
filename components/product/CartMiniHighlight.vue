@@ -9,7 +9,7 @@
         <div class="list-items-mini">
           <div v-for="item in minidata?.data" :key="item.id" class="!border-b-0">
             <div class="img w-[60px] flex-shrink-0 overflow-hidden">
-              <div class="text-[10px] text-[#3F3F3F] whitespace-nowrap text-ellipsis">{{ item.productID }}</div>
+              <div class="text-[10px] text-[#3F3F3F] whitespace-nowrap text-ellipsis">ID: {{ item.productID }}</div>
               <NuxtLink :to="`/p/${item.uri.replace('.html', '')}`"><ProductThumbs :data="item" :size="60" /></NuxtLink>
             </div>
             <div class="flex-1 flex flex-col justify-between">
