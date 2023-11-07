@@ -50,8 +50,8 @@ const router = useRouter();
 const props = defineProps(['title']);
 const modalVisible = ref(false);
 const DEFAULT_DATA = {
-  action: 'callmeback',
-  subject: 'Заказать обратный звонок',
+  action: 'consultation',
+  subject: 'Бесплатная консультация',
   page: `https://i-ven.by${router.currentRoute.value.fullPath}`,
   name: '',
   email: '',
