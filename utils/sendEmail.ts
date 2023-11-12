@@ -13,8 +13,6 @@ export async function sendEmail(info: any, to: string) {
     },
   };
 
-  return '';
-
   const transporter = nodemailer.createTransport(mailConfig as TransportOptions);
 
   return transporter.sendMail({
