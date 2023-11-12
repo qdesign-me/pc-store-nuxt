@@ -1,7 +1,6 @@
 import db from '../../../db/db';
 
 const getFilters = async (category: { categoryID: number; uri: string }) => {
-  return {};
   const sql = `select spf.label, spf.tooltip, spf.alias, spf.suffix, spf.filter_type, spf.sort_value, spf.preffered_values, group_concat(distinct sfop.value) as value from  iven_features_on_products sfop 
   join iven_features_on_categories sfoc on sfoc.featureID=sfop.featureID and sfoc.categoryID=${category?.categoryID}
   join iven_products_features spf on spf.featureID=sfop.featureID 
@@ -40,9 +39,10 @@ export default defineEventHandler(async (event) => {
     };
   const data = await getCategory(body.uri);
   const children = await getChildren(data.categoryID);
-  // const blocks = await getFilters(data);
+  const blocks = await getFilters(data);
 
   return {
+    blocks,
     children,
     data,
     // minmax,

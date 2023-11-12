@@ -7,7 +7,9 @@
 </template>
 
 <script setup>
-const props = defineProps(['block', 'values']);
+import { watchDebounced } from '@vueuse/core';
+
+const props = defineProps(['block', 'values', 'uri']);
 const alias = props.block.alias;
 
 const filters = inject('filters');
@@ -42,6 +44,18 @@ const handleCheckbox = (value) => {
 
 const handleSelect = (value) => {
   model.value = [];
-  filters[alias] = '';
 };
+
+watchDebounced(
+  model,
+  () => {
+    const newFitlers = { ...filters.value };
+    newFitlers[alias] = model.value.sort((a, b) => a - b).join(',');
+
+    const searchQuery = buildQuery(newFitlers);
+    const path = `${props.uri}${searchQuery}`;
+    navigateTo(path);
+  },
+  { debounce: 500, maxWait: 1000 }
+);
 </script>

@@ -9,7 +9,6 @@
         <div class="list-items-mini">
           <div v-for="item in minidata?.data" :key="item.id" class="!border-b-0">
             <div class="img w-[60px] flex-shrink-0 overflow-hidden">
-              <div class="text-[10px] text-[#3F3F3F] whitespace-nowrap text-ellipsis">ID: {{ item.productID }}</div>
               <NuxtLink :to="`/p/${item.uri.replace('.html', '')}`"><ProductThumbs :data="item" :size="60" /></NuxtLink>
             </div>
             <div class="flex-1 flex flex-col justify-between">
@@ -20,8 +19,8 @@
                   <div v-if="item.PriceSale > 0" class="bg-[#FFAC2F]">На акции</div>
                 </div>
               </div>
-
-              <NuxtLink :to="`/p/${item.uri.replace('.html', '')}`" class="text-black font-semibold mb-2 mr-6">{{ item.name }}</NuxtLink>
+              <div class="text-[10px] text-[#3F3F3F] whitespace-nowrap text-ellipsis">Код товара: {{ item.productID }}</div>
+              <NuxtLink :to="`/p/${item.uri.replace('.html', '')}`" class="text-black font-semibold mb-0 mr-6">{{ item.name }}</NuxtLink>
 
               <div class="flex gap-2 justify-between">
                 <div class="price text-[14px] flex gap-2">
@@ -64,10 +63,10 @@ let timeout = null;
 watch(highlight, () => {
   modal.value = true;
   if (timeout) clearTimeout(timeout);
-  timeout = setTimeout(() => {
-    clearHighlight();
-    modal.value = false;
-  }, 3500);
+  // timeout = setTimeout(() => {
+  //   clearHighlight();
+  //   modal.value = false;
+  // }, 3500);
 });
 watch(router.currentRoute, () => {
   modal.value = false;

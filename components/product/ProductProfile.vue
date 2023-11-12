@@ -23,7 +23,7 @@
         <ProductProfileImages :data="props.data" />
       </div>
       <div class="text-sm flex flex-col gap-4 flex-1 min-w-[200px] profile-short">
-        <div class="text-sm sm:text-base font-semibold mb-4 hidden xl:block">ID: {{ props.data.productID }}</div>
+        <div class="text-sm sm:text-base font-semibold mb-4 hidden xl:block">Код товара: {{ props.data.productID }}</div>
 
         <template v-if="0">
           <div>
@@ -49,7 +49,7 @@
         </div>
       </div>
       <div class="max-w-[420px] text-sm flex flex-col">
-        <div class="block xl:hidden text-sm font-semibold mb-4">ID: {{ props.data.productID }}</div>
+        <div class="block xl:hidden text-sm font-semibold mb-4">Код товара: {{ props.data.productID }}</div>
 
         <div class="flex gap-2 mb-6" v-if="0">
           Рейтинг товара

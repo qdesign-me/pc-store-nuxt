@@ -1,16 +1,19 @@
 <template>
   <DefaultLayout>
     <div class="container py-20 pt-10 md:pt-20">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-16 items-center">
-        <div>
-          <img :src="img" alt="404" width="800" height="645" />
-        </div>
-        <div class="text">
-          <div class="h2">Увы, страница не найдена</div>
-          <p>К сожалению, вы зашли на несуществующую страницу. Возможно, вы перешли по старой ссылке или ввели неправильный адрес.</p>
-          <p>Попробуйте проверить ссылку или вернитесь на главную страницу</p>
-          <NuxtLink to="/" class="btn mt-10 xl:ml-20">Перейти на главную</NuxtLink>
-        </div>
+      <div class="text text-center max-w-[450px] mx-auto">
+        <div class="h2">Ошибка 404</div>
+        <p>Страница, которую Вы запрашиваете, не существует.</p>
+        <p>
+          Возможно, она была удалена, или Вы набрали неверный адрес. Приглашаем вернуться на
+          <NuxtLink to="/" class="text-blue underline underline-offset-2">Главную</NuxtLink> страницу либо
+          <span class="inline-block text-blue underline underline-offset-2 cursor-pointer">
+            <Consultation title="Бесплатная консультация"> обратиться </Consultation>
+          </span>
+          к нашему консультанту.
+        </p>
+
+        <img :src="img" alt="404" width="180" height="180" class="inline-block mx-auto mt-8" />
       </div>
     </div>
   </DefaultLayout>
@@ -18,7 +21,7 @@
 
 <script setup>
 import DefaultLayout from './layouts/default.vue';
-import img from '@/assets/img/error404.webp';
+import img from '@/assets/img/404.png';
 const meta = {
   title: 'Iven — интернет магазин компьютеров и комплектующих, техники для офиса и электроники. Сборка ПК. Доставка по Беларуси',
   description:

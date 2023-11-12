@@ -182,6 +182,7 @@
   </main>
 </template>
 <script setup>
+const { show: showThanks } = useThanks();
 const target = ref(null);
 const file = ref(null);
 definePageMeta({
@@ -226,13 +227,13 @@ const DEFAULT_DATA = {
 const model = useState(() => clone(DEFAULT_DATA));
 
 const onFinish = async (event) => {
-  message.info('Ваше сообщение отправлено');
   const body = clone(model.value);
   useFetch('/api/email', {
     method: 'POST',
     body,
   });
   Object.assign(model.value, clone(DEFAULT_DATA));
+  showThanks();
 };
 </script>
 

@@ -66,7 +66,7 @@ export default defineEventHandler(async (event) => {
       }
       if (field === 'q') {
         const q = values.value.trim();
-        return `and (p.name like '%${q}%' )`;
+        return `and (p.name like '%${q}%')`;
       }
 
       if (values.to && !values.from) {

@@ -1,5 +1,6 @@
 <template>
-  <div @click="modalVisible = true" className="w-full"><slot /></div>
+  <div @click="modalVisible = true" class="w-full"><slot /></div>
+
   <Modal :visible="modalVisible" @close="modalVisible = false" :title="props.title">
     <div class="text-[#000] font-semibold text-center">Оставьте свой номер телефона или контакт в мессенджере.</div>
     <div class="text-[#F54D4D] font-semibold text-center text-sm py-5">Мы обязательно с Вами свяжемся!</div>
@@ -45,7 +46,7 @@
 
 <script setup lang="ts">
 import QuestionIcon from '../icons/QuestionIcon.vue';
-
+const { show: showThanks } = useThanks();
 const router = useRouter();
 const props = defineProps(['title']);
 const modalVisible = ref(false);
@@ -63,8 +64,7 @@ const DEFAULT_DATA = {
 
 const model = useState(() => clone(DEFAULT_DATA));
 
-const onFinish = async (event) => {
-  message.info('Бесплатная консультация');
+const onFinish = async () => {
   const body = clone(model.value);
   useFetch('/api/email', {
     method: 'POST',
@@ -73,5 +73,6 @@ const onFinish = async (event) => {
   Object.assign(model.value, clone(DEFAULT_DATA));
 
   modalVisible.value = false;
+  showThanks();
 };
 </script>

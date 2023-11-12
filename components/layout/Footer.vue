@@ -126,6 +126,7 @@
         </div>
       </div>
     </footer>
+    <Thanks />
   </template>
 </template>
 

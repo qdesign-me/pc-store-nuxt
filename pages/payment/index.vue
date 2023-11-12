@@ -14,7 +14,7 @@
               <h2>Оплата банковской картой</h2>
               <p>Оплату банковской картой можно осуществить в пункте самовывоза или курьеру при получении товара.</p>
 
-              <p>В том числе, принимаем к оплате карты рассрочки:</p>
+              <p>В том числе, принимаем к оплате <NuxtLink class="text-blue underline underline-offset-2" to="/payment/instalments">карты рассрочки</NuxtLink>:</p>
 
               <div class="flex gap-2 card-logos mt-2">
                 <img src="/img/info/vtb.png" loading="lazy" width="64" height="40" alt="ВТБ" />
@@ -76,6 +76,7 @@
         </div>
       </div>
     </div>
+
     <div class="box box-scroll2 pt-10" id="credit">
       <div class="container">
         <h2>Оплата в кредит</h2>

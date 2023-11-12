@@ -1,9 +1,9 @@
 <template>
-  <component :is="components[props.block.filter_type]" :block="props.block" :values="values" />
+  <component :is="components[props.block.filter_type]" :block="props.block" :values="values" :uri="props.uri" />
 </template>
 
 <script setup>
-const props = defineProps(['block']);
+const props = defineProps(['block', 'uri']);
 const FilterItemAsBoolean = resolveComponent('FilterItemAsBoolean');
 const FilterItemAsCombo = resolveComponent('FilterItemAsCombo');
 const FilterItemAsModal = resolveComponent('FilterItemAsModal');
