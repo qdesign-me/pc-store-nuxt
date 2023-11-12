@@ -26,14 +26,12 @@
           </Swiper>
         </NuxtErrorBoundary>
       </div>
-      <NuxtLink class="card pt-5 px-4 rounded overflow-hidden more-padding bg-blue pb-0 height-sm link-alt hidden lg:block" to="/payment/instalments">
-        <picture>
-          <source media="(max-width: 1024px)" srcset="/img/promo/sale-mobi.png" />
-          <img src="/img/promo/zero.png" alt="Скидка" loading="lazy" width="190" height="200" class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 mt-4" />
-        </picture>
+      <NuxtLink class="card pt-5 px-4 rounded overflow-hidden more-padding bg-blue pb-0 height-sm installments" to="/payment/instalments">
+        <img src="/img/promo/zero.png" alt="Скидка" loading="lazy" width="190" height="200" class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 mt-4" />
+
         <div class="h2 text-white relative">РАССРОЧКА <br />БЕЗ ПЕРЕПЛАТ!</div>
 
-        <div class="flex justify-between absolute left-5 right-5 bottom-5">
+        <div class="flex justify-between absolute left-5 right-5 bottom-5 cards">
           <img src="/img/info/vtb.png" loading="lazy" width="64" height="40" alt="ВТБ" data-v-inspector="pages/payment/index.vue:20:17" /><img
             src="/img/info/halva.png"
             loading="lazy"

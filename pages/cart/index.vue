@@ -1,6 +1,6 @@
 <template>
   <main class="container mt-[50px] sm:mt-[110px]" v-if="mode === 'thankyou'">
-    <div class="flex justify-center align-center flex-col text-center">
+    <div class="flex justify-center align-center flex-col text-center box-scroll2 py-20 pb-10" id="thanks">
       <h2>Ваш заказ принят!</h2>
       <p class="text-sm max-w-[375px] mx-auto">Менеджер свяжется с Вами в ближайшее время для подтверждения заказа по указанным контактам.</p>
     </div>
@@ -427,6 +427,7 @@ const onFinish = async (info) => {
     },
   });
   mode.value = 'thankyou';
+
   clear();
   person.value = {
     delivery: 'Самовывоз',
@@ -437,6 +438,10 @@ const onFinish = async (info) => {
     delivery: 'Самовывоз',
     payment: 'Банковский перевод',
   };
+  setTimeout(() => {
+    const el = document.querySelector(`#thanks`);
+    el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 0);
 };
 
 const onRemove = (id) => {

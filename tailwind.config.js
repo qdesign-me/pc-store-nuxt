@@ -15,7 +15,7 @@ module.exports = {
         yellow: '#FDFF92',
       },
       boxShadow: {
-        DEFAULT: '4px 4px 10px rgba(0, 0, 0, 0.1)',
+        DEFAULT: '4px 4px 10px rgba(0, 0, 0, 0.2)',
       },
       borderColor: {
         DEFAULT: '#D9D9D9',

@@ -4,7 +4,7 @@
       <div class="card pt-5 height-xs flex flex-col lgr z-1">
         <img src="/img/promo/confetti.png" alt="" class="absolute top-0 right-0 z-1 max-h-full" />
         <img src="/img/promo/gift-box.png" alt="" class="absolute top-1/2 -translate-y-1/2 right-0 z-1 max-h-full" />
-        <div class="title-md text-white px-3 relative">
+        <div class="title-md text-white px-3 relative max-w-[265px] lg:max-w-initial">
           Бесплатная <br />
           сборка под <br />
           ваши задачи
@@ -18,7 +18,7 @@
       </div>
       <div class="card pt-5 height-xs flex flex-col lgr">
         <img src="/img/promo/technician.png" alt="" class="absolute top-0 right-0 z-1 max-h-full" />
-        <div class="title-md text-white line-clamp-3 z-[2] relative px-3">
+        <div class="title-md text-white line-clamp-3 z-[2] relative px-3 max-w-[265px] lg:max-w-initial">
           Собрать <br />
           самостоятельно <br />
           в Конфигураторе ПК
@@ -31,12 +31,12 @@
             Можно забрать <br />
             уже сегодня!
           </div>
-          <div class="w-full sm:w-auto">
+          <div class="w-full sm:w-auto buy-pc">
             <NuxtLink to="/noutbuki-i-aksessuary/gotovie-komputeri" class="btn-white w-full"><CartIcon class="static" />Купить готовый компьютер</NuxtLink>
           </div>
         </div>
 
-        <div class="items !mt-0">
+        <div class="items !gap-10 !justify-center !mt-0 pc-types">
           <PcTypesBlock />
         </div>
       </div>
