@@ -14,14 +14,19 @@
       <Loading :class="pending || uri !== products?.uri ? 'opacity-100' : 'opacity-0'" />
     </div>
 
-    <div class="mb-6" v-if="!pending && filters.q && products?.total === 0">По запросу «{{ filters.q }}» ничего не найдено.</div>
-    <div class="mb-6" v-else-if="!pending && !filters.q && products?.total === 0">{{ category.data.name }}: ничего не найдено.</div>
+    <div class="text text-center max-w-[450px] mx-auto mb-10" v-if="!pending && products?.total === 0">
+      <p>
+        К сожалению, по Вашему запросу ничего не найдено. Приглашаем вернуться на
+        <NuxtLink to="/" class="text-blue underline underline-offset-2">Главную</NuxtLink> страницу либо
+        <span class="inline-block text-blue underline underline-offset-2 cursor-pointer">
+          <Consultation title="Бесплатная консультация"> обратиться </Consultation>
+        </span>
+        к нашему консультанту.
+      </p>
 
-    <template v-if="!pending && products?.total === 0">
-      <TopSalesBlock />
-      <PopularCatsBlock />
-      <NewItemsBlock />
-    </template>
+      <img :src="img" alt="404" width="180" height="180" class="inline-block mx-auto mt-8" />
+    </div>
+
     <template v-if="products?.total > 0 && products.uri === uri">
       <div class="grid grid-cols-5 gap-2.5">
         <div class="col-span-5 xl:col-span-1" v-if="products?.total > 0">
@@ -43,6 +48,7 @@
   </main>
 </template>
 <script async setup>
+import img from '@/assets/img/404.png';
 const router = useRouter();
 const filters = computed(() => router.currentRoute.value.query);
 import { notAllowedCats } from '../configs/index';

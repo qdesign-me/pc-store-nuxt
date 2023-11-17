@@ -85,6 +85,12 @@
           <CallMeBack />
 
           <div class="text mt-4">
+            <p v-if="data.available.pickup_text !== data.available.delivery_text">
+              <div>Самовывоз: {{ data.available.pickup_text }}</div>
+              <div>Доставка: {{ data.available.delivery_text }}</div>
+            </p>
+            <p v-else>Самовывоз и доставка: <span class="font-semibold">{{ data.available.pickup_text }}</span></p>
+
             <p class="hidden sm:block">Самовывоз только в Минске.</p>
 
             <p class="hidden sm:block">Стоимость и сроки доставки по РБ уточняйте в отделе продаж.</p>
