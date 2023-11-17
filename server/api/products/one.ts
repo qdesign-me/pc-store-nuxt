@@ -31,10 +31,9 @@ async function getKurs() {
 }
 
 async function getAvailable(availability, nowDay) {
-  console.log(
+  const [data] = await db.execute(
     `SELECT DATE_FORMAT(PostTime, '%H.%i') as PostTime, Pickup1, Pickup2, Delivery1, Delivery2 from win7_whenpickup where Seller_ID='${availability}' and NowDay='${nowDay}'`
   );
-  const [data] = await db.execute(`SELECT Pickup1, Pickup2, Delivery1, Delivery2 from win7_whenpickup where Seller_ID='${availability}' and NowDay='${nowDay}'`);
   return data[0];
 }
 
@@ -71,20 +70,23 @@ export default defineEventHandler(async (event) => {
 
   if (availableData) {
     if (availableData.PostTime > nowTime) {
-      available.delivery = availableData.Delivery1;
+      available.delivery = availableData.Delivery1 - nowDay;
       available.pickup = availableData.Pickup1 - nowDay;
     } else {
-      available.delivery = availableData.Delivery2;
+      available.delivery = availableData.Delivery2 - nowDay;
       available.pickup = availableData.Pickup2 - nowDay;
     }
     if (available.pickup < 0) {
       available.pickup += 7;
-      available.delivery = availableData.Delivery1 - nowDay;
-      if (available.delivery < 0) available.delivery += 7;
     }
-    available.pickup_text = available.pickup === nowDay ? 'сегодня' : days[available.pickup];
-    available.delivery_text = available.delivery === nowDay ? 'сегодня' : days[available.delivery];
+    if (available.delivery < 0) {
+      available.delivery += 7;
+    }
+    available.pickup_text = available.pickup === 0 ? 'Сегодня' : days[available.pickup];
+    available.delivery_text = available.delivery === 0 ? 'Сегодня' : days[available.delivery];
   }
+
+  console.log({ availableData, available });
 
   data['available'] = available;
 
@@ -103,9 +105,5 @@ export default defineEventHandler(async (event) => {
   return {
     data,
     similar,
-    availableData,
-    available,
-    nowTime,
-    nowDay,
   };
 });

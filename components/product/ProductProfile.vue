@@ -86,8 +86,8 @@
 
           <div class="text mt-4">
             <p v-if="data.available.pickup_text !== data.available.delivery_text">
-              <div>Самовывоз: {{ data.available.pickup_text }}</div>
-              <div>Доставка: {{ data.available.delivery_text }}</div>
+              <div>Самовывоз: <span class="font-semibold">{{ data.available.pickup_text }}</span></div>
+              <div>Доставка: <span class="font-semibold">{{ data.available.delivery_text }}</span></div>
             </p>
             <p v-else>Самовывоз и доставка: <span class="font-semibold">{{ data.available.pickup_text }}</span></p>
 
