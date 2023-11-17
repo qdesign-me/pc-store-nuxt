@@ -2,7 +2,7 @@
   <button class="btn mt-4 mb-6 xl:mb-12 is-large" @click="modalVisible = true"><CallbackIcon /> Заказать обратный звонок</button>
   <Modal :visible="modalVisible" @close="modalVisible = false" title="Заказать обратный звонок">
     <Form :model="model" :onFinish="onFinish">
-      <FormItem name="name" :rules="[{ required: true }]">
+      <FormItem name="name">
         <input name="name" type="text" class="input" placeholder="Укажите ваше имя и фамилию" v-model="model.name" />
       </FormItem>
       <FormItem name="phone" :rules="[{ required: true }]">
@@ -11,7 +11,7 @@
       <FormItem name="email" :rules="[{ email: true }]">
         <input name="email" type="email" class="input" placeholder="Укажите ваш E-mail" v-model="model.email" />
       </FormItem>
-      <FormItem name="message" :rules="[{ required: true }]">
+      <FormItem name="message">
         <textarea name="message" placeholder="Комментарий к заказу" class="input h-40" v-model="model.message"></textarea>
       </FormItem>
       <button class="btn is-large"><CallbackIcon /> Заказать обратный звонок</button>
