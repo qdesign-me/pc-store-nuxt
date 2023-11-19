@@ -7,6 +7,7 @@ const getFilters = async (category: { categoryID: number; uri: string }) => {
   join iven_products sp on sp.productID = sfop.productID 
   join iven_categories sc on sc.categoryID = sp.categoryID and sc.fullPath like '${category.uri}%' 
   group by label, tooltip, alias `;
+  console.log(sql);
   const [data] = await db.execute(sql);
   return data;
 };

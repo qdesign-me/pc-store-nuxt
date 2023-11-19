@@ -1,58 +1,54 @@
 <template>
-  <FilterItemAsCheckboxes :block="props.block" :values="checkboxes" v-model="model" @update:modelValue="handleCheckbox" />
+  <FilterItemAsCheckboxes :block="props.block" :values="checkboxes" v-model="model.values" @update:modelValue="handleCheckbox" />
   <div class="input-group">
-    <Select :options="options" v-model="filters[`${alias}[from]`]" @update:modelValue="handleSelect" />
-    <Select :options="options" v-model="filters[`${alias}[to]`]" @update:modelValue="handleSelect" />
+    <Select :options="options" v-model="model.from" @update:modelValue="handleSelect" />
+    <Select :options="optionsTo" v-model="model.to" @update:modelValue="handleSelect" />
   </div>
 </template>
 
 <script setup>
 import { watchDebounced } from '@vueuse/core';
-
 const props = defineProps(['block', 'values', 'uri']);
+const filters = inject('filters');
 const alias = props.block.alias;
 
-const filters = inject('filters');
-if (!filters[alias]) filters[alias] = '';
-if (!filters[`${alias}[from]`]) filters[`${alias}[from]`] = '';
-if (!filters[`${alias}[to]`]) filters[`${alias}[to]`] = '';
-const model = ref(filters[alias].split(',').filter((item) => item.length));
+const model = ref({
+  from: filters.value[`${alias}[from]`] ?? '',
+  to: filters.value[`${alias}[to]`] ?? '',
+  values: (filters.value[alias] ?? '').split(','),
+});
+
+const options = computed(() => [{ value: '', label: '' }, ...props.values.map((value) => ({ value, label: `${value}${props.block.suffix}` }))]);
+const optionsTo = computed(() => {
+  if (!model.value.from) return options.value;
+  return options.value.filter((item) => +item.value >= +model.value.from);
+});
 
 const checkboxes = props.block.preffered_values
   ? props.block.preffered_values
       .split(',')
       .map((value) => value.trim())
       .filter((value) => props.values.includes(value))
-  : props.values.slice(0, 3);
+  : props.values.slice(0, 5);
 
-const options = [{ value: '', label: '' }, ...props.values.map((value) => ({ value, label: `${value}${props.block.suffix}` }))];
-
-const handleCheckbox = (value) => {
-  const current = value.sort((a, b) => +a - +b);
-  const from = current[0];
-  const to = current[current.length - 1];
-  filters[`${alias}[from]`] = from;
-  if (to !== from) filters[`${alias}[to]`] = to;
-
-  checkboxes.forEach((item) => {
-    if (+item < +to && +item > +from && !model.value.includes(item)) {
-      model.value.push(item);
-    }
-  });
-  filters[alias] = model.value.sort((a, b) => a - b).join(',');
+const handleCheckbox = () => {
+  model.value = { ...model.value, from: '', to: '' };
 };
 
-const handleSelect = (value) => {
-  model.value = [];
+const handleSelect = () => {
+  const newValues = { ...model.value, values: [] };
+  if (+newValues.to && +newValues.to < +newValues.from) delete newValues.to;
+  model.value = { ...newValues };
 };
 
 watchDebounced(
   model,
   () => {
-    const newFitlers = { ...filters.value };
-    newFitlers[alias] = model.value.sort((a, b) => a - b).join(',');
-
-    const searchQuery = buildQuery(newFitlers);
+    const newFilters = { ...filters.value };
+    newFilters[alias] = model.value.values;
+    newFilters[`${alias}[from]`] = model.value.from;
+    newFilters[`${alias}[to]`] = model.value.to;
+    const searchQuery = buildQuery(newFilters);
     const path = `${props.uri}${searchQuery}`;
     navigateTo(path);
   },

@@ -20,13 +20,12 @@
 <script setup>
 import { onClickOutside, watchDebounced } from '@vueuse/core';
 const props = defineProps(['block', 'values', 'uri']);
-const alias = props.block.alias;
 
 const modal = ref(false);
 const target = ref(null);
 const filters = inject('filters');
-if (!filters[alias]) filters[alias] = '';
-const model = ref(filters[alias].split(',').filter((item) => item.length));
+
+const model = ref((filters.value[props.block.alias] ?? '').split(',').filter((item) => item && item.length));
 
 const checkboxes = props.block.preffered_values
   ? props.block.preffered_values
@@ -54,8 +53,7 @@ watchDebounced(
   model,
   () => {
     const newFitlers = { ...filters.value };
-    newFitlers[alias] = model.value;
-    console.log(newFitlers);
+    newFitlers[props.block.alias] = model.value;
     const searchQuery = buildQuery(newFitlers);
     const path = `${props.uri}${searchQuery}`;
     navigateTo(path);

@@ -10,6 +10,8 @@
 2ч поменял фон блок "Новые товары,  добавил второй баннер, блок готовый компьютер - поправил иконки, код товара - ID: -> везде, Бесплатная консультация выпадалки, страница /catalog - добавил фото
 6ч правки по странице доработок и по мобильному адаптиву
 3ч алгоритм наличия, правки когда товар не найден
+3ч быстрый поиск
+4ч переделка фильтров
 
 yandex
 логин win7@win7.by                                          
@@ -20,6 +22,14 @@ win7@win7.by
 Ueukfrrfeynwin7
 
 
+
+SELECT * FROM iven_features_on_products where value like '%2xDP%' LIMIT 0,100
+select spf.label, spf.tooltip, spf.alias, spf.suffix, spf.filter_type, spf.sort_value, spf.preffered_values, group_concat(distinct sfop.value) as value from  iven_features_on_products sfop 
+  join iven_features_on_categories sfoc on sfoc.featureID=sfop.featureID and sfoc.categoryID=20
+  join iven_products_features spf on spf.featureID=sfop.featureID
+  join iven_products sp on sp.productID = sfop.productID
+  join iven_categories sc on sc.categoryID = sp.categoryID and sc.fullPath like '/periferiya-i-aksessuary/monitory%'
+  group by label, tooltip, alias
 
 
 scp -P 2253  root@93.125.2.1:/var/www/html/i-ven.by/rozn.zip c://Downloads.zip

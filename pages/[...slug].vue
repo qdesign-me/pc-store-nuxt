@@ -14,7 +14,7 @@
       <Loading :class="pending || uri !== products?.uri ? 'opacity-100' : 'opacity-0'" />
     </div>
 
-    <div class="text text-center max-w-[450px] mx-auto mb-10" v-if="!pending && products?.total === 0">
+    <div class="text text-center max-w-[450px] mx-auto mb-10" v-if="!pending && products?.total === 0 && router.currentRoute.value?.query?.q">
       <p>
         К сожалению, по Вашему запросу ничего не найдено. Приглашаем вернуться на
         <NuxtLink to="/" class="text-blue underline underline-offset-2">Главную</NuxtLink> страницу либо
@@ -27,21 +27,24 @@
       <img :src="img" alt="404" width="180" height="180" class="inline-block mx-auto mt-8" />
     </div>
 
-    <template v-if="products?.total > 0 && products.uri === uri">
+    <template v-if="products.uri === uri && (products?.total > 0 || category.blocks?.length)">
       <div class="grid grid-cols-5 gap-2.5">
-        <div class="col-span-5 xl:col-span-1" v-if="products?.total > 0">
+        <div class="col-span-5 xl:col-span-1">
           <Filters :blocks="category.blocks" :products="products" :uri="uri" />
         </div>
         <div class="col-span-5 xl:col-span-4 flex flex-col">
-          <div class="catlinks order-[999] mt-5 xl:mt-0 xl:mb-4 xl:order-[0]" v-if="category.children">
+          <!-- <div class="catlinks order-[999] mt-5 xl:mt-0 xl:mb-4 xl:order-[0]" v-if="0 && category.children " >
             <NuxtLink :to="child.uri" v-for="child in category.children" :key="child.uri">{{ child.name }}</NuxtLink>
-          </div>
-          <div class="text-[#E5A35B] mb-4">Всего {{ pluralize(products?.total, ['товар', 'товара', 'товаров']) }}</div>
-          <SortingLinks :uri="uri" />
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2.5 gap-y-8 products-grid">
-            <ProductCard v-for="product in products?.data" :key="product.productID" :product="product" />
-          </div>
-          <PaginationBox :uri="uri" :total="products?.total" v-if="products?.total > 12" />
+          </div> -->
+          <div v-if="!pending && products.total === 0" class="text text-center">Упс. У нас нет таких товаров. Попробуйте изменить условия поиска.</div>
+          <template v-if="products.total > 0">
+            <div class="text-[#E5A35B] mb-4">Всего {{ pluralize(products?.total, ['товар', 'товара', 'товаров']) }}</div>
+            <SortingLinks :uri="uri" />
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2.5 gap-y-8 products-grid">
+              <ProductCard v-for="product in products?.data" :key="product.productID" :product="product" />
+            </div>
+            <PaginationBox :uri="uri" :total="products?.total" v-if="products?.total > 12" />
+          </template>
         </div>
       </div>
     </template>

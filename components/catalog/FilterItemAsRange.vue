@@ -1,40 +1,60 @@
 <template>
-  <FilterItemAsCheckboxes :block="props.block" :values="checkboxes" v-model="model" @update:modelValue="handleCheckbox" />
+  <FilterItemAsCheckboxes :block="props.block" :values="checkboxes" v-model="model.values" @update:modelValue="handleCheckbox" />
   <div class="input-group">
-    <input placeholder="от" type="number" v-model="filters[`${alias}[from]`]" :min="min" :max="max" :step="1" @input="handleInput" />
-    <input placeholder="до" type="number" v-model="filters[`${alias}[to]`]" :min="min" :max="max" :step="1" @input="handleInput" />
+    <input placeholder="от" type="number" v-model="model.from" :min="min" :max="max" :step="1" @input="handleInput('from')" />
+    <input placeholder="до" type="number" v-model="model.to" :min="min" :max="max" :step="1" @input="handleInput('to')" />
   </div>
 </template>
 
 <script setup>
-const props = defineProps(['block', 'values']);
+import { watchDebounced } from '@vueuse/core';
+const props = defineProps(['block', 'values', 'uri']);
 const filters = inject('filters');
 const alias = props.block.alias;
 
-if (!filters[alias]) filters[alias] = '';
-if (!filters[`${alias}[from]`]) filters[`${alias}[from]`] = '';
-if (!filters[`${alias}[to]`]) filters[`${alias}[to]`] = '';
-const model = ref(filters[alias].split(',').filter((item) => item.length));
-const max = props.values[0];
-const min = props.values[props.values[props.values.length - 1]];
-const checkboxes = props.values;
+const model = ref({
+  from: filters.value[`${alias}[from]`] ?? '',
+  to: filters.value[`${alias}[to]`] ?? '',
+  values: (filters.value[alias] ?? '').split(','),
+});
+
+const min = props.values[0];
+const max = props.values[props.values.length - 1];
+
+const checkboxes = props.block.preffered_values
+  ? props.block.preffered_values
+      .split(',')
+      .map((value) => value.trim())
+      .filter((value) => props.values.includes(value))
+  : props.values.slice(0, 5);
 
 const handleCheckbox = (value) => {
-  const current = value.sort((a, b) => +a - +b);
-  const from = current[0];
-  const to = current[current.length - 1];
-  filters[`${alias}[to]`] = to;
-  filters[`${alias}[from]`] = from;
-  checkboxes.forEach((item) => {
-    if (+item < +to && +item > +from && !model.value.includes(item)) {
-      model.value.push(item);
-    }
-  });
-  filters[alias] = model.value.join(',');
+  model.value = {
+    values: value.filter((item) => item?.length),
+    from: '',
+    to: '',
+  };
 };
 
-const handleInput = () => {
-  model.value = [];
-  filters[alias] = '';
+const handleInput = (mode) => {
+  const newValues = { ...model.value, values: [] };
+  if (mode === 'from' && +newValues.to && +newValues.to < +newValues.from) delete newValues.to;
+
+  console.log(newValues, min, max);
+  model.value = { ...newValues };
 };
+
+watchDebounced(
+  model,
+  () => {
+    const newFilters = { ...filters.value };
+    newFilters[alias] = model.value.values;
+    newFilters[`${alias}[from]`] = model.value.from;
+    newFilters[`${alias}[to]`] = model.value.to;
+    const searchQuery = buildQuery(newFilters);
+    const path = `${props.uri}${searchQuery}`;
+    navigateTo(path);
+  },
+  { debounce: 500, maxWait: 1000 }
+);
 </script>

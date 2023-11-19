@@ -1,4 +1,6 @@
 <template>
+  <div class="label mb-[-20px]">Цена</div>
+
   <div class="input-group">
     <input :placeholder="props.min" type="number" v-model="model.min" :min="props.min" :max="props.max" :step="1" class="!pr-0" />
     <input :placeholder="props.max" type="number" v-model="model.max" :min="model.min ?? props.min" :max="props.max" :step="1" class="!pr-0" />
