@@ -58,6 +58,13 @@ export default defineEventHandler(async (event) => {
       const field = row[0];
       let condition = '';
       const values = row[1];
+      console.log({ values });
+      if (values.value === 'no') {
+        values.value = 'no,0,Нет';
+      }
+      if (values.value === 'yes') {
+        values.value = 'yes,1,Да';
+      }
       if (field === 'price') {
         const priceTo = values.to ?? 9999999;
         const priceFrom = values.from ?? 0;
