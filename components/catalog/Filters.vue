@@ -24,7 +24,7 @@
           <button class="btn" @click="emit('reset')">Очичтить фильтры <span class="filters-clear"></span></button>
         </div>
 
-        <SortingLinks :uri="uri" />
+        <SortingLinks :uri="uri" class="xl:hidden mt-6" />
       </div>
     </div>
   </div>
