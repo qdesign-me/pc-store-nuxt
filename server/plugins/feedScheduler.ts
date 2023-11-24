@@ -1,32 +1,11 @@
+import { useScheduler } from '#scheduler';
 import { writeFile } from 'fs/promises';
 import { notAllowedCats } from '~/configs';
 import db from '~/db/db';
 
-/*`<offer id="18295" available="true">
-  <name>Парогенератор Bosch TDS 4040</name>
-  <typePrefix>Парогенератор</typePrefix>
-  <model>TDS 4040</model>
-  <vendor>Bosch</vendor>
-  <description>Мощность: 2400 Вт; Постоянная подача пара: есть; Вертикальное отпаривание: есть; Вес: 3.4 кг; Автоматическое отключение: есть; Автоматическая регулировка пара: есть; Расход при паровом ударе: 270 г/мин; Максимальное давление пара: 5.5 бар;</description>
-  <vendorCode>100028173415</vendorCode>
-  <param name="Цвет">белый, синий, серый</param>
-  <param name="Материал">Пластик</param>   
-  <param name="Размер" unit="см">Длина 38.5 Ширина 19.2 Высота 26</param>
-  <param name="Длина" unit="см">38.5</param>
-  <param name="Ширина" unit="см">19.2</param>
-  <param name="Высота" unit="см">26</param>
-  <condition type="showcasesample">
-        <quality>good</quality>
-  </condition>
-  <categoryId>123</categoryId>
-  <picture>https://avatars.mds.yandex.net/get-mpic/5209485/img_id4945386046892792794.jpeg/orig</picture>
-  <url>https://market.yandex.ru/product--parogenerator-bosch-tds-4040/1807277658</url>
-  <price>11670</price>
-  <oldprice>12000</oldprice>
-  <currencyId>RUR</currencyId>
-  <sales_notes>сроки доставки и оплаты</sales_notes>
-</offer>`;
-*/
+export default defineNitroPlugin(() => {
+  startScheduler();
+});
 
 async function getFeatures(productID) {
   const [data] = await db.execute(
@@ -84,35 +63,40 @@ async function getProducts(start: number, kurs: any) {
   const [data] = await db.execute(
     `SELECT productID, categoryID, typePrefix, vendorCode, vendor, name, uri, model, ROUND(Price * ${kurs}, 2) as Price,
     (select ip.filename from iven_product_pictures ip where ip.productID=iven_products.productID  limit 1) as img
-    FROM iven_products where enabled=1 and  categoryID not in (${notAllowedCats.join(',')})  LIMIT ${start}, 1000`
+    FROM iven_products where enabled=1 and  categoryID not in (${notAllowedCats.join(',')})  LIMIT ${start},1000`
   );
   return data;
 }
-export default defineEventHandler(async (event) => {
-  const categories = await getCategories();
-  console.log('get categories');
-  const kurs = await getKurs();
-  console.log('get kurs');
-  console.log('getting products');
-  const offers = [];
-  let start: number = 0;
-  do {
-    const data = await getProducts(start, kurs);
-    if (data?.length > 0) {
-      start = start + 1000;
-      offers.push(data.map((item) => getItem(item)).join(''));
-    } else {
-      start = -1;
-    }
-  } while (start > 0);
-  console.log('got products');
 
-  // event.node.res.setHeader('content-type', 'text/xml'); // we need to tell nitro to return this as a xml file
-  // event.node.res.end(
+function startScheduler() {
+  const scheduler = useScheduler();
 
-  const today = new Date();
+  scheduler
+    .run(async () => {
+      const categories = await getCategories();
+      console.log('get categories');
+      const kurs = await getKurs();
+      console.log('get kurs');
+      console.log('getting products');
+      const offers = [];
+      let start: number = 0;
+      do {
+        const data = await getProducts(start, kurs);
+        if (data?.length > 0) {
+          start = start + 1000;
+          offers.push(data.map((item) => getItem(item)).join(''));
+        } else {
+          start = -1;
+        }
+      } while (start > 0);
+      console.log('got products');
 
-  const content = `<?xml version="1.0" encoding="UTF-8"?>
+      // event.node.res.setHeader('content-type', 'text/xml'); // we need to tell nitro to return this as a xml file
+      // event.node.res.end(
+
+      const today = new Date();
+
+      const content = `<?xml version="1.0" encoding="UTF-8"?>
     <yml_catalog date="${today.toISOString()}">
         <shop>
             <name>Iven — интернет магазин компьютеров и комплектующих, техники для офиса и электроники.</name>
@@ -128,22 +112,10 @@ export default defineEventHandler(async (event) => {
         </shop>
     </yml_catalog>`;
 
-  const filePath = `./feed.xml`;
-  console.log('writing file');
-  await writeFile(filePath, content);
-  console.log('done');
-  return {
-    status: 'ok',
-  };
-
-  const zip = new JSZip();
-
-  zip.file('feed.xml', content);
-
-  const zipped = await zip.generateAsync({ type: 'nodebuffer' });
-  await writeFile(`./public/yandexfeed.zip`, zipped);
-
-  return {
-    status: 'ok',
-  };
-});
+      const filePath = `./feed.xml`;
+      console.log('writing file');
+      await writeFile(filePath, content);
+      console.log('done');
+    })
+    .everyFourHours();
+}

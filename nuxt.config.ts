@@ -28,7 +28,7 @@ export default defineNuxtConfig({
     },
   },
   css: ['~/assets/css/main.scss'],
-  modules: ['@pinia/nuxt', 'nuxt-swiper', '@ant-design-vue/nuxt', 'nuxt-simple-sitemap', 'yandex-metrika-module-nuxt3', 'nuxt-gtag', '@nuxt/image'],
+  modules: ['@pinia/nuxt', 'nuxt-swiper', '@ant-design-vue/nuxt', 'nuxt-simple-sitemap', 'yandex-metrika-module-nuxt3', 'nuxt-gtag', '@nuxt/image', 'nuxt-scheduler'],
   pinia: {
     autoImports: ['defineStore', 'acceptHMRUpdate'],
   },

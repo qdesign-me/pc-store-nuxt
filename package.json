@@ -34,6 +34,7 @@
     "maska": "^2.1.10",
     "mysql2": "^3.6.3",
     "nodemailer": "^6.9.7",
+    "nuxt-scheduler": "^0.1.9",
     "nuxt-swiper": "^1.1.1",
     "pinia": "^2.1.7",
     "yandex-metrika-module-nuxt3": "^1.5.3"
