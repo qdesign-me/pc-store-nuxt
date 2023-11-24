@@ -87,7 +87,7 @@ export default defineEventHandler(async (event) => {
   const [data] = await db.execute(
     `SELECT productID, categoryID, typePrefix, vendorCode, vendor, name, uri, model, ROUND(Price * ${kurs}, 2) as Price,
     (select ip.filename from iven_product_pictures ip where ip.productID=iven_products.productID  limit 1) as img
-    FROM iven_products where enabled=1 and  categoryID not in (${notAllowedCats.join(',')})  LIMIT 0,10`
+    FROM iven_products where enabled=1 and  categoryID not in (${notAllowedCats.join(',')})  LIMIT 0,100000`
   );
 
   const offers = data.map((item) => getItem(item)).join('');
