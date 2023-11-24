@@ -95,7 +95,7 @@ export default defineEventHandler(async (event) => {
   );
   data['features'] = data['features'].map((item: Record<string, any>) => ({
     ...item,
-    value: item.filter_type !== 'boolean' ? item.value : item.value === '1' ? 'Да' : 'Нет',
+    value: item.filter_type !== 'boolean' ? item.value : item.value === 'yes' ? 'Да' : 'Нет',
   }));
   const similar = {
     link: data.uri,

@@ -1,4 +1,5 @@
 node_modules
+public/yandexfeed.xml
 ecosystem.config.js
 *.log*
 .nuxt
