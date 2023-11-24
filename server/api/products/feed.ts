@@ -1,5 +1,6 @@
 import { writeFile } from 'fs/promises';
 import { notAllowedCats } from '~/configs';
+import JSZip from 'jszip';
 import db from '~/db/db';
 
 /*`<offer id="18295" available="true">
@@ -111,7 +112,18 @@ export default defineEventHandler(async (event) => {
             <offers>${offers}</offers>
         </shop>
     </yml_catalog>`;
-  const filePath = `./public/yandexfeed.xml`;
-  await writeFile(filePath, content);
-  return { status: 'ok' };
+
+  // const filePath = `./public/yandex/feed.xml`;
+  // await writeFile(filePath, content);
+
+  const zip = new JSZip();
+
+  zip.file('feed.xml', content);
+
+  const zipped = await zip.generateAsync({ type: 'nodebuffer' });
+  await writeFile(`./public/yandexfeed.zip`, zipped);
+
+  return {
+    status: 'ok',
+  };
 });

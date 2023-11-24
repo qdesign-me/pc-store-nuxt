@@ -30,6 +30,7 @@
     "@vueuse/core": "^10.6.0",
     "ant-design-vue": "^4.0.7",
     "js-cookie": "^3.0.5",
+    "jszip": "^3.10.1",
     "maska": "^2.1.10",
     "mysql2": "^3.6.3",
     "nodemailer": "^6.9.7",
