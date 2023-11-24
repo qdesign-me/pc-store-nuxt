@@ -113,8 +113,11 @@ export default defineEventHandler(async (event) => {
         </shop>
     </yml_catalog>`;
 
-  // const filePath = `./public/yandex/feed.xml`;
-  // await writeFile(filePath, content);
+  const filePath = `./feed.xml`;
+  await writeFile(filePath, content);
+  return {
+    status: 'ok',
+  };
 
   const zip = new JSZip();
 
