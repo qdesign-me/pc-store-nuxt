@@ -8,13 +8,16 @@
     </button>
 
     <div v-show="modal" class="filter-modal" ref="target">
+      <div class="text-center text-sm font-medium border-b border-[#D9D9D9] pt-6 pb-6 -mx-5 px-5 sticky top-0 bg-white mb-4">
+        {{ block.label }}
+      </div>
       <div class="filter-modal-columns text-light">
         <div v-for="value in props.values" :key="value" class="flex gap-2 items-center whitespace-nowrap">
           <input type="checkbox" :value="value" v-model="model" @input="handleInput" /> {{ value }}
         </div>
       </div>
-      <div class="fixed top-7 right-5">
-        <button @click="modal = false" class="text-[#000]"><CloseIcon /></button>
+      <div class="fixed top-4 right-3">
+        <button @click="modal = false" class="text-[#000]"><ChevronRightIcon class="rotate-180" /></button>
       </div>
     </div>
   </div>
