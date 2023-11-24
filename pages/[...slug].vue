@@ -39,7 +39,7 @@
           <div v-if="!pending && products.total === 0" class="text text-center">Упс. У нас нет таких товаров. Попробуйте изменить условия поиска.</div>
           <template v-if="products.total > 0">
             <div class="text-[#E5A35B] mb-4">Всего {{ pluralize(products?.total, ['товар', 'товара', 'товаров']) }}</div>
-            <SortingLinks :uri="uri" />
+            <SortingLinks :uri="uri" class="hidden xl:flex" />
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2.5 gap-y-8 products-grid">
               <ProductCard v-for="product in products?.data" :key="product.productID" :product="product" />
             </div>

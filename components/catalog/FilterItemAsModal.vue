@@ -7,11 +7,14 @@
       <ArrowRightIcon class="absolute right-4" />
     </button>
 
-    <div v-show="modal" class="shadow p-6 absolute z-[100] -top-16 -right-6 bg-white rounded translate-x-full" ref="target">
-      <div class="text-light text-sm columns-3 column gap-10">
+    <div v-show="modal" class="filter-modal" ref="target">
+      <div class="filter-modal-columns text-light">
         <div v-for="value in props.values" :key="value" class="flex gap-2 items-center whitespace-nowrap">
           <input type="checkbox" :value="value" v-model="model" @input="handleInput" /> {{ value }}
         </div>
+      </div>
+      <div class="fixed top-7 right-5">
+        <button @click="modal = false" class="text-[#000]"><CloseIcon /></button>
       </div>
     </div>
   </div>

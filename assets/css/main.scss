@@ -5,6 +5,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap');
 
 @layer base {
+  .filter-modal {
+    @apply shadow p-6 absolute z-[100] -top-16 -right-6 bg-white rounded translate-x-full;
+  }
+  .is-filter + .is-filter {
+    margin-top: 10px;
+  }
+  .mobi-filters {
+    overflow: hidden;
+    height: 100vh;
+  }
+  .mobi-filters .all-filters {
+    position: fixed;
+    inset: 0px;
+    display: block;
+    z-index: 100;
+    background: #fff;
+    padding: 20px;
+  }
+  .filter-modal-columns {
+    @apply text-sm columns-3  gap-10;
+  }
+  .mobi-filters .help-trigger {
+    display: none !important;
+  }
   .lgr {
     background: linear-gradient(152deg, #00a2c1 0%, #87ebff 99.41%);
   }
@@ -873,6 +897,25 @@
 }
 
 @media screen and (max-width: 1280px) {
+  .filter-modal {
+    transform: none;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+    top: 0;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+  }
+  .filter-modal button {
+    margin-top: auto;
+  }
+  .all-filters .inside {
+    padding-top: 20px;
+    overflow: auto;
+    max-height: calc(100vh - 90px);
+  }
   body {
     font-size: 14px;
   }
@@ -929,6 +972,15 @@
 }
 
 @media screen and (max-width: 1024px) {
+  .filter-modal-columns {
+    @apply columns-1;
+    padding-bottom: 60px;
+  }
+
+  .mobi-filters .sorting-label {
+    font-weight: 600;
+    margin-top: 15px;
+  }
   .can-expand .card.installments {
     @apply mt-2 mx-5 -mb-8;
     border-radius: 5px !important;
