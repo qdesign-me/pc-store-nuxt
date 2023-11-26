@@ -41,7 +41,7 @@
 import { ref } from 'vue';
 const visible = ref(false);
 const props = defineProps(['data']);
-const images = props.data.img?.split('|')?.map((item) => `http://img.i-ven.by/big/${item}`);
+const images = props.data.img?.split('|')?.map((item) => `//img.i-ven.by/big/${item}`);
 const main = ref(images?.[0] ?? '/img/no-image.jpg');
 const setVisible = (value) => {
   visible.value = value;

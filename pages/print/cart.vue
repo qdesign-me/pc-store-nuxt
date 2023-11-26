@@ -14,7 +14,7 @@
       <tbody>
         <tr v-for="item in data.data">
           <td>
-            <div class="img max-w-[80x] flex-shrink-0"><img width="80" :src="'http://img.i-ven.by/big/' + item.img" /></div>
+            <div class="img max-w-[80x] flex-shrink-0"><img width="80" :src="'//img.i-ven.by/big/' + item.img" /></div>
           </td>
           <td>
             {{ item.productID }}
