@@ -1,11 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
 export default defineNuxtConfig({
-  runtimeConfig: {
-    public: {
-      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://i-ven.by',
-    },
-  },
   app: {
     head: {
       charset: 'utf-8',
@@ -59,5 +54,8 @@ export default defineNuxtConfig({
   },
   image: {
     domains: ['win7.by'],
+  },
+  site: {
+    url: 'https://i-ven.by',
   },
 });
