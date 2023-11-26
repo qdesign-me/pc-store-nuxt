@@ -1,7 +1,7 @@
 import { notAllowedCats } from '~/configs';
 import db from '../../db/db';
 
-const routes = ['/about', '/contacts', '/delivery', '/payment', '/warranty', '/public-offer', '/privacy-and-terms'];
+const routes = ['/privacy-and-terms'];
 export default cachedEventHandler(
   async (e) => {
     const [categories] = await db.execute(`SELECT LOWER(fullPath) as uri FROM iven_categories where visible=1 and categoryID not in (${notAllowedCats.join(',')}) LIMIT 10000`);
@@ -10,7 +10,7 @@ export default cachedEventHandler(
     const posts = [...routes, ...categories.map((item: any) => item.uri), ...products.map((item: any) => '/p/' + item.uri.replace('.html', ''))];
     return posts.map((p) => {
       return {
-        loc: p,
+        loc: 'https://i-ven.by' + p,
       };
     });
   },
