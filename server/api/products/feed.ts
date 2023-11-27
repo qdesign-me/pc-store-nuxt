@@ -39,7 +39,7 @@ async function getFeatures(productID) {
 }
 const fixname = (str: string) => {
   if (!str) return '';
-  return str.replaceAll('"', '&quot;').replaceAll('&', '&amp;').replaceAll('>', '&gt;').replaceAll('<', '&lt;').replaceAll("'", '&apos;');
+  return str.replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('>', '&gt;').replaceAll('<', '&lt;').replaceAll("'", '&apos;');
 };
 function getItem(item: Record<string, any>) {
   // const features = await getFeatures(item.productID);
