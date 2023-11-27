@@ -47,7 +47,8 @@ function getItem(item: Record<string, any>) {
   const payment =
     item.Price > 500 ? 'Оплата: Наличные, Б/Н, пластиковые карты, ЕРИП, карты рассрочки (Черепаха, Магнит, Халва)' : 'Оплата: Наличные, Б/Н, пластиковые карты, ЕРИП.';
   const saleNotes = `${payment} Самовывоз только в Минске. Стоимость и сроки доставки по РБ уточняйте в отделе продаж. Возможность и стоимость доставки по стране в удобный для Вас день уточняйте у специалиста call-центра.`;
-  return `<offer id="${item.productID}" available="true">
+  return `
+  <offer id="${item.productID}" available="true">
   <name>${fixname(item.name)}</name>
   ${item.typePrefix ? '<typePrefix>' + fixname(item.typePrefix) + '</typePrefix>' : ''}
   ${item.model ? '<model>' + fixname(item.model) + '</model>' : ''}
