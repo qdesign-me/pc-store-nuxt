@@ -79,7 +79,10 @@ async function getCategories() {
     and categoryId not in (${notAllowedCats.join(',')}) 
     order by parent, sort_order`
   );
-  const items = data.slice(1).map((item) => `<category id="${item.categoryID}" parentId="${item.parent}">${item.name}</category>`);
+  const items = data
+    .slice(1)
+    .map((item) => `<category id="${item.categoryID}" parentId="${item.parent}">${item.name}</category>`)
+    .join('');
 
   return `<category id="1">Главная категория</category>${items}`;
 }
