@@ -48,6 +48,8 @@ export default defineNuxtConfig({
     trackLinks: true,
     accurateTrackBounce: true,
     webvisor: true,
+    trackHash: true,
+    ecommerce: 'dataLayer',
   },
   gtag: {
     id: 'G-L2CG7ZPL61',
