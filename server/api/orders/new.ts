@@ -70,7 +70,7 @@ ${body.info.fio},<br/>
     sql = `insert into win7_customers 
     (customerID, login, name, cust_password, Email, city, adress, phone, price, privelege)
     values
-    (null, '${body.info.email}', '${body.info.name}', 'md5(1234)', '${body.info.email}', '${body.info.city ?? ''}', '${body.info.address}', '${body.info.phone}', 4,99)`;
+    (null, '${body.info.email}', '${body.info.name}', 'md5(1234)', '${body.info.email}', '${body.info.city ?? ''}', '${body.info.address}', '${body.info.phone}', 4,0)`;
     res = await db.execute(sql);
 
     customerID = res[0].insertId;
