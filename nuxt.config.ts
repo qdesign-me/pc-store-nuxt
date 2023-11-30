@@ -43,7 +43,7 @@ export default defineNuxtConfig({
     inferStaticPagesAsRoutes: false,
   },
   yandexMetrika: {
-    id: process.env.YANDEX_METRIKA_ID,
+    id: '95705823',
     clickmap: true,
     trackLinks: true,
     accurateTrackBounce: true,
