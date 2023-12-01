@@ -80,8 +80,8 @@
                         <input name="delivery" type="radio" v-model="person.delivery" value="Доставка в пределах МКАД" />
                       </label>
                       <div class="text-black font-medium">Доставка в пределах МКАД</div>
-                      <div>Бесплатно при стоимости товара от <span class="whitespace-nowrap">220 Br</span></div>
-                      <div>При стоимости товара до <span class="whitespace-nowrap">220 Br</span>, стоимость доставки — <span class="whitespace-nowrap">6 Br</span></div>
+                      <div>Бесплатно при стоимости товара от <span class="whitespace-nowrap">300 Br</span></div>
+                      <div>При стоимости товара до <span class="whitespace-nowrap">300 Br</span>, стоимость доставки — <span class="whitespace-nowrap">6 Br</span></div>
                     </div>
                   </div>
                   <div class="col-span-6 lg:col-span-2">
@@ -264,8 +264,8 @@
                         <input name="delivery" type="radio" v-model="ur.delivery" value="Доставка в пределах МКАД" />
                       </label>
                       <div class="text-black font-medium">Доставка в пределах МКАД</div>
-                      <div>Бесплатно при стоимости товара от <span class="whitespace-nowrap">220 Br</span></div>
-                      <div>При стоимости товара до <span class="whitespace-nowrap">220 Br</span>, стоимость доставки — <span class="whitespace-nowrap">6 Br</span></div>
+                      <div>Бесплатно при стоимости товара от <span class="whitespace-nowrap">300 Br</span></div>
+                      <div>При стоимости товара до <span class="whitespace-nowrap">300 Br</span>, стоимость доставки — <span class="whitespace-nowrap">6 Br</span></div>
                     </div>
                   </div>
                   <div class="col-span-6 lg:col-span-2">
@@ -451,7 +451,7 @@ const summary = computed(() => {
   const delivery = who.value === 'person' ? person.value.delivery : ur.value.delivery;
   let deliveryPrice = 0;
   if (delivery === 'Доставка в пределах МКАД') {
-    if (price < 220) deliveryPrice = 6;
+    if (price < 300) deliveryPrice = 6;
   }
   if (delivery === 'Доставка в регионы РБ') {
     deliveryPrice = 12;
