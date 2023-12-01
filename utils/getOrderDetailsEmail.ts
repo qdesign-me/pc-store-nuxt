@@ -82,6 +82,7 @@ export function getOrderDetailsEmail(orderID: number, body: Record<string, any>)
                           <strong>Заказчик</strong>: ${body.info.name}<br />
                           <strong>Телефон</strong>: +375${body.info.phone}<br />
                           <strong>Способ доставки</strong>: ${body.info.delivery}<br />
+                          <strong>Стоимость доставки</strong>: ${body.total.deliveryPrice} Br<br /
                           ${body.info.delivery !== 'Самовывоз' ? '<strong>Адрес доставки</strong>: ' + body.info.address + '<br />' : ''}
                           <strong>Способ оплаты</strong>: ${body.info.payment}<br />
                           ${body.info.comment ? '<strong>Комментарий</strong>: ' + body.info.comment + '<br />' : ''}

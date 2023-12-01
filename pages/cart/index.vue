@@ -1,11 +1,5 @@
 <template>
-  <main class="container mt-[50px] sm:mt-[110px]" v-if="mode === 'thankyou'">
-    <div class="flex justify-center align-center flex-col text-center box-scroll2 py-20 pb-10" id="thanks">
-      <h2>Ваш заказ принят!</h2>
-      <p class="text-sm max-w-[375px] mx-auto">Менеджер свяжется с Вами в ближайшее время для подтверждения заказа по указанным контактам.</p>
-    </div>
-  </main>
-  <main class="container" v-else>
+  <main class="container">
     <div class="breadcrumbs"><NuxtLink to="/">Главная </NuxtLink><span>Корзина</span></div>
     <div class="flex justify-between gap-6 items-start">
       <h1>Корзина</h1>
@@ -380,7 +374,6 @@
 <script setup>
 const router = useRouter();
 const who = ref('person');
-const mode = ref('cart');
 const person = useState(() => ({
   delivery: 'Самовывоз',
   payment: 'Наличными',
@@ -426,7 +419,7 @@ const onFinish = async (info) => {
       total,
     },
   });
-  mode.value = 'thankyou';
+  router.push('/thankyou');
 
   clear();
   person.value = {
@@ -438,10 +431,6 @@ const onFinish = async (info) => {
     delivery: 'Самовывоз',
     payment: 'Банковский перевод',
   };
-  setTimeout(() => {
-    const el = document.querySelector(`#thanks`);
-    el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }, 0);
 };
 
 const onRemove = (id) => {
@@ -459,7 +448,7 @@ const onOrder = () => {
 
 const summary = computed(() => {
   const price = data.value.total?.price;
-  const delivery = person.value.delivery;
+  const delivery = who.value === 'person' ? person.value.delivery : ur.value.delivery;
   let deliveryPrice = 0;
   if (delivery === 'Доставка в пределах МКАД') {
     if (price < 220) deliveryPrice = 6;

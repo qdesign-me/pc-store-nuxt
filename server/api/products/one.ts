@@ -37,6 +37,12 @@ async function getAvailable(availability, nowDay) {
   return data[0];
 }
 
+const getDayName = (day: int) => {
+  if (day === 0) return 'Сегодня';
+  if (day < 7) return days[day];
+  return days[day - 7];
+};
+
 export default defineEventHandler(async (event) => {
   const d = new Date();
   const day = d.getDay();
@@ -59,7 +65,6 @@ export default defineEventHandler(async (event) => {
   let products = await getSimilar(
     `select (select group_concat(filename separator '|') from iven_product_pictures where productID=iven_products.productID) as img, productID, name, ROUND(Price * ${kurs}, 2) as Price, ROUND(PriceSale * ${kurs}, 2) as PriceSale, uri, is_auction, is_new from iven_products where  categoryID='${data.categoryID}' and productID<>${data.productID} and enabled=1 limit 4`
   );
-
   const availableData = await getAvailable(data['availability'], nowDay);
   const available = {
     pickup_text: 'Уточняйте',
@@ -82,11 +87,11 @@ export default defineEventHandler(async (event) => {
     if (available.delivery < 0) {
       available.delivery += 7;
     }
-    available.pickup_text = available.pickup === 0 ? 'Сегодня' : days[available.pickup];
-    available.delivery_text = available.delivery === 0 ? 'Сегодня' : days[available.delivery];
-  }
 
-  console.log({ availableData, available });
+    available.pickup_text = getDayName(available.pickup + nowDay);
+    available.delivery_text = getDayName(available.delivery + nowDay);
+  }
+  //console.log('availability', data['availability'], nowDay, availableData, available);
 
   data['available'] = available;
 

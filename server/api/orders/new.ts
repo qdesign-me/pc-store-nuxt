@@ -89,12 +89,13 @@ ${body.info.fio},<br/>
     'Оплата в кредит': 'Кредит',
     Рассрочка: 'Рассрочка',
   };
-  const payment = payments[body.info.payment];
+  const payment = payments[body.info.payment] ?? 'Безнал';
 
   sql = `insert into win7_orders 
   (orderID, customerID, order_time, customer_ip, shipping_type, payment_type, customers_comment, manager_comment, rek, statusID, shipping_cost, order_discount, order_amount, name, phone, email, city, address) 
   values
   (null, '${customerID}', '${body.info.order_time}', '${body.info.customer_ip}', '${delivery}', '${payment}', '${body.info.comment}', '${body.info.manager_comment}', '${body.info.rek}', '${body.info.statusID}', '${body.total.deliveryPrice}', '${body.total.order_discount}', '${body.total.total}', '${body.info.name}', '${body.info.phone}', '${body.info.email}', '${body.info.city}', '${body.info.address}')`;
+  const test = getOrderDetailsEmail(1, body);
 
   res = await db.execute(sql);
 

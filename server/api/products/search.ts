@@ -13,7 +13,7 @@ export default defineEventHandler(async (event) => {
   const kurs = await getKurs();
 
   const [data] = await db.execute(
-    `SELECT (select ip.filename from iven_product_pictures ip where ip.productID=iven_products.productID limit 1) as img, uri, productID, name, ROUND(Price * ${kurs}, 2) as Price, ROUND(PriceSale * ${kurs}, 2) as PriceSale FROM iven_products where enabled=1 and productID='${q}' or name like '%${q}%' limit 5`
+    `SELECT (select ip.filename from iven_product_pictures ip where ip.productID=iven_products.productID limit 1) as img, uri, productID, name, ROUND(Price * ${kurs}, 2) as Price, ROUND(PriceSale * ${kurs}, 2) as PriceSale FROM iven_products where enabled=1 and (productID='${q}' or name like '%${q}%') limit 5`
   );
 
   return { data };
