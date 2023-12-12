@@ -14,16 +14,16 @@ const props = defineProps(['min', 'max', 'uri']);
 
 const filters = inject('filters');
 
-const model = reactive({ min: filters.value['price[from]'], max: filters.value['price[to]'] });
+const model = reactive({ min: filters.value['filter_price[from]'], max: filters.value['filter_price[to]'] });
 
 watchDebounced(
   model,
   () => {
     const newFitlers = { ...filters.value };
-    if (model.min) newFitlers[`price[from]`] = model.min;
-    if (model.max) newFitlers[`price[to]`] = model.max;
-    if (!model.min) delete newFitlers[`price[from]`];
-    if (!model.max) delete newFitlers[`price[to]`];
+    if (model.min) newFitlers[`filter_price[from]`] = model.min;
+    if (model.max) newFitlers[`filter_price[to]`] = model.max;
+    if (!model.min) delete newFitlers[`filter_price[from]`];
+    if (!model.max) delete newFitlers[`filter_price[to]`];
 
     const searchQuery = buildQuery(newFitlers);
     const path = `${props.uri}${searchQuery}`;

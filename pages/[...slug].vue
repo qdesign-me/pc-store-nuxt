@@ -27,7 +27,7 @@
       <img :src="img" alt="404" width="180" height="180" class="inline-block mx-auto mt-8" />
     </div>
 
-    <template v-if="products.uri === uri && (products?.total > 0 || category.blocks?.length)">
+    <template v-if="products?.uri === uri && (products?.total > 0 || category.blocks?.length)">
       <div class="grid grid-cols-5 gap-2.5">
         <div class="col-span-5 xl:col-span-1">
           <Filters :blocks="category.blocks" :products="products" :uri="uri" />
@@ -53,11 +53,15 @@
 <script async setup>
 import img from '@/assets/img/404.png';
 const router = useRouter();
-const filters = computed(() => router.currentRoute.value.query);
+const filters = computed(() =>
+  Object.keys(router.currentRoute.value.query ?? {})
+    .filter((key) => key.includes('filter_'))
+    .reduce((acc, item) => ({ ...acc, [item]: router.currentRoute.value.query[item] }), {})
+);
 import { notAllowedCats } from '../configs/index';
 provide('filters', filters);
 const uri = router.currentRoute.value.path;
-
+console.log({ uri });
 const { data: category } = await useFetch('/api/categories/one', {
   method: 'POST',
   body: {

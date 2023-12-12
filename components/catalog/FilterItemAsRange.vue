@@ -48,7 +48,7 @@ watchDebounced(
   model,
   () => {
     const newFilters = { ...filters.value };
-    newFilters[alias] = model.value.values;
+    newFilters[`${alias}`] = model.value.values;
     newFilters[`${alias}[from]`] = model.value.from;
     newFilters[`${alias}[to]`] = model.value.to;
     const searchQuery = buildQuery(newFilters);

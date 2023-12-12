@@ -60,7 +60,8 @@ export default defineEventHandler(async (event) => {
     `select (select group_concat(ip.filename separator '|') from iven_product_pictures ip where ip.productID=p.productID group by ip.productID) as img, p.productID, p.categoryID, p.model, p.name, c.uri as curi, p.description, p.enabled, p.meta_description, p.is_auction, p.is_new, ROUND(p.Price * ${kurs}, 2) as Price, ROUND(p.PriceSale * ${kurs}, 2) as PriceSale, c.name as cat_name, c.fullPath as uri , c.breadcrumbs, p.availability from iven_products p join iven_categories c on c.categoryID=p.categoryID  where p.uri='${uri}' limit 1`
   );
 
-  await db.execute(`update iven_products set viewed_times=viewed_times+1 where productID=${data['productID']}`);
+  // TODO check perfomance, re-enable
+  //await db.execute(`update iven_products set viewed_times=viewed_times+1 where productID=${data['productID']}`);
 
   let products = await getSimilar(
     `select (select group_concat(filename separator '|') from iven_product_pictures where productID=iven_products.productID) as img, productID, name, ROUND(Price * ${kurs}, 2) as Price, ROUND(PriceSale * ${kurs}, 2) as PriceSale, uri, is_auction, is_new from iven_products where  categoryID='${data.categoryID}' and productID<>${data.productID} and enabled=1 limit 4`

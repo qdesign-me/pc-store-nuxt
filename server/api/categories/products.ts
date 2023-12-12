@@ -26,9 +26,10 @@ export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   const {
     uri,
-    filters: { take = 12, sortby = 'popular', sortdir = 'desc', page = 1, ...rest },
+    filters: { take = 12, sortby = 'popular', sortdir = 'desc', page = 1, ...others },
   } = body;
 
+  const rest = Object.keys(others ?? {}).reduce((acc, item) => ({ ...acc, [item.replace('filter_', '')]: others[item] }), {});
   const kurs = await getKurs();
 
   const skip = (page - 1) * 12;
@@ -58,13 +59,7 @@ export default defineEventHandler(async (event) => {
       const field = row[0];
       let condition = '';
       const values = row[1];
-      console.log({ values });
-      if (values.value === 'no') {
-        values.value = 'no,0,Нет';
-      }
-      if (values.value === 'yes') {
-        values.value = 'yes,1,Да';
-      }
+
       if (field === 'price') {
         const priceTo = values.to ?? 9999999;
         const priceFrom = values.from ?? 0;
@@ -82,11 +77,16 @@ export default defineEventHandler(async (event) => {
         condition = `(fop.value >= ${values.from})`;
       } else if (values.from && values.to) {
         condition = `(fop.value >= ${values.from} and fop.value <= ${values.to})`;
+      } else if (values.value === 'yes') {
+        condition = `(fop.value in ('yes',1,'Да'))`;
+      } else if (values.value === 'no') {
+        condition = `(fop.value in ('no',0,'Нет'))`;
       } else {
-        condition = `fop.value in (${values.value
+        const vals = values.value
           .split(',')
-          .filter((item: string) => item.length)
-          .map((item: string) => "'" + item + "'")} )`;
+          .map((item) => `, ${item},`)
+          .join('|');
+        condition = `CONCAT(', ', fop.value, ',') REGEXP '${vals}'`;
       }
 
       return `and productID in (select fop.productID from iven_features_on_products fop  join iven_products_features spf on spf.featureID = fop.featureID and spf.alias='${field}' where ${condition})`;
@@ -113,6 +113,7 @@ export default defineEventHandler(async (event) => {
   ${urlCheck}
   where p.enabled=1 and p.categoryID not in (${notAllowedCats.join(',')})  ${andFilters} order by ${sorttypes[sortby]} ${sortdir} limit ${skip}, ${take}`;
   results.data = await fetchAll(sql);
+  console.log({ sql });
 
   const total = await fetchColumn(`select count(*) as total from iven_products p 
   ${urlCheck}

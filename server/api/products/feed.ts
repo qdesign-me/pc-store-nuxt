@@ -28,7 +28,7 @@ import db from '~/db/db';
 </offer>`;
 */
 
-async function getFeatures(productID) {
+async function getFeatures(productID: number) {
   const [data] = await db.execute(
     `select sfop.value,  sf.label, sf.tooltip, sf.filter_type, sf.suffix from iven_features_on_products sfop join iven_products_features sf on sf.featureID = sfop.featureID where sfop.productID=${productID} order by sf.sort_order`
   );
