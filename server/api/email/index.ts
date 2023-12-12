@@ -38,7 +38,9 @@ const processBody = (data: Record<string, any>) => {
     if (data.telegram) html += `Telegram: ${data.telegram}<br>`;
   }
   if (data.action === 'consultation') {
-    html = `Имя: ${data.name}<br/>`;
+    html = '';
+    if (data.page) html = `Страница: ${data.page}<br/>`;
+    if (data.name) html += `Имя: ${data.name}<br/>`;
     if (data.email) html += `Email: ${data.email}<br>`;
     if (data.phone) html += `Телефон: ${data.phone}<br>`;
     if (data.viber) html += `Viber: ${data.viber}<br>`;
@@ -52,6 +54,7 @@ const processBody = (data: Record<string, any>) => {
     return {
       status: 'error',
     };
+
   return {
     subject,
     html,

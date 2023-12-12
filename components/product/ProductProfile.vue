@@ -8,9 +8,19 @@
   <h1 class="mb-10 max-w-[900px]">{{ props.data.name }}</h1>
 
   <div>
-    <div class="flex gap-4 text-sm text-[#E5A35B] items-center mb-6" v-if="props.data.enabled === 1">
-      <AvailableIcon />
-      Товар в наличии
+    <div class="flex flex-wrap text-sm items-center mb-6 lg:mb-12 text-[#7C7C7C] gap-y-2 gap-x-6 lg:gap-[60px]" v-if="props.data.enabled === 1">
+      <div class="text-[#00B3D7] flex gap-3 items-center">
+        <AvailableIcon />
+        Товар в наличии
+      </div>
+      <div class="relative pl-10 w-full sm:w-auto">
+        <PickupIcon class="absolute top-1/2 -translate-y-1/2 left-0" />Самовывоз в Минске: {{ props.data.available.delivery_date }} г.
+        <span class="lowercase">({{ props.data.available.delivery_text }})</span>
+      </div>
+      <div class="relative pl-10">
+        <TruckIcon class="absolute top-1/2 -translate-y-1/2 left-0" />Доставка по Беларуси: {{ props.data.available.delivery_rb_date }} г.
+        <span class="lowercase">({{ props.data.available.delivery_rb_text }})</span>
+      </div>
     </div>
     <div class="tags mb-6 lg:hidden">
       <div v-if="props.data.PriceSale > 0" class="bg-[#FFAC2F] flex-1">На акции</div>
@@ -35,17 +45,13 @@
             <ChevronDownIcon width="40" height="26" />
           </div>
         </template>
-
-        <ul class="flex flex-col gap-3" v-if="props.data.features?.length">
-          <li v-for="feature in props.data.features" :key="feature.label">
-            <span class="font-semibold">{{ feature.label }}</span
-            >: {{ feature.value }}{{ feature.suffix }}
-          </li>
-        </ul>
-
-        <div class="mt-10 text-blue cursor-pointer text-base gap-6 items-center hidden xl:flex" v-if="props.data.description?.length > 6">
-          <div class="underline underline-offset-4" @click="showFeatures">Все характеристики товара</div>
-          <ArrowRightIcon />
+        <div class="table-wrap">
+          <table class="features-table" v-if="props.data.features?.length">
+            <tr v-for="feature in props.data.features" :key="feature.label">
+              <td class="label">{{ feature.label }}</td>
+              <td class="max">{{ feature.value }}{{ feature.suffix }}</td>
+            </tr>
+          </table>
         </div>
       </div>
       <div class="max-w-[420px] text-sm flex flex-col">
@@ -68,11 +74,28 @@
           <div v-if="props.data.Price > 500" class="bg-[#F54D4D] flex-1">В рассрочку</div>
         </div>
         <div class="price-info flex flex-col flex-1">
-          <div class="flex gap-2 items-end text-base font-semibold mb-8">
-            <span class="line-through text-sm mr-2" v-if="props.data.PriceSale">{{ price(props.data.PriceSale) }} </span>
+          <div class="mb-8">
+            <div class="text-[#F54D4D] mb-4 font-semibold" v-if="props.data.PriceSale">{{ price(props.data.PriceSale) }}</div>
 
-            <div class="text-3xl font-semibold" :class="{ 'text-red-600': props.data.PriceSale > 0 }">{{ price(props.data.Price) }}</div>
+            <div class="text-3xl font-semibold">{{ price(props.data.Price) }}</div>
           </div>
+
+          <BuyAtOneClick>
+            <div class="flex flex-wrap gap-4 mb-10 items-center">
+              <div class="flex gap-4">
+                <div>
+                  <ProductThumbs :data="{ img: props.data.img.split('|')?.[0] }" size="63" />
+                </div>
+                <div class="font-light">
+                  <div class="text-[12px] text-[#3F3F3F] mb-2">Код товара: {{ props.data.productID }}</div>
+                  <div class="text-sm text-[#000000] underline underline-offset-2">{{ props.data.name }}</div>
+                </div>
+              </div>
+              <div class="text-[24px] text-[#000000] ml-auto">
+                {{ price(props.data.Price) }}
+              </div>
+            </div>
+          </BuyAtOneClick>
 
           <Add2Cart class="has-large" :productID="props.data.productID" />
 
@@ -84,13 +107,7 @@
 
           <CallMeBack />
 
-          <div class="text mt-4">
-            <p v-if="data.available.pickup_text !== data.available.delivery_text">
-              <div>Самовывоз: <span class="font-semibold">{{ data.available.pickup_text }}</span></div>
-              <div>Доставка: <span class="font-semibold">{{ data.available.delivery_text }}</span></div>
-            </p>
-            <p v-else>Самовывоз и доставка: <span class="font-semibold">{{ data.available.pickup_text }}</span></p>
-
+          <div class="text">
             <p class="hidden sm:block">Самовывоз только в Минске.</p>
 
             <p class="hidden sm:block">Стоимость и сроки доставки по РБ уточняйте в отделе продаж.</p>

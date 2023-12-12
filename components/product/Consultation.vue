@@ -6,7 +6,7 @@
     <div class="text-[#F54D4D] font-semibold text-center text-sm py-5">Мы обязательно с Вами свяжемся!</div>
     <Form :model="model" :onFinish="onFinish">
       <FormItem name="name" :rules="[{ required: true }]">
-        <input name="name" type="text" class="input" placeholder="Укажите ваше имя и фамилию" v-model="model.name" />
+        <input name="name" type="text" class="input" placeholder="Укажите ваше имя" v-model="model.name" />
       </FormItem>
 
       <div class="text-[#000] font-semibold text-center text-sm pb-5 -mt-2">Выберите удобный для Вас способ связи:</div>

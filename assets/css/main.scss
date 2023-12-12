@@ -817,6 +817,15 @@
 .cart-summary {
   @apply sticky top-[100px] lg:bg-[#E5A35B]/10 lg:px-6 py-4 flex flex-col gap-4 text-sm;
 }
+.table-wrap {
+  max-width: 100%;
+  overflow: auto;
+}
+.features-table td.label {
+  @apply font-semibold pr-5 py-[3px];
+  width: 0;
+  white-space: nowrap;
+}
 
 .help-trigger {
   width: 15px;

@@ -1,5 +1,5 @@
 <template>
-  <button class="btn mt-4 mb-6 xl:mb-12 is-large" @click="modalVisible = true"><CallbackIcon /> Заказать обратный звонок</button>
+  <button class="btn mt-4 mb-6 xl:mb-10 is-large" @click="modalVisible = true"><CallbackIcon /> Заказать обратный звонок</button>
   <Modal :visible="modalVisible" @close="modalVisible = false" title="Заказать обратный звонок">
     <Form :model="model" :onFinish="onFinish">
       <FormItem name="name">

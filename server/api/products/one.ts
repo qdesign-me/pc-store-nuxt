@@ -30,17 +30,34 @@ async function getKurs() {
   return data[0].currency_value;
 }
 
-async function getAvailable(availability, nowDay) {
+async function getAvailable(availability: number, nowDay: number) {
   const [data] = await db.execute(
     `SELECT DATE_FORMAT(PostTime, '%H.%i') as PostTime, Pickup1, Pickup2, Delivery1, Delivery2 from win7_whenpickup where Seller_ID='${availability}' and NowDay='${nowDay}'`
   );
   return data[0];
 }
 
-const getDayName = (day: int) => {
+const getDayName = (day: number) => {
   if (day === 0) return 'Сегодня';
   if (day < 7) return days[day];
   return days[day - 7];
+};
+
+function padTo2Digits(num: number) {
+  return num.toString().padStart(2, '0');
+}
+
+function formatDate(date: Date) {
+  return [padTo2Digits(date.getDate()), padTo2Digits(date.getMonth() + 1), date.getFullYear()].join('.');
+}
+
+const getFutureDate = (day: number) => {
+  const add = day > 7 ? day - 7 : day;
+  const today = new Date();
+
+  const result = today.setDate(today.getDate() + add);
+  console.log(day, add, result);
+  return formatDate(new Date(result));
 };
 
 export default defineEventHandler(async (event) => {
@@ -70,8 +87,12 @@ export default defineEventHandler(async (event) => {
   const available = {
     pickup_text: 'Уточняйте',
     delivery_text: 'Уточняйте',
+    delivery_rb_text: 'Уточняйте',
     pickup: 21,
     delivery: 21,
+    delivery_rb: 21,
+    delivery_date: '',
+    delivery_rb_date: '',
   };
 
   if (availableData) {
@@ -88,9 +109,11 @@ export default defineEventHandler(async (event) => {
     if (available.delivery < 0) {
       available.delivery += 7;
     }
-
     available.pickup_text = getDayName(available.pickup + nowDay);
     available.delivery_text = getDayName(available.delivery + nowDay);
+    available.delivery_date = getFutureDate(available.delivery);
+    available.delivery_rb_text = getDayName(available.delivery + nowDay + 2);
+    available.delivery_rb_date = getFutureDate(available.delivery + 2);
   }
   //console.log('availability', data['availability'], nowDay, availableData, available);
 
