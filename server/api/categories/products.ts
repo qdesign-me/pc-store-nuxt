@@ -30,6 +30,7 @@ export default defineEventHandler(async (event) => {
   } = body;
 
   const rest = Object.keys(others ?? {}).reduce((acc, item) => ({ ...acc, [item.replace('filter_', '')]: others[item] }), {});
+
   const kurs = await getKurs();
 
   const skip = (page - 1) * 12;

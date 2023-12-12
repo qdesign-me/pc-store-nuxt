@@ -55,7 +55,7 @@ import img from '@/assets/img/404.png';
 const router = useRouter();
 const filters = computed(() =>
   Object.keys(router.currentRoute.value.query ?? {})
-    .filter((key) => key.includes('filter_'))
+    .filter((key) => ['q', 'page', 'sortdir', 'sortby'].includes(key) || key.includes('filter_'))
     .reduce((acc, item) => ({ ...acc, [item]: router.currentRoute.value.query[item] }), {})
 );
 import { notAllowedCats } from '../configs/index';
