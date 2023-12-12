@@ -58,7 +58,6 @@ function getItem(item: Record<string, any>) {
   <picture>https://img.i-ven.by/big/${fixname(item.img)}</picture>
   <url>https://i-ven.by/p/${fixname(item.uri.replace('.html', ''))}</url>
   <price>${item.Price}</price>
-  <condition>new</condition>
   <currencyId>BYN</currencyId>
   <store>false</store>
   <pickup>true</pickup>
