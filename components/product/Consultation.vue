@@ -5,7 +5,7 @@
     <div class="text-[#000] font-semibold text-center">Оставьте свой номер телефона или контакт в мессенджере.</div>
     <div class="text-[#F54D4D] font-semibold text-center text-sm py-5">Мы обязательно с Вами свяжемся!</div>
     <Form :model="model" :onFinish="onFinish">
-      <FormItem name="name" :rules="[{ required: true }]">
+      <FormItem name="name">
         <input name="name" type="text" class="input" placeholder="Укажите ваше имя" v-model="model.name" />
       </FormItem>
 

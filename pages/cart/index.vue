@@ -44,7 +44,7 @@
               <Form :model="person" :onFinish="onFinish" :class="who === 'person' ? 'block' : 'hidden'">
                 <div class="grid grid-cols-6 gap-2">
                   <div class="col-span-6 lg:col-span-2">
-                    <FormItem name="name" :rules="[{ required: true }]">
+                    <FormItem name="name">
                       <input name="name" type="text" class="input" placeholder="Укажите ваше имя и фамилию" v-model="person.name" />
                     </FormItem>
                   </div>
@@ -87,9 +87,9 @@
                   <div class="col-span-6 lg:col-span-2">
                     <div class="radio-card">
                       <label class="absolute inset-0">
-                        <input name="delivery" type="radio" v-model="person.delivery" value="Доставка в регионы РБ" />
+                        <input name="delivery" type="radio" v-model="person.delivery" value="Доставка по Беларуси" />
                       </label>
-                      <div class="text-black font-medium">Доставка в регионы РБ</div>
+                      <div class="text-black font-medium">Доставка по Беларуси</div>
                       <div>Стоимость доставки — от 12 Br</div>
                     </div>
                   </div>
@@ -271,9 +271,9 @@
                   <div class="col-span-6 lg:col-span-2">
                     <div class="radio-card">
                       <label class="absolute inset-0">
-                        <input name="delivery" type="radio" v-model="ur.delivery" value="Доставка в регионы РБ" />
+                        <input name="delivery" type="radio" v-model="ur.delivery" value="Доставка по Беларуси" />
                       </label>
-                      <div class="text-black font-medium">Доставка в регионы РБ</div>
+                      <div class="text-black font-medium">Доставка по Беларуси</div>
                       <div>Стоимость доставки — от 12 Br</div>
                     </div>
                   </div>
@@ -453,7 +453,7 @@ const summary = computed(() => {
   if (delivery === 'Доставка в пределах МКАД') {
     if (price < 300) deliveryPrice = 6;
   }
-  if (delivery === 'Доставка в регионы РБ') {
+  if (delivery === 'Доставка по Беларуси') {
     deliveryPrice = 12;
   }
   const total = price + deliveryPrice;

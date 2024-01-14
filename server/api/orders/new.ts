@@ -78,7 +78,7 @@ ${body.info.fio},<br/>
   const deliveries: Record<string, any> = {
     Самовывоз: 'Самовывоз',
     'Доставка в пределах МКАД': 'Курьер Минск',
-    'Доставка в регионы РБ': 'Курьер РБ',
+    'Доставка по Беларуси': 'Курьер РБ',
   };
   const delivery: Record<string, any> = deliveries[body.info.delivery];
   const payments: Record<string, any> = {

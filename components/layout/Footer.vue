@@ -131,6 +131,8 @@
 </template>
 
 <script setup>
+const { show: showThanks } = useThanks();
+
 const DEFAULT_DATA = {
   action: 'subscribe-details',
   subject: 'Подписка на новости',
@@ -140,7 +142,7 @@ const DEFAULT_DATA = {
 };
 const model = useState(() => clone(DEFAULT_DATA));
 const onFinish = async () => {
-  message.info('Ваше сообщение отправлено');
+  showThanks('Спасибо за подписку');
   const body = clone(model.value);
   useFetch('/api/email', {
     method: 'POST',

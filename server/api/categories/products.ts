@@ -107,7 +107,7 @@ export default defineEventHandler(async (event) => {
     // const [data] = await db.execute(`select ProductID as ids from iven_products where enabled=1 order by viewed_times desc limit 100`);
     // const ids = data.map(({ ids }) => ids).join(',');
     // andFilters += ` and p.ProductID in (${ids})`;
-    andFilters += ` and p.viewed_times > 1000`;
+    andFilters += ` and p.viewed_times > 100`;
   }
   const sql = `select ${select} 
   from iven_products p 

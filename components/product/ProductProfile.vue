@@ -8,6 +8,7 @@
   <h1 class="mb-10 max-w-[900px]">{{ props.data.name }}</h1>
 
   <div>
+    <div class="flex flex-wrap text-sm items-center mb-6 lg:mb-12 text-[#7C7C7C] gap-y-2 gap-x-6 lg:gap-[60px]" v-if="props.data.enabled === 0">Нет в наличии</div>
     <div class="flex flex-wrap text-sm items-center mb-6 lg:mb-12 text-[#7C7C7C] gap-y-2 gap-x-6 lg:gap-[60px]" v-if="props.data.enabled === 1">
       <div class="text-[#00B3D7] flex gap-3 items-center">
         <AvailableIcon />
@@ -45,7 +46,8 @@
             <ChevronDownIcon width="40" height="26" />
           </div>
         </template>
-        <div class="table-wrap">
+        <div class="table-wrap hidden lg:block">
+          <div class="mb-5 text-[#00B3D7] text-base">Основные характеристики</div>
           <table class="features-table" v-if="props.data.features?.length">
             <tr v-for="feature in props.data.features" :key="feature.label">
               <td class="label">{{ feature.label }}</td>
@@ -54,7 +56,7 @@
           </table>
         </div>
       </div>
-      <div class="max-w-[420px] text-sm flex flex-col">
+      <div class="lg:max-w-[420px] w-full text-sm flex flex-col">
         <div class="block xl:hidden text-sm font-semibold mb-4">Код товара: {{ props.data.productID }}</div>
 
         <div class="flex gap-2 mb-6" v-if="0">
@@ -74,13 +76,13 @@
           <div v-if="props.data.Price > 500" class="bg-[#F54D4D] flex-1">В рассрочку</div>
         </div>
         <div class="price-info flex flex-col flex-1">
-          <div class="mb-8">
+          <div class="mb-8" v-if="props.data.enabled === 1">
             <div class="text-[#F54D4D] mb-4 font-semibold" v-if="props.data.PriceSale">{{ price(props.data.PriceSale) }}</div>
 
             <div class="text-3xl font-semibold">{{ price(props.data.Price) }}</div>
           </div>
 
-          <BuyAtOneClick>
+          <BuyAtOneClick v-if="props.data.enabled === 1">
             <div class="flex flex-wrap gap-4 mb-10 items-center">
               <div class="flex gap-4">
                 <div>
@@ -97,7 +99,7 @@
             </div>
           </BuyAtOneClick>
 
-          <Add2Cart class="has-large" :productID="props.data.productID" />
+          <Add2Cart class="has-large" :productID="props.data.productID" v-if="props.data.enabled === 1" />
 
           <div class="bg-[#EFEFEF] flex relative rounded mt-4">
             <Add2Favorites variant="primary" :productID="props.data.productID" />
@@ -107,7 +109,7 @@
 
           <CallMeBack />
 
-          <div class="text">
+          <div class="text" v-if="props.data.enabled === 1">
             <p class="hidden sm:block">Самовывоз только в Минске.</p>
 
             <p class="hidden sm:block">Стоимость и сроки доставки по РБ уточняйте в отделе продаж.</p>

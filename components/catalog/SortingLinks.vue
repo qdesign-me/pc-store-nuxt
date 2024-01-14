@@ -1,7 +1,12 @@
 <template>
   <div class="text-sm flex flex-wrap gap-3 mb-6">
     <div class="block w-full md:inline-block md:w-[initial] sorting-label">Сортировать</div>
-    <div v-for="link in Object.keys(links)" class="flex gap-2 items-center cursor-pointer" :class="{ 'text-blue': filters['sortby'] === link }" @click="handleClick(link)">
+    <div
+      v-for="link in Object.keys(links)"
+      class="flex gap-2 items-center cursor-pointer"
+      :class="{ 'text-blue': filters['sortby'] === link || (!filters['sortby'] && link === 'popular') }"
+      @click="handleClick(link)"
+    >
       {{ links[link] }}
       <template v-if="link !== 'popular'">
         <ChevronDownIcon v-if="filters['sortby'] === link && filters['sortdir'] == 'asc'" width="8" height="5" class="rotate-180" />

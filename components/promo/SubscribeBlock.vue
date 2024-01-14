@@ -12,6 +12,7 @@
 </template>
 
 <script setup>
+const { show: showThanks } = useThanks();
 const DEFAULT_DATA = {
   action: 'subscribe',
   email: '',
@@ -21,7 +22,7 @@ const formValid = computed(() => model.value.email.length);
 
 const model = useState(() => clone(DEFAULT_DATA));
 const onFinish = async () => {
-  message.info('Ваше сообщение отправлено');
+  showThanks('Спасибо за подписку');
   const body = clone(model.value);
   useFetch('/api/email', {
     method: 'POST',

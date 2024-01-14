@@ -12,6 +12,7 @@
 </template>
 
 <script setup lang="ts">
+const { show: showThanks } = useThanks();
 const router = useRouter();
 const modalVisible = ref(false);
 const DEFAULT_DATA = {
@@ -23,8 +24,8 @@ const DEFAULT_DATA = {
 
 const model = useState(() => clone(DEFAULT_DATA));
 
-const onFinish = async (event) => {
-  message.info('Ваше сообщение отправлено');
+const onFinish = async () => {
+  showThanks();
   const body = clone(model.value);
   useFetch('/api/email', {
     method: 'POST',

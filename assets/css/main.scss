@@ -822,7 +822,7 @@
   overflow: auto;
 }
 .features-table td.label {
-  @apply font-semibold pr-5 py-[3px];
+  @apply font-semibold pr-5 py-[3px] text-sm;
   width: 0;
   white-space: nowrap;
 }
@@ -1375,6 +1375,7 @@
     }
   }
 }
+
 .has-table {
   @apply max-w-full overflow-auto;
   table td {
@@ -1432,4 +1433,22 @@
   .tabs .tabs-content {
     display: block !important;
   }
+
+  .tabs .tabs-header {
+    display: none !important;
+  }
+}
+.tabs-content * {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 14px !important;
+}
+.tabs-content table span span span {
+  color: #00b3d7 !important;
+  font-weight: 600;
+}
+.tabs-content table tr td:first-child {
+  font-weight: 600;
+}
+.tabs-content table tr td:first-child[colspan='2'] {
+  font-weight: 400;
 }
