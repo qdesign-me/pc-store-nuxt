@@ -33,31 +33,31 @@
             <div>
               <div class="ir">
                 <div class="flex input-group">
-                  <button class="text-center flex-1 w-10 text-xs leading-[38px] btn" :class="{ 'is-plain': who === 'business' }" @click.prevent="who = 'person'">
+                  <button class="text-center flex-1 w-10 text-xs leading-[38px] btn" :class="{ 'is-plain': model.who === 'business' }" @click.prevent="model.who = 'person'">
                     Частное лицо
                   </button>
-                  <button class="text-center flex-1 w-10 text-xs leading-[38px] btn" :class="{ 'is-plain': who === 'person' }" @click.prevent="who = 'business'">
+                  <button class="text-center flex-1 w-10 text-xs leading-[38px] btn" :class="{ 'is-plain': model.who === 'person' }" @click.prevent="model.who = 'business'">
                     Юридическое лицо
                   </button>
                 </div>
               </div>
-              <Form :model="person" :onFinish="onFinish" :class="who === 'person' ? 'block' : 'hidden'">
+              <Form :model="model.person" :onFinish="onFinish" :class="model.who === 'person' ? 'block' : 'hidden'">
                 <div class="grid grid-cols-6 gap-2">
                   <div class="col-span-6 lg:col-span-2">
                     <FormItem name="name">
-                      <input name="name" type="text" class="input" placeholder="Укажите ваше имя и фамилию" v-model="person.name" />
+                      <input name="name" type="text" class="input" placeholder="Укажите ваше имя и фамилию" v-model="model.person.name" />
                     </FormItem>
                   </div>
 
                   <div class="col-span-6 lg:col-span-2">
                     <FormItem name="phone" :rules="[{ required: true }]">
-                      <input name="phone" type="tel" class="input" placeholder="+375 (__) ___-__-__" v-model="person.phone" v-maska data-maska="+375 (##) ###-##-##" />
+                      <input name="phone" type="tel" class="input" placeholder="+375 (__) ___-__-__" v-model="model.person.phone" v-maska data-maska="+375 (##) ###-##-##" />
                     </FormItem>
                   </div>
 
                   <div class="col-span-6 lg:col-span-2">
                     <FormItem name="email" :rules="[{ email: true }]">
-                      <input name="email" type="email" class="input" placeholder="Укажите ваш E-mail" v-model="person.email" />
+                      <input name="email" type="email" class="input" placeholder="Укажите ваш E-mail" v-model="model.person.email" />
                     </FormItem>
                   </div>
 
@@ -68,7 +68,7 @@
                   <div class="col-span-6 lg:col-span-2">
                     <div class="radio-card">
                       <label class="absolute inset-0">
-                        <input name="delivery" type="radio" v-model="person.delivery" value="Самовывоз" />
+                        <input name="delivery" type="radio" v-model="model.person.delivery" value="Самовывоз" />
                       </label>
                       <div class="text-black font-medium">Самовывоз</div>
                       <div>Бесплатно</div>
@@ -77,7 +77,7 @@
                   <div class="col-span-6 lg:col-span-2">
                     <div class="radio-card">
                       <label class="absolute inset-0">
-                        <input name="delivery" type="radio" v-model="person.delivery" value="Доставка в пределах МКАД" />
+                        <input name="delivery" type="radio" v-model="model.person.delivery" value="Доставка в пределах МКАД" />
                       </label>
                       <div class="text-black font-medium">Доставка в пределах МКАД</div>
                       <div>Бесплатно при стоимости товара от <span class="whitespace-nowrap">300 Br</span></div>
@@ -87,13 +87,13 @@
                   <div class="col-span-6 lg:col-span-2">
                     <div class="radio-card">
                       <label class="absolute inset-0">
-                        <input name="delivery" type="radio" v-model="person.delivery" value="Доставка по Беларуси" />
+                        <input name="delivery" type="radio" v-model="model.person.delivery" value="Доставка по Беларуси" />
                       </label>
                       <div class="text-black font-medium">Доставка по Беларуси</div>
                       <div>Стоимость доставки — от 12 Br</div>
                     </div>
                   </div>
-                  <template v-if="person.delivery !== 'Самовывоз'">
+                  <template v-if="model.person.delivery !== 'Самовывоз'">
                     <div class="col-span-6 text-sm text-black mt-4">
                       Сроки доставки уточнит менеджер при подтверждении заказа.
 
@@ -102,34 +102,34 @@
 
                     <div class="col-span-6 lg:col-span-2">
                       <FormItem name="city" :rules="[{ required: true }]">
-                        <input name="city" type="text" class="input" placeholder="Город" v-model="person.city" />
+                        <input name="city" type="text" class="input" placeholder="Город" v-model="model.person.city" />
                       </FormItem>
                     </div>
 
                     <div class="col-span-6 lg:col-span-2">
                       <FormItem name="street" :rules="[{ required: true }]">
-                        <input name="street" type="text" class="input" placeholder="Улица" v-model="person.street" />
+                        <input name="street" type="text" class="input" placeholder="Улица" v-model="model.person.street" />
                       </FormItem>
                     </div>
 
                     <div class="col-span-6 lg:col-span-2">
                       <FormItem name="building" :rules="[{ required: true }]">
-                        <input name="building" type="text" class="input" placeholder="Номер дома" v-model="person.building" />
+                        <input name="building" type="text" class="input" placeholder="Номер дома" v-model="model.person.building" />
                       </FormItem>
                     </div>
                     <div class="col-span-6 lg:col-span-2">
                       <FormItem>
-                        <input name="block" type="text" class="input" placeholder="Корпус" v-model="person.block" />
+                        <input name="block" type="text" class="input" placeholder="Корпус" v-model="model.person.block" />
                       </FormItem>
                     </div>
                     <div class="col-span-6 lg:col-span-2">
                       <FormItem name="apt" :rules="[{ required: true }]">
-                        <input name="apt" type="text" class="input" placeholder="Квартира" v-model="person.apt" />
+                        <input name="apt" type="text" class="input" placeholder="Квартира" v-model="model.person.apt" />
                       </FormItem>
                     </div>
                     <div class="col-span-6 lg:col-span-2">
                       <FormItem>
-                        <input name="zip" type="text" class="input" placeholder="Почтовый индекс" v-model="person.zip" />
+                        <input name="zip" type="text" class="input" placeholder="Почтовый индекс" v-model="model.person.zip" />
                       </FormItem>
                     </div>
                   </template>
@@ -138,21 +138,21 @@
                   </div>
                   <div class="col-span-6 lg:col-span-2">
                     <div class="radio-card">
-                      <label class="absolute inset-0"> <input type="radio" name="payment" v-model="person.payment" value="Наличными" /> </label>
+                      <label class="absolute inset-0"> <input type="radio" name="payment" v-model="model.person.payment" value="Наличными" /> </label>
                       <div class="text-black font-medium">Наличными</div>
                       <div>В пункте самовывоза или курьеру при получении</div>
                     </div>
                   </div>
                   <div class="col-span-6 lg:col-span-2">
                     <div class="radio-card">
-                      <label class="absolute inset-0"> <input type="radio" name="payment" v-model="person.payment" value="Оплата банковской картой" /> </label>
+                      <label class="absolute inset-0"> <input type="radio" name="payment" v-model="model.person.payment" value="Оплата банковской картой" /> </label>
                       <div class="text-black font-medium">Оплата банковской картой</div>
                       <div>В пункте самовывоза или курьеру при получении</div>
                     </div>
                   </div>
                   <div class="col-span-6 lg:col-span-2">
                     <div class="radio-card">
-                      <label class="absolute inset-0"> <input type="radio" name="payment" v-model="person.payment" value="Оплата через ЕРИП" /> </label>
+                      <label class="absolute inset-0"> <input type="radio" name="payment" v-model="model.person.payment" value="Оплата через ЕРИП" /> </label>
                       <div class="text-black font-medium">Оплата через ЕРИП</div>
                       <div>Менеджер сообщит реквизиты оплаты после подтверждения заказа</div>
                       <img src="/img/info/erip.png" loading="lazy" width="125" height="40" alt="" />
@@ -160,7 +160,7 @@
                   </div>
                   <div class="col-span-6 lg:col-span-2">
                     <div class="radio-card">
-                      <label class="absolute inset-0"> <input type="radio" name="payment" v-model="person.payment" value="Рассрочка" /> </label>
+                      <label class="absolute inset-0"> <input type="radio" name="payment" v-model="model.person.payment" value="Рассрочка" /> </label>
                       <div class="text-black font-medium">Рассрочка</div>
                       <div>Оплата картой рассрочки в пункте самовывоза или курьеру при получении</div>
                       <div class="flex gap-2 card-logos">
@@ -173,7 +173,7 @@
                   <div class="col-span-6 lg:col-span-2">
                     <div class="radio-card">
                       <label class="absolute inset-0">
-                        <input type="radio" v-model="person.payment" name="payment" value="Оплата в кредит" />
+                        <input type="radio" v-model="model.person.payment" name="payment" value="Оплата в кредит" />
                       </label>
                       <div class="text-black font-medium">Оплата в кредит</div>
                       <div>Банки-партнёры:</div>
@@ -189,59 +189,59 @@
                   </div>
                   <div class="col-span-6">
                     <FormItem>
-                      <textarea placeholder="Комментарий к заказу" name="comment" v-model="person.comment" cols="30" rows="8" class="input"></textarea>
+                      <textarea placeholder="Комментарий к заказу" name="comment" v-model="model.person.comment" cols="30" rows="8" class="input"></textarea>
                     </FormItem>
                   </div>
                 </div>
-                <button type="submit" class="btn hidden lg:inline-block">Оформить заказ</button>
+                <button type="submit" class="btn hidden lg:inline-block" :disabled="disabled">Оформить заказ</button>
               </Form>
 
-              <Form :model="ur" :onFinish="onFinish" :class="who === 'business' ? 'block' : 'hidden'">
+              <Form :model="model.ur" :onFinish="onFinish" :class="model.who === 'business' ? 'block' : 'hidden'">
                 <div class="grid grid-cols-6 gap-2">
                   <div class="col-span-6">
                     <FormItem name="name" :rules="[{ required: true }]">
-                      <input name="name" type="text" class="input" placeholder="Укажите наименование организации" v-model="ur.name" />
+                      <input name="name" type="text" class="input" placeholder="Укажите наименование организации" v-model="model.ur.name" />
                     </FormItem>
                   </div>
                   <div class="col-span-6 lg:col-span-2">
                     <FormItem name="unp" :rules="[{ required: true }]">
-                      <input name="unp" type="text" class="input" placeholder="УНП" v-model="ur.unp" />
+                      <input name="unp" type="text" class="input" placeholder="УНП" v-model="model.ur.unp" />
                     </FormItem>
                   </div>
                   <div class="col-span-6 lg:col-span-2">
                     <FormItem name="account" :rules="[{ required: true }]">
-                      <input name="account" type="text" class="input" placeholder="Р/с" v-model="ur.account" />
+                      <input name="account" type="text" class="input" placeholder="Р/с" v-model="model.ur.account" />
                     </FormItem>
                   </div>
                   <div class="col-span-6 lg:col-span-2">
                     <FormItem name="bankaddress" :rules="[{ required: true }]">
-                      <input name="bankaddress" type="text" class="input" placeholder="Адрес банка" v-model="ur.bankaddress" />
+                      <input name="bankaddress" type="text" class="input" placeholder="Адрес банка" v-model="model.ur.bankaddress" />
                     </FormItem>
                   </div>
                   <div class="col-span-6 lg:col-span-2">
                     <FormItem name="bankbic" :rules="[{ required: true }]">
-                      <input name="bankbic" type="text" class="input" placeholder="БИК банка" v-model="ur.bankbic" />
+                      <input name="bankbic" type="text" class="input" placeholder="БИК банка" v-model="model.ur.bankbic" />
                     </FormItem>
                   </div>
                   <div class="col-span-6 lg:col-span-2">
                     <FormItem name="reason" :rules="[{ required: true }]">
-                      <input name="reason" type="text" class="input" placeholder="На каком основании заключает договор от имени организации" v-model="ur.reason" />
+                      <input name="reason" type="text" class="input" placeholder="На каком основании заключает договор от имени организации" v-model="model.ur.reason" />
                     </FormItem>
                   </div>
                   <div class="col-span-6 lg:col-span-2">
                     <FormItem name="fio" :rules="[{ required: true }]">
-                      <input name="fio" type="text" class="input" placeholder="ФИО того, в чьем лице действует организация" v-model="ur.fio" />
+                      <input name="fio" type="text" class="input" placeholder="ФИО того, в чьем лице действует организация" v-model="model.ur.fio" />
                     </FormItem>
                   </div>
 
                   <div class="col-span-6 lg:col-span-3">
                     <FormItem name="phone" :rules="[{ required: true }]">
-                      <input name="phone" type="tel" placeholder="+375 (__) ___-__-__" class="input" v-model="ur.phone" v-maska data-maska="+375 (##) ###-##-##" />
+                      <input name="phone" type="tel" placeholder="+375 (__) ___-__-__" class="input" v-model="model.ur.phone" v-maska data-maska="+375 (##) ###-##-##" />
                     </FormItem>
                   </div>
                   <div class="col-span-6 lg:col-span-3">
                     <FormItem name="email" :rules="[{ email: true }]">
-                      <input name="email" type="email" class="input" placeholder="Контактный  E-mail" v-model="ur.email" />
+                      <input name="email" type="email" class="input" placeholder="Контактный  E-mail" v-model="model.ur.email" />
                     </FormItem>
                   </div>
 
@@ -252,7 +252,7 @@
                   <div class="col-span-6 lg:col-span-2">
                     <div class="radio-card">
                       <label class="absolute inset-0">
-                        <input name="delivery" type="radio" v-model="ur.delivery" value="Самовывоз" />
+                        <input name="delivery" type="radio" v-model="model.ur.delivery" value="Самовывоз" />
                       </label>
                       <div class="text-black font-medium">Самовывоз</div>
                       <div>Бесплатно</div>
@@ -261,7 +261,7 @@
                   <div class="col-span-6 lg:col-span-2">
                     <div class="radio-card">
                       <label class="absolute inset-0">
-                        <input name="delivery" type="radio" v-model="ur.delivery" value="Доставка в пределах МКАД" />
+                        <input name="delivery" type="radio" v-model="model.ur.delivery" value="Доставка в пределах МКАД" />
                       </label>
                       <div class="text-black font-medium">Доставка в пределах МКАД</div>
                       <div>Бесплатно при стоимости товара от <span class="whitespace-nowrap">300 Br</span></div>
@@ -271,13 +271,13 @@
                   <div class="col-span-6 lg:col-span-2">
                     <div class="radio-card">
                       <label class="absolute inset-0">
-                        <input name="delivery" type="radio" v-model="ur.delivery" value="Доставка по Беларуси" />
+                        <input name="delivery" type="radio" v-model="model.ur.delivery" value="Доставка по Беларуси" />
                       </label>
                       <div class="text-black font-medium">Доставка по Беларуси</div>
                       <div>Стоимость доставки — от 12 Br</div>
                     </div>
                   </div>
-                  <template v-if="ur.delivery !== 'Самовывоз'">
+                  <template v-if="model.ur.delivery !== 'Самовывоз'">
                     <div class="col-span-6 text-sm text-black mt-4">
                       Сроки доставки уточнит менеджер при подтверждении заказа.
 
@@ -286,34 +286,34 @@
 
                     <div class="col-span-6 lg:col-span-2">
                       <FormItem name="city" :rules="[{ required: true }]">
-                        <input name="city" type="text" class="input" placeholder="Город" v-model="ur.city" />
+                        <input name="city" type="text" class="input" placeholder="Город" v-model="model.ur.city" />
                       </FormItem>
                     </div>
 
                     <div class="col-span-6 lg:col-span-2">
                       <FormItem name="street" :rules="[{ required: true }]">
-                        <input name="street" type="text" class="input" placeholder="Улица" v-model="ur.street" />
+                        <input name="street" type="text" class="input" placeholder="Улица" v-model="model.ur.street" />
                       </FormItem>
                     </div>
 
                     <div class="col-span-6 lg:col-span-2">
                       <FormItem name="building" :rules="[{ required: true }]">
-                        <input name="building" type="text" class="input" placeholder="Номер дома" v-model="ur.building" />
+                        <input name="building" type="text" class="input" placeholder="Номер дома" v-model="model.ur.building" />
                       </FormItem>
                     </div>
                     <div class="col-span-6 lg:col-span-2">
                       <FormItem>
-                        <input name="block" type="text" class="input" placeholder="Корпус" v-model="ur.block" />
+                        <input name="block" type="text" class="input" placeholder="Корпус" v-model="model.ur.block" />
                       </FormItem>
                     </div>
                     <div class="col-span-6 lg:col-span-2">
                       <FormItem name="apt" :rules="[{ required: true }]">
-                        <input name="apt" type="text" class="input" placeholder="Квартира" v-model="ur.apt" />
+                        <input name="apt" type="text" class="input" placeholder="Квартира" v-model="model.ur.apt" />
                       </FormItem>
                     </div>
                     <div class="col-span-6 lg:col-span-2">
                       <FormItem>
-                        <input name="zip" type="text" class="input" placeholder="Почтовый индекс" v-model="ur.zip" />
+                        <input name="zip" type="text" class="input" placeholder="Почтовый индекс" v-model="model.ur.zip" />
                       </FormItem>
                     </div>
                   </template>
@@ -323,7 +323,7 @@
                   </div>
                   <div class="col-span-6">
                     <FormItem>
-                      <textarea placeholder="Комментарий к заказу" name="comment" v-model="ur.comment" cols="30" rows="8" class="input"></textarea>
+                      <textarea placeholder="Комментарий к заказу" name="comment" v-model="model.ur.comment" cols="30" rows="8" class="input"></textarea>
                     </FormItem>
                   </div>
                 </div>
@@ -359,7 +359,7 @@
             <div>{{ price(summary.total) }}</div>
           </div>
 
-          <button class="btn w-full sm:max-w-[200px] sm:mx-auto" @click="onOrder">Оформить заказ</button>
+          <button class="btn w-full sm:max-w-[200px] sm:mx-auto" @click="onOrder" :disabled="disabled">Оформить заказ</button>
 
           <div class="text-[12px] font-light text-center">
             Нажимая на кнопку «‎Оформить заказ», Вы соглашаетесь с
@@ -372,17 +372,17 @@
   </main>
 </template>
 <script setup>
+const disabled = ref(false);
+import { useLocalStorage } from '@vueuse/core';
 const router = useRouter();
-const who = ref('person');
-const person = useState(() => ({
-  delivery: 'Самовывоз',
-  payment: 'Наличными',
-}));
-
-const ur = useState(() => ({
-  delivery: 'Самовывоз',
-  payment: 'Банковский перевод',
-}));
+const model = useLocalStorage('checkout', {
+  who: 'person',
+  person: {
+    delivery: 'Самовывоз',
+    payment: 'Наличными',
+  },
+  ur: { delivery: 'Самовывоз', payment: 'Банковский перевод' },
+});
 
 const { add: add2favorites } = useFavorites();
 const { items, add, total, remove, clear, itemshash } = useCart();
@@ -408,10 +408,11 @@ const { data } = await useAsyncData(
 const onPrint = () => router.push('/print/cart');
 
 const onFinish = async (info) => {
+  disabled.value = true;
   const cart = data.value;
   const total = summary.value;
 
-  await $fetch('/api/orders/new', {
+  const res = await $fetch('/api/orders/new', {
     method: 'POST',
     body: {
       info,
@@ -419,18 +420,10 @@ const onFinish = async (info) => {
       total,
     },
   });
-  router.push('/thankyou');
 
+  router.push(`/thankyou?orderID=${res.orderID}`);
   clear();
-  person.value = {
-    delivery: 'Самовывоз',
-    payment: 'Наличными',
-  };
-
-  ur.value = {
-    delivery: 'Самовывоз',
-    payment: 'Банковский перевод',
-  };
+  disabled.value = false;
 };
 
 const onRemove = (id) => {
@@ -448,7 +441,8 @@ const onOrder = () => {
 
 const summary = computed(() => {
   const price = data.value.total?.price;
-  const delivery = who.value === 'person' ? person.value.delivery : ur.value.delivery;
+
+  const delivery = model.value.who === 'person' ? model.value.person.delivery : model.value.ur.delivery;
   let deliveryPrice = 0;
   if (delivery === 'Доставка в пределах МКАД') {
     if (price < 300) deliveryPrice = 6;

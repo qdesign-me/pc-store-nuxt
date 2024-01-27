@@ -895,6 +895,9 @@
 
   opacity: 1;
 }
+button[disabled] {
+  pointer-events: none;
+}
 @media screen and (max-width: 1500px) {
   h1,
   .h1,

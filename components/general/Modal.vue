@@ -18,6 +18,7 @@ const props = defineProps(['visible', 'title', 'width']);
 const emit = defineEmits(['close']);
 
 watch(props, () => {
+  console.log(props.visible);
   props.visible ? document.querySelector('body').classList.add('overflow-hidden') : document.querySelector('body').classList.remove('overflow-hidden');
 });
 </script>

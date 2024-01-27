@@ -129,17 +129,17 @@ ${body.info.fio},<br/>
 
   await sendEmail(
     {
-      subject: 'Заказ на сайте i-ven.by',
+      subject: `Заказ №${orderID} на сайте i-ven.by`,
       html,
     },
     to
   );
   await sendEmail(
     {
-      subject: 'Заказ на сайте i-ven.by',
+      subject: `Заказ №${orderID} на сайте i-ven.by`,
       html,
     },
     body.info.email
   );
-  return { status: 'ok' };
+  return { status: 'ok', orderID };
 });

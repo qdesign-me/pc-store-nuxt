@@ -48,8 +48,16 @@
         </template>
         <div class="table-wrap hidden lg:block">
           <div class="mb-5 text-[#00B3D7] text-base">Основные характеристики</div>
-          <table class="features-table" v-if="props.data.features?.length">
-            <tr v-for="feature in props.data.features" :key="feature.label">
+          <table class="features-table">
+            <tr v-if="props.data.vendor">
+              <td class="label">Производитель</td>
+              <td class="max">{{ props.data.vendor }}</td>
+            </tr>
+            <tr v-if="props.data.model">
+              <td class="label">Модель</td>
+              <td class="max">{{ props.data.model }}</td>
+            </tr>
+            <tr v-for="feature in props.data.features?.filter((item) => !['Производитель', 'Модель'].includes(item.label))" :key="feature.label">
               <td class="label">{{ feature.label }}</td>
               <td class="max">{{ feature.value }}{{ feature.suffix }}</td>
             </tr>
@@ -82,22 +90,7 @@
             <div class="text-3xl font-semibold">{{ price(props.data.Price) }}</div>
           </div>
 
-          <BuyAtOneClick v-if="props.data.enabled === 1">
-            <div class="flex flex-wrap gap-4 mb-10 items-center">
-              <div class="flex gap-4">
-                <div>
-                  <ProductThumbs :data="{ img: props.data.img.split('|')?.[0] }" size="63" />
-                </div>
-                <div class="font-light">
-                  <div class="text-[12px] text-[#3F3F3F] mb-2">Код товара: {{ props.data.productID }}</div>
-                  <div class="text-sm text-[#000000] underline underline-offset-2">{{ props.data.name }}</div>
-                </div>
-              </div>
-              <div class="text-[24px] text-[#000000] ml-auto">
-                {{ price(props.data.Price) }}
-              </div>
-            </div>
-          </BuyAtOneClick>
+          <BuyAtOneClick v-if="props.data.enabled === 1" :data="props.data"> </BuyAtOneClick>
 
           <Add2Cart class="has-large" :productID="props.data.productID" v-if="props.data.enabled === 1" />
 
