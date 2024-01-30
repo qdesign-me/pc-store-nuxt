@@ -1,12 +1,12 @@
 import db from '../../../db/db';
 
 const getFilters = async (category: { categoryID: number; uri: string }) => {
-  const sql = `select spf.label, spf.tooltip, concat('filter_', spf.alias) as alias, spf.suffix, spf.filter_type, spf.sort_value, spf.preffered_values, group_concat(distinct sfop.value separator ',') as value from  iven_features_on_products sfop 
+  const sql = `select spf.label, spf.tooltip,  concat('filter_', spf.alias) as alias, spf.suffix, spf.filter_type, spf.sort_value, spf.preffered_values, group_concat(distinct sfop.value separator ',') as value from  iven_features_on_products sfop 
   join iven_features_on_categories sfoc on sfoc.featureID=sfop.featureID and sfoc.categoryID=${category?.categoryID}
   join iven_products_features spf on spf.featureID=sfop.featureID 
   join iven_products sp on sp.productID = sfop.productID 
   join iven_categories sc on sc.categoryID = sp.categoryID and sc.fullPath like '${category.uri}%' 
-  group by label, tooltip, alias `;
+  group by label, tooltip, alias order by spf.sort_order`;
 
   const [data] = await db.execute(sql);
   // fix duplicates

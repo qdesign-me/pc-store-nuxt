@@ -48,6 +48,7 @@
         </template>
         <div class="table-wrap hidden lg:block">
           <div class="mb-5 text-[#00B3D7] text-base">Основные характеристики</div>
+
           <table class="features-table">
             <tr v-if="props.data.vendor">
               <td class="label">Производитель</td>

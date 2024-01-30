@@ -121,7 +121,7 @@ export default defineEventHandler(async (event) => {
   data['available'] = available;
 
   data['features'] = await getFeatures(
-    `select sfop.value,  sf.label, sf.tooltip, sf.filter_type, sf.suffix from iven_features_on_products sfop join iven_products_features sf on sf.featureID = sfop.featureID where sfop.productID=${data.productID} order by sf.sort_order`
+    `select sfop.value,  sf.label, sf.tooltip, sf.filter_type, sf.suffix,  sf.sort_order from iven_features_on_products sfop join iven_products_features sf on sf.featureID = sfop.featureID where sfop.productID=${data.productID} order by sf.sort_order`
   );
   data['features'] = data['features'].map((item: Record<string, any>) => ({
     ...item,
