@@ -23,7 +23,9 @@
           самостоятельно <br />
           в Конфигураторе ПК
         </div>
-        <button class="btn-white mt-auto justify-center"><ToolsIcon class="absolute left-6 top-1/2 -translate-y-1/2" />Начать собирать</button>
+        <NuxtLink to="https://win7.by:5050/?config=1" class="btn-white mt-auto justify-center"
+          ><ToolsIcon class="absolute left-6 top-1/2 -translate-y-1/2" />Начать собирать</NuxtLink
+        >
       </div>
       <div class="card py-5 px-5 xl:col-span-2 bg-milk height-xs lgr flex flex-col justify-between gap-4">
         <div class="flex gap-5 flex-wrap">
