@@ -4,8 +4,8 @@
     <SliderBlock />
     <PromoBlock />
     <div class="container">
-      <TopSalesBlock />
       <PopularCatsBlock />
+      <TopSalesBlock />
       <PopularSetsBlock v-if="false" />
       <NewItemsBlock />
     </div>

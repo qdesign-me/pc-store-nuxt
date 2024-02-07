@@ -3,9 +3,9 @@
     <div class="breadcrumbs">
       <NuxtLink to="/">Главная </NuxtLink>
       <NuxtLink to="/account">Кабинет пользователя </NuxtLink>
-      <span>Мои заказы</span>
+      <span>Конфигурации ПК</span>
     </div>
 
-    <h2>Заказы</h2>
+    <h2>Конфигурации ПК</h2>
   </AccountWrapper>
 </template>

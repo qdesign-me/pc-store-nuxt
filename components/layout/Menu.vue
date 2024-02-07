@@ -5,7 +5,7 @@
         <CatalogIcon class="menu-open-true" />
         <div class="text-2xl menu-open-false"><CloseIcon /></div>
       </div>
-      Каталог товров
+      Каталог товаров
     </button>
     <div class="menu">
       <div class="only-mobi">
