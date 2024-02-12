@@ -29,7 +29,7 @@ export default defineNuxtConfig({
     },
   },
   css: ['~/assets/css/main.scss'],
-  modules: ['@pinia/nuxt', 'nuxt-swiper', '@ant-design-vue/nuxt', 'nuxt-simple-sitemap', 'yandex-metrika-module-nuxt3', 'nuxt-gtag', '@nuxt/image', 'nuxt-scheduler'],
+  modules: ['@pinia/nuxt', 'nuxt-swiper', '@ant-design-vue/nuxt', 'nuxt-simple-sitemap', 'yandex-metrika-module-nuxt3', '@nuxtjs/google-gtag', '@nuxt/image', 'nuxt-scheduler'],
   pinia: {
     autoImports: ['defineStore', 'acceptHMRUpdate'],
   },
@@ -54,6 +54,19 @@ export default defineNuxtConfig({
   },
   gtag: {
     tags: ['G-L2CG7ZPL61', 'AW-620701504'],
+  },
+  'google-gtag': {
+    id: 'G-L2CG7ZPL61',
+    config: {},
+    debug: true,
+    additionalAccounts: [
+      {
+        id: 'AW-620701504',
+        config: {
+          send_page_view: false,
+        },
+      },
+    ],
   },
   image: {
     domains: ['win7.by'],
