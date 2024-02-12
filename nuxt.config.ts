@@ -52,9 +52,7 @@ export default defineNuxtConfig({
     trackHash: true,
     ecommerce: 'dataLayer',
   },
-  gtag: {
-    tags: ['G-L2CG7ZPL61', 'AW-620701504'],
-  },
+
   'google-gtag': {
     id: 'G-L2CG7ZPL61',
     config: {},
