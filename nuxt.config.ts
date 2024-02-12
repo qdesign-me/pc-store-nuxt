@@ -29,10 +29,8 @@ export default defineNuxtConfig({
     },
   },
   css: ['~/assets/css/main.scss'],
-  modules: ['@pinia/nuxt', 'nuxt-swiper', '@ant-design-vue/nuxt', 'nuxt-simple-sitemap', 'yandex-metrika-module-nuxt3', '@nuxtjs/google-gtag', '@nuxt/image', 'nuxt-scheduler'],
-  pinia: {
-    autoImports: ['defineStore', 'acceptHMRUpdate'],
-  },
+  modules: ['@pinia/nuxt', 'nuxt-swiper', '@ant-design-vue/nuxt', 'nuxt-simple-sitemap', 'yandex-metrika-module-nuxt3', 'nuxt-gtag', '@nuxt/image', 'nuxt-scheduler'],
+
   antd: {
     components: ['Image'],
   },
@@ -52,20 +50,10 @@ export default defineNuxtConfig({
     trackHash: true,
     ecommerce: 'dataLayer',
   },
-
-  'google-gtag': {
-    id: 'G-L2CG7ZPL61',
-    config: {},
-    debug: true,
-    additionalAccounts: [
-      {
-        id: 'AW-620701504',
-        config: {
-          send_page_view: false,
-        },
-      },
-    ],
+  gtag: {
+    tags: ['G-L2CG7ZPL61', 'AW-620701504'],
   },
+
   image: {
     domains: ['win7.by'],
   },
