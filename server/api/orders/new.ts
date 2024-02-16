@@ -23,8 +23,8 @@ export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   const phone = body.info.phone.replaceAll(' ', '').replaceAll('-', '').replaceAll('+375', '').replaceAll('(', '').replaceAll(')', '');
   body.info.order_time = formatDate(new Date());
-  return event.node.req.socket;
   body.info.customer_ip = event.node.req.socket.remoteAddress || event.node.req.headers['x-forwarded-for'];
+  return body.info.customer_ip;
   body.info.statusID = 1;
   body.info.manager_comment = '';
   body.info.payment = body.info.unp ? 'Банковскиий перевод' : body.info.payment;
@@ -97,8 +97,7 @@ ${body.info.fio},<br/>
   values
   (null, '${customerID}', '${body.info.order_time}', '${body.info.customer_ip}', '${delivery}', '${payment}', '${body.info.comment}', '${body.info.manager_comment}', '${body.info.rek}', '${body.info.statusID}', '${body.total.deliveryPrice}', '${body.total.order_discount}', '${body.total.total}', '${body.info.name}', '${body.info.phone}', '${body.info.email}', '${body.info.city}', '${body.info.address}')`;
   const test = getOrderDetailsEmail(1, body);
-  console.log(sql);
-  return sql;
+
   res = await db.execute(sql);
 
   const orderID = res[0].insertId;
