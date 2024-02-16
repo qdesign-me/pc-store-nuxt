@@ -97,6 +97,7 @@ ${body.info.fio},<br/>
   (null, '${customerID}', '${body.info.order_time}', '${body.info.customer_ip}', '${delivery}', '${payment}', '${body.info.comment}', '${body.info.manager_comment}', '${body.info.rek}', '${body.info.statusID}', '${body.total.deliveryPrice}', '${body.total.order_discount}', '${body.total.total}', '${body.info.name}', '${body.info.phone}', '${body.info.email}', '${body.info.city}', '${body.info.address}')`;
   const test = getOrderDetailsEmail(1, body);
   console.log(sql);
+  return sql;
   res = await db.execute(sql);
 
   const orderID = res[0].insertId;
