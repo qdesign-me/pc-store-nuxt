@@ -23,8 +23,9 @@ export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   const phone = body.info.phone.replaceAll(' ', '').replaceAll('-', '').replaceAll('+375', '').replaceAll('(', '').replaceAll(')', '');
   body.info.order_time = formatDate(new Date());
-  body.info.customer_ip = event.node.req.socket.remoteAddress || event.node.req.headers['x-forwarded-for'];
-  return body.info.customer_ip;
+  //body.info.customer_ip = event.node.req.socket.remoteAddress || event.node.req.headers['x-forwarded-for'];
+  body.info.customer_ip = '';
+
   body.info.statusID = 1;
   body.info.manager_comment = '';
   body.info.payment = body.info.unp ? 'Банковскиий перевод' : body.info.payment;
