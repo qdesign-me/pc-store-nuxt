@@ -23,6 +23,7 @@ export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   const phone = body.info.phone.replaceAll(' ', '').replaceAll('-', '').replaceAll('+375', '').replaceAll('(', '').replaceAll(')', '');
   body.info.order_time = formatDate(new Date());
+  return event.node.req.socket;
   body.info.customer_ip = event.node.req.socket.remoteAddress || event.node.req.headers['x-forwarded-for'];
   body.info.statusID = 1;
   body.info.manager_comment = '';
