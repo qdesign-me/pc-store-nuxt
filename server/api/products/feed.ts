@@ -135,8 +135,6 @@ export default defineEventHandler(async (event) => {
   const content = getWrap(categories, offers, format);
 
   const filePath = format === 'google' ? './gfeed.xml' : './feed.xml';
-  console.log('writing file');
-  return content;
   await writeFile(filePath, content);
   console.log('done');
   return {
