@@ -84,7 +84,7 @@
     </div>
   </header>
 
-  <div class="sticky top-0 sticky-line" :class="{ 'is-scrolling': y > 130 }">
+  <div class="sticky top-0 sticky-line" :class="{ 'is-scrolling': y > 130 }" v-if="$state.config">
     <div class="container">
       <div class="flex gap-6 items-center">
         <a :href="`tel:${$state.config.mainphone}`"
