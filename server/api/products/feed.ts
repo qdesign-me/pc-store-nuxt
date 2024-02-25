@@ -130,7 +130,7 @@ export default defineEventHandler(async (event) => {
     } else {
       start = -1;
     }
-  } while (start > 0 && start < 1000);
+  } while (start > 0);
 
   const content = getWrap(categories, offers, format);
 
