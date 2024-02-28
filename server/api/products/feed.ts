@@ -42,7 +42,7 @@ function getItem(item: Record<string, any>, categories: any, format: 'google' | 
   const category = categories.find((it) => it.categoryID === item.categoryID)?.name;
 
   return `<item>
-  <g:link>https://i-ven.by/p/${fixname(item.uri.replace('.html', ''))}<g:/link>
+    <g:link>https://i-ven.by/p/${fixname(item.uri.replace('.html', ''))}</g:link>
     <g:id>${item.productID}</g:id>
     <g:price>${item.Price} BYN</g:price>
     <g:condition>new</g:condition>
