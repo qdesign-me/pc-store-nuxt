@@ -107,8 +107,7 @@ function getWrap(categories: any, offers: any, format: 'google' | 'yandex') {
     </yml_catalog>`;
   }
 
-  return `
-  <?xml version="1.0"?>
+  return `<?xml version="1.0"?>
 <rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">
   <channel>
     <title>Iven — интернет магазин компьютеров и комплектующих, техники для офиса и электроники.</title>
