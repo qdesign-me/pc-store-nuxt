@@ -107,12 +107,14 @@ function getWrap(categories: any, offers: any, format: 'google' | 'yandex') {
     </yml_catalog>`;
   }
 
-  return `<channel>
+  return `
+  <?xml version="1.0"?>
+<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">
+  <channel>
     <title>Iven — интернет магазин компьютеров и комплектующих, техники для офиса и электроники.</title>
     <link>https://i-ven.by</link>
     ${offers}
-    </channel>
-    `;
+    </channel></rss>`;
 }
 export default defineEventHandler(async (event) => {
   const format = event.node.req.originalUrl === '/api/products/feed?format=google' ? 'google' : 'yandex';
