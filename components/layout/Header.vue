@@ -75,11 +75,7 @@
         <div class="flex" v-if="false">
           <NuxtLink class="btn is-large ml-auto" to="https://win7.by:5050/?config=1"> <ConfiguratorIcon /> Конфигуратор ПК</NuxtLink>
         </div>
-        <Consultation title="Бесплатная консультация">
-          <button class="bg-[#F54D4D] w-[255px] ml-auto text-white text-sm font-medium flex items-center gap-2 px-4 leading-[50px] rounded-[5px]">
-            <QuestionIcon /> Бесплатная консультация
-          </button>
-        </Consultation>
+        <div class="text-[12px] text-right" v-html="$state.config.header ?? 'г. Минск, Тимирязева 4 (ст. м. Молодежная)<br />ПН-ПТ: с 10:00 до 19:00'"></div>
       </div>
     </div>
   </header>

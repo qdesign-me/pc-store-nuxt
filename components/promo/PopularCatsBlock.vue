@@ -3,8 +3,8 @@
   <div class="grid gap-2.5 grid-cols-1 lg:grid-cols-5 box">
     <NuxtLink v-for="(link, index) in links" :key="link.uri" :to="link.uri" class="card px-5 pt-0 bg-blue group height-xs overflow-hidden !min-h-[100px] group">
       <div class="text-[20px] font-semibold text-white mt-4 relative z-[2]">{{ link.title }}</div>
-      <img :src="link.img" width="296" height="200" loading="lazy" class="promo-bg" />
-      <img :src="`/img/promo/i${index + 1}.png`" loading="lazy" class="absolute bottom-0 right-0 transition duration-300 group-hover:scale-[1.1]" />
+      <img :src="`/img/promo/p${index + 1}.png`" width="296" height="200" loading="lazy" class="promo-bg" />
+      <img :src="link.img" loading="lazy" class="h-[60px] lg:h-auto absolute transition duration-300 group-hover:scale-[1.1]" :class="link.class" />
     </NuxtLink>
     <NuxtLink to="/" class="card bg-blue group height-xs overflow-hidden lg:hidden !hidden">
       <div class="title text-white">
@@ -19,10 +19,20 @@
 
 <script setup>
 const links = [
-  { img: '/img/promo/p1.png', uri: '/noutbuki-i-aksessuary/gotovie-komputeri', title: 'Компьютеры' },
-  { img: '/img/promo/p2.png', uri: '/noutbuki-i-aksessuary/noutbuki', title: 'Ноутбуки' },
-  { img: '/img/promo/p3.png', uri: '/komplektuyuszie', title: 'Комплектующие' },
-  { img: '/img/promo/p4.png', uri: '/periferiya-i-aksessuary', title: 'Периферия' },
-  { img: '/img/promo/p5.png', uri: '/elektronika', title: 'Электроника' },
+  { class: 'right-5 bottom-5 lg:bottom-5 lg:right-8', img: '/img/promo/ssd.png', uri: '/komplektuyuszie/zhestkie-diski/solid-state-drive', title: 'SSD' },
+  { class: 'right-5 bottom-5 lg:bottom-5 lg:right-5', img: '/img/promo/proc.png', uri: '/komplektuyuszie/processory', title: 'Процессоры' },
+  {
+    class: 'right-5 bottom-5 lg:right-auto lg:left-1/2 lg:top-1/2 lg:-translate-x-1/2 lg:-translate-y-1/3',
+    img: '/img/promo/videocard.png',
+    uri: '/komplektuyuszie/videokarty-videozahvat',
+    title: 'Видеокарты',
+  },
+  { class: 'right-5 bottom-5 lg:bottom-2 lg:right-5', img: '/img/promo/corpus.png', uri: '/komplektuyuszie/korpusa', title: 'Корпусы' },
+  {
+    class: 'right-5 bottom-5 lg:right-auto lg:left-1/2 lg:top-1/2 lg:-translate-x-1/2 lg:-translate-y-1/3',
+    img: '/img/promo/monoblock.png',
+    uri: '/noutbuki-i-aksessuary/Monobloki',
+    title: 'Моноблоки',
+  },
 ];
 </script>

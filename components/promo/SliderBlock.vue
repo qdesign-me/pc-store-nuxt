@@ -1,6 +1,6 @@
 <template>
   <div class="container can-expand" v-if="links">
-    <div class="grid grid-cols-1 lg:grid-cols-5 lg:gap-2.5 box lg:mt-4">
+    <div class="grid grid-cols-1 lg:grid-cols-5 lg:gap-2.5 lg:mt-4 mb-3 lg:mb-[50px]">
       <div class="lg:col-span-4 slider relative">
         <NuxtErrorBoundary>
           <Swiper
@@ -26,21 +26,34 @@
           </Swiper>
         </NuxtErrorBoundary>
       </div>
-      <NuxtLink class="card pt-5 px-4 rounded overflow-hidden more-padding bg-blue pb-0 height-sm installments" to="/payment/instalments">
-        <img src="/img/promo/zero.png" alt="Скидка" loading="lazy" width="190" height="200" class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 mt-4" />
-
-        <div class="h2 text-white relative">РАССРОЧКА <br />БЕЗ ПЕРЕПЛАТ!</div>
-
-        <div class="flex justify-between absolute left-5 right-5 bottom-5 cards">
-          <img src="/img/info/vtb.png" loading="lazy" width="64" height="40" alt="ВТБ" data-v-inspector="pages/payment/index.vue:20:17" /><img
-            src="/img/info/halva.png"
+      <div class="px-5 pt-3 lg:p-0">
+        <NuxtLink
+          class="card pt-5 px-4 !rounded overflow-hidden more-padding pb-0 height-sm bg-cover bg-no-repeat bg-center"
+          to="/p/24-Sonic-WG24IHM-B--1920x1080--IPS--165Hz--Speakers--HDMI--DP-_164388"
+          style="background-image: url(/img/promo/bg.png)"
+        >
+          <img
+            src="/img/promo/sonic_wg24-2 1.png"
+            alt="Скидка"
             loading="lazy"
-            width="64"
-            height="40"
-            alt="Халва"
-          /><img src="/img/info/magnit.png" loading="lazy" width="64" height="40" alt="Магнит" />
-        </div>
-      </NuxtLink>
+            width="260"
+            height="250"
+            class="absolute lg:left-5 right-2 lg:right-5 top-2 bottom-2 lg:bottom-5 lg:top-auto h-[calc(100%-16px)] lg:h-auto"
+          />
+
+          <div class="text-white relative text-[20px] sm:text-[30px] font-extrabold leading-[1.2] mb-2">
+            Игровой монитор<br class="hidden sm:block" />
+            Sonic
+          </div>
+
+          <div class="text-lg font-semibold relative text-white leading-[1.2]">
+            Ваш проводник<br />
+            в мир ярких<br />
+            игровых<br />
+            моментов!
+          </div>
+        </NuxtLink>
+      </div>
     </div>
   </div>
 </template>
