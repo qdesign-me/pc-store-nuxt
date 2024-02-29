@@ -26,7 +26,7 @@ export default defineEventHandler(async (event) => {
   //body.info.customer_ip = event.node.req.socket.remoteAddress || event.node.req.headers['x-forwarded-for'];
   body.info.customer_ip = '';
 
-  body.info.statusID = 1;
+  body.info.statusID = 0;
   body.info.manager_comment = '';
   body.info.payment = body.info.unp ? 'Банковскиий перевод' : body.info.payment;
   body.info.phone = phone;

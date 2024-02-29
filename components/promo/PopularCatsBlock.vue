@@ -27,7 +27,7 @@ const links = [
     uri: '/komplektuyuszie/videokarty-videozahvat',
     title: 'Видеокарты',
   },
-  { class: 'right-5 bottom-5 lg:bottom-2 lg:right-5', img: '/img/promo/corpus.png', uri: '/komplektuyuszie/korpusa', title: 'Корпусы' },
+  { class: 'right-5 bottom-5 lg:bottom-2 lg:right-5', img: '/img/promo/corpus.png', uri: '/komplektuyuszie/korpusa', title: 'Корпуса' },
   {
     class: 'right-5 bottom-5 lg:right-auto lg:left-1/2 lg:top-1/2 lg:-translate-x-1/2 lg:-translate-y-1/3',
     img: '/img/promo/monoblock.png',
