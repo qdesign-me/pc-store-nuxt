@@ -42,9 +42,9 @@
                   +375-25-{{ formatPhoneNumber($state.config.mainphone) }}</a
                 >
 
-                <a class="mode-2-item" :href="`tel:+37517${$state.config.mainphone}`">
+                <a class="mode-2-item" :href="`tel:+375172277190`">
                   <img src="/img/logos/iven.png" alt="i-ven.by" />
-                  +375-17-{{ formatPhoneNumber($state.config.mainphone) }}</a
+                  +375-17-{{ formatPhoneNumber('2277190') }}</a
                 >
                 <div class="mode-2-item" @click="setMenuMode('hide')">Закрыть</div>
               </div>
