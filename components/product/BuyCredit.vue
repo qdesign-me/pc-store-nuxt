@@ -24,7 +24,7 @@
       <div
         v-for="card in cards"
         :key="card.title"
-        class="border border-solid flex items-center cursor-pointer rounded-[5px]"
+        class="border border-solid flex items-center cursor-pointer rounded-[5px] text-sm"
         :class="selected && selected.card && selected.card.title === card.title ? 'border-[#00B3D7]' : ''"
         @click="
           selected = {
@@ -43,8 +43,8 @@
             <div>В рассрочку картой «{{ card.title }}»</div>
             <div>Первый платёж 0 бел.руб.</div>
           </div>
-          <div>≈ {{ calcFullPricePeriod(props.data.Price, card.percent, card.period) }} руб x {{ card.period }} мес</div>
-          <div>итоговая сумма = {{ calcFullPrice(props.data.Price, card.percent) }} бел.руб.</div>
+          <div class="text-[12px]">≈ {{ calcFullPricePeriod(props.data.Price, card.percent, card.period) }} руб x {{ card.period }} мес</div>
+          <div class="text-[12px]">итоговая сумма = {{ calcFullPrice(props.data.Price, card.percent) }} бел.руб.</div>
         </div>
         <div class="py-1 px-2 w-[36px]">
           <input type="radio" :checked="selected?.card?.title === card.title" />
@@ -63,7 +63,7 @@
         <div
           v-for="variant in bank.variants"
           :key="variant.title"
-          class="border border-solid flex items-center cursor-pointer rounded-[5px]"
+          class="border border-solid flex items-center cursor-pointer rounded-[5px] text-sm"
           :class="selected && selected.variant && selected.variant.title === variant.title ? 'border-[#00B3D7]' : ''"
           @click="
             selected = {
@@ -81,8 +81,8 @@
               <div><img :src="bank.img" class="" /></div>
               <div>{{ variant.title }}</div>
             </div>
-            <div>≈ {{ calcFullPricePeriod(props.data.Price, variant.percent, variant.period) }} руб x {{ variant.period }} мес</div>
-            <div>итоговая сумма = {{ calcFullPrice(props.data.Price, variant.percent) }} бел.руб.</div>
+            <div class="text-[12px]">≈ {{ calcFullPricePeriod(props.data.Price, variant.percent, variant.period) }} руб x {{ variant.period }} мес</div>
+            <div class="text-[12px]">итоговая сумма = {{ calcFullPrice(props.data.Price, variant.percent) }} бел.руб.</div>
           </div>
           <div class="py-1 px-2"><input type="radio" :checked="selected?.bank?.title === bank.title && selected.variant.title === variant.title" /></div>
         </div>

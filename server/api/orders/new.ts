@@ -92,7 +92,7 @@ ${body.info.fio},<br/>
     Рассрочка: 'Рассрочка',
   };
   const payment = payments[body.info.payment] ?? 'Безнал';
-
+  if (!body.info.comment) body.info.comment = '';
   sql = `insert into win7_orders 
   (orderID, customerID, order_time, customer_ip, shipping_type, payment_type, customers_comment, manager_comment, rek, statusID, shipping_cost, order_discount, order_amount, name, phone, email, city, address) 
   values
