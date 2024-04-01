@@ -140,7 +140,7 @@ const model = useState(() => clone(DEFAULT_DATA));
 import { cards, banks } from '@/constants/credit';
 
 const onFinish = async () => {
-  const payment = selected.value.bank ? 'Кредит' : 'Рассрочка';
+  const payment = selected.value.bank ? 'Оплата в кредит' : 'Рассрочка';
   const paymentDetails = selected.value.bank
     ? `${selected.value.bank.title} ${selected.value.variant.title}`
     : `${selected.value.card.title} на ${selected.value.card.period} мес.`;
