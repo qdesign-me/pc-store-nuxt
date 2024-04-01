@@ -350,6 +350,18 @@
   .title-md {
     @apply text-lg lg:text-[24px] font-semibold leading-[1.25];
   }
+  .cards-info {
+    @apply pb-6;
+  }
+  .cards-info p {
+    @apply mb-6;
+  }
+  .cards-info strong {
+    @apply font-medium text-[#000];
+  }
+  .cards-info a {
+    @apply text-[#00B3D7] underline underline-offset-2;
+  }
   nav .router-link-active {
     color: #e5a35b !important;
   }
@@ -822,9 +834,8 @@
   overflow: auto;
 }
 .features-table td.label {
-  @apply font-semibold pr-5 py-[3px] text-sm;
+  @apply font-semibold pr-5 py-[3px] text-sm lg:min-w-[250px];
   width: 0;
-  white-space: nowrap;
 }
 
 .help-trigger {
@@ -951,9 +962,7 @@ button[disabled] {
       display: block;
     }
   }
-  .profile-cont {
-    @apply flex-wrap;
-  }
+
   .profile-short {
     @apply min-w-full order-[99];
   }
@@ -1291,9 +1300,6 @@ button[disabled] {
     + div {
       @apply w-full max-w-full;
     }
-  }
-  .profile-img {
-    @apply max-w-[100%] w-full;
   }
 }
 @media screen and (max-width: 640px) {
