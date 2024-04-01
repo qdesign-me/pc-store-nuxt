@@ -602,6 +602,9 @@
     .router-link-active {
       display: none !important;
     }
+    .info {
+      @apply hidden;
+    }
   }
   .icon {
     @apply w-7 h-7 bg-center bg-no-repeat bg-contain;

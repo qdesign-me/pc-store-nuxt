@@ -1,5 +1,5 @@
 <template>
-  <Modal :visible="!!modalVisible" @close="handleClose" title="Варианты покупки в рассрочку и кредит" :width="909">
+  <Modal :visible="!!modalVisible" @close="handleClose" title="Варианты покупки" :width="909">
     <div class="flex flex-wrap gap-4 mb-10 items-center">
       <div class="flex gap-4">
         <div class="shrink-0 w-[63px]">
