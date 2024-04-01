@@ -6,7 +6,7 @@
         <h3>{{ props.title }}</h3>
       </div>
       <button class="bg-none border-none text-[30px] hover:text-blue absolute top-6 right-6" @click="emit('close')"><CloseIcon /></button>
-      <div class="p-6 max-h-[calc(100vh-60px)] overflow-auto"><slot /></div>
+      <div class="p-6 max-h-[calc(100dvh-60px)] overflow-auto"><slot /></div>
     </div>
   </div>
 </template>
