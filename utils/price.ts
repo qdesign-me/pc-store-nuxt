@@ -1,5 +1,5 @@
 export function price(price: number | string) {
-  return price
+  return Number(price)
     ?.toLocaleString('ru-RU', {
       style: 'currency',
       currency: 'BYN',

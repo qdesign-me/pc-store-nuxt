@@ -15,7 +15,7 @@
     <div class="my-8" v-if="props.data.enabled === 1">
       <div class="text-[#F54D4D] mb-4 font-semibold" v-if="props.data.PriceSale">{{ price(props.data.PriceSale) }}</div>
 
-      <div class="text-3xl font-semibold">{{ price(props.data.Price) }}</div>
+      <div class="text-[32px] font-semibold">{{ price(props.data.Price) }}</div>
     </div>
 
     <div class="cards-info" v-if="props.data.Price > 500">

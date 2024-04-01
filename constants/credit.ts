@@ -26,3 +26,9 @@ export const banks = [
     ],
   },
 ];
+export const calcFullPrice = (price: number, percent: number) => {
+  return ((price * (100 + percent)) / 100).toFixed(2);
+};
+export const calcFullPricePeriod = (price: number, percent: number, period: number) => {
+  return (+calcFullPrice(price, percent) / period).toFixed(2);
+};

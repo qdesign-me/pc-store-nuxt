@@ -6,7 +6,7 @@
           <div class="text-[12px] text-[#3F3F3F] mb-1 block sm:hidden">Код: {{ item.productID }}</div>
           <NuxtLink :to="`/p/${item.uri.replace('.html', '')}`"><ProductThumbs :data="item" :size="160" /></NuxtLink>
         </div>
-        <div class="name">
+        <div class="name" @click.stop.prevent>
           <div class="flex gap-6 items-center mb-3">
             <div class="tags min-h-[21px]">
               <div v-if="item.is_auction" class="bg-[#4DB732]">Аукцион</div>

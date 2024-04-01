@@ -2,7 +2,7 @@
   <Modal :visible="!!modalVisible" @close="handleClose" title="Варианты покупки в рассрочку и кредит" :width="909">
     <div class="flex flex-wrap gap-4 mb-10 items-center">
       <div class="flex gap-4">
-        <div>
+        <div class="shrink-0 w-[63px]">
           <ProductThumbs :data="{ img: props.data.img.split('|')?.[0] }" size="63" />
         </div>
         <div class="font-light">
@@ -15,47 +15,56 @@
       </div>
     </div>
     <div class="flex flex-col gap-1" v-if="modalVisible === 'cards'">
-      <div class="text-[12px] flex border-t">
-        <div class="text-left font-normal flex-1 py-3 px-2">Предложение</div>
-        <div class="text-center font-normal w-[200px] py-3 px-2">Первый платёж</div>
+      <div class="text-[12px] border-t hidden sm:flex w-full">
+        <div class="text-left font-normal py-3 px-2 flex-1">Предложение</div>
+        <div class="text-center font-normal w-[200px] py-3 px-2 hidden sm:block">Первый платёж</div>
         <div class="text-center font-normal w-[300px] py-3 px-2">Ежемесячный платёж</div>
-        <div></div>
+        <div class="w-[36px]"></div>
       </div>
       <div
         v-for="card in cards"
         :key="card.title"
-        class="border border-solid flex items-center cursor-pointer hover:shadow-md"
-        :class="selected && selected.card && selected.card.title !== card.title ? '!hidden' : ''"
+        class="border border-solid flex items-center cursor-pointer rounded-[5px]"
+        :class="selected && selected.card && selected.card.title === card.title ? 'border-[#00B3D7]' : ''"
         @click="
           selected = {
             card,
           }
         "
       >
-        <div class="py-1 px-2 flex items-center gap-2 flex-1"><img :src="card.img" /> В рассрочку картой «{{ card.title }}»</div>
-        <div class="py-1 px-2 text-center w-[200px]">0 бел.руб.</div>
-        <div class="py-1 px-2 text-center w-[300px]">
+        <div class="py-1 px-2 items-center hidden sm:flex gap-2 flex-1">
+          <img :src="card.img" />
+          <div class="hidden sm:block">В рассрочку картой «{{ card.title }}»</div>
+        </div>
+        <div class="py-1 px-2 hidden sm:block text-center w-[200px]">0 бел.руб.</div>
+        <div class="py-1 px-2 sm:text-center flex-1 sm:max-w-[300px]">
+          <div class="flex sm:hidden flex-col gap-1">
+            <div><img :src="card.img" /></div>
+            <div>В рассрочку картой «{{ card.title }}»</div>
+            <div>Первый платёж 0 бел.руб.</div>
+          </div>
           <div>≈ {{ calcFullPricePeriod(props.data.Price, card.percent, card.period) }} руб x {{ card.period }} мес</div>
           <div>итоговая сумма = {{ calcFullPrice(props.data.Price, card.percent) }} бел.руб.</div>
         </div>
-        <div class="py-1 px-2">
-          <button v-if="selected?.card?.title === card.title" @click.stop="selected = null"><DeleteIcon class="h-4" /></button>
+        <div class="py-1 px-2 w-[36px]">
+          <input type="radio" :checked="selected?.card?.title === card.title" />
         </div>
       </div>
     </div>
 
     <div class="flex flex-col gap-1" v-if="modalVisible === 'bank'">
-      <div class="text-[12px] flex border-t">
+      <div class="text-[12px] border-t hidden sm:flex w-full">
         <div class="text-left font-normal flex-1 py-3 px-2">Предложение</div>
         <div class="text-center font-normal w-[200px] py-3 px-2">Кредит</div>
         <div class="text-center font-normal w-[300px] py-3 px-2">Ежемесячный платёж</div>
+        <div class="w-[36px]"></div>
       </div>
       <template v-for="(bank, index) in banks" :key="index">
         <div
           v-for="variant in bank.variants"
           :key="variant.title"
-          class="border border-solid flex items-center cursor-pointer hover:shadow-md"
-          :class="selected && selected.variant && selected.variant.title !== variant.title ? '!hidden' : ''"
+          class="border border-solid flex items-center cursor-pointer rounded-[5px]"
+          :class="selected && selected.variant && selected.variant.title === variant.title ? 'border-[#00B3D7]' : ''"
           @click="
             selected = {
               bank,
@@ -63,17 +72,19 @@
             }
           "
         >
-          <div class="py-1 px-2 flex items-center gap-2 flex-1">
+          <div class="py-1 px-2 hidden sm:flex items-center gap-2 flex-1">
             <img :src="bank.img" class="h-5" />
           </div>
-          <div class="py-1 px-2 text-center w-[200px]">{{ variant.title }}</div>
-          <div class="py-1 px-2 text-center w-[300px]">
+          <div class="py-1 px-2 sm:text-center w-[200px] hidden sm:block">{{ variant.title }}</div>
+          <div class="py-1 px-2 sm:text-center flex-1 w-[300px]">
+            <div class="flex sm:hidden flex-col gap-1">
+              <div><img :src="bank.img" class="" /></div>
+              <div>{{ variant.title }}</div>
+            </div>
             <div>≈ {{ calcFullPricePeriod(props.data.Price, variant.percent, variant.period) }} руб x {{ variant.period }} мес</div>
             <div>итоговая сумма = {{ calcFullPrice(props.data.Price, variant.percent) }} бел.руб.</div>
           </div>
-          <div class="py-1 px-2">
-            <button v-if="selected?.bank?.title === bank.title && selected.variant.title === variant.title" @click.stop="selected = null"><DeleteIcon class="h-4" /></button>
-          </div>
+          <div class="py-1 px-2"><input type="radio" :checked="selected?.bank?.title === bank.title && selected.variant.title === variant.title" /></div>
         </div>
       </template>
     </div>
@@ -115,7 +126,7 @@
     <a class="underline underline-offset-2" @click="modalVisible = 'bank'">При покупке в кредит, ежемесячный платёж </a><br />
     <strong>{{ getCreditByBank(props.data.Price).monthly }}</strong>
     <span class="text-[#444]">
-      бел. рублей в течение <strong>{{ getCreditByBank(props.data.Price).period }}</strong> месяцев</span
+      бел. рублей в течение <strong>{{ getCreditByBank(props.data.Price!).period }}</strong> месяцев</span
     >
   </p>
 </template>
@@ -137,7 +148,7 @@ const DEFAULT_DATA = {
 };
 
 const model = useState(() => clone(DEFAULT_DATA));
-import { cards, banks } from '@/constants/credit';
+import { cards, banks, calcFullPrice, calcFullPricePeriod } from '@/constants/credit';
 
 const onFinish = async () => {
   const payment = selected.value.bank ? 'Оплата в кредит' : 'Рассрочка';
@@ -197,34 +208,28 @@ const onFinish = async () => {
   selected.value = null;
 };
 
-const getCreditByBank = (value) => {
-  let min = null;
+const getCreditByBank = (value: number) => {
+  let min: any = null;
   banks.forEach((bank) => {
     bank.variants.forEach((variant) => {
       const total = ((value * (100 + variant.percent)) / 100).toFixed(2);
-      const monthly = (total / variant.period).toFixed(2);
+      const monthly = (+total / variant.period).toFixed(2);
 
       if (!min || +monthly < +min.monthly) min = { monthly, period: variant.period };
     });
   });
   return min;
 };
-const getCreditByCard = (value) => {
-  let min = -1;
+const getCreditByCard = (value: number) => {
+  let min: any = -1;
   cards.forEach((card) => {
     const total = ((value * (100 + card.percent)) / 100).toFixed(2);
-    const monthly = (total / card.period).toFixed(2);
+    const monthly = (+total / card.period).toFixed(2);
     if (min < 0 || +monthly < +min) min = monthly;
   });
   return min;
 };
 
-const calcFullPrice = (price, percent) => {
-  return ((price * (100 + percent)) / 100).toFixed(2);
-};
-const calcFullPricePeriod = (price, percent, period) => {
-  return (calcFullPrice(price, percent) / period).toFixed(2);
-};
 const handleClose = () => {
   modalVisible.value = false;
   selected.value = null;

@@ -1,5 +1,6 @@
 <template>
   <main class="container">
+    <pre>{{ summary }}</pre>
     <div class="breadcrumbs"><NuxtLink to="/">Главная </NuxtLink><span>Корзина</span></div>
     <div class="flex justify-between gap-6 items-start">
       <h1>Корзина</h1>
@@ -16,10 +17,10 @@
       <NuxtLink to="/catalog" class="btn is-large mt-10 xl:mb-20 min-w-[300px]">Перейти в каталог</NuxtLink>
     </div>
     <div v-else>
-      <div class="text-[#E5A35B] text-sm font-medium mb-10">В корзине {{ pluralize(data?.total?.qty, ['товар', 'товара', 'товаров']) }}</div>
+      <div class="text-[#E5A35B] text-sm font-medium mb-10">В корзине {{ pluralize(summary.qty, ['товар', 'товара', 'товаров']) }}</div>
       <div class="grid grid-cols-1 lg:grid-cols-4 relative items-start gap-6">
         <div class="lg:col-span-3 order-area">
-          <ProductList :data="data?.data" class="mb-10">
+          <ProductList :data="summary.data" class="mb-10">
             <template #controls="row">
               <Add2Favorites :productID="row.item.productID" />
               <Add2Compare :productID="row.item.productID" />
@@ -158,7 +159,7 @@
                       <img src="/img/info/erip.png" loading="lazy" width="125" height="40" alt="" />
                     </div>
                   </div>
-                  <div class="col-span-6 lg:col-span-2">
+                  <div class="col-span-6 lg:col-span-2" v-if="summary.total > 500">
                     <div class="radio-card">
                       <label class="absolute inset-0"> <input type="radio" name="payment" v-model="model.person.payment" value="Рассрочка" /> </label>
                       <div class="text-black font-medium">Рассрочка</div>
@@ -170,7 +171,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-span-6 lg:col-span-2">
+                  <div class="col-span-6 lg:col-span-2" v-if="summary.total > 500">
                     <div class="radio-card">
                       <label class="absolute inset-0">
                         <input type="radio" v-model="model.person.payment" name="payment" value="Оплата в кредит" />
@@ -184,6 +185,94 @@
                     </div>
                   </div>
                   <div class="col-span-6 lg:col-span-2"></div>
+                  <div class="col-span-6 mt-14 sm:mt-16" v-if="model.who === 'person' && model.person.payment === 'Рассрочка'">
+                    <h2>Варианты покупки в рассрочку</h2>
+                    <p class="note max-w-[300px] mb-5">Оплата картой рассрочки в пункте самовывоза или курьеру при получении</p>
+
+                    <div class="flex flex-col gap-1">
+                      <div class="text-[12px] border-t hidden sm:flex w-full">
+                        <div class="text-left font-normal py-3 px-2 flex-1">Предложение</div>
+                        <div class="text-center font-normal w-[200px] py-3 px-2 hidden sm:block">Первый платёж</div>
+                        <div class="text-center font-normal w-[300px] py-3 px-2">Ежемесячный платёж</div>
+                        <div class="w-[36px]"></div>
+                      </div>
+                      <div
+                        v-for="card in cards"
+                        :key="card.title"
+                        class="border border-solid flex items-center cursor-pointer rounded-[5px]"
+                        :class="selectedC.card.title === card.title ? 'border-[#00B3D7]' : ''"
+                        @click="
+                          selectedC = {
+                            card,
+                          }
+                        "
+                      >
+                        <div class="py-1 px-2 items-center hidden sm:flex gap-2 flex-1">
+                          <img :src="card.img" />
+                          <div class="hidden sm:block">В рассрочку картой «{{ card.title }}»</div>
+                        </div>
+                        <div class="py-1 px-2 hidden sm:block text-center w-[200px]">0 бел.руб.</div>
+                        <div class="py-1 px-2 sm:text-center flex-1 sm:max-w-[300px]">
+                          <div class="flex sm:hidden flex-col gap-1">
+                            <div><img :src="card.img" /></div>
+                            <div>В рассрочку картой «{{ card.title }}»</div>
+                            <div>Первый платёж 0 бел.руб.</div>
+                          </div>
+                          <div>≈ {{ calcFullPricePeriod(summary.price, card.percent, card.period) }} руб x {{ card.period }} мес</div>
+                          <div>итоговая сумма = {{ calcFullPrice(summary.price, card.percent) }} бел.руб.</div>
+                        </div>
+                        <div class="py-1 px-2 w-[36px]">
+                          <input type="radio" :checked="card.title === selectedC.card.title" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-span-6 mt-14 sm:mt-16" v-if="model.who === 'person' && model.person.payment === 'Оплата в кредит'">
+                    <h2>Варианты покупки в кредит</h2>
+                    <p class="note mb-5">
+                      Оплата покупки через партнёрский банк:<br />
+                      оформляете заказ и ждёте звонок от менеджера банка-партнёра.
+                    </p>
+
+                    <div class="flex flex-col gap-1">
+                      <div class="text-[12px] border-t hidden sm:flex w-full">
+                        <div class="text-left font-normal flex-1 py-3 px-2">Предложение</div>
+                        <div class="text-center font-normal w-[200px] py-3 px-2">Кредит</div>
+                        <div class="text-center font-normal w-[300px] py-3 px-2">Ежемесячный платёж</div>
+                        <div class="w-[36px]"></div>
+                      </div>
+                      <template v-for="(bank, index) in banks" :key="index">
+                        <div
+                          v-for="variant in bank.variants"
+                          :key="variant.title"
+                          class="border border-solid flex items-center cursor-pointer rounded-[5px]"
+                          :class="selectedB.bank.title === bank.title && selectedB.variant.title === variant.title ? 'border-[#00B3D7]' : ''"
+                          @click="
+                            selectedB = {
+                              bank,
+                              variant,
+                            }
+                          "
+                        >
+                          <div class="py-1 px-2 hidden sm:flex items-center gap-2 flex-1">
+                            <img :src="bank.img" class="h-5" />
+                          </div>
+                          <div class="py-1 px-2 sm:text-center w-[200px] hidden sm:block">{{ variant.title }}</div>
+                          <div class="py-1 px-2 sm:text-center flex-1 w-[300px]">
+                            <div class="flex sm:hidden flex-col gap-1">
+                              <div><img :src="bank.img" class="" /></div>
+                              <div>{{ variant.title }}</div>
+                            </div>
+                            <div>≈ {{ calcFullPricePeriod(summary.total, variant.percent, variant.period) }} руб x {{ variant.period }} мес</div>
+                            <div>итоговая сумма = {{ calcFullPrice(summary.total, variant.percent) }} бел.руб.</div>
+                          </div>
+                          <div class="py-1 px-2">
+                            <input type="radio" :checked="selectedB.bank.title === bank.title && selectedB.variant.title === variant.title" />
+                          </div>
+                        </div>
+                      </template>
+                    </div>
+                  </div>
                   <div class="col-span-6 mt-14 sm:mt-16">
                     <h2>Дополнительная информация</h2>
                   </div>
@@ -356,13 +445,13 @@
 
           <div class="text-[18px] font-semibold text-black flex justify-between gap-4">
             <div>Итого к оплате:</div>
-            <div>{{ price(summary.total) }}</div>
+            <div>{{ price(summary?.total) }}</div>
           </div>
 
           <button class="btn w-full sm:max-w-[200px] sm:mx-auto" @click="onOrder" :disabled="disabled">Оформить заказ</button>
 
           <div class="text-[12px] font-light text-center">
-            Нажимая на кнопку «‎Оформить заказ», Вы соглашаетесь с
+            Нажимая на кнопку «Оформить заказ», Вы соглашаетесь с
             <NuxtLink to="/privacy-and-terms" class="underline underline-offset-4">обработкой персональных данных</NuxtLink> и
             <NuxtLink to="/public-offer" class="underline underline-offset-4">Договором публичной оферты</NuxtLink>.
           </div>
@@ -372,6 +461,9 @@
   </main>
 </template>
 <script setup>
+const selectedC = ref({ card: cards[0] });
+const selectedB = ref({ bank: banks[0], variant: banks[0].variants[0] });
+import { cards, banks, calcFullPrice, calcFullPricePeriod } from '@/constants/credit';
 const disabled = ref(false);
 import { useLocalStorage } from '@vueuse/core';
 const router = useRouter();
@@ -389,7 +481,6 @@ const { items, add, total, remove, clear, itemshash } = useCart();
 const { data } = await useAsyncData(
   'cart',
   () => {
-    console.log('items', items.value);
     return $fetch('/api/products/cart', {
       method: 'POST',
       body: {
@@ -409,15 +500,27 @@ const onPrint = () => router.push('/print/cart');
 
 const onFinish = async (info) => {
   disabled.value = true;
-  const cart = data.value;
+
   const total = summary.value;
 
   const res = await $fetch('/api/orders/new', {
     method: 'POST',
     body: {
       info,
-      cart,
-      total,
+      cart: {
+        total: {
+          qty: 1,
+          price: total,
+        },
+        data: summary.value.data,
+      },
+      total: {
+        qty: summary.value.qty,
+        price: summary.value.price,
+        delivery: summary.value.delivery,
+        deliveryPrice: summary.value.deliveryPrice,
+        total: summary.value.total,
+      },
     },
   });
 
@@ -439,8 +542,12 @@ const onOrder = () => {
   form.click();
 };
 
+const fixPrice = (value) => {
+  return String(value).replace('.', ',') + ' Br';
+};
+
 const summary = computed(() => {
-  const price = data.value.total?.price;
+  let price = data.value.total?.price;
 
   const delivery = model.value.who === 'person' ? model.value.person.delivery : model.value.ur.delivery;
   let deliveryPrice = 0;
@@ -450,8 +557,27 @@ const summary = computed(() => {
   if (delivery === 'Доставка по Беларуси') {
     deliveryPrice = 12;
   }
-  const total = price + deliveryPrice;
+  let newData = data.value.data;
+  let total = price + deliveryPrice;
+  if (model.value.who === 'person' && ['Оплата в кредит', 'Рассрочка'].includes(model.value.person.payment)) {
+    const percent = model.value.person.payment === 'Оплата в кредит' ? selectedB.value.variant.percent : selectedC.value.card.percent;
+    price = 0;
+    total = 0;
+    newData = newData.map((item) => {
+      const itemPrice = calcFullPrice(item.Price, percent);
+      const itemTotal = calcFullPrice(item.itemTotal, percent);
+      price += +itemPrice;
+      total += +itemTotal;
+      return {
+        ...item,
+        Price: itemPrice,
+        itemTotal,
+      };
+    });
+    if (deliveryPrice) total += deliveryPrice;
+  }
   return {
+    data: newData,
     qty: data.value.total?.qty,
     price,
     delivery,
