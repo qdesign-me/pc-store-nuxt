@@ -158,7 +158,7 @@
                       <img src="/img/info/erip.png" loading="lazy" width="125" height="40" alt="" />
                     </div>
                   </div>
-                  <div class="col-span-6 lg:col-span-2" v-if="summary.totalRaw > 500">
+                  <div class="col-span-6 lg:col-span-2">
                     <div class="radio-card">
                       <label class="absolute inset-0"> <input type="radio" name="payment" v-model="model.person.payment" value="Рассрочка" /> </label>
                       <div class="text-black font-medium">Рассрочка</div>
@@ -184,7 +184,7 @@
                     </div>
                   </div>
                   <div class="col-span-6 lg:col-span-2"></div>
-                  <div class="col-span-6 mt-14 sm:mt-16" v-if="model.who === 'person' && model.person.payment === 'Рассрочка' && summary.totalRaw > 500">
+                  <div class="col-span-6 mt-14 sm:mt-16" v-if="model.who === 'person' && model.person.payment === 'Рассрочка'">
                     <h2>Варианты покупки в рассрочку</h2>
                     <p class="note max-w-[300px] mb-5">Оплата картой рассрочки в пункте самовывоза или курьеру при получении</p>
 
@@ -501,10 +501,8 @@ const onFinish = async (info) => {
   disabled.value = true;
   info.paymentDetails = '';
 
-  if (summary.value.totalRaw > 500) {
-    if (info.payment === 'Рассрочка') info.paymentDetails = `${selectedC.value.card.title} на ${selectedC.value.card.period} мес.`;
-    if (info.payment === 'Оплата в кредит') info.paymentDetails = `${selectedB.value.bank.title} ${selectedB.value.variant.title}`;
-  }
+  if (info.payment === 'Рассрочка') info.paymentDetails = `${selectedC.value.card.title} на ${selectedC.value.card.period} мес.`;
+  if (info.payment === 'Оплата в кредит' && summary.value.totalRaw > 500) info.paymentDetails = `${selectedB.value.bank.title} ${selectedB.value.variant.title}`;
 
   const payload = {
     method: 'POST',

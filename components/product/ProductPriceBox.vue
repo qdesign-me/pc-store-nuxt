@@ -1,5 +1,5 @@
 <template>
-  <div class="rounded-[5px] px-4 py-5 relative overflow-hidden" style="background: linear-gradient(151.7deg, #00a2c1 0%, #87ebff 99.41%)" v-if="props.data.Price > 500">
+  <div class="rounded-[5px] px-4 py-5 relative overflow-hidden" style="background: linear-gradient(151.7deg, #00a2c1 0%, #87ebff 99.41%)">
     <div class="absolute inset-0 bg-cover" style="background-image: url(/img/bg/stripes.svg)"></div>
     <div class="relative">
       <div class="text-white text-[26px] font-extrabold leading-[1.25]">
@@ -18,7 +18,7 @@
       <div class="text-[32px] font-semibold">{{ price(props.data.Price) }}</div>
     </div>
 
-    <div class="cards-info" v-if="props.data.Price > 500">
+    <div class="cards-info">
       <BuyCredit :data="props.data" />
 
       <p v-if="props.data.PriceSale > 0">При оплате картой рассрочки или в кредит, акционные предложения <span class="text-[#F54D4D]">не действуют</span></p>

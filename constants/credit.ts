@@ -10,9 +10,9 @@ export const banks = [
     img: '/img/info/belarusb-logo.png',
     variants: [
       { title: 'на срок до 6 мес.', period: 6, percent: 5 },
-      { title: 'на срок до 9 мес.', period: 9, percent: 18 },
-      { title: 'на срок до 12 мес.', period: 12, percent: 16 },
-      { title: 'на срок до 24 мес.', period: 24, percent: 15 },
+      { title: 'на срок до 9 мес.', period: 9, percent: 10 },
+      { title: 'на срок до 12 мес.', period: 12, percent: 15 },
+      { title: 'на срок до 24 мес.', period: 24, percent: 17 },
     ],
   },
   {

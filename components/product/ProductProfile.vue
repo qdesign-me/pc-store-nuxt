@@ -28,7 +28,7 @@
         <div class="tags mb-6 lg:hidden">
           <div v-if="props.data.PriceSale > 0" class="bg-[#FFAC2F] flex-1">На акции</div>
           <div v-if="props.data.is_auction > 0" class="bg-[#4DB732] flex-1">Аукцион</div>
-          <div v-if="props.data.Price > 500" class="bg-[#F54D4D] flex-1">В рассрочку</div>
+          <div v-if="props.data.Price > 0" class="bg-[#F54D4D] flex-1">В рассрочку</div>
         </div>
         <div class="flex gap-8 flex-wrap">
           <div class="profile-img">

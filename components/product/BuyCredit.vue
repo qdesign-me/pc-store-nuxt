@@ -122,7 +122,7 @@
     <span class="text-[#444]"> бел. рублей в месяц</span>
   </p>
 
-  <p>
+  <p v-if="props.data.Price > 500">
     <a class="underline underline-offset-2" @click="modalVisible = 'bank'">При покупке в кредит, ежемесячный платёж </a><br />
     <strong>{{ getCreditByBank(props.data.Price).monthly }}</strong>
     <span class="text-[#444]">

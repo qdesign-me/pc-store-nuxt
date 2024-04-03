@@ -10,7 +10,7 @@
           <div class="flex gap-6 items-center mb-3">
             <div class="tags min-h-[21px]">
               <div v-if="item.is_auction" class="bg-[#4DB732]">Аукцион</div>
-              <div v-if="item.Price > 500" class="bg-[#F54D4D]">В рассрочку</div>
+              <div v-if="item.Price > 0" class="bg-[#F54D4D]">В рассрочку</div>
               <div v-if="item.PriceSale > 0" class="bg-[#FFAC2F]">На акции</div>
             </div>
             <div class="info flex gap-2">
