@@ -16,6 +16,8 @@ const handleClick = (page) => {
   const searchQuery = buildQuery(newFitlers);
   const path = `${props.uri}${searchQuery}`;
   navigateTo(path);
+  const box = document.querySelector('.breadcrumbs');
+  box.scrollIntoView({ behavior: 'smooth' });
 };
 
 const links = computed(() => {

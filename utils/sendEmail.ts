@@ -18,7 +18,7 @@ export async function sendEmail(info: any, to: string) {
   return transporter.sendMail({
     from,
     to,
-    cc: 'qdesign.by@gmail.com',
+
     ...info,
   });
 }

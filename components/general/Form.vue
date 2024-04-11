@@ -33,6 +33,10 @@ const checkErrors = (input = null) => {
         errors[input] = { ...errors[input], required: true };
       }
 
+      if (it.phone && value?.length > 0 && value?.length < 19) {
+        errors[input] = { ...errors[input], phone: true };
+      }
+
       if (it.email && value?.length > 0 && !/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/.test(value)) {
         errors[input] = { ...errors[input], email: true };
       }
@@ -42,9 +46,12 @@ const checkErrors = (input = null) => {
       rules[item]?.reduce((acc, it) => {
         delete errors[item];
         const value = props.model[item];
-
         if (it.required && !value?.length) {
           errors[item] = { ...errors[item], required: true };
+        }
+
+        if (it.phone && value?.length > 0 && value?.length < 19) {
+          errors[input] = { ...errors[input], phone: true };
         }
 
         if (it.email && value?.length > 0 && !/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/.test(value)) {

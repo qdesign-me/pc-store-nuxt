@@ -197,7 +197,7 @@
         <div class="flex gap-2 card-logos">
           <img src="/img/info/vtb.png" loading="lazy" width="64" height="40" alt="ВТБ" />
           <img src="/img/info/halva.png" loading="lazy" width="64" height="40" alt="Халва" />
-          <img src="/img/info/magnit.png" loading="lazy" width="64" height="40" alt="Магнит" /><img src="/img/info/erip.png" loading="lazy" width="125" height="40" alt="Ерип" />
+          <img src="/img/info/magnit.png" loading="lazy" width="64" height="40" alt="Магнит" /><img src="/img/info/e-rip.png" loading="lazy" width="118" height="40" alt="Ерип" />
         </div>
 
         <p class="my-6">

@@ -5,7 +5,7 @@
       <FormItem name="name">
         <input name="name" type="text" class="input" placeholder="Укажите ваше имя и фамилию" v-model="model.name" />
       </FormItem>
-      <FormItem name="phone" :rules="[{ required: true }]">
+      <FormItem name="phone" :rules="[{ required: true, phone: true }]">
         <input name="phone" type="tel" class="input" placeholder="+375 (__) ___-__-__" v-model="model.phone" v-maska data-maska="+375 (##) ###-##-##" />
       </FormItem>
       <FormItem name="email" :rules="[{ email: true }]">

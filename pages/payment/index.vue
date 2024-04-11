@@ -24,7 +24,7 @@
             </div>
 
             <h2 class="mt-10">Оплата через ЕРИП</h2>
-            <img src="/img/info/erip.png" loading="lazy" width="125" height="40" alt="Ерип" class="mb-4" />
+            <img src="/img/info/e-rip.png" loading="lazy" width="118" height="40" alt="Ерип" class="mb-4" />
 
             <p>Инструкция по оплате в системе ЕРИП:</p>
 

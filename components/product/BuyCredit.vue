@@ -100,7 +100,7 @@
 
         <div class="relative pl-[40px]">
           <PhoneIcon class="text-[#00B3D7] absolute left-0 top-[10px]" />
-          <FormItem name="phone" :rules="[{ required: true }]">
+          <FormItem name="phone" :rules="[{ required: true, phone: true }]">
             <input name="phone" type="tel" class="input" placeholder="+375 (__) ___-__-__" v-model="model.phone" v-maska data-maska="+375 (##) ###-##-##" />
           </FormItem>
         </div>

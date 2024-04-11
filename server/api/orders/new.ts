@@ -133,6 +133,7 @@ ${body.info.fio},<br/>
     {
       subject: `Заказ №${orderID} на сайте i-ven.by`,
       html,
+      replyTo: body.info.email,
     },
     to
   );

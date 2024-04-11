@@ -1,5 +1,8 @@
 <template>
   <main class="container">
+    <pre>
+      {{ summary.data }}
+    </pre>
     <div class="breadcrumbs"><NuxtLink to="/">Главная </NuxtLink><span>Корзина</span></div>
     <div class="flex justify-between gap-6 items-start">
       <h1>Корзина</h1>
@@ -50,7 +53,7 @@
                   </div>
 
                   <div class="col-span-6 lg:col-span-2">
-                    <FormItem name="phone" :rules="[{ required: true }]">
+                    <FormItem name="phone" :rules="[{ required: true, phone: true }]">
                       <input name="phone" type="tel" class="input" placeholder="+375 (__) ___-__-__" v-model="model.person.phone" v-maska data-maska="+375 (##) ###-##-##" />
                     </FormItem>
                   </div>
@@ -155,7 +158,7 @@
                       <label class="absolute inset-0"> <input type="radio" name="payment" v-model="model.person.payment" value="Оплата через ЕРИП" /> </label>
                       <div class="text-black font-medium">Оплата через ЕРИП</div>
                       <div>Менеджер сообщит реквизиты оплаты после подтверждения заказа</div>
-                      <img src="/img/info/erip.png" loading="lazy" width="125" height="40" alt="" />
+                      <img src="/img/info/e-rip.png" loading="lazy" width="118" height="40" alt="" />
                     </div>
                   </div>
                   <div class="col-span-6 lg:col-span-2">
@@ -323,7 +326,7 @@
                   </div>
 
                   <div class="col-span-6 lg:col-span-3">
-                    <FormItem name="phone" :rules="[{ required: true }]">
+                    <FormItem name="phone" :rules="[{ required: true, phone: true }]">
                       <input name="phone" type="tel" placeholder="+375 (__) ___-__-__" class="input" v-model="model.ur.phone" v-maska data-maska="+375 (##) ###-##-##" />
                     </FormItem>
                   </div>
