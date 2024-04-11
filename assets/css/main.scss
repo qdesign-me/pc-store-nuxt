@@ -478,7 +478,7 @@
     background: linear-gradient(90deg, #000 -2.99%, rgba(196, 196, 196, 0) 50.25%);
   }
   .card {
-    @apply flex flex-col rounded relative p-3  hover:shadow min-h-[450px];
+    @apply flex flex-col rounded relative p-3  hover:shadow h-[450px];
 
     &.height-sm {
       height: 350px;
