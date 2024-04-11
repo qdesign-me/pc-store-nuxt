@@ -13,7 +13,7 @@
 
     <NuxtLink :to="uri" class="text-sm font-light leading-4 block mt-2">
       <div class="mb-2">Код товара: {{ props.product.productID }}</div>
-      <div class="line-clamp-2">{{ props.product.name }}</div>
+      <div class="line-clamp-5">{{ props.product.name }}</div>
     </NuxtLink>
 
     <div class="price-info">
