@@ -479,7 +479,9 @@
   }
   .card {
     @apply flex flex-col rounded relative p-3  hover:shadow h-[450px];
-
+    &.card-product {
+      @apply h-auto min-h-[450px];
+    }
     &.height-sm {
       height: 350px;
     }
