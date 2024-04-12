@@ -1,8 +1,5 @@
 <template>
   <main class="container">
-    <pre>
-      {{ summary.data }}
-    </pre>
     <div class="breadcrumbs"><NuxtLink to="/">Главная </NuxtLink><span>Корзина</span></div>
     <div class="flex justify-between gap-6 items-start">
       <h1>Корзина</h1>
