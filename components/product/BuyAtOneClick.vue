@@ -2,7 +2,7 @@
   <button class="btn mb-4 is-large" @click="modalVisible = true"><WizardIcon /> Купить в один клик</button>
 
   <Modal :visible="modalVisible" @close="handleClose" title="Купить в один клик" :width="909">
-    <div class="flex flex-wrap gap-4 mb-10 items-center">
+    <div class="flex flex-wrap lg:flex-nowrap gap-4 mb-10 items-center">
       <div class="flex gap-4">
         <div class="shrink-0 w-[63px]">
           <ProductThumbs :data="{ img: props.data.img.split('|')?.[0] }" size="63" />

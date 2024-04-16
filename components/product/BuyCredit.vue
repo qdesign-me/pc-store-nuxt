@@ -1,6 +1,6 @@
 <template>
   <Modal :visible="!!modalVisible" @close="handleClose" title="Варианты покупки" :width="909">
-    <div class="flex flex-wrap gap-4 mb-10 items-center">
+    <div class="flex flex-wrap lg:flex-nowrap gap-4 mb-10 items-center">
       <div class="flex gap-4">
         <div class="shrink-0 w-[63px]">
           <ProductThumbs :data="{ img: props.data.img.split('|')?.[0] }" size="63" />
@@ -10,9 +10,7 @@
           <div class="text-sm text-[#000000] underline underline-offset-2">{{ props.data.name }}</div>
         </div>
       </div>
-      <div class="text-[24px] text-[#000000] ml-auto">
-        {{ price(props.data.Price) }}
-      </div>
+      <div class="text-[24px] text-[#000000] ml-auto whitespace-nowrap">{{ Number(total).toFixed(2) }} Br</div>
     </div>
     <div class="flex flex-col gap-1" v-if="modalVisible === 'cards'">
       <div class="text-[12px] border-t hidden sm:flex w-full">
@@ -150,12 +148,17 @@ const DEFAULT_DATA = {
 const model = useState(() => clone(DEFAULT_DATA));
 import { cards, banks, calcFullPrice, calcFullPricePeriod } from '@/constants/credit';
 
+const total = computed(() => {
+  if (!selected.value) return props.data.Price;
+  return calcFullPrice(props.data.Price, selected.value.bank ? selected.value.variant.percent : selected.value.card.percent);
+});
+
 const onFinish = async () => {
   const payment = selected.value.bank ? 'Оплата в кредит' : 'Рассрочка';
   const paymentDetails = selected.value.bank
     ? `${selected.value.bank.title} ${selected.value.variant.title}`
     : `${selected.value.card.title} на ${selected.value.card.period} мес.`;
-  const total = calcFullPrice(props.data.Price, selected.value.bank ? selected.value.variant.percent : selected.value.card.percent);
+
   const payload = {
     info: {
       delivery: 'Самовывоз',
@@ -168,7 +171,7 @@ const onFinish = async () => {
     cart: {
       total: {
         qty: 1,
-        price: total,
+        price: total.value,
       },
       data: [
         {
@@ -177,13 +180,13 @@ const onFinish = async () => {
           name: props.data.name,
           warranty: props.data.warranty,
           model: props.data.model,
-          Price: total,
+          Price: total.value,
           PriceSale: props.data.PriceSale,
           uri: props.data.uri,
           is_auction: props.data.is_auction,
           is_new: props.data.is_new,
           qty: 1,
-          itemTotal: total,
+          itemTotal: total.value,
         },
       ],
     },

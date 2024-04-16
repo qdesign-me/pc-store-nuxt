@@ -563,7 +563,7 @@ const summary = computed(() => {
   let newData = data.value.data;
   let total = price + deliveryPrice;
   let totalRaw = price + deliveryPrice;
-  if (model.value.who === 'person' && ['Оплата в кредит', 'Рассрочка'].includes(model.value.person.payment) && totalRaw > 500) {
+  if (model.value.who === 'person' && (model.value.person.payment === 'Рассрочка' || (model.value.person.payment === 'Оплата в кредит' && totalRaw > 500))) {
     const percent = model.value.person.payment === 'Оплата в кредит' ? selectedB.value.variant.percent : selectedC.value.card.percent;
     price = 0;
     total = 0;
