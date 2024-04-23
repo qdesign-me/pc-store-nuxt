@@ -14,7 +14,8 @@
         <div class="flex flex-wrap text-sm items-center mb-6 lg:mb-12 text-[#7C7C7C] gap-y-2 gap-x-6 lg:gap-[60px]" v-if="props.data.enabled === 1">
           <div class="text-[#00B3D7] flex gap-3 items-center">
             <AvailableIcon />
-            Товар в наличии
+            <span v-if="props.data.available.pickup < 2">Товар в наличии</span>
+            <span v-else>Под заказ</span>
           </div>
           <div class="relative pl-10 w-full sm:w-auto">
             <PickupIcon class="absolute top-1/2 -translate-y-1/2 left-0" />Самовывоз в Минске: {{ props.data.available.delivery_date }} г.
