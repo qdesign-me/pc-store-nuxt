@@ -19,6 +19,8 @@ win7@win7.by
 Ueukfrrfeynwin7
 
 
+root@ 93.125.2.1     2253
+pass   fkbujahtys
 
 SELECT * FROM iven_features_on_products where value like '%2xDP%' LIMIT 0,100
 select spf.label, spf.tooltip, spf.alias, spf.suffix, spf.filter_type, spf.sort_value, spf.preffered_values, group_concat(distinct sfop.value) as value from  iven_features_on_products sfop 
