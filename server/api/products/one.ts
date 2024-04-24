@@ -74,7 +74,7 @@ export default defineEventHandler(async (event) => {
   const kurs = await getKurs();
 
   const data = await getProduct(
-    `select (select group_concat(ip.filename separator '|') from iven_product_pictures ip where ip.productID=p.productID group by ip.productID) as img, p.productID, p.warranty, p.categoryID, p.model, p.vendor, p.producer, p.name, c.uri as curi, p.description, p.enabled, p.meta_description, p.is_auction, p.is_new, ROUND(p.Price * ${kurs}, 2) as Price, ROUND(p.PriceSale * ${kurs}, 2) as PriceSale, c.name as cat_name, c.fullPath as uri , c.breadcrumbs, p.availability from iven_products p join iven_categories c on c.categoryID=p.categoryID  where p.uri='${uri}' limit 1`
+    `select (select group_concat(ip.filename separator '|') from iven_product_pictures ip where ip.productID=p.productID group by ip.productID) as img, p.productID, p.warranty, p.categoryID, p.model, p.vendor, op.Producer as producer, p.name, c.uri as curi, p.description, p.enabled, p.meta_description, p.is_auction, p.is_new, ROUND(p.Price * ${kurs}, 2) as Price, ROUND(p.PriceSale * ${kurs}, 2) as PriceSale, c.name as cat_name, c.fullPath as uri , c.breadcrumbs, p.availability from iven_products p join iven_categories c on c.categoryID=p.categoryID left join onliner_producers op on op.Vendor=p.vendor where p.uri='${uri}' limit 1`
   );
 
   // TODO check perfomance, re-enable
