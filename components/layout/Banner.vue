@@ -7,9 +7,8 @@
 <script setup>
 const open = ref(false);
 onMounted(async () => {
-  console.log('here');
   const banner = sessionStorage.getItem('banner');
-  //if (banner) return;
+  if (banner) return;
   const res = await $fetch('/api/config');
   if (!res.config.banner?.length) return;
   open.value = res.config.banner;
