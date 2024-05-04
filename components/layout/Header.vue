@@ -106,6 +106,7 @@
       </div>
     </div>
   </div>
+  <Banner />
 </template>
 <script setup>
 import { useWindowScroll } from '@vueuse/core';
