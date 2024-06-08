@@ -20,7 +20,7 @@
                 </picture>
                 <div class="slider-bg"></div>
 
-                <div class="text-white absolute top-8 bottom-8 left-6 flex flex-col lg:text-[24px] leading-[1.3]" v-html="link.title" />
+                <div class="text-white absolute top-8 bottom-8 left-6 flex justify-center flex-col lg:text-[24px] leading-[1.3]" v-html="link.title" />
               </NuxtLink>
             </SwiperSlide>
           </Swiper>

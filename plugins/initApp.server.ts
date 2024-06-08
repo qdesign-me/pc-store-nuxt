@@ -25,7 +25,7 @@ export default defineNuxtPlugin({
           phones: '+375172277190 +375295418080 +375255418080 +375445418080',
           'service.phone': '+375173783627',
           slider:
-            '[{"img":"/img/promo/prod.jpg","mobi":"/img/promo/prod.jpg","uri":"/noutbuki-i-aksessuary/gotovie-komputeri","title":"<h2>СОБСТВЕННОЕ<br />ПРОИЗВОДСТВО<br />КОМПЬЮТЕРОВ</h2><p>Гарантия 24 месяца<br />Бесплатная сборка и настройка<br />Оперативная доставка</p>"},{"img":"/img/promo/prod2.jpg","mobi":"/img/promo/prod2.jpg","uri":"/catalog","title":"<h2>РАБОТАЕМ<br/>С ЮРЛИЦАМИ</h2><p>Все цены на сайте<br/>указаны с учётом НДС</p>"}]',
+            '[{"img":"/img/promo/pc.jpg","mobi":"/img/promo/pc.jpg","uri":"/noutbuki-i-aksessuary/Gotovie-komputeri/Kompyutery-Iven?filter_pc_sel=%D0%98%D0%B3%D1%80%D0%BE%D0%B2%D0%BE%D0%B9&sortdir=asc&sortby=price","title":"<h2>СИСТЕМНЫЕ БЛОКИ<br>ДЛЯ ЯРКИХ ПОБЕД<br>В ЛЮБЫХ ИГРАХ!</h2>"},{"img":"/img/promo/notebooks.jpg","mobi":"/img/promo/notebooks.jpg","uri":"/noutbuki-i-aksessuary/noutbuki","title":"<h2>НОУТБУКИ<br>ДЛЯ ЛЮБЫХ<br>ЗАДАЧ</h2>"},{"img":"/img/promo/kompl.jpg","mobi":"/img/promo/kompl.jpg","uri":"/komplektuyuszie","title":"<h2>ШИРОКИЙ<br>АССОРТИМЕНТ<br>ЛЮБЫХ<br>КОМПЛЕКТУЮЩИХ</h2>"}]',
           social: 'https://vk.com/club218783813 https://www.instagram.com/ivencomputers/',
           timetable: 'Понедельник - пятница, 10:00-19:00',
         },
