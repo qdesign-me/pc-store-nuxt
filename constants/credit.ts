@@ -9,20 +9,20 @@ export const banks = [
     title: 'Беларусбанк',
     img: '/img/info/belarusb-logo.png',
     variants: [
-      { title: 'на срок до 6 мес.', period: 6, percent: 5 },
-      { title: 'на срок до 9 мес.', period: 9, percent: 10 },
-      { title: 'на срок до 12 мес.', period: 12, percent: 15 },
-      { title: 'на срок до 24 мес.', period: 24, percent: 17 },
+      { title: 'на срок до 6 мес.', period: 6, percent: 10 },
+      { title: 'на срок до 9 мес.', period: 9, percent: 15.5 },
+      { title: 'на срок до 12 мес.', period: 12, percent: 18.5 },
+      { title: 'на срок до 24 мес.', period: 24, percent: 19.5 },
     ],
   },
   {
     title: 'ВТБ',
     img: '/img/info/vtb-logo.png',
     variants: [
-      { title: 'на срок 6 мес', period: 6, percent: 20 },
-      { title: 'на срок 12 мес', period: 12, percent: 20 },
-      { title: 'на срок 24 мес', period: 24, percent: 20 },
-      { title: 'на срок 36 мес', period: 36, percent: 20 },
+      { title: 'на срок 6 мес', period: 6, percent: 25 },
+      { title: 'на срок 12 мес', period: 12, percent: 25 },
+      { title: 'на срок 24 мес', period: 24, percent: 25 },
+      { title: 'на срок 36 мес', period: 36, percent: 25 },
     ],
   },
 ];

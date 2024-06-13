@@ -80,8 +80,11 @@
                         <input name="delivery" type="radio" v-model="model.person.delivery" value="Доставка в пределах МКАД" />
                       </label>
                       <div class="text-black font-medium">Доставка в пределах МКАД</div>
-                      <div>Бесплатно при стоимости товара от <span class="whitespace-nowrap">300 Br</span></div>
-                      <div>При стоимости товара до <span class="whitespace-nowrap">300 Br</span>, стоимость доставки — <span class="whitespace-nowrap">6 Br</span></div>
+                      <div>Бесплатно при стоимости товара от <span class="whitespace-nowrap">330 Br</span></div>
+                      <div>
+                        При стоимости товара до <span class="whitespace-nowrap">330 Br</span>, стоимость доставки — по Минску — <span class="whitespace-nowrap">9 Br</span> а в
+                        другой город <span class="whitespace-nowrap">17 Br</span>
+                      </div>
                     </div>
                   </div>
                   <div class="col-span-6 lg:col-span-2">
@@ -90,7 +93,7 @@
                         <input name="delivery" type="radio" v-model="model.person.delivery" value="Доставка по Беларуси" />
                       </label>
                       <div class="text-black font-medium">Доставка по Беларуси</div>
-                      <div>Стоимость доставки — от 12 Br</div>
+                      <div>Стоимость доставки — от 17 Br</div>
                     </div>
                   </div>
                   <template v-if="model.person.delivery !== 'Самовывоз'">
@@ -352,8 +355,12 @@
                         <input name="delivery" type="radio" v-model="model.ur.delivery" value="Доставка в пределах МКАД" />
                       </label>
                       <div class="text-black font-medium">Доставка в пределах МКАД</div>
-                      <div>Бесплатно при стоимости товара от <span class="whitespace-nowrap">300 Br</span></div>
-                      <div>При стоимости товара до <span class="whitespace-nowrap">300 Br</span>, стоимость доставки — <span class="whitespace-nowrap">6 Br</span></div>
+                      <div>Бесплатно при стоимости товара от <span class="whitespace-nowrap">330 Br</span></div>
+                      <div>
+                        При стоимости товара до <span class="whitespace-nowrap">330 Br</span>, стоимость доставки по Минску — <span class="whitespace-nowrap">9 Br</span> а в другой
+                        город
+                        <span class="whitespace-nowrap">17 Br</span>
+                      </div>
                     </div>
                   </div>
                   <div class="col-span-6 lg:col-span-2">
@@ -362,7 +369,7 @@
                         <input name="delivery" type="radio" v-model="model.ur.delivery" value="Доставка по Беларуси" />
                       </label>
                       <div class="text-black font-medium">Доставка по Беларуси</div>
-                      <div>Стоимость доставки — от 12 Br</div>
+                      <div>Стоимость доставки — от 17 Br</div>
                     </div>
                   </div>
                   <template v-if="model.ur.delivery !== 'Самовывоз'">
@@ -555,10 +562,14 @@ const summary = computed(() => {
   const delivery = model.value.who === 'person' ? model.value.person.delivery : model.value.ur.delivery;
   let deliveryPrice = 0;
   if (delivery === 'Доставка в пределах МКАД') {
-    if (price < 300) deliveryPrice = 6;
+    if (price < 330) {
+      deliveryPrice = 17;
+      if (model.value.who === 'person' && model.value.person.city?.toLowerCase() === 'минск') deliveryPrice = 9;
+      if (model.value.who === 'business' && model.value.ur.city?.toLowerCase() === 'минск') deliveryPrice = 9;
+    }
   }
   if (delivery === 'Доставка по Беларуси') {
-    deliveryPrice = 12;
+    deliveryPrice = 17;
   }
   let newData = data.value.data;
   let total = price + deliveryPrice;
