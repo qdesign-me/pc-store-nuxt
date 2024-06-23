@@ -32,7 +32,7 @@
 
             <div>
               <div class="ir">
-                <div class="flex input-group">
+                <div class="flex input-group !border-0">
                   <button class="text-center flex-1 w-10 text-xs leading-[38px] btn" :class="{ 'is-plain': model.who === 'business' }" @click.prevent="model.who = 'person'">
                     Частное лицо
                   </button>
