@@ -79,8 +79,8 @@
               <div><img :src="bank.img" class="" /></div>
               <div>{{ variant.title }}</div>
             </div>
-            <div class="text-[12px]">≈ {{ calcFullPricePeriod(props.data.Price, variant.percent, variant.period) }} руб x {{ variant.period }} мес</div>
-            <div class="text-[12px]">итоговая сумма = {{ calcFullPrice(props.data.Price, variant.percent) }} бел.руб.</div>
+            <div class="text-[12px]">≈ {{ calcBankPrice(props.data.Price, variant.percent, variant.calcperiod, variant.period) }} руб x {{ variant.period }} мес</div>
+            <div class="text-[12px]">итоговая сумма = {{ calcBankPrice(props.data.Price, variant.percent, variant.calcperiod, 1) }} бел.руб.</div>
           </div>
           <div class="py-1 w-[20px]"><input type="radio" :checked="selected?.bank?.title === bank.title && selected.variant.title === variant.title" /></div>
         </div>
@@ -211,12 +211,16 @@ const onFinish = async () => {
   selected.value = null;
 };
 
+const calcBankPrice = (value: number, percent: number, calcperiod: number, payments: number) =>
+  ((value * 1.07 + (value * 1.07 * (percent + 100)) / 100 / calcperiod) / payments).toFixed(2);
+
 const getCreditByBank = (value: number) => {
   let min: any = null;
   banks.forEach((bank) => {
     bank.variants.forEach((variant) => {
-      const total = ((value * (100 + variant.percent)) / 100).toFixed(2);
-      const monthly = (+total / variant.period).toFixed(2);
+      const total = calcBankPrice(value, variant.percent, variant.calcperiod, 1);
+      const monthly = calcBankPrice(value, variant.percent, variant.calcperiod, variant.period);
+      console.log(value, variant, total, monthly);
 
       if (!min || +monthly < +min.monthly) min = { monthly, period: variant.period };
     });

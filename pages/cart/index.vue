@@ -454,6 +454,16 @@
             <div>{{ price(summary?.total) }}</div>
           </div>
 
+          <p
+            class="text-[13px] opacity-50"
+            v-if="
+              (model.who === 'person' && model.person.payment === 'Оплата в кредит' && summary.totalRaw > 500) ||
+              (model.who === 'business' && model.payment.payment === 'Оплата в кредит' && summary.totalRaw > 500)
+            "
+          >
+            расчет является ориентировочным, величину ежемесячного платежа уточняйте в банке
+          </p>
+
           <button class="btn w-full sm:max-w-[200px] sm:mx-auto" @click="onOrder" :disabled="disabled">Оформить заказ</button>
 
           <div class="text-[12px] font-light text-center">
