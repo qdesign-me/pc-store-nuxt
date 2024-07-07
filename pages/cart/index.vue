@@ -586,7 +586,7 @@ const summary = computed(() => {
     newData = newData.map((item) => {
       const itemPrice = calcFullPrice(item.Price, selectedC.value.card.percent, selectedC.value.card.period);
 
-      const itemTotal = calcFullPrice(item.itemTotal, selectedC.value.card.percent, selectedC.value.card.period);
+      const itemTotal = +itemPrice * item.qty; //calcFullPrice(item.itemTotal, selectedC.value.card.percent, selectedC.value.card.period);
       price += +itemTotal;
       total += +itemTotal;
       totalRaw += +item.itemTotal;
@@ -607,9 +607,11 @@ const summary = computed(() => {
     totalRaw = 0;
     newData = newData.map((item) => {
       const itemPrice = calcBankPrice(item.Price, selectedB.value.variant.percent, selectedB.value.variant.calcperiod, 1);
-      const itemTotal = calcBankPrice(item.itemTotal, selectedB.value.variant.percent, selectedB.value.variant.calcperiod, 1);
+      console.log({ item });
+      const itemTotal = +itemPrice * item.qty; //calcBankPrice(item.itemTotal, selectedB.value.variant.percent, selectedB.value.variant.calcperiod, 1);
       price += +itemTotal;
       total += +itemTotal;
+      console.log({ itemPrice, itemTotal });
       totalRaw += +item.itemTotal;
       return {
         ...item,
