@@ -266,9 +266,11 @@
                               <div>{{ variant.title }}</div>
                             </div>
                             <div class="text-[12px]">
-                              ≈ {{ calcBankPrice(summary.totalRaw, variant.percent, variant.calcperiod, variant.period) }} руб x {{ variant.period }} мес
+                              ≈ {{ (calcBankPrice(summary.totalRaw, variant.percent, variant.calcperiod, variant.period) / variant.period).toFixed(2) }} руб x {{
+                                variant.period
+                              }} мес
                             </div>
-                            <div class="text-[12px]">итоговая сумма = {{ calcBankPrice(summary.totalRaw, variant.percent, variant.calcperiod, 1) }} бел.руб.</div>
+                            <div class="text-[12px]">итоговая сумма = {{ calcBankPrice(summary.totalRaw, variant.percent, variant.calcperiod, variant.period) }} бел.руб.</div>
                           </div>
                           <div class="py-1 px-2">
                             <input type="radio" :checked="selectedB.bank.title === bank.title && selectedB.variant.title === variant.title" />
@@ -606,7 +608,7 @@ const summary = computed(() => {
     total = 0;
     totalRaw = 0;
     newData = newData.map((item) => {
-      const itemPrice = calcBankPrice(item.Price, selectedB.value.variant.percent, selectedB.value.variant.calcperiod, 1);
+      const itemPrice = calcBankPrice(item.Price, selectedB.value.variant.percent, selectedB.value.variant.calcperiod, selectedB.value.variant.period);
       console.log({ item });
       const itemTotal = +itemPrice * item.qty; //calcBankPrice(item.itemTotal, selectedB.value.variant.percent, selectedB.value.variant.calcperiod, 1);
       price += +itemTotal;

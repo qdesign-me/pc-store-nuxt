@@ -79,8 +79,10 @@
               <div><img :src="bank.img" class="" /></div>
               <div>{{ variant.title }}</div>
             </div>
-            <div class="text-[12px]">≈ {{ calcBankPrice(props.data.Price, variant.percent, variant.calcperiod, variant.period) }} руб x {{ variant.period }} мес</div>
-            <div class="text-[12px]">итоговая сумма = {{ calcBankPrice(props.data.Price, variant.percent, variant.calcperiod, 1) }} бел.руб.</div>
+            <div class="text-[12px]">
+              ≈ {{ (calcBankPrice(props.data.Price, variant.percent, variant.calcperiod, variant.period) / variant.period).toFixed(2) }} руб x {{ variant.period }} мес
+            </div>
+            <div class="text-[12px]">итоговая сумма = {{ calcBankPrice(props.data.Price, variant.percent, variant.calcperiod, variant.period) }} бел.руб.</div>
           </div>
           <div class="py-1 w-[20px]"><input type="radio" :checked="selected?.bank?.title === bank.title && selected.variant.title === variant.title" /></div>
         </div>

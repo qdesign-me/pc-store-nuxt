@@ -9,10 +9,14 @@ export const banks = [
     title: 'Беларусбанк',
     img: '/img/info/belarusb-logo.png',
     variants: [
-      { title: 'на срок до 6 мес.', period: 6, calcperiod: 5, percent: 5 },
-      { title: 'на срок до 9 мес.', period: 9, calcperiod: 8, percent: 6 },
-      { title: 'на срок до 12 мес.', period: 12, calcperiod: 11, percent: 8 },
-      { title: 'на срок до 24 мес.', period: 24, calcperiod: 23, percent: 9 },
+      // { title: 'на срок до 6 мес.', period: 6, calcperiod: 5, percent: 5 },
+      // { title: 'на срок до 9 мес.', period: 9, calcperiod: 8, percent: 6 },
+      // { title: 'на срок до 12 мес.', period: 12, calcperiod: 11, percent: 8 },
+      // { title: 'на срок до 24 мес.', period: 24, calcperiod: 23, percent: 9 },
+      { title: 'на срок до 6 мес.', period: 6, calcperiod: 6, percent: 5 },
+      { title: 'на срок до 9 мес.', period: 9, calcperiod: 9, percent: 6 },
+      { title: 'на срок до 12 мес.', period: 12, calcperiod: 12, percent: 8 },
+      { title: 'на срок до 24 мес.', period: 24, calcperiod: 24, percent: 9 },
     ],
   },
   {
@@ -32,5 +36,6 @@ export const calcFullPricePeriod = (price: number, percent: number, period: numb
   return (+calcFullPrice(price, percent) / period).toFixed(2);
 };
 
-export const calcBankPrice = (value: number, percent: number, calcperiod: number, payments: number) =>
-  ((value * 1.07 + (value * 1.07 * (percent + 100)) / 100 / calcperiod) / payments).toFixed(2);
+export const calcBankPrice = (value: number, percent: number, calcperiod: number, payments: number) => {
+  return (((percent + 100) / 100 / calcperiod) * payments * value).toFixed(2);
+};
