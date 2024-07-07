@@ -52,9 +52,9 @@ export default defineNuxtConfig({
     ecommerce: 'dataLayer',
   },
   gtag: {
-    tags: ['G-L2CG7ZPL61', 'AW-620701504'],
+    tags: ['AW-620701504'],
   },
-
+  //'G-L2CG7ZPL61',
   image: {
     domains: ['win7.by'],
   },
