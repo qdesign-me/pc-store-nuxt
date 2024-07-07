@@ -56,7 +56,7 @@
                   </div>
 
                   <div class="col-span-6 lg:col-span-2">
-                    <FormItem name="email" :rules="[{ email: true }]">
+                    <FormItem name="email" :rules="[{ email: true, required: true }]">
                       <input name="email" type="email" class="input" placeholder="Укажите ваш E-mail" v-model="model.person.email" />
                     </FormItem>
                   </div>
@@ -333,7 +333,7 @@
                     </FormItem>
                   </div>
                   <div class="col-span-6 lg:col-span-3">
-                    <FormItem name="email" :rules="[{ email: true }]">
+                    <FormItem name="email" :rules="[{ email: true, required: true }]">
                       <input name="email" type="email" class="input" placeholder="Контактный  E-mail" v-model="model.ur.email" />
                     </FormItem>
                   </div>
