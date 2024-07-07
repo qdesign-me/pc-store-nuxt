@@ -36,7 +36,7 @@
                   <button class="text-center flex-1 w-10 text-xs leading-[38px] btn" :class="{ 'is-plain': model.who === 'business' }" @click="model.who = 'person'">
                     Частное лицо
                   </button>
-                  <button class="text-center flex-1 w-10 text-xs leading-[38px] btn" :class="{ 'is-plain': model.who === 'person' }" @click="model.who = 'business'">
+                  <button class="text-center flex-1 w-10 text-xs leading-[38px] btn" :class="{ 'is-plain': model.who !== 'business' }" @click="model.who = 'business'">
                     Юридическое лицо
                   </button>
                 </div>
