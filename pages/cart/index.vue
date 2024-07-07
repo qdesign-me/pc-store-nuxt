@@ -286,7 +286,7 @@
                     </FormItem>
                   </div>
                 </div>
-                <button type="submit" class="hidden" :disabled="disabled">Оформить заказ</button>
+                <button type="submit" class="absolute opacity-0 left-[-10000px]" :disabled="disabled">Оформить заказ</button>
               </Form>
 
               <Form :model="model.ur" :onFinish="onFinish" :class="model.who === 'business' ? 'block' : 'hidden'">
@@ -424,7 +424,7 @@
                     </FormItem>
                   </div>
                 </div>
-                <button type="submit" class="btn lg:inline-block">Оформить заказ</button>
+                <button type="submit" class="absolute opacity-0 left-[-10000px]">Оформить заказ</button>
               </Form>
             </div>
           </div>
@@ -554,7 +554,7 @@ const onQty = (productID, qty) => {
 };
 
 const onOrder = () => {
-  const form = document.querySelector(`.order-area form.block button[type="submit"]`);
+  const form = document.querySelector(`.order-area form.block button[type=submit]`);
   form.click();
 };
 
