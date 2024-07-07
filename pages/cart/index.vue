@@ -33,10 +33,10 @@
             <div>
               <div class="ir">
                 <div class="flex input-group !border-0">
-                  <button class="text-center flex-1 w-10 text-xs leading-[38px] btn" :class="{ 'is-plain': model.who === 'business' }" @click.prevent="model.who = 'person'">
+                  <button class="text-center flex-1 w-10 text-xs leading-[38px] btn" :class="{ 'is-plain': model.who === 'business' }" @click="model.who = 'person'">
                     Частное лицо
                   </button>
-                  <button class="text-center flex-1 w-10 text-xs leading-[38px] btn" :class="{ 'is-plain': model.who === 'person' }" @click.prevent="model.who = 'business'">
+                  <button class="text-center flex-1 w-10 text-xs leading-[38px] btn" :class="{ 'is-plain': model.who === 'person' }" @click="model.who = 'business'">
                     Юридическое лицо
                   </button>
                 </div>
@@ -454,13 +454,7 @@
             <div>{{ price(summary?.total) }}</div>
           </div>
 
-          <p
-            class="text-[13px] opacity-50"
-            v-if="
-              (model.who === 'person' && model.person.payment === 'Оплата в кредит' && summary.totalRaw > 500) ||
-              (model.who === 'business' && model.payment.payment === 'Оплата в кредит' && summary.totalRaw > 500)
-            "
-          >
+          <p class="text-[13px] opacity-50" v-if="model.who === 'person' && model.person.payment === 'Оплата в кредит' && summary.totalRaw > 500">
             расчет является ориентировочным, величину ежемесячного платежа уточняйте в банке
           </p>
 
