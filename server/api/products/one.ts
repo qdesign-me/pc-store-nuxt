@@ -56,7 +56,6 @@ const getFutureDate = (day: number) => {
   const today = new Date();
 
   const result = today.setDate(today.getDate() + add);
-  console.log(day, add, result);
   return formatDate(new Date(result));
 };
 
@@ -116,7 +115,6 @@ export default defineEventHandler(async (event) => {
     available.delivery_rb_text = getDayName(available.delivery + nowDay + 2);
     available.delivery_rb_date = getFutureDate(available.delivery + 2);
   }
-  //console.log('availability', data['availability'], nowDay, availableData, available);
 
   data['available'] = available;
 

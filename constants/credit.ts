@@ -31,3 +31,6 @@ export const calcFullPrice = (price: number, percent: number) => {
 export const calcFullPricePeriod = (price: number, percent: number, period: number) => {
   return (+calcFullPrice(price, percent) / period).toFixed(2);
 };
+
+export const calcBankPrice = (value: number, percent: number, calcperiod: number, payments: number) =>
+  ((value * 1.07 + (value * 1.07 * (percent + 100)) / 100 / calcperiod) / payments).toFixed(2);

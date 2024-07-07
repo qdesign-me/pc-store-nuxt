@@ -265,8 +265,10 @@
                               <div><img :src="bank.img" class="" /></div>
                               <div>{{ variant.title }}</div>
                             </div>
-                            <div class="text-[12px]">≈ {{ calcFullPricePeriod(summary.totalRaw, variant.percent, variant.period) }} руб x {{ variant.period }} мес</div>
-                            <div class="text-[12px]">итоговая сумма = {{ calcFullPrice(summary.totalRaw, variant.percent) }} бел.руб.</div>
+                            <div class="text-[12px]">
+                              ≈ {{ calcBankPrice(summary.totalRaw, variant.percent, variant.calcperiod, variant.period) }} руб x {{ variant.period }} мес
+                            </div>
+                            <div class="text-[12px]">итоговая сумма = {{ calcBankPrice(summary.totalRaw, variant.percent, variant.calcperiod, 1) }} бел.руб.</div>
                           </div>
                           <div class="py-1 px-2">
                             <input type="radio" :checked="selectedB.bank.title === bank.title && selectedB.variant.title === variant.title" />
@@ -473,7 +475,7 @@
 <script setup>
 const selectedC = ref({ card: cards[0] });
 const selectedB = ref({ bank: banks[0], variant: banks[0].variants[0] });
-import { cards, banks, calcFullPrice, calcFullPricePeriod } from '@/constants/credit';
+import { cards, banks, calcFullPrice, calcFullPricePeriod, calcBankPrice } from '@/constants/credit';
 const disabled = ref(false);
 import { useLocalStorage } from '@vueuse/core';
 const router = useRouter();
@@ -578,14 +580,35 @@ const summary = computed(() => {
   let newData = data.value.data;
   let total = price + deliveryPrice;
   let totalRaw = price + deliveryPrice;
-  if (model.value.who === 'person' && (model.value.person.payment === 'Рассрочка' || (model.value.person.payment === 'Оплата в кредит' && totalRaw > 500))) {
-    const percent = model.value.person.payment === 'Оплата в кредит' ? selectedB.value.variant.percent : selectedC.value.card.percent;
+  if (model.value.who === 'person' && model.value.person.payment === 'Рассрочка') {
     price = 0;
     total = 0;
     totalRaw = 0;
     newData = newData.map((item) => {
-      const itemPrice = calcFullPrice(item.Price, percent);
-      const itemTotal = calcFullPrice(item.itemTotal, percent);
+      const itemPrice = calcFullPrice(item.Price, selectedC.value.card.percent, selectedC.value.card.period);
+
+      const itemTotal = calcFullPrice(item.itemTotal, selectedC.value.card.percent, selectedC.value.card.period);
+      price += +itemTotal;
+      total += +itemTotal;
+      totalRaw += +item.itemTotal;
+      return {
+        ...item,
+        Price: itemPrice,
+        itemTotal,
+      };
+    });
+    if (deliveryPrice) {
+      total += deliveryPrice;
+      totalRaw += deliveryPrice;
+    }
+  }
+  if (model.value.who === 'person' && model.value.person.payment === 'Оплата в кредит' && totalRaw > 500) {
+    price = 0;
+    total = 0;
+    totalRaw = 0;
+    newData = newData.map((item) => {
+      const itemPrice = calcBankPrice(item.Price, selectedB.value.variant.percent, selectedB.value.variant.calcperiod, 1);
+      const itemTotal = calcBankPrice(item.itemTotal, selectedB.value.variant.percent, selectedB.value.variant.calcperiod, 1);
       price += +itemTotal;
       total += +itemTotal;
       totalRaw += +item.itemTotal;

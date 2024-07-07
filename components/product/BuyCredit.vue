@@ -146,7 +146,7 @@ const DEFAULT_DATA = {
 };
 
 const model = useState(() => clone(DEFAULT_DATA));
-import { cards, banks, calcFullPrice, calcFullPricePeriod } from '@/constants/credit';
+import { cards, banks, calcFullPrice, calcFullPricePeriod, calcBankPrice } from '@/constants/credit';
 
 const total = computed(() => {
   if (!selected.value) return props.data.Price;
@@ -211,16 +211,12 @@ const onFinish = async () => {
   selected.value = null;
 };
 
-const calcBankPrice = (value: number, percent: number, calcperiod: number, payments: number) =>
-  ((value * 1.07 + (value * 1.07 * (percent + 100)) / 100 / calcperiod) / payments).toFixed(2);
-
 const getCreditByBank = (value: number) => {
   let min: any = null;
   banks.forEach((bank) => {
     bank.variants.forEach((variant) => {
       const total = calcBankPrice(value, variant.percent, variant.calcperiod, 1);
       const monthly = calcBankPrice(value, variant.percent, variant.calcperiod, variant.period);
-      console.log(value, variant, total, monthly);
 
       if (!min || +monthly < +min.monthly) min = { monthly, period: variant.period };
     });

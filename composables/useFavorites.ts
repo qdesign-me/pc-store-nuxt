@@ -10,7 +10,6 @@ export const useFavorites = () => {
     items.value = items.value.filter((item) => item !== productID);
   };
   const add = (productID: number) => {
-    console.log('add 2 favorites', productID);
     const newItems = items.value.includes(productID) ? items.value : [...items.value, productID];
     items.value = newItems;
   };

@@ -4,7 +4,6 @@ export const useCart = () => {
   items.value = items.value || {};
 
   const add = (productID: number, qty: number, isNew: boolean = false) => {
-    console.log('add', productID);
     const newItems = { ...items.value, [productID]: qty } as Record<string, number>;
     if (!qty) delete newItems[String(productID)];
     items.value = newItems;
@@ -16,13 +15,11 @@ export const useCart = () => {
     highlight.value = null;
   };
   const remove = (productID: number) => {
-    console.log('remove', productID);
     const newItems = { ...items.value };
     delete newItems[String(productID)];
     items.value = newItems;
   };
   const clear = () => {
-    console.log('clear');
     items.value = { 0: 0 };
   };
 

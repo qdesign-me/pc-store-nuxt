@@ -61,7 +61,6 @@ const filters = computed(() =>
 import { notAllowedCats } from '../configs/index';
 provide('filters', filters);
 const uri = router.currentRoute.value.path;
-console.log({ uri });
 const { data: category } = await useFetch('/api/categories/one', {
   method: 'POST',
   body: {

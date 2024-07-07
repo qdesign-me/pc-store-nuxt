@@ -4,7 +4,6 @@ export default defineEventHandler(async (event) => {
   const config = response.reduce((acc, item: any) => {
     return { ...acc, [item.key]: item.value };
   }, {});
-  console.log('API CONFIG', config);
   return {
     config,
   };

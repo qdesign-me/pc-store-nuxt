@@ -40,7 +40,6 @@ const handleInput = (mode) => {
   const newValues = { ...model.value, values: [] };
   if (mode === 'from' && +newValues.to && +newValues.to < +newValues.from) delete newValues.to;
 
-  console.log(newValues, min, max);
   model.value = { ...newValues };
 };
 
