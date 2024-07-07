@@ -41,7 +41,7 @@
                   </button>
                 </div>
               </div>
-              <Form :model="model.person" :onFinish="onFinish" :class="model.who === 'person' ? 'block' : 'hidden'">
+              <Form :model="model.person" :class="model.who === 'person' ? 'block' : 'hidden'">
                 <div class="grid grid-cols-6 gap-2">
                   <div class="col-span-6 lg:col-span-2">
                     <FormItem name="name">
@@ -286,10 +286,10 @@
                     </FormItem>
                   </div>
                 </div>
-                <button type="submit" class="absolute opacity-0 left-[-10000px]" :disabled="disabled">Оформить заказ</button>
+                <!-- <button type="submit" class="absolute opacity-0 left-[-10000px]" :disabled="disabled">Оформить заказ</button> -->
               </Form>
 
-              <Form :model="model.ur" :onFinish="onFinish" :class="model.who === 'business' ? 'block' : 'hidden'">
+              <Form :model="model.ur" :class="model.who === 'business' ? 'block' : 'hidden'">
                 <div class="grid grid-cols-6 gap-2">
                   <div class="col-span-6">
                     <FormItem name="name" :rules="[{ required: true }]">
@@ -424,7 +424,7 @@
                     </FormItem>
                   </div>
                 </div>
-                <button type="submit" class="absolute opacity-0 left-[-10000px]">Оформить заказ</button>
+                <!-- <button type="submit" class="absolute opacity-0 left-[-10000px]">Оформить заказ</button> -->
               </Form>
             </div>
           </div>
@@ -554,8 +554,7 @@ const onQty = (productID, qty) => {
 };
 
 const onOrder = () => {
-  const form = document.querySelector(`.order-area form.block button[type=submit]`);
-  form.click();
+  onFinish(model.value.who === 'person' ? model.value.person : model.value.ur);
 };
 
 const fixPrice = (value) => {
