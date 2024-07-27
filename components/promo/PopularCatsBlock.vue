@@ -1,7 +1,7 @@
 <template>
   <div class="title mb-6">Популярные категории</div>
   <div class="grid gap-2.5 grid-cols-1 lg:grid-cols-5 box">
-    <NuxtLink v-for="(link, index) in links" :key="link.uri" :to="link.uri" class="card px-5 pt-0 bg-blue group height-xs overflow-hidden !min-h-[100px] group">
+    <NuxtLink v-for="(link, index) in links" :key="link.uri" :to="link.uri.toLowerCase()" class="card px-5 pt-0 bg-blue group height-xs overflow-hidden !min-h-[100px] group">
       <div class="text-[20px] font-semibold text-white mt-4 relative z-[2]">{{ link.title }}</div>
       <img :src="`/img/promo/p${index + 1}.png`" width="296" height="200" loading="lazy" class="promo-bg" />
       <img :src="link.img" loading="lazy" class="h-[60px] lg:h-auto absolute transition duration-300 group-hover:scale-[1.1]" :class="link.class" />

@@ -13,7 +13,7 @@
             }"
           >
             <SwiperSlide class="slide" v-for="(link, index) in links" :key="index">
-              <NuxtLink class="card more-padding bg-blue py-0 height-sm justify-center relative" :to="link.uri">
+              <NuxtLink class="card more-padding bg-blue py-0 height-sm justify-center relative" :to="link.uri.toLowerCase()">
                 <picture>
                   <source media="(max-width: 1024px)" :srcset="link.mobi" />
                   <img :src="link.img" :alt="link.title" loading="lazy" width="450" height="350" class="slider-bg" />

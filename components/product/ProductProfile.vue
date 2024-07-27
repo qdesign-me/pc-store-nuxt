@@ -1,7 +1,9 @@
 <template>
   <div class="breadcrumbs">
     <NuxtLink to="/">Главная </NuxtLink>
-    <NuxtLink :to="page.uri" v-for="page in JSON.parse(props.data.breadcrumbs)" :key="page.uri">{{ page.name.replaceAll('&amp;quot;', '"') }} </NuxtLink>
+    <NuxtLink :to="page.uri.toLowerCase()" v-for="page in JSON.parse(props.data.breadcrumbs)" :key="page.uri.toLowerCase()"
+      >{{ page.name.replaceAll('&amp;quot;', '"') }}
+    </NuxtLink>
     <span>{{ props.data.name }}</span>
   </div>
 

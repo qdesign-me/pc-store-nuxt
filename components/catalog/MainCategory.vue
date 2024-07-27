@@ -11,7 +11,7 @@
       <div class="item col-span-2" v-for="(node, index) in props?.data.nodes" :key="node.categoryID">
         <div class="it" v-if="node.nodes">
           <BigLogo class="bg z-[0]" v-if="!index" />
-          <NuxtLink :to="node.uri" class="relative z-[10]">
+          <NuxtLink :to="node.uri.toLowerCase()" class="relative z-[10]">
             <div class="note">{{ props.data.name }}</div>
             <div class="title-sm">{{ node.name }}</div>
             <div class="note">
@@ -19,14 +19,14 @@
             </div>
           </NuxtLink>
           <div class="catlinks mt-auto lg:max-w-[70%] pt-4 z-[2]">
-            <NuxtLink :to="link.uri" v-for="(link, index) in node?.nodes" :key="link.categoryID" v-show="index < 10">{{ link.name }}</NuxtLink>
+            <NuxtLink :to="link.uri.toLowerCase()" v-for="(link, index) in node?.nodes" :key="link.categoryID" v-show="index < 10">{{ link.name }}</NuxtLink>
             <div v-if="node?.nodes.length > 10" class="text-xs leading-[20px]">+ {{ node?.nodes.length - 10 }} еще</div>
           </div>
           <div class="img">
             <img loading="lazy" :src="`/img/products/komplektuyuszie/${node.categoryID}.png`" :alt="node.name" v-if="config.includes(node.categoryID)" />
           </div>
         </div>
-        <NuxtLink :to="node.uri" v-else class="it">
+        <NuxtLink :to="node.uri.toLowerCase()" v-else class="it">
           <BigLogo class="bg" v-if="!index" />
           <div class="relative z-[10]">
             <div class="note">{{ props.data.name }}</div>

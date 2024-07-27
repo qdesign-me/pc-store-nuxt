@@ -9,7 +9,7 @@
         <div class="list-items-mini">
           <div v-for="item in minidata?.data" :key="item.id" class="!border-b-0">
             <div class="img w-[60px] flex-shrink-0 overflow-hidden">
-              <NuxtLink :to="`/p/${item.uri.replace('.html', '')}`"><ProductThumbs :data="item" :size="60" /></NuxtLink>
+              <NuxtLink :to="`/p/${item.uri.replace('.html', '').toLowerCase()}`"><ProductThumbs :data="item" :size="60" /></NuxtLink>
             </div>
             <div class="flex-1 flex flex-col justify-between">
               <div class="flex gap-6 items-center mb-1">
@@ -20,7 +20,7 @@
                 </div>
               </div>
               <div class="text-[10px] text-[#3F3F3F] whitespace-nowrap text-ellipsis">Код товара: {{ item.productID }}</div>
-              <NuxtLink :to="`/p/${item.uri.replace('.html', '')}`" class="text-black font-semibold mb-0 mr-6">{{ item.name }}</NuxtLink>
+              <NuxtLink :to="`/p/${item.uri.replace('.html', '').toLowerCase()}`" class="text-black font-semibold mb-0 mr-6">{{ item.name }}</NuxtLink>
 
               <div class="flex gap-2 justify-between">
                 <div class="price text-[14px] flex gap-2">

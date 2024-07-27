@@ -1,5 +1,5 @@
 <template>
-  <NuxtLink v-for="link in data.data" :to="link.uri" :key="link.uri" class="hover:text-white opacity-100 !gap-2">
+  <NuxtLink v-for="link in data.data" :to="link.uri.toLowerCase()" :key="link.uri" class="hover:text-white opacity-100 !gap-2">
     <div class="bg-white flex items-center justify-center rounded-full w-[46px] h-[46px]" style="filter: drop-shadow(0px 4px 4px rgba(0, 179, 215, 0.49))">
       <component :is="linkIcon(link.uri)" class="text-[#00B3D7]" />
     </div>

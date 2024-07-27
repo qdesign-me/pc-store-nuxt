@@ -4,7 +4,7 @@
       <div v-for="item in props.data" :key="item.id">
         <div class="img max-w-[80px] lg:max-w-[100px] flex-shrink-0">
           <div class="text-[12px] text-[#3F3F3F] mb-1 block sm:hidden">Код: {{ item.productID }}</div>
-          <NuxtLink :to="`/p/${item.uri.replace('.html', '')}`"><ProductThumbs :data="item" :size="160" /></NuxtLink>
+          <NuxtLink :to="`/p/${item.uri.replace('.html', '').toLowerCase()}`"><ProductThumbs :data="item" :size="160" /></NuxtLink>
         </div>
         <div class="name">
           <div class="flex gap-6 items-center mb-3">
@@ -18,7 +18,7 @@
               <PercentIcon v-if="item.is_sale" />
             </div>
           </div>
-          <NuxtLink :to="`/p/${item.uri.replace('.html', '')}`">
+          <NuxtLink :to="`/p/${item.uri.replace('.html', '').toLowerCase()}`">
             <div class="text-[12px] text-[#3F3F3F] mb-1 hidden sm:block">Код товара: {{ item.productID }}</div>
             <div class="lg:text-lg font-semibold mb-2">{{ item.name }}</div>
             <div class="text-sm font-light"></div>

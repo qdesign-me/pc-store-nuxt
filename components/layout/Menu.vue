@@ -13,7 +13,7 @@
           <div class="container flex items-center gap-2 font-bold"><ArrowLeftOutlined /> Каталог товаров</div>
         </div>
         <div class="border-b leading-[60px] cursor-pointer" v-if="mactive === 0" @click="mactive = null">
-          <div class="container flex items-center gap-2 font-bold"><ArrowLeftOutlined /> Готовые сборки ПК</div>
+          <div class="container flex items-center gap-2 font-bold"><ArrowLeftOutlined /> Компьютеры Iven</div>
         </div>
         <div class="border-b leading-[60px] cursor-pointer" v-if="mactive === 1" @click="mactive = null">
           <div class="container flex items-center gap-2 font-bold"><ArrowLeftOutlined />Комплектующие для ПК</div>
@@ -33,7 +33,7 @@
           <div class="part-1">
             <div class="items">
               <div :class="{ active: active === 0 }" @mouseenter="active = 0" @click="setActive(0)">
-                <PCSetsIcon class="ico" /> Готовые сборки ПК
+                <PCSetsIcon class="ico" /> Компьютеры Iven
                 <div class="parentcat-icon" @click.prevent.stop="mactive = 0"><ChevronRightIcon class="arr" /></div>
               </div>
               <div :class="{ active: active === 1 }" @mouseenter="active = 1" @click="setActive(1)">
@@ -61,21 +61,21 @@
             >
               <div class="flex-1">
                 <div class="title">
-                  <NuxtLink :to="item.uri" class="!text-black">{{ item.name }}</NuxtLink>
+                  <NuxtLink :to="item.uri.toLowerCase()" class="!text-black">{{ item.name }}</NuxtLink>
                 </div>
 
                 <ul class="md:lg:columns-3 gap-6">
                   <li v-for="link in item.nodes" :key="link.uri" class="relative">
-                    <NuxtLink :to="link.uri">
+                    <NuxtLink :to="link.uri.toLowerCase()">
                       <component :is="linkIcon(link.uri)" />
                       {{ link.name }}
                     </NuxtLink>
                     <div class="toggle-sublinks" v-if="link.nodes && link.categoryID !== 28" @click="toggleSublinks"><ChevronRightIcon class="arr" /></div>
                     <div v-if="link.nodes && link.categoryID !== 28" class="sublinks relative">
-                      <NuxtLink v-for="childlink in link.nodes" :to="childlink.uri" :key="childlink.name">
+                      <NuxtLink v-for="childlink in link.nodes" :to="childlink.uri.toLowerCase()" :key="childlink.name">
                         {{ childlink.name }}
                       </NuxtLink>
-                      <NuxtLink :to="link.uri" class="!text-[#E5A35B]"> Все категории</NuxtLink>
+                      <NuxtLink :to="link.uri.toLowerCase()" class="!text-[#E5A35B]"> Все категории</NuxtLink>
                     </div>
                   </li>
                 </ul>
@@ -86,10 +86,10 @@
                   продаж
                 </div>
 
-                <NuxtLink :to="item.uri" class="!flex gap-6 items-center text-sm font-normal mb-2">
+                <NuxtLink :to="item.uri.toLowerCase()" class="!flex gap-6 items-center text-sm font-normal mb-2">
                   <span class="underline underline-offset-4">Все товары</span><ArrowRightIcon class="!text-black"
                 /></NuxtLink>
-                <NuxtLink :to="`/p/${item.product.uri.replace('.html', '')}`" class="flex flex-col gap-2 !items-start">
+                <NuxtLink :to="`/p/${item.product.uri.replace('.html', '').toLowerCase()}`" class="flex flex-col gap-2 !items-start">
                   <div>{{ item.product.name }}</div>
 
                   <ProductThumbs :data="{ img: item.product.img.split('|')[0] }" />

@@ -5,7 +5,7 @@
         <div class="breadcrumbs"><NuxtLink to="/" class="">Главная </NuxtLink> <NuxtLink to="/payment" class="">Оплата </NuxtLink> <span>Рассрочка</span></div>
 
         <div class="box box-scroll2 pt-10" id="installments">
-          <h2>Оплата картами рассрочки</h2>
+          <h1>Оплата картами рассрочки</h1>
           <p class="mb-6 -mt-1">Принимаем к оплате карты рассрочки:</p>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <NuxtLink to="https://cherepaha.vtb.by/" target="_blank" class="card h-auto border md:pt-6 md:pb-8 md:px-10">

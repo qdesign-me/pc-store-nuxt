@@ -1,5 +1,5 @@
 <template>
-  <NuxtLink :to="link" class="a" :class="{ 'text-blue': items.length }">
+  <NuxtLink :to="link.toLowerCase()" class="a" :class="{ 'text-blue': items.length }">
     <div v-if="items.length > 0" class="count">{{ items.length }}</div>
     <CompareIcon />
     Сравнить</NuxtLink

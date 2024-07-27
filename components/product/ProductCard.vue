@@ -6,12 +6,12 @@
       <div v-if="props.product.PriceSale > 0" class="bg-[#FFAC2F]">На акции</div>
     </div>
     <div class="pt-[30px]">
-      <NuxtLink :to="uri" class="block">
+      <NuxtLink :to="uri.toLowerCase()" class="block">
         <ProductThumbs :data="props.product" />
       </NuxtLink>
     </div>
 
-    <NuxtLink :to="uri" class="text-sm font-light leading-4 block mt-2">
+    <NuxtLink :to="uri.toLowerCase()" class="text-sm font-light leading-4 block mt-2">
       <div class="mb-2">Код товара: {{ props.product.productID }}</div>
       <div class="line-clamp-5">{{ props.product.name }}</div>
     </NuxtLink>
