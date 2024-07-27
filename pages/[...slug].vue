@@ -3,7 +3,7 @@
     <div class="breadcrumbs">
       <NuxtLink to="/">Главная </NuxtLink>
 
-      <NuxtLink v-if="category.data.breadcrumbs" :to="page?.uri" v-for="page in JSON.parse(category.data.breadcrumbs).slice(0, -1)" :key="page.uri"
+      <NuxtLink v-if="category.data.breadcrumbs" :to="page?.uri.toLowerCase()" v-for="page in JSON.parse(category.data.breadcrumbs).slice(0, -1)" :key="page.uri"
         >{{ page.name.replaceAll('&amp;quot;', '"') }}
       </NuxtLink>
       <span>{{ category.data.name }}</span>

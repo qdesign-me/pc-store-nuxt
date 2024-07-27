@@ -13,6 +13,7 @@
 2ч - переделать кредитный калькулятор
 2ч - баг с оформлением заказа
 2ч - анализ сео, мелкие правки
+2ч 30м - навести порядок в url - все в lowercase, добавить h1 там где его нет
 *13=
 
 
@@ -26,7 +27,7 @@ win7@win7.by
 Ueukfrrfeynwin7
 
 
-root@ 93.125.2.1     2253
+root@ 93.125.2.23     2253
 pass   fkbujahtys
 
 SELECT * FROM iven_features_on_products where value like '%2xDP%' LIMIT 0,100
