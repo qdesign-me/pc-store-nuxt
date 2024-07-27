@@ -132,7 +132,7 @@
           </div>
         </div>
         <div class="tabs-content text" v-for="(tab, index) in tabs" :key="tab.title" :class="{ active: index === activeTab }">
-          <div v-html="tab.content" class="has-table"></div>
+          <div v-html="tab.content.replace(/<a\b[^>]*>/i, '').replace(/<\/a>/i, '')" class="has-table"></div>
         </div>
       </div>
     </div>
