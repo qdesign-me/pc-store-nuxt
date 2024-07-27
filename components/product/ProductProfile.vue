@@ -78,7 +78,7 @@
       <div class="text-sm flex flex-col row-span-2">
         <div class="block xl:hidden text-[12px] font-semibold mb-4">Код товара: {{ props.data.productID }}</div>
 
-        <ProductPriceBox :data="props.data" />
+        <ProductPriceBox :data="props.data" v-if="props.data.enabled === 1" />
 
         <!-- <div class="flex gap-2 mb-6" v-if="0">
           Рейтинг товара

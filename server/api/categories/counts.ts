@@ -10,7 +10,9 @@ const getTotal = async (uri: string) => {
 };
 
 export default defineEventHandler(async () => {
-  const [data] = await db.execute(`select categoryID,  fullPath as uri, parent from iven_categories where visible=1 and categoryId  in (498, 28, 20)  order by parent, sort_order`);
+  const [data] = await db.execute(
+    `select categoryID,  lower(fullPath) as uri, parent from iven_categories where visible=1 and categoryId  in (1041, 28, 20)  order by parent, sort_order`
+  );
   for (const item of data) {
     item.total = await getTotal(item.uri);
   }

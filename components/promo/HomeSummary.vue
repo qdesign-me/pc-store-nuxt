@@ -1,9 +1,9 @@
 <template>
-  <NuxtLink to="/noutbuki-i-aksessuary/gotovie-komputeri" class="relative border-[#D9D9D9] border-solid border p-4 pt-6 card height-xs !gap-3 sm:!gap-5">
+  <NuxtLink to="/kompyutery-iven" class="relative border-[#D9D9D9] border-solid border p-4 pt-6 card height-xs !gap-3 sm:!gap-5">
     <img src="/img/promo/i1.png" alt="" class="absolute right-0 top-0 bottom-0 h-full" />
     <div class="text-[#CB863A] text-[24px] font-medium leading-[1]">Компьютеры</div>
     <div class="text-black font-light text-sm">
-      <span class="font-semibold">{{ data['/noutbuki-i-aksessuary/gotovie-komputeri'] }}</span> товаров
+      <span class="font-semibold">{{ data['/kompyutery-iven'] }}</span> товаров
     </div>
 
     <div class="text-sm font-semibold flex items-start flex-col gap-1 mt-auto text-white relative -ml-4">
