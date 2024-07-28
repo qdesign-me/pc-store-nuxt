@@ -21,11 +21,11 @@ export default defineEventHandler(async (event) => {
     1: '1,362,364,365,584,1021,1022,1023,1024,  0',
   };
   const current = mapping[body.categoryID];
-  const [data] = await db.execute(
-    `select categoryID, name, meta_description, fullPath as uri, parent from iven_categories where visible=1 and categoryId not in (7, 26, 497, 27, 161, ${notAllowedCats.join(
-      ','
-    )}) and parent in (${current}) order by parent, sort_order`
-  );
+  const sql = `select categoryID, name, meta_description, fullPath as uri, parent from iven_categories where visible=1  and fullPath is not null and categoryId not in (7, 26, 497, 27, 161, ${notAllowedCats.join(
+    ','
+  )}) and parent in (${current}) order by parent, sort_order`;
+  console.log({ sql });
+  const [data] = await db.execute(sql);
 
   const menumap = new Map();
 
