@@ -23,6 +23,7 @@ function getItem(item: Record<string, any>, categories: any, format: 'google' | 
   if (format === 'yandex') {
     return `
   <offer id="${item.productID}" available="true">
+  <collectionId>${item.categoryID}</collectionId>
   <name>${fixname(item.name)}</name>
   ${item.typePrefix ? '<typePrefix>' + fixname(item.typePrefix) + '</typePrefix>' : ''}
   ${item.model ? '<model>' + fixname(item.model) + '</model>' : ''}
@@ -61,11 +62,11 @@ async function getKurs() {
 }
 async function getCategories() {
   const [data] = await db.execute(
-    `select categoryID, name, parent from iven_categories 
+    `select categoryID, name, parent, fullPath from iven_categories 
     where 
     visible=1  
     and categoryId not in (${notAllowedCats.join(',')}) 
-    order by parent, sort_order`
+    order by parent, sort_order, fullPath`
   );
   return data;
 }
@@ -79,6 +80,17 @@ async function getProducts(start: number, kurs: any) {
   return data;
 }
 
+function getCollections(collections: any) {
+  return collections
+    .map(
+      (item: any) => `<collection id="${item.categoryID}">
+          <url>https://i-ven.by/${item.fullPath}</url>
+          <name>${item.name}</name>
+        </collection>`
+    )
+    .join('');
+}
+
 function getWrap(categories: any, offers: any, format: 'google' | 'yandex') {
   const today = new Date();
 
@@ -87,7 +99,7 @@ function getWrap(categories: any, offers: any, format: 'google' | 'yandex') {
       `<category id="1">Главная категория</category>` +
       categories
         .slice(1)
-        .map((item) => `<category id="${item.categoryID}" parentId="${item.parent}">${item.name}</category>`)
+        .map((item: any) => `<category id="${item.categoryID}" parentId="${item.parent}">${item.name}</category>`)
         .join('');
 
     return `<?xml version="1.0" encoding="UTF-8"?>
@@ -99,10 +111,12 @@ function getWrap(categories: any, offers: any, format: 'google' | 'yandex') {
             <currencies>
                 <currency id="BYN" rate="1"/>
             </currencies>
+            
             <categories>
             ${items}
             </categories>
             <offers>${offers.join('')}</offers>
+            <collections>${getCollections(categories)}</collections>
         </shop>
     </yml_catalog>`;
   }
@@ -118,7 +132,6 @@ function getWrap(categories: any, offers: any, format: 'google' | 'yandex') {
 export default defineEventHandler(async (event) => {
   const format = event.node.req.originalUrl === '/api/products/feed?format=google' ? 'google' : 'yandex';
   const categories = await getCategories();
-  console.log('get feed', format);
   const kurs = await getKurs();
 
   const offers = [];
