@@ -31,13 +31,13 @@
         "
       >
         <div class="py-1 px-2 items-center hidden sm:flex gap-2 flex-1">
-          <img :src="card.img" />
+          <img :src="card.img" width="64" height="40" />
           <div class="hidden sm:block">В рассрочку картой «{{ card.title }}»</div>
         </div>
         <div class="py-1 px-2 hidden sm:block text-center w-[200px]">0 бел.руб.</div>
         <div class="py-1 px-2 sm:text-center flex-1 sm:max-w-[300px]">
           <div class="flex sm:hidden flex-col gap-1">
-            <div><img :src="card.img" /></div>
+            <div><img :src="card.img" width="64" height="40" /></div>
             <div>В рассрочку картой «{{ card.title }}»</div>
             <div>Первый платёж 0 бел.руб.</div>
           </div>
