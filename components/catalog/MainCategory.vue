@@ -22,6 +22,7 @@
             <NuxtLink :to="link.uri.toLowerCase()" v-for="(link, index) in node?.nodes" :key="link.categoryID" v-show="index < 10">{{ link.name }}</NuxtLink>
             <div v-if="node?.nodes.length > 10" class="text-xs leading-[20px]">+ {{ node?.nodes.length - 10 }} еще</div>
           </div>
+
           <div class="img">
             <img loading="lazy" :src="`/img/products/komplektuyuszie/${node.categoryID}.png`" :alt="node.name" v-if="config.includes(node.categoryID)" />
           </div>
@@ -35,7 +36,6 @@
               <strong>{{ node.total }}</strong> {{ pluralize(node.total, ['товар', 'товара', 'товаров']).replace(node.total, '') }}
             </div>
           </div>
-
           <div class="img">
             <img loading="lazy" :src="`/img/products/komplektuyuszie/${node.categoryID}.png`" :alt="node.name" v-if="config.includes(node.categoryID)" />
           </div>
@@ -49,6 +49,6 @@
 const props = defineProps(['data']);
 const config = [
   2, 4, 3, 5, 6, 8, 76, 9, 10, 16, 19, 178, 28, 18, 171, 215, 554, 378, 812, 423, 602, 162, 172, 29, 32, 389, 34, 229, 30, 498, 1005, 605, 175, 177, 241, 24, 368, 13, 14, 15, 17,
-  23, 25, 27, 69, 825, 67, 117, 972, 549, 908, 213, 22, 21, 20, 193, 1012, 584, 364, 362, 365,
+  23, 25, 27, 69, 825, 67, 117, 972, 549, 908, 213, 22, 21, 20, 193, 1012, 584, 364, 362, 365, 1041,
 ];
 </script>

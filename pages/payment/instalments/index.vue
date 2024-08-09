@@ -48,7 +48,7 @@
               </div>
             </NuxtLink>
             <NuxtLink to="https://www.halva.by/" target="_blank" class="card h-auto border md:pt-6 md:pb-8 md:px-10">
-              <img src="/img/info/halva-lg.png" loading="lazy" width="216" height="134" class="mb-4 w-full max-w-[300px] mx-auto" alt="" />
+              <img src="/img/info/halva-mix.png" loading="lazy" width="216" height="134" class="mb-4 w-full max-w-[300px] mx-auto" alt="" />
               <div class="text-lg font-medium">
                 Карта рассрочки<br />
                 «Халва» от МТБанк

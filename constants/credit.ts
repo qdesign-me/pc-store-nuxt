@@ -1,6 +1,6 @@
 export const cards = [
   { title: 'Черепаха', period: 8, percent: 7, img: '/img/info/vtb.png' },
-  { title: 'Халва', period: 2, percent: 7, img: '/img/info/halva.png' },
+  { title: 'Халва', period: 2, percent: 7, img: '/img/info/halva-mix.png' },
   { title: 'Магнит', period: 3, percent: 7, img: '/img/info/magnit.png' },
 ];
 

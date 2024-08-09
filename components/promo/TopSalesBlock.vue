@@ -5,7 +5,7 @@
       <ArrowLink class="mt-3 relative">
         <span class="underline underline-offset-4">Все новинки</span>
       </ArrowLink>
-      <img src="/img/promo/top-sale.png" width="296" height="263" loading="lazy" class="-mx-5 w-auto max-w-[initial] mt-auto mb-6" />
+      <img src="/img/promo/top-sale.png" width="296" height="263" loading="lazy" class="-mx-5 max-w-[initial] mt-auto mb-6 block" />
     </NuxtLink>
     <div class="lg:col-span-4">
       <div class="flex gap-2.5 -mr-5 pr-5 overflow-auto md:overflow-visible md:pr-0 md:mr-0 grid-cols-4 md:grid">

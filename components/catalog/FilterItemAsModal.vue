@@ -1,7 +1,7 @@
 <template>
   <FilterItemAsCheckboxes :block="props.block" :values="all" v-model="model" />
 
-  <div class="relative">
+  <div class="relative mt-1">
     <button class="btn is-small w-full relative is-plain" @click="modal = true">
       Все {{ totalInfo }}
       <ArrowRightIcon class="absolute right-4" />
