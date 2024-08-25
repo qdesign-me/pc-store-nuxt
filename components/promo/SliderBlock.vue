@@ -29,11 +29,11 @@
       <div class="px-5 pt-3 lg:p-0">
         <NuxtLink
           class="card pt-5 px-4 !rounded overflow-hidden more-padding pb-0 height-sm bg-cover bg-no-repeat bg-center"
-          to="/p/24-Sonic-WG24IHM-B--1920x1080--IPS--165Hz--Speakers--HDMI--DP-_164388"
+          to="/p/30-xiaomi-mi-curved-gaming-30-bhr5116gl--2560x1440--va--200hz--2xhdmi--dp-_161008"
           style="background-image: url(/img/promo/bg.png)"
         >
           <img
-            src="/img/promo/sonic_wg24-2 1.png"
+            src="/img/promo/curved-monitor.jpg"
             alt="Скидка"
             loading="lazy"
             width="260"
@@ -41,17 +41,9 @@
             class="absolute lg:left-5 right-2 lg:right-5 top-2 bottom-2 lg:bottom-5 lg:top-auto h-[calc(100%-16px)] lg:h-auto"
           />
 
-          <div class="text-white relative text-[20px] sm:text-[30px] font-extrabold leading-[1.2] mb-2">
-            Игровой монитор<br class="hidden sm:block" />
-            Sonic
-          </div>
+          <div class="text-white relative text-[20px] sm:text-[30px] font-extrabold leading-[1.2] mb-2">Изогнутый<br class="hidden sm:block" />30" монитор</div>
 
-          <div class="text-lg font-semibold relative text-white leading-[1.2]">
-            Ваш проводник<br />
-            в мир ярких<br />
-            игровых<br />
-            моментов!
-          </div>
+          <div class="text-lg font-semibold relative text-white leading-[1.2]">Идеальное сочетание<br />для гейминга <br />и работы!</div>
         </NuxtLink>
       </div>
     </div>
