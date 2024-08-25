@@ -79,9 +79,9 @@ export default defineEventHandler(async (event) => {
       } else if (values.from && values.to) {
         condition = `(fop.value >= ${values.from} and fop.value <= ${values.to})`;
       } else if (values.value === 'yes') {
-        condition = `(fop.value in ('yes',1,'Да'))`;
+        condition = `(fop.value in ('yes','1','Да'))`;
       } else if (values.value === 'no') {
-        condition = `(fop.value in ('no',0,'Нет'))`;
+        condition = `(fop.value in ('no','0','Нет'))`;
       } else {
         const vals = values.value
           .split(',')

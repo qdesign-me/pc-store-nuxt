@@ -7,7 +7,7 @@ const getFilters = async (category: { categoryID: number; uri: string }) => {
   join iven_products sp on sp.productID = sfop.productID 
   join iven_categories sc on sc.categoryID = sp.categoryID and sc.fullPath like '${category.uri}%' 
   group by label, tooltip, alias order by spf.sort_order`;
-
+  console.log({ sql });
   const [data] = await db.execute(sql);
   // fix duplicates
   return data.map((item: any) => ({ ...item, value: [...new Set(item.value.split(',').map((item: any) => item.trim()))].join(',') }));
