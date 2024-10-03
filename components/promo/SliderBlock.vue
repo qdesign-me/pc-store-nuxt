@@ -18,9 +18,9 @@
                   <source media="(max-width: 1024px)" :srcset="link.mobi" />
                   <img :src="link.img" :alt="link.title" loading="lazy" width="450" height="350" class="slider-bg" />
                 </picture>
-                <div class="slider-bg"></div>
+                <!-- <div class="slider-bg"></div> -->
 
-                <div class="text-white absolute top-8 bottom-8 left-6 flex justify-center flex-col lg:text-[24px] leading-[1.3]" v-html="link.title" />
+                <div class="text-white absolute top-8 bottom-8 left-6 flex justify-center flex-col lg:text-[24px] leading-[1.3]" v-html="link.title" v-if="link.title" />
               </NuxtLink>
             </SwiperSlide>
           </Swiper>

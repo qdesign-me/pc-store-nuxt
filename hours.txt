@@ -24,7 +24,8 @@
 
 
 остаток 460 руб
-1ч - обновить ssl, проверка фильтров, переделать meta_description и meta_keywords
+1ч 30м - обновить ssl, проверка фильтров, переделать meta_description и meta_keywords
+
 
 
 yandex

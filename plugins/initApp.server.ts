@@ -25,7 +25,7 @@ export default defineNuxtPlugin({
           phones: '+375172277190 +375295418080 +375255418080 +375445418080',
           'service.phone': '+375173783627',
           slider:
-            '[{"img":"/img/promo/pc.jpg","mobi":"/img/promo/pc.jpg","uri":"/kompyutery-iven?filter_pc_sel=%D0%98%D0%B3%D1%80%D0%BE%D0%B2%D0%BE%D0%B9&sortdir=asc&sortby=price","title":"<h2>СИСТЕМНЫЕ БЛОКИ<br>ДЛЯ ЯРКИХ ПОБЕД<br>В ЛЮБЫХ ИГРАХ!</h2>"},{"img":"/img/promo/notebooks.jpg","mobi":"/img/promo/notebooks.jpg","uri":"/noutbuki-i-aksessuary/noutbuki","title":"<h2>НОУТБУКИ<br>ДЛЯ ЛЮБЫХ<br>ЗАДАЧ</h2>"},{"img":"/img/promo/kompl.jpg","mobi":"/img/promo/kompl.jpg","uri":"/komplektuyuszie","title":"<h2>ШИРОКИЙ<br>АССОРТИМЕНТ<br>ЛЮБЫХ<br>КОМПЛЕКТУЮЩИХ</h2>"}]',
+            '[{"img":"/img/promo/home/1.png","mobi":"/img/promo/home/1-sm.png","uri":"/kompyutery-iven?filter_pc_sel=Игровой&filter_pc_chip=B650,B560,B450,X670,Z790&sortdir=asc&sortby=price","title":""},{"img":"/img/promo/home/2.png","mobi":"/img/promo/home/2-sm.png","uri":"/kompyutery-iven?filter_pc_sel=Офисный&sortdir=asc&sortby=price","title":""}]',
           social: 'https://vk.com/club218783813 https://www.instagram.com/ivencomputers/',
           timetable: 'Понедельник - пятница, 10:00-19:00',
         },
