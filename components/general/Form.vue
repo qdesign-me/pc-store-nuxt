@@ -72,6 +72,7 @@ const submit = (event) => {
   if (isValid) {
     return props.onFinish(props.model);
   }
+
   const name = Object.keys(errors)[0];
   const el = document.querySelector(`[name=${name}]`);
 

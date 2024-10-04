@@ -41,7 +41,7 @@
                   </button>
                 </div>
               </div>
-              <Form :model="model.person" :class="model.who === 'person' ? 'block' : 'hidden'">
+              <Form :model="model.person" :class="model.who === 'person' ? 'cart-form block' : 'hidden'" :onFinish="onOrder">
                 <div class="grid grid-cols-6 gap-2">
                   <div class="col-span-6 lg:col-span-2">
                     <FormItem name="name">
@@ -288,10 +288,10 @@
                     </FormItem>
                   </div>
                 </div>
-                <!-- <button type="submit" class="absolute opacity-0 left-[-10000px]" :disabled="disabled">Оформить заказ</button> -->
+                <button type="submit" class="absolute opacity-0 left-[-10000px]" :disabled="disabled">Оформить заказ</button>
               </Form>
 
-              <Form :model="model.ur" :class="model.who === 'business' ? 'block' : 'hidden'">
+              <Form :model="model.ur" :class="model.who === 'business' ? 'cart-form block' : 'hidden'" :onFinish="onOrder">
                 <div class="grid grid-cols-6 gap-2">
                   <div class="col-span-6">
                     <FormItem name="name" :rules="[{ required: true }]">
@@ -426,7 +426,7 @@
                     </FormItem>
                   </div>
                 </div>
-                <!-- <button type="submit" class="absolute opacity-0 left-[-10000px]">Оформить заказ</button> -->
+                <button type="submit" class="absolute opacity-0 left-[-10000px]">Оформить заказ</button>
               </Form>
             </div>
           </div>
@@ -462,7 +462,10 @@
             расчет является ориентировочным, величину ежемесячного платежа уточняйте в банке
           </p>
 
-          <button class="btn w-full sm:max-w-[200px] sm:mx-auto" @click="onOrder" :disabled="disabled">Оформить заказ</button>
+          <button class="btn w-full sm:max-w-[200px] sm:mx-auto" @click="startOrder" :disabled="disabled">
+            <Loading v-if="disabled" />
+            Оформить заказ
+          </button>
 
           <div class="text-[12px] font-light text-center">
             Нажимая на кнопку «Оформить заказ», Вы соглашаетесь с
@@ -512,7 +515,15 @@ const { data } = await useAsyncData(
 
 const onPrint = () => router.push('/print/cart');
 
+const onOrder = () => {
+  onFinish(model.value.who === 'person' ? model.value.person : model.value.ur);
+};
+
+const startOrder = () => {
+  document.querySelector('.cart-form button[type="submit"]').click();
+};
 const onFinish = async (info) => {
+  if (disabled.value) return;
   disabled.value = true;
   info.paymentDetails = '';
 
@@ -553,10 +564,6 @@ const onRemove = (id) => {
 };
 const onQty = (productID, qty) => {
   if (qty === 0) onRemove(productID);
-};
-
-const onOrder = () => {
-  onFinish(model.value.who === 'person' ? model.value.person : model.value.ur);
 };
 
 const fixPrice = (value) => {
@@ -609,11 +616,9 @@ const summary = computed(() => {
     totalRaw = 0;
     newData = newData.map((item) => {
       const itemPrice = calcBankPrice(item.Price, selectedB.value.variant.percent, selectedB.value.variant.calcperiod, selectedB.value.variant.period);
-      console.log({ item });
       const itemTotal = +itemPrice * item.qty; //calcBankPrice(item.itemTotal, selectedB.value.variant.percent, selectedB.value.variant.calcperiod, 1);
       price += +itemTotal;
       total += +itemTotal;
-      console.log({ itemPrice, itemTotal });
       totalRaw += +item.itemTotal;
       return {
         ...item,

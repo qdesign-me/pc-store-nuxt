@@ -4,7 +4,6 @@ const getTotal = async (uri: string) => {
   const sql = `select count(*) as total
   from iven_products p
   where p.enabled=1 and p.categoryId in (SELECT categoryID FROM iven_categories where fullPath like '${uri}%')`;
-  console.log(sql);
   const [res] = await db.execute(sql);
   return res?.[0]?.total;
 };

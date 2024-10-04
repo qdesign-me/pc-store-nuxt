@@ -9,7 +9,6 @@ export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   let { items } = body;
   if (typeof items === 'string') items = JSON.parse(items);
-  console.log('API PRODUCTS/CART', items);
   if (!items || Object.keys(items).length === 0)
     return {
       total: 0,

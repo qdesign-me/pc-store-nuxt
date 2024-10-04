@@ -6,7 +6,6 @@ async function getKurs() {
 }
 
 export default defineEventHandler(async (event) => {
-  console.log('API PRODUCTS/INDEX');
   const body = await readBody(event);
   const { take = 100, sortby = 'popular', sortdir = 'desc', where = {} } = body;
   const kurs = await getKurs();

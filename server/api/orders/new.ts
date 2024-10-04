@@ -129,15 +129,14 @@ ${body.info.fio},<br/>
 
   const to = process.env.EMAIL_ADMIN as string;
 
-  if (to)
-    await sendEmail(
-      {
-        subject: `Заказ №${orderID} на сайте i-ven.by`,
-        html,
-        replyTo: body.info.email,
-      },
-      to
-    );
+  await sendEmail(
+    {
+      subject: `Заказ №${orderID} на сайте i-ven.by`,
+      html,
+      replyTo: body.info.email,
+    },
+    to
+  );
   await sendEmail(
     {
       subject: `Заказ №${orderID} на сайте i-ven.by`,

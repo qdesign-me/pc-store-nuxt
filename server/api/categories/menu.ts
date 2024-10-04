@@ -12,7 +12,6 @@ async function getKurs() {
   return data[0].currency_value;
 }
 export default defineEventHandler(async (event) => {
-  console.log('API CATEGORIES/MENU');
   const kurs = await getKurs();
   const [data] = await db.execute(
     `select categoryID, name, fullPath as uri, parent from iven_categories 

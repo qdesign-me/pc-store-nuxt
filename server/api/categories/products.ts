@@ -22,7 +22,6 @@ async function getKurs() {
 }
 
 export default defineEventHandler(async (event) => {
-  console.log('API CATEGORIES/PRODUCTS');
   const body = await readBody(event);
   const {
     uri,
@@ -114,7 +113,6 @@ export default defineEventHandler(async (event) => {
   ${urlCheck}
   where p.enabled=1 and p.categoryID not in (${notAllowedCats.join(',')})  ${andFilters} order by ${sorttypes[sortby]} ${sortdir} limit ${skip}, ${take}`;
   results.data = await fetchAll(sql);
-  console.log({ sql });
 
   const total = await fetchColumn(`select count(*) as total from iven_products p 
   ${urlCheck}

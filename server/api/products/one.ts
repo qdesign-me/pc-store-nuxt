@@ -65,10 +65,8 @@ export default defineEventHandler(async (event) => {
   //getDay 0-6  Sunday - Saturday
   const nowDay = day === 0 ? 7 : day;
   const nowTime = Number(d.getHours() + '.' + d.getMinutes());
-  console.log('API PRODUCTS/ONE');
   const body = await readBody(event);
   const uri = body.uri;
-  console.log(uri);
 
   const kurs = await getKurs();
 
@@ -78,7 +76,6 @@ export default defineEventHandler(async (event) => {
 
   // TODO check perfomance, re-enable
   await db.execute(`update iven_products set viewed_times=viewed_times+1 where productID=${data['productID']}`);
-  console.log(`update iven_products set viewed_times=viewed_times+1 where productID=${data['productID']}`);
 
   let products = await getSimilar(
     `select (select group_concat(filename separator '|') from iven_product_pictures where productID=iven_products.productID) as img, productID, name, ROUND(Price * ${kurs}, 2) as Price, ROUND(PriceSale * ${kurs}, 2) as PriceSale, uri, is_auction, is_new from iven_products where  categoryID='${data.categoryID}' and productID<>${data.productID} and enabled=1 limit 4`
