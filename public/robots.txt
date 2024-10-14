@@ -1,3 +1,4 @@
 User-agent: *
+Disallow: /*?filter_pc_sel=*
 Host: i-ven.by
 Sitemap: https://i-ven.by/sitemap.xml

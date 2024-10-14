@@ -12,7 +12,7 @@
           }"
         >
           <SwiperSlide class="slide" v-for="(link, index) in links" :key="index">
-            <NuxtLink :to="link.uri.toLowerCase()" rel="nofollow">
+            <NuxtLink :to="link.uri.toLowerCase()">
               <picture>
                 <source media="(max-width: 1024px)" :srcset="link.mobi" />
                 <img :src="link.img" :alt="link.title" loading="lazy" class="w-full" />
